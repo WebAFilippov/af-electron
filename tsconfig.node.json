@@ -4,11 +4,5 @@
   "compilerOptions": {
     "composite": true,
     "types": ["electron-vite/node"],
-    "paths": {
-      "@libs/*": ["./src/main/libs/*"],
-      "@types/*": ["./src/main/types/*"],
-      "@utils/*": ["./src/main/utils/*"],      
-      "@/*": ["./src/main/*"],
-    }
   }
 }

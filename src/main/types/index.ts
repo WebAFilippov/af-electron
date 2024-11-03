@@ -1,5 +1,1 @@
-export interface IConfig {
-  window: {
-    isOpen: boolean
-  }
-}
+export * from './state'
