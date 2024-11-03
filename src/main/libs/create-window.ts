@@ -48,3 +48,7 @@
 
 //   return window
 // }
+
+export const print = () => {
+  console.log('App started!')
+}

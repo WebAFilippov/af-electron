@@ -1,23 +1,16 @@
-import { resolve } from 'path'
 import { defineConfig, externalizeDepsPlugin } from 'electron-vite'
 import react from '@vitejs/plugin-react'
+import tsconfigPaths from 'vite-tsconfig-paths'
 
 export default defineConfig({
   main: {
-    plugins: [externalizeDepsPlugin()]
+    plugins: [tsconfigPaths(), externalizeDepsPlugin()]
   },
   preload: {
     plugins: [externalizeDepsPlugin()]
   },
   renderer: {
-    resolve: {
-      alias: {
-        '@': resolve(__dirname, './src/renderer/src'),
-        '@app': resolve(__dirname, './src/renderer/src/app'),
-        '@shared': resolve(__dirname, './src/renderer/src/shared'),
-      }
-    },
-    plugins: [react()],
+    plugins: [tsconfigPaths(), react()],
     define: {
       'process.env': process.env
     }

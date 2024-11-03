@@ -2,7 +2,7 @@ import { app, shell, BrowserWindow, Tray, Menu } from 'electron'
 import { electronApp, optimizer, is } from '@electron-toolkit/utils'
 import { join } from 'path'
 import icon from '../../resources/icon512.png?asset'
-import { Logger } from './lib/logger'
+import { Logger } from '@libs/logger'
 
 Logger.setupLogger()
 const log = new Logger('main')
@@ -103,9 +103,9 @@ app.whenReady().then(() => {
         label: 'New Window',
         accelerator: 'CmdOrCtrl+N',
         click: () => {
-          const win = new BrowserWindow({ width: 800, height: 600 });
-          win.loadURL('https://github.com/WebAFilippov');
-        },
+          const win = new BrowserWindow({ width: 800, height: 600 })
+          win.loadURL('https://github.com/WebAFilippov')
+        }
       },
       {
         type: 'separator'
