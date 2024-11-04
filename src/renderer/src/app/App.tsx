@@ -1,14 +1,12 @@
-import { Button } from '@/shared/components/ui'
+import { ModeToggle } from '../entities/mode-toggle/mode-toggle'
+import { ThemeProvider } from './providers/theme-provider'
 
 function App(): JSX.Element {
   return (
     <>
-      <Button variant="outline" className="h-[1000px]">
-        Button
-      </Button>
-      <a href="https://github.com/WebAFilippov" target="_parent">
-        Link
-      </a>
+      <ThemeProvider storageKey="vite-ui-theme">
+        <ModeToggle />
+      </ThemeProvider>
     </>
   )
 }

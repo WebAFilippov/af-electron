@@ -1,4 +1,4 @@
-import { BrowserWindow, shell } from 'electron'
+import { BrowserWindow } from 'electron'
 import { join } from 'node:path'
 import icon from '../../../resources/icon512.png?asset'
 import { is } from '@electron-toolkit/utils'
@@ -7,8 +7,6 @@ import { state } from './state'
 
 export const createWindow = (isAutoLaunch: boolean = false): BrowserWindow => {
   const window = new BrowserWindow({
-    center: true,
-    // titleBarStyle: 'hidden',
     trafficLightPosition: {
       x: 16,
       y: 10
@@ -17,35 +15,29 @@ export const createWindow = (isAutoLaunch: boolean = false): BrowserWindow => {
     minHeight: 650,
     width: 1280,
     height: 800,
+    center: true,
     show: !isAutoLaunch,
-    autoHideMenuBar: true,
+    titleBarStyle: is.dev ? 'default' : 'hidden',
+    autoHideMenuBar: is.dev ? false : true,
     icon: join(icon),
     webPreferences: {
       preload: join(__dirname, '../preload/index.js'),
       contextIsolation: true,
       nodeIntegration: false,
-      sandbox: false,
+      sandbox: true,
       allowRunningInsecureContent: false,
       plugins: false,
-      devTools: process.env.NODE_ENV !== 'production' ? true : false
+      // devTools: is.dev ? true : false
     }
   })
 
-  window.setMenu(null)
-  window.setMenuBarVisibility(false)
+  window.loadFile(join(__dirname, '../renderer/index.html'))
 
-  if (is.dev && process.env['ELECTRON_RENDERER_URL']) {
-    window.loadURL(process.env['ELECTRON_RENDERER_URL'])
-  } else {
-    window.loadFile(join(__dirname, '../renderer/index.html'))
-  }
+  // window.setMenu(null)
+  // window.setMenuBarVisibility(false)
 
-  window.webContents.setWindowOpenHandler((details) => {
-    shell.openExternal(details.url)
-    return { action: 'deny' }
-  })
-  window.once('ready-to-show', () => {
-    toggleWindowVisibility(window, true)
+  window.on('ready-to-show', () => {    
+    !isAutoLaunch && toggleWindowVisibility(window, true)
   })
 
   return window
@@ -61,5 +53,14 @@ export const toggleWindowVisibility = (window: BrowserWindow, isVisible: boolean
     window.setSkipTaskbar(true)
     state.isWindowHidden = true
   }
-  // ;(0, tray_js_1.updateTrayMenu)(window)
+}
+
+export const toggleWindowState = (window: BrowserWindow) => {
+  if (state.isWindowHidden) {
+    toggleWindowVisibility(window, true)
+  } else if (window.isMinimized()) {
+    window.restore()
+  } else {
+    window.minimize()
+  }
 }
