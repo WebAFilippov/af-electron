@@ -1,11 +1,9 @@
-import { app, BrowserWindow, Menu, Tray } from 'electron'
+import { app, BrowserWindow, Menu, nativeImage, Tray } from 'electron'
 
 import { Logger } from './libs/logger'
 import { createWindow, toggleWindowState, toggleWindowVisibility } from './libs/create-window'
 import { autoLaunch } from './libs/auto-launch'
-import { join } from 'node:path'
-import icon from '../../resources/icon512.png?asset'
-import { optimizer } from '@electron-toolkit/utils'
+import icon from '../../build/icon512.png?asset'
 
 Logger.setupLogger()
 autoLaunch(true)
@@ -22,17 +20,17 @@ if (!gotTheLock) {
       if (window.isMinimized()) {
         window.restore()
       }
-      toggleWindowVisibility(window, true)
+      if (!window.isVisible()) {
+        toggleWindowVisibility(window, true)
+      }
+      window.focus()
     }
   })
 
   app.whenReady().then(() => {
     const window = createWindow(isAutoLaunch)
-    app.on('browser-window-created', (_, window) => {
-      optimizer.watchWindowShortcuts(window)
-    })
 
-    const tray = new Tray(join(icon))
+    const tray = new Tray(nativeImage.createFromPath(icon))
     tray.setToolTip('Harmonify')
     tray.setContextMenu(
       Menu.buildFromTemplate([

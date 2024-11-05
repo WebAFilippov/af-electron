@@ -1,6 +1,6 @@
-import { BrowserWindow } from 'electron'
+import { app, BrowserWindow, nativeImage } from 'electron'
 import { join } from 'node:path'
-import icon from '../../../resources/icon512.png?asset'
+import icon from '../../../build/icon512.png?asset'
 import { is } from '@electron-toolkit/utils'
 
 import { state } from './state'
@@ -19,7 +19,7 @@ export const createWindow = (isAutoLaunch: boolean = false): BrowserWindow => {
     show: !isAutoLaunch,
     titleBarStyle: is.dev ? 'default' : 'hidden',
     autoHideMenuBar: is.dev ? false : true,
-    icon: join(icon),
+    icon: nativeImage.createFromPath(icon),
     webPreferences: {
       preload: join(__dirname, '../preload/index.js'),
       contextIsolation: true,
@@ -27,16 +27,22 @@ export const createWindow = (isAutoLaunch: boolean = false): BrowserWindow => {
       sandbox: true,
       allowRunningInsecureContent: false,
       plugins: false,
-      // devTools: is.dev ? true : false
+      devTools: is.dev ? true : false
     }
   })
 
-  window.loadFile(join(__dirname, '../renderer/index.html'))
+  if (!is.dev) {
+    window.setMenu(null)
+    window.setMenuBarVisibility(false)
+  }
 
-  // window.setMenu(null)
-  // window.setMenuBarVisibility(false)
+  if (!app.isPackaged && process.env['ELECTRON_RENDERER_URL']) {
+    window.loadURL(process.env['ELECTRON_RENDERER_URL'])
+  } else {
+    window.loadFile(join(__dirname, '../renderer/index.html'))
+  }
 
-  window.on('ready-to-show', () => {    
+  window.on('ready-to-show', () => {
     !isAutoLaunch && toggleWindowVisibility(window, true)
   })
 
