@@ -10,13 +10,13 @@ import { ModeToggle } from './../../../../entities/mode-toggle/mode-toggle'
 
 export const WindowHeader = () => {
   const handleClickControlMinimize = () => {
-    window.title_control.minimizeWindow()
+    window.window_control.minimizeWindow()
   }
   const handleClickControlMaximize = () => {
-    window.title_control.maximizeWindow()
+    window.window_control.maximizeWindow()
   }
   const handleClickControlClose = () => {
-    window.title_control.closeWindow()
+    window.window_control.closeWindow()
   }
 
   return (

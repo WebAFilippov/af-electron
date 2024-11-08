@@ -1,19 +1,24 @@
-import { app, BrowserWindow, Menu, nativeImage, Tray } from 'electron'
+import { app, BrowserWindow, Menu } from 'electron'
 
 import { Logger } from './libs/logger'
-import { createWindow, toggleWindowState, toggleWindowVisibility } from './libs/create-window'
+import { createWindow } from './libs/create-window'
 import { autoLaunch } from './libs/auto-launch'
-import { setupStore } from './libs/store'
-import icon from '../../build/icon512.png?asset'
+
+import { createTray } from './libs/tray'
+
+import { initDb } from './libs/database/store'
+import { setupBackground } from './libs/create-bg-main'
+import { handlerControlWindow } from './handlers/control-window/control-window'
+import { is } from '@electron-toolkit/utils'
 
 Logger.setupLogger()
+const log = new Logger('main')
+
 autoLaunch(true)
+!is.dev && Menu.setApplicationMenu(null)
+
 const isAutoLaunch = process.argv.includes('--auto-launch')
-
 const gotTheLock = app.requestSingleInstanceLock()
-
-const store = setupStore(isAutoLaunch)
-console.log(store)
 
 if (!gotTheLock) {
   app.quit()
@@ -25,57 +30,25 @@ if (!gotTheLock) {
         window.restore()
       }
       if (!window.isVisible()) {
-        toggleWindowVisibility(window, true)
+        window.show()
       }
       window.focus()
     }
   })
 
-  app.whenReady().then(() => {
-    const window = createWindow(isAutoLaunch)
+  app.whenReady().then(async () => {
+    try {
+      const window = createWindow()
+      createTray(window)
 
-    const tray = new Tray(nativeImage.createFromPath(icon))
-    tray.setToolTip('Harmonify')
-    tray.setContextMenu(
-      Menu.buildFromTemplate([
-        {
-          label: 'Показать/Скрыть',
-          click: () => {
-            if (window) {
-              window.isVisible() ? window.hide() : window.show()
-            }
-          }
-        },
-        {
-          type: 'separator'
-        },
-        {
-          label: 'future funcion',
-          enabled: false,
-          click() {}
-        },
-        {
-          label: 'New Window',
-          accelerator: 'CmdOrCtrl+N',
-          click: () => {
-            const win = new BrowserWindow({ width: 800, height: 600 })
-            win.loadURL('https://github.com/WebAFilippov')
-          }
-        },
-        {
-          type: 'separator'
-        },
-        {
-          label: 'Выход',
-          role: 'quit'
-        }
-      ])
-    )
-    tray.on('click', () => {
-      toggleWindowState(window)
-    })
-    tray.on('double-click', () => {
-      toggleWindowState(window)
-    })
+      const store = await initDb(isAutoLaunch)
+      setupBackground(store, window)
+
+      handlerControlWindow(window, isAutoLaunch)
+
+      log.info('Application ready')
+    } catch (error) {
+      log.error(error)
+    }
   })
 }

@@ -1,6 +1,8 @@
 import log, { LogFunctions } from 'electron-log'
 import { join } from 'path'
 import { formatLog } from '../utils/formatLog'
+import { is } from '@electron-toolkit/utils'
+import { app } from 'electron'
 
 export class Logger {
   scope: string
@@ -11,8 +13,14 @@ export class Logger {
   }
 
   static setupLogger() {
-    log.transports.file.resolvePathFn = (pathVariables) =>
-      join(__dirname, '..', '..', 'logs', `${pathVariables.fileName}`)
+    if (is.dev) {
+      log.transports.file.resolvePathFn = (pathVariables) =>
+        join(__dirname, '..', '..', 'logs', `${pathVariables.fileName}`)
+    } else {
+      log.transports.file.resolvePathFn = (pathVariables) =>
+        join(app.getPath('userData'), 'logs', `${pathVariables.fileName}`)
+    }
+
     log.transports.file.format = formatLog
     log.transports.console.format = formatLog
   }
