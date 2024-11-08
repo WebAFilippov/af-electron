@@ -3,6 +3,7 @@ import { app, BrowserWindow, Menu, nativeImage, Tray } from 'electron'
 import { Logger } from './libs/logger'
 import { createWindow, toggleWindowState, toggleWindowVisibility } from './libs/create-window'
 import { autoLaunch } from './libs/auto-launch'
+import { setupStore } from './libs/store'
 import icon from '../../build/icon512.png?asset'
 
 Logger.setupLogger()
@@ -10,6 +11,9 @@ autoLaunch(true)
 const isAutoLaunch = process.argv.includes('--auto-launch')
 
 const gotTheLock = app.requestSingleInstanceLock()
+
+const store = setupStore(isAutoLaunch)
+console.log(store)
 
 if (!gotTheLock) {
   app.quit()
@@ -75,13 +79,3 @@ if (!gotTheLock) {
     })
   })
 }
-
-// ipcMain.handle('theme:apply', (_, theme) => {
-//   console.log(theme)
-//   if (theme === 'system') {
-//     nativeTheme.themeSource = 'system'
-//   } else {
-//     nativeTheme.themeSource = theme
-//   }
-//   return nativeTheme.shouldUseDarkColors
-// })

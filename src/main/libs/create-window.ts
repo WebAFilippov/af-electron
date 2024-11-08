@@ -1,3 +1,4 @@
+const { ipcMain } = require('electron')
 import { app, BrowserWindow, nativeImage } from 'electron'
 import { join } from 'node:path'
 import icon from '../../../build/icon512.png?asset'
@@ -17,14 +18,15 @@ export const createWindow = (isAutoLaunch: boolean = false): BrowserWindow => {
     height: 800,
     center: true,
     show: !isAutoLaunch,
-    titleBarStyle: is.dev ? 'default' : 'hidden',
+    // titleBarStyle: is.dev ? 'default' : 'hidden',
+    titleBarStyle: 'hidden',
     autoHideMenuBar: is.dev ? false : true,
     icon: nativeImage.createFromPath(icon),
     webPreferences: {
-      preload: join(__dirname, '../preload/index.js'),
+      preload: join(__dirname, '..', 'preload', 'index.mjs'),
       contextIsolation: true,
       nodeIntegration: false,
-      sandbox: true,
+      sandbox: false,
       allowRunningInsecureContent: false,
       plugins: false,
       devTools: is.dev ? true : false
@@ -44,6 +46,27 @@ export const createWindow = (isAutoLaunch: boolean = false): BrowserWindow => {
 
   window.on('ready-to-show', () => {
     !isAutoLaunch && toggleWindowVisibility(window, true)
+  })
+
+  ipcMain.on('minimize-window', () => {
+    const win = BrowserWindow.getFocusedWindow()
+    if (win) win.minimize()
+  })
+
+  ipcMain.on('maximize-window', () => {
+    const win = BrowserWindow.getFocusedWindow()
+    if (win) {
+      if (win.isMaximized()) {
+        win.unmaximize()
+      } else {
+        win.maximize()
+      }
+    }
+  })
+
+  ipcMain.on('close-window', () => {
+    const win = BrowserWindow.getFocusedWindow()
+    if (win) win.hide()
   })
 
   return window

@@ -4,8 +4,8 @@
 
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 222.2 47.4% 11.2%;
+    --background: 0, 0%, 90%;
+    --foreground: 0, 0%, 10%;
 
     --muted: 210 40% 96.1%;
     --muted-foreground: 215.4 16.3% 46.9%;
@@ -34,11 +34,15 @@
     --ring: 215 20.2% 65.1%;
 
     --radius: 0.5rem;
+
+    --control-window: 0, 0%, 0%, 0.1;
+    --control-window-foreground: 0, 0%, 10%, 1;
+    --control-window-close: 359, 87%, 60%, 1;
   }
 
   .dark {
-    --background: 224 71% 4%;
-    --foreground: 213 31% 91%;
+    --background: 0, 0%, 5%;
+    --foreground: 0, 0%, 90%;
 
     --muted: 223 47% 11%;
     --muted-foreground: 215.4 16.3% 56.9%;
@@ -67,6 +71,10 @@
     --ring: 216 34% 17%;
 
     --radius: 0.5rem;
+
+    --control-window: 0, 0%, 100%, 0.12;
+    --control-window-foreground: 0, 0%, 90%, 1;
+    --control-window-close: 359, 87%, 60%, 1;
   }
 }
 
@@ -76,6 +84,26 @@
   }
   body {
     @apply bg-background text-foreground;
-    font-feature-settings: "rlig" 1, "calt" 1;
+    font-feature-settings:
+      'rlig' 1,
+      'calt' 1;
+    font-family: 'YSText', sans-serif;
   }
+}
+
+@font-face {
+  font-family: 'YSText';
+  src:
+    url('/src/shared/fonts/YSText-Black.woff') .format('woff2'),
+    url('/src/shared/fonts/YSText-Black.woff') .format('woff');
+  font-weight: 400;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'YSText';
+  src:
+    url('/src/assets/fonts/MyCustomFont-Bold.woff2') .format('woff2'),
+    url('/src/assets/fonts/MyCustomFont-Bold.woff') .format('woff');
+  font-weight: 700;
+  font-style: normal;
 }
