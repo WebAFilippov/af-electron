@@ -4,8 +4,20 @@ import yaml from 'js-yaml'
 import fs from 'fs'
 import { app } from 'electron'
 import { IState } from '../../types'
+import { Logger } from '../logger'
 
-// Создаем адаптер для работы с YAML
+const log = new Logger('database')
+
+function isValidState(data: any): data is IState {
+  return (
+    typeof data === 'object' &&
+    data !== null &&
+    typeof data.isHide === 'boolean' &&
+    typeof data.isMinisize === 'boolean' &&
+    typeof data.isMaximaze === 'boolean' &&
+    (data.theme === 'dark' || data.theme === 'light' || data.theme === 'system')
+  )
+}
 class YAMLFile<T> {
   constructor(public filename: string) {}
 
@@ -22,6 +34,7 @@ class YAMLFile<T> {
 
 let filePath = join(app.getPath('userData'), 'settings.yaml')
 if (!fs.existsSync(filePath)) {
+  log.error('Файл settings.yaml не найден. Создаём новый.')
   fs.writeFileSync(
     filePath,
     yaml.dump({
@@ -41,6 +54,8 @@ try {
   const fileContent = fs.readFileSync(filePath, 'utf-8').trim()
 
   if (!fileContent) {
+    log.error('Файл settings.yaml пуст. Создаём новый.')
+
     initialData = {
       isHide: false,
       isMinisize: false,
@@ -51,12 +66,24 @@ try {
     fs.writeFileSync(filePath, yaml.dump(initialData))
   } else {
     initialData = yaml.load(fileContent)
-    initialData = { ...initialData, isHide: false, isMinisize: false, isMaximaze: false }
+
+    if (isValidState(initialData)) {
+      initialData = { ...initialData, isHide: false, isMinisize: false, isMaximaze: false }
+      fs.writeFileSync(filePath, yaml.dump(initialData))
+    } else {
+      log.error('Данные в файле некорректны, перезаписываем файл.')
+      initialData = {
+        isHide: false,
+        isMinisize: false,
+        isMaximaze: false,
+        theme: 'system'
+      }
+      fs.writeFileSync(filePath, yaml.dump(initialData))
+    }
   }
 } catch (error) {
-  console.error('Ошибка при чтении/парсинге файла:', error)
+  log.error('Ошибка при чтении/парсинге файла:', error)
 
-  // Устанавливаем начальные данные в случае ошибки
   initialData = {
     isHide: false,
     isMinisize: false,
@@ -64,20 +91,16 @@ try {
     theme: 'system'
   }
 
-  // Перезаписываем файл с начальными данными
   fs.writeFileSync(filePath, yaml.dump(initialData))
 }
 
-const db = new Low<IState>(new YAMLFile<IState>(filePath), initialData)
-
 export async function initDb(isAutoLaunch: boolean) {
+  const db = new Low<IState>(new YAMLFile<IState>(filePath), initialData)
+
   if (isAutoLaunch) {
     db.data.isHide = true
-  } else {
-    db.data.isHide = false
+    await db.write()
   }
-  
-  await db.write()
 
   return db
 }
