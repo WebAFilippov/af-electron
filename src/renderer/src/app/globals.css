@@ -87,23 +87,5 @@
     font-feature-settings:
       'rlig' 1,
       'calt' 1;
-    font-family: 'YSText', sans-serif;
   }
-}
-
-@font-face {
-  font-family: 'YSText';
-  src:
-    url('/src/shared/fonts/YSText-Black.woff') .format('woff2'),
-    url('/src/shared/fonts/YSText-Black.woff') .format('woff');
-  font-weight: 400;
-  font-style: normal;
-}
-@font-face {
-  font-family: 'YSText';
-  src:
-    url('/src/assets/fonts/MyCustomFont-Bold.woff2') .format('woff2'),
-    url('/src/assets/fonts/MyCustomFont-Bold.woff') .format('woff');
-  font-weight: 700;
-  font-style: normal;
 }

@@ -18,7 +18,7 @@ autoLaunch(true)
 !is.dev && Menu.setApplicationMenu(null)
 
 const isAutoLaunch = process.argv.includes('--auto-launch')
-const gotTheLock = app.requestSingleInstanceLock()
+const gotTheLock = app.requestSingleInstanceLock() // Проверка на запущенное окно -> true if once window
 
 if (!gotTheLock) {
   app.quit()
@@ -44,7 +44,16 @@ if (!gotTheLock) {
       const store = await initDb(isAutoLaunch)
       setupBackground(store, window)
 
-      handlerControlWindow(window, isAutoLaunch)
+      
+
+      // HANDLERS
+      handlerControlWindow(window, isAutoLaunch, store)
+
+      app.on('activate', () => {
+        if (BrowserWindow.getAllWindows().length === 0) {
+          createWindow()
+        }
+      })
 
       log.info('Application ready')
     } catch (error) {

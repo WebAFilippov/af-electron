@@ -1,4 +1,5 @@
 import { useEffect } from 'react'
+
 import { WindowHeader } from '../shared/components/ui'
 import { WindowLayout } from '../shared/layouts/window-layout'
 import { ThemeProvider } from './providers/theme-provider'
@@ -15,8 +16,10 @@ function App(): JSX.Element {
 
   return (
     <>
-      <ThemeProvider defaultTheme="system" storageKey="vite-ui-theme">
-        <WindowLayout window_header={<WindowHeader />}></WindowLayout>
+      <ThemeProvider storageKey="ui-theme">
+        <WindowLayout window_header={<WindowHeader />}>
+          <div>Content</div>
+        </WindowLayout>
       </ThemeProvider>
     </>
   )

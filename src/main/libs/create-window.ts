@@ -17,6 +17,8 @@ export const createWindow = (): BrowserWindow => {
     show: false,
     titleBarStyle: 'hidden',
     autoHideMenuBar: is.dev ? false : true,
+    // transparent: true,
+    hasShadow: false,
     icon: nativeImage.createFromPath(icon),
     webPreferences: {
       preload: join(__dirname, '..', 'preload', 'index.mjs'),

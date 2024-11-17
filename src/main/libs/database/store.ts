@@ -3,14 +3,7 @@ import { join } from 'path'
 import yaml from 'js-yaml'
 import fs from 'fs'
 import { app } from 'electron'
-
-// Типизация структуры данных
-export interface AppDataDatabase {
-  isHide: boolean
-  isMinisize: boolean
-  isMaximaze: boolean
-  theme: 'dark' | 'light' | 'system'
-}
+import { IState } from '../../types'
 
 // Создаем адаптер для работы с YAML
 class YAMLFile<T> {
@@ -29,41 +22,62 @@ class YAMLFile<T> {
 
 let filePath = join(app.getPath('userData'), 'settings.yaml')
 if (!fs.existsSync(filePath)) {
-  fs.writeFileSync(filePath, '')
+  fs.writeFileSync(
+    filePath,
+    yaml.dump({
+      isHide: false,
+      isMinisize: false,
+      isMaximaze: false,
+      theme: 'system'
+    })
+  )
 }
 
 console.log(filePath)
 
-const db = new Low<AppDataDatabase>(new YAMLFile<AppDataDatabase>(filePath), {
-  isHide: false,
-  isMinisize: false,
-  isMaximaze: false,
-  theme: 'system'
-})
+let initialData: IState
+
+try {
+  const fileContent = fs.readFileSync(filePath, 'utf-8').trim()
+
+  if (!fileContent) {
+    initialData = {
+      isHide: false,
+      isMinisize: false,
+      isMaximaze: false,
+      theme: 'system'
+    }
+
+    fs.writeFileSync(filePath, yaml.dump(initialData))
+  } else {
+    initialData = yaml.load(fileContent)
+    initialData = { ...initialData, isHide: false, isMinisize: false, isMaximaze: false }
+  }
+} catch (error) {
+  console.error('Ошибка при чтении/парсинге файла:', error)
+
+  // Устанавливаем начальные данные в случае ошибки
+  initialData = {
+    isHide: false,
+    isMinisize: false,
+    isMaximaze: false,
+    theme: 'system'
+  }
+
+  // Перезаписываем файл с начальными данными
+  fs.writeFileSync(filePath, yaml.dump(initialData))
+}
+
+const db = new Low<IState>(new YAMLFile<IState>(filePath), initialData)
 
 export async function initDb(isAutoLaunch: boolean) {
-  await db.read()
-
   if (isAutoLaunch) {
     db.data.isHide = true
   } else {
     db.data.isHide = false
   }
-  db.data.isMinisize = false
-  db.data.isMaximaze = false
-
+  
   await db.write()
 
   return db
 }
-
-// // Использование
-// initDb().then((db) => {
-//   // Чтение данных
-//   console.log('Current theme:', db.data?.theme)
-
-//   // Обновление данных
-//   db.data!.isHide = false
-//   db.data!.theme = 'тёмная'
-//   db.write()
-// })

@@ -18,3 +18,4 @@ if (process.contextIsolated) {
   // @ts-ignore (define in dts)
   window.window_control = window_control
 }
+

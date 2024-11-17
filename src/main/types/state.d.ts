@@ -1,3 +1,6 @@
 export interface IState {
-  isWindowHidden: boolean
+  isHide: boolean
+  isMinisize: boolean
+  isMaximaze: boolean
+  theme: 'dark' | 'light' | 'system'
 }
