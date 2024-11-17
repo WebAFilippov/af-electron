@@ -65,7 +65,18 @@ try {
 
     fs.writeFileSync(filePath, yaml.dump(initialData))
   } else {
-    initialData = yaml.load(fileContent)
+    try {
+      initialData = yaml.load(fileContent)
+    } catch (error) {
+      log.error('Файл settings.yaml некорректен. Создаём новый.')
+
+      initialData = {
+        isHide: false,
+        isMinisize: false,
+        isMaximaze: false,
+        theme: 'system'
+      }
+    }
 
     if (isValidState(initialData)) {
       initialData = { ...initialData, isHide: false, isMinisize: false, isMaximaze: false }
