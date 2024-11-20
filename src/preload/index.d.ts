@@ -9,10 +9,15 @@ export interface WindowControl {
   closeWindow: () => void
 }
 
+export type CitiesSearch = {
+  searchCities: (query: string) => string[]
+}
+
 declare global {
   interface Window {
     electron: ElectronAPI
     api: Api
     window_control: WindowControl
+    search_cities: CitiesSearch
   }
 }

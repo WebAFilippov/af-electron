@@ -8,8 +8,12 @@ import { createTray } from './libs/tray'
 
 import { initDb } from './libs/database/store'
 import { setupBackground } from './libs/create-bg-main'
-import { handlerControlWindow } from './handlers/control-window/control-window'
+
 import { is } from '@electron-toolkit/utils'
+import { handlerControlWindow } from './handlers/control-window'
+import { handlerWindow } from './handlers/app-handlers'
+import { dbHandlers } from './handlers/db-handlers'
+import { initializeDatabase } from './libs/database/db'
 
 Logger.setupLogger()
 const log = new Logger('main')
@@ -38,16 +42,20 @@ if (!gotTheLock) {
 
   app.whenReady().then(async () => {
     try {
-      const window = createWindow()
-      createTray(window)
+      await initializeDatabase()
 
       const store = await initDb(isAutoLaunch)
+
+      const window = createWindow()
+      const tray = createTray(window, store)
+      console.log(tray)
+
       setupBackground(store, window)
 
-      
-
       // HANDLERS
-      handlerControlWindow(window, isAutoLaunch, store)
+      handlerWindow(window, store)
+      handlerControlWindow(window, store, isAutoLaunch)
+      dbHandlers()
 
       app.on('activate', () => {
         if (BrowserWindow.getAllWindows().length === 0) {

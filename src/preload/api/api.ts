@@ -9,3 +9,7 @@ export const window_control: WindowControl = {
   maximizeWindow: () => ipcRenderer.send('maximize-window'),
   closeWindow: () => ipcRenderer.send('close-window')
 }
+
+export const search_cities = {
+  searchCities: (query: string) => ipcRenderer.invoke('search_cities', query)
+}

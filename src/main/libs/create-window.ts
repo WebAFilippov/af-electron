@@ -5,10 +5,6 @@ import { is } from '@electron-toolkit/utils'
 
 export const createWindow = (): BrowserWindow => {
   const window = new BrowserWindow({
-    trafficLightPosition: {
-      x: 16,
-      y: 10
-    },
     minWidth: 768,
     minHeight: 650,
     width: 1280,
@@ -17,7 +13,9 @@ export const createWindow = (): BrowserWindow => {
     show: false,
     titleBarStyle: 'hidden',
     autoHideMenuBar: is.dev ? false : true,
-    // transparent: true,
+    minimizable: true,
+    maximizable: true,
+    transparent: true,
     hasShadow: false,
     icon: nativeImage.createFromPath(icon),
     webPreferences: {

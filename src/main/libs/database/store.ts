@@ -79,7 +79,7 @@ try {
     }
 
     if (isValidState(initialData)) {
-      initialData = { ...initialData, isHide: false, isMinisize: false, isMaximaze: false }
+      // initialData = { ...initialData, isHide: false, isMinisize: false, isMaximaze: false }
       fs.writeFileSync(filePath, yaml.dump(initialData))
     } else {
       log.error('Данные в файле некорректны, перезаписываем файл.')

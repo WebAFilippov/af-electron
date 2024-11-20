@@ -5,10 +5,13 @@ import {
   // VscChromeRestore
 } from 'react-icons/vsc'
 
-import { Button } from '../button/button'
-import { ModeToggle } from './../../../../entities/mode-toggle/mode-toggle'
+import { ModeToggle } from '../../features'
+import { Button } from '../../shared/components/ui'
+import { useOnlineStatus } from '../../shared/hooks/useOnlineStatus/useOnlineStatus'
+import { cn } from '../../shared/lib'
 
 export const WindowHeader = () => {
+  const statusOnline = useOnlineStatus(10000)
   const handleClickControlMinimize = () => {
     window.window_control.minimizeWindow()
   }
@@ -23,7 +26,14 @@ export const WindowHeader = () => {
     <div className="h-8 absolute top-0 left-0 w-full flex gap-8 justify-end items-center overflow-hidden area-drag user-select-none">
       <div className="flex items-center justify-center gap-4">
         <div className="flex justify-center items-center">
-          <span className="font-ym_text font-bold text-[11px] text-green-400">Online</span>
+          <span
+            className={cn(
+              'font-ym_text font-bold text-[11px] text-red-400',
+              statusOnline && 'text-green-400'
+            )}
+          >
+            WEB
+          </span>
         </div>
         <div className="flex justify-center items-center">
           <span className="font-ym_text font-bold text-[11px] text-red-400">MQTT</span>

@@ -1,8 +1,9 @@
 import { useEffect } from 'react'
 
-import { WindowHeader } from '../shared/components/ui'
 import { WindowLayout } from '../shared/layouts/window-layout'
 import { ThemeProvider } from './providers/theme-provider'
+import { WindowHeader } from '../widgets'
+import AutoComplete from '../features/AutoComplete/AutoComplete'
 
 function App(): JSX.Element {
   useEffect(() => {
@@ -18,7 +19,9 @@ function App(): JSX.Element {
     <>
       <ThemeProvider storageKey="ui-theme">
         <WindowLayout window_header={<WindowHeader />}>
-          <div>Content</div>
+          <div>
+            <AutoComplete />
+          </div>
         </WindowLayout>
       </ThemeProvider>
     </>
