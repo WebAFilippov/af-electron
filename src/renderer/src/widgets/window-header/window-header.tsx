@@ -6,9 +6,10 @@ import {
 } from 'react-icons/vsc'
 
 import { ModeToggle } from '../../features'
-import { Button } from '../../shared/components/ui'
+
 import { useOnlineStatus } from '../../shared/hooks/useOnlineStatus/useOnlineStatus'
 import { cn } from '../../shared/lib'
+import { Button } from '../../shared/ui'
 
 export const WindowHeader = () => {
   const statusOnline = useOnlineStatus(10000)
@@ -23,24 +24,24 @@ export const WindowHeader = () => {
   }
 
   return (
-    <div className="h-8 absolute top-0 left-0 w-full flex gap-8 justify-end items-center overflow-hidden area-drag user-select-none">
+    <div className="area-drag user-select-none absolute left-0 top-0 flex h-8 w-full items-center justify-end gap-8 overflow-hidden">
       <div className="flex items-center justify-center gap-4">
-        <div className="flex justify-center items-center">
+        <div className="flex items-center justify-center">
           <span
             className={cn(
-              'font-ym_text font-bold text-[11px] text-red-400',
+              'font-ym_text text-[11px] font-bold text-red-400',
               statusOnline && 'text-green-400'
             )}
           >
             WEB
           </span>
         </div>
-        <div className="flex justify-center items-center">
-          <span className="font-ym_text font-bold text-[11px] text-red-400">MQTT</span>
+        <div className="flex items-center justify-center">
+          <span className="font-ym_text text-[11px] font-bold text-red-400">MQTT</span>
         </div>
       </div>
       <div>
-        <ModeToggle className="w-[42px] area-no-drag text-control_window-foreground bg-transparent hover:bg-control_window" />
+        <ModeToggle className="area-no-drag text-control_window-foreground hover:bg-control_window w-[42px] bg-transparent" />
       </div>
       <div className="flex items-center justify-center">
         <Button
@@ -49,7 +50,7 @@ export const WindowHeader = () => {
           aria-label="Свернуть"
           variant="ghost"
           tabIndex={-1}
-          className="w-[42px] area-no-drag text-control_window-foreground bg-transparent hover:bg-control_window"
+          className="area-no-drag text-control_window-foreground hover:bg-control_window w-[42px] bg-transparent"
           onClick={() => handleClickControlMinimize()}
         >
           {<VscChromeMinimize />}
@@ -60,7 +61,7 @@ export const WindowHeader = () => {
           aria-label="Развернуть"
           variant="ghost"
           tabIndex={-1}
-          className="w-[42px] area-no-drag text-control_window-foreground bg-transparent hover:bg-control_window"
+          className="area-no-drag text-control_window-foreground hover:bg-control_window w-[42px] bg-transparent"
           onClick={() => handleClickControlMaximize()}
         >
           {<VscChromeMaximize />}
@@ -71,7 +72,7 @@ export const WindowHeader = () => {
           aria-label="Закрыть"
           variant="ghost"
           tabIndex={-1}
-          className="w-[42px] area-no-drag text-control_window-foreground bg-transparent hover:bg-control_window-close"
+          className="area-no-drag text-control_window-foreground hover:bg-control_window-close w-[42px] bg-transparent"
           onClick={() => handleClickControlClose()}
         >
           {<VscChromeClose />}

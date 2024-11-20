@@ -1,13 +1,13 @@
 import { Moon, Sun } from 'lucide-react'
 
-import { Button } from '../../shared/components/ui'
 import { useTheme } from '../../app/providers/theme-provider'
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger
-} from '../../shared/components/ui/dropdown-menu/dropdown-menu'
+} from '../../shared/ui/dropdown-menu'
+import { Button } from '../../shared/ui'
 
 export function ModeToggle({ className }: { className?: string }) {
   const { setTheme } = useTheme()
@@ -23,19 +23,19 @@ export function ModeToggle({ className }: { className?: string }) {
       <DropdownMenuContent align="center">
         <DropdownMenuItem
           onClick={() => setTheme('light')}
-          className="text-foreground text-xs cursor-pointer"
+          className="cursor-pointer text-xs text-foreground"
         >
           Всегда светлый
         </DropdownMenuItem>
         <DropdownMenuItem
           onClick={() => setTheme('dark')}
-          className="text-foreground text-xs cursor-pointer"
+          className="cursor-pointer text-xs text-foreground"
         >
           Всегда темный
         </DropdownMenuItem>
         <DropdownMenuItem
           onClick={() => setTheme('system')}
-          className="text-foreground text-xs cursor-pointer"
+          className="cursor-pointer text-xs text-foreground"
         >
           Как в системе
         </DropdownMenuItem>
