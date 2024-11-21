@@ -4,5 +4,13 @@
   "compilerOptions": {
     "composite": true,
     "types": ["electron-vite/node"],
+    /* Alias */
+    "baseUrl": "./src/main",
+    "paths": {
+      "@handlers/*": ["handlers/*"],
+      "@libs/*": ["libs/*"],
+      "@types_app/*": ["types_app/*"],
+      "@utils/*": ["utils/*"],
+    },
   }
 }

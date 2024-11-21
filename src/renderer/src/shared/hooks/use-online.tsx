@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 
-export const useOnlineStatus = (intervalMs: number = 10000): boolean => {
+export const useOnline = (intervalMs: number = 10000): boolean => {
   const [isOnline, setIsOnline] = useState<boolean>(false)
 
   const checkOnlineStatus = async () => {

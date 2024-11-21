@@ -1,5 +1,6 @@
 import { ipcMain } from 'electron'
-import { db } from '../libs/database/db'
+
+import { db } from '@libs/database/db'
 
 export const dbHandlers = () => {
   // Получить города по запросу

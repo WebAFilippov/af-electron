@@ -1,6 +1,7 @@
 import { BrowserWindow } from 'electron'
 import { Low } from 'lowdb/lib'
-import { IState } from '../types'
+
+import { IState } from '@types_app/state'
 
 export const handlerWindow = (window: BrowserWindow, store: Low<IState>) => {
   window.on('close', () => {

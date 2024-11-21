@@ -1,10 +1,12 @@
+import { app } from 'electron'
+import fs from 'fs'
+import yaml from 'js-yaml'
 import { Low } from 'lowdb'
 import { join } from 'path'
-import yaml from 'js-yaml'
-import fs from 'fs'
-import { app } from 'electron'
-import { IState } from '../../types'
-import { Logger } from '../logger'
+
+import { Logger } from '@libs/logger'
+
+import { IState } from '@types_app/state'
 
 const log = new Logger('database')
 
@@ -32,7 +34,7 @@ class YAMLFile<T> {
   }
 }
 
-let filePath = join(app.getPath('userData'), 'settings.yaml')
+const filePath = join(app.getPath('userData'), 'settings.yaml')
 if (!fs.existsSync(filePath)) {
   log.error('Файл settings.yaml не найден. Создаём новый.')
   fs.writeFileSync(

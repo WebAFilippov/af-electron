@@ -1,10 +1,9 @@
 import { BrowserWindow, ipcMain } from 'electron'
-
-
 import { Low } from 'lowdb/lib'
-import { Logger } from '../libs/logger'
-import { IState } from '../types'
 
+
+import { Logger } from '@libs/logger'
+import { IState } from '@types_app/state'
 
 const log = new Logger('control-window')
 
@@ -24,8 +23,6 @@ export const handlerControlWindow = (
       return 'Window is not shown'
     }
   })
-
-  
 
   ipcMain.on('minimize-window', () => {
     if (window) window.minimize()

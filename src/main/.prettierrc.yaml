@@ -1,0 +1,23 @@
+singleQuote: true
+semi: false
+printWidth: 100
+trailingComma: none
+plugins:
+  - prettier-plugin-tailwindcss
+  - '@trivago/prettier-plugin-sort-imports'
+tailwindFunctions:
+  - clsx
+  - cva
+  - twMerge
+tailwindPreserveDuplicates: true
+importOrder:
+  - '^[a-zA-Z0-9]'
+  - '^@handlers'
+  - '^@libs'
+  - '^@utils'
+  - '^@types'
+  - '^[./]'
+  - '^[../]'
+importOrderCaseInsensitive: true
+importOrderSeparation: true
+importOrderSortSpecifiers: true

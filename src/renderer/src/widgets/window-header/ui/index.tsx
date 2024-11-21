@@ -1,18 +1,17 @@
 import {
+  VscChromeClose, // VscChromeRestore
   VscChromeMaximize,
-  VscChromeMinimize,
-  VscChromeClose
-  // VscChromeRestore
+  VscChromeMinimize
 } from 'react-icons/vsc'
 
-import { ModeToggle } from '../../features'
+import { ModeToggle } from '@features/theme-mode'
 
-import { useOnlineStatus } from '../../shared/hooks/useOnlineStatus/useOnlineStatus'
-import { cn } from '../../shared/lib'
-import { Button } from '../../shared/ui'
+import { Button } from '@shared/components/ui'
+import { useOnline } from '@shared/hooks'
+import { cn } from '@shared/lib/utils'
 
 export const WindowHeader = () => {
-  const statusOnline = useOnlineStatus(10000)
+  const statusOnline = useOnline(10000)
   const handleClickControlMinimize = () => {
     window.window_control.minimizeWindow()
   }

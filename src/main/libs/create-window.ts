@@ -1,7 +1,9 @@
+import { is } from '@electron-toolkit/utils'
+
 import { app, BrowserWindow, nativeImage } from 'electron'
 import { join } from 'node:path'
+
 import icon from '../../../build/icon512.png?asset'
-import { is } from '@electron-toolkit/utils'
 
 export const createWindow = (): BrowserWindow => {
   const window = new BrowserWindow({

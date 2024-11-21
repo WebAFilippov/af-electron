@@ -1,19 +1,18 @@
+import { is } from '@electron-toolkit/utils'
+
 import { app, BrowserWindow, Menu } from 'electron'
 
-import { Logger } from './libs/logger'
-import { createWindow } from './libs/create-window'
-import { autoLaunch } from './libs/auto-launch'
+import { handlerWindow } from '@handlers/app-handlers'
+import { handlerControlWindow } from '@handlers/control-window'
+import { dbHandlers } from '@handlers/db-handlers'
 
-import { createTray } from './libs/tray'
-
-import { initDb } from './libs/database/store'
-import { setupBackground } from './libs/create-bg-main'
-
-import { is } from '@electron-toolkit/utils'
-import { handlerControlWindow } from './handlers/control-window'
-import { handlerWindow } from './handlers/app-handlers'
-import { dbHandlers } from './handlers/db-handlers'
-import { initializeDatabase } from './libs/database/db'
+import { autoLaunch } from '@libs/auto-launch'
+import { setupBackground } from '@libs/create-bg-main'
+import { createWindow } from '@libs/create-window'
+import { initializeDatabase } from '@libs/database/db'
+import { initDb } from '@libs/database/store'
+import { Logger } from '@libs/logger'
+import { createTray } from '@libs/tray'
 
 Logger.setupLogger()
 const log = new Logger('main')

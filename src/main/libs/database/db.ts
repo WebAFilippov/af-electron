@@ -1,8 +1,9 @@
+import Database from 'better-sqlite3'
+import csv from 'csv-parser'
+import { app } from 'electron'
 import fs from 'fs'
 import path from 'path'
-import csv from 'csv-parser'
-import Database from 'better-sqlite3'
-import { app } from 'electron'
+
 // import { is } from '@electron-toolkit/utils'
 
 // Настраиваем путь к базе данных

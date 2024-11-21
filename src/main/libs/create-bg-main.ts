@@ -1,8 +1,7 @@
-import { Low } from 'lowdb/lib'
 import { BrowserWindow, nativeTheme } from 'electron'
+import { Low } from 'lowdb/lib'
 
-import { IState, ThemeColorBackground } from '../types'
-
+import { IState, ThemeColorBackground } from '@types_app/state'
 
 export const setupBackground = (store: Low<IState>, window: BrowserWindow) => {
   switch (store.data.theme) {

@@ -1,5 +1,6 @@
 import { useState } from 'react'
-import { cn } from '../../lib'
+
+import { cn } from '@shared/lib/utils'
 
 type Props = {
   window_header?: React.ReactNode

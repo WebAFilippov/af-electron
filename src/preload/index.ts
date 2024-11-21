@@ -1,5 +1,6 @@
-import { contextBridge } from 'electron'
 import { electronAPI } from '@electron-toolkit/preload'
+import { contextBridge } from 'electron'
+
 import { api, search_cities, window_control } from './api/api'
 
 if (process.contextIsolated) {

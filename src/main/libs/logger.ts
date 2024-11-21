@@ -1,8 +1,10 @@
+import { is } from '@electron-toolkit/utils'
+
+import { app } from 'electron'
 import log, { LogFunctions } from 'electron-log'
 import { join } from 'path'
-import { formatLog } from '../utils/formatLog'
-import { is } from '@electron-toolkit/utils'
-import { app } from 'electron'
+
+import { formatLog } from '@utils/formatLog'
 
 export class Logger {
   scope: string
