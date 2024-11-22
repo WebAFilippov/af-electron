@@ -3,12 +3,11 @@ semi: false
 printWidth: 100
 trailingComma: none
 plugins:
-  - prettier-plugin-tailwindcss
   - '@trivago/prettier-plugin-sort-imports'
+  - prettier-plugin-tailwindcss
 tailwindFunctions:
   - clsx
   - cva
-  - twMerge
 tailwindPreserveDuplicates: true
 importOrder:
   - '^[a-zA-Z0-9]'

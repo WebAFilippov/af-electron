@@ -1,81 +1,48 @@
-import {
-  VscChromeClose, // VscChromeRestore
-  VscChromeMaximize,
-  VscChromeMinimize
-} from 'react-icons/vsc'
+import { Binary, Wifi } from 'lucide-react'
+import { FC } from 'react'
 
-import { ModeToggle } from '@features/theme-mode'
+import { WindowControls } from '@features/window-control/ui'
 
-import { Button } from '@shared/components/ui'
+import { SidebarTrigger, StatusBadge, useSidebar } from '@shared/components/ui'
 import { useOnline } from '@shared/hooks'
 import { cn } from '@shared/lib/utils'
 
-export const WindowHeader = () => {
+type Props = {
+  className?: string
+}
+
+export const WindowHeader: FC<Props> = ({ className }) => {
   const statusOnline = useOnline(10000)
-  const handleClickControlMinimize = () => {
-    window.window_control.minimizeWindow()
-  }
-  const handleClickControlMaximize = () => {
-    window.window_control.maximizeWindow()
-  }
-  const handleClickControlClose = () => {
-    window.window_control.closeWindow()
-  }
+  const { state, isMobile } = useSidebar()
+
+  console.log(isMobile, state)
 
   return (
-    <div className="area-drag user-select-none absolute left-0 top-0 flex h-8 w-full items-center justify-end gap-8 overflow-hidden">
-      <div className="flex items-center justify-center gap-4">
-        <div className="flex items-center justify-center">
-          <span
-            className={cn(
-              'font-ym_text text-[11px] font-bold text-red-400',
-              statusOnline && 'text-green-400'
-            )}
-          >
-            WEB
-          </span>
-        </div>
-        <div className="flex items-center justify-center">
-          <span className="font-ym_text text-[11px] font-bold text-red-400">MQTT</span>
-        </div>
+    <div
+      className={cn(
+        'absolute inset-0 flex h-8 items-center justify-between gap-4 overflow-hidden border-b border-sidebar-border bg-sidebar text-sidebar-foreground area-drag user-select-none',
+        className
+      )}
+    >
+      <div
+        className={cn(
+          'relative h-8 transition-[width] duration-200 ease-linear',
+          state === 'collapsed' ? 'w-[--sidebar-width-icon]' : 'w-[--sidebar-width]',
+          isMobile && 'w-0'
+        )}
+      >
+        <SidebarTrigger className="absolute -right-8 top-0 area-no-drag" />
       </div>
-      <div>
-        <ModeToggle className="area-no-drag text-control_window-foreground hover:bg-control_window w-[42px] bg-transparent" />
-      </div>
-      <div className="flex items-center justify-center">
-        <Button
-          id="minimize-window"
-          type="button"
-          aria-label="Свернуть"
-          variant="ghost"
-          tabIndex={-1}
-          className="area-no-drag text-control_window-foreground hover:bg-control_window w-[42px] bg-transparent"
-          onClick={() => handleClickControlMinimize()}
-        >
-          {<VscChromeMinimize />}
-        </Button>
-        <Button
-          id="maximize-window"
-          type="button"
-          aria-label="Развернуть"
-          variant="ghost"
-          tabIndex={-1}
-          className="area-no-drag text-control_window-foreground hover:bg-control_window w-[42px] bg-transparent"
-          onClick={() => handleClickControlMaximize()}
-        >
-          {<VscChromeMaximize />}
-        </Button>
-        <Button
-          id="close-window"
-          type="button"
-          aria-label="Закрыть"
-          variant="ghost"
-          tabIndex={-1}
-          className="area-no-drag text-control_window-foreground hover:bg-control_window-close w-[42px] bg-transparent"
-          onClick={() => handleClickControlClose()}
-        >
-          {<VscChromeClose />}
-        </Button>
+
+      {/* <SidebarTrigger className="area-no-drag" /> */}
+      <div className="flex items-center gap-6">
+        <div className="flex items-center gap-2">
+          <StatusBadge icon={<Wifi size={14} />} isActive={statusOnline} />
+          <StatusBadge icon={<Binary size={14} />} isActive={false} />
+        </div>
+
+        {/* Кнопки свернуть/развернуть/закрыть */}
+        <WindowControls />
       </div>
     </div>
   )

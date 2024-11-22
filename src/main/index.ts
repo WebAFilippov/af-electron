@@ -10,7 +10,6 @@ import { autoLaunch } from '@libs/auto-launch'
 import { setupBackground } from '@libs/create-bg-main'
 import { createWindow } from '@libs/create-window'
 import { initializeDatabase } from '@libs/database/db'
-import { initDb } from '@libs/database/store'
 import { Logger } from '@libs/logger'
 import { createTray } from '@libs/tray'
 
@@ -43,17 +42,17 @@ if (!gotTheLock) {
     try {
       await initializeDatabase()
 
-      const store = await initDb(isAutoLaunch)
+
 
       const window = createWindow()
-      const tray = createTray(window, store)
+      const tray = createTray(window)
       console.log(tray)
 
-      setupBackground(store, window)
+      setupBackground(window)
 
       // HANDLERS
-      handlerWindow(window, store)
-      handlerControlWindow(window, store, isAutoLaunch)
+      handlerWindow(window)
+      handlerControlWindow(window, isAutoLaunch)
       dbHandlers()
 
       app.on('activate', () => {

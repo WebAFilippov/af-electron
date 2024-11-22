@@ -7,7 +7,7 @@ import icon from '../../../build/icon512.png?asset'
 
 export const createWindow = (): BrowserWindow => {
   const window = new BrowserWindow({
-    minWidth: 768,
+    minWidth: 767,
     minHeight: 650,
     width: 1280,
     height: 800,

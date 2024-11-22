@@ -1,66 +1,66 @@
 import { BrowserWindow } from 'electron'
-import { Low } from 'lowdb/lib'
 
-import { IState } from '@types_app/state'
 
-export const handlerWindow = (window: BrowserWindow, store: Low<IState>) => {
-  window.on('close', () => {
-    console.log('Окно закрывается')
-  })
 
-  window.on('closed', async () => {
-    store.data.isHide = false
-    store.data.isMaximaze = false
-    store.data.isMinisize = false
-    await store.write()
-    console.log('Окно закрыто')
-  })
 
-  window.on('minimize', () => {
-    console.log('Окно свернуто')
-  })
+export const handlerWindow = (window: BrowserWindow) => {
+  // window.on('close', () => {
+  //   console.log('Окно закрывается')
+  // })
 
-  window.on('maximize', async () => {
-    store.data.isMaximaze = true
-    await store.write()
-    console.log('Окно развернуто')
-  })
+  // window.on('closed', async () => {
+  //   store.data.isHide = false
+  //   store.data.isMaximaze = false
+  //   store.data.isMinisize = false
+  //   await store.write()
+  //   console.log('Окно закрыто')
+  // })
 
-  window.on('unmaximize', async () => {
-    store.data.isMaximaze = false
-    await store.write()
-    console.log('Окно восстановлено из развернутого состояния')
-  })
+  // window.on('minimize', () => {
+  //   console.log('Окно свернуто')
+  // })
 
-  window.on('restore', () => {
-    console.log('Окно восстановлено')
-  })
+  // window.on('maximize', async () => {
+  //   store.data.isMaximaze = true
+  //   await store.write()
+  //   console.log('Окно развернуто')
+  // })
 
-  window.on('show', () => {
-    console.log('Окно показано')
-  })
+  // window.on('unmaximize', async () => {
+  //   store.data.isMaximaze = false
+  //   await store.write()
+  //   console.log('Окно восстановлено из развернутого состояния')
+  // })
 
-  window.on('hide', () => {
-    console.log('Окно скрыто')
-  })
+  // window.on('restore', () => {
+  //   console.log('Окно восстановлено')
+  // })
 
-  window.on('focus', () => {
-    console.log('Окно получило фокус')
-  })
+  // window.on('show', () => {
+  //   console.log('Окно показано')
+  // })
 
-  window.on('blur', () => {
-    console.log('Окно потеряло фокус')
-  })
+  // window.on('hide', () => {
+  //   console.log('Окно скрыто')
+  // })
 
-  window.on('enter-full-screen', () => {
-    console.log('Окно перешло в полноэкранный режим')
-  })
+  // window.on('focus', () => {
+  //   console.log('Окно получило фокус')
+  // })
 
-  window.on('leave-full-screen', () => {
-    console.log('Окно вышло из полноэкранного режима')
-  })
+  // window.on('blur', () => {
+  //   console.log('Окно потеряло фокус')
+  // })
 
-  window.on('ready-to-show', () => {
-    console.log('Окно готово к отображению')
-  })
+  // window.on('enter-full-screen', () => {
+  //   console.log('Окно перешло в полноэкранный режим')
+  // })
+
+  // window.on('leave-full-screen', () => {
+  //   console.log('Окно вышло из полноэкранного режима')
+  // })
+
+  // window.on('ready-to-show', () => {
+  //   console.log('Окно готово к отображению')
+  // })
 }

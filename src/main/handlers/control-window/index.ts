@@ -1,16 +1,12 @@
 import { BrowserWindow, ipcMain } from 'electron'
-import { Low } from 'lowdb/lib'
-
 
 import { Logger } from '@libs/logger'
-import { IState } from '@types_app/state'
 
 const log = new Logger('control-window')
 
 export const handlerControlWindow = (
   window: BrowserWindow,
-  store: Low<IState>,
-  // tray: Tray,
+
   isAutoLaunch: boolean
 ) => {
   ipcMain.handleOnce('start-window', () => {
@@ -41,9 +37,6 @@ export const handlerControlWindow = (
   ipcMain.on('close-window', async () => {
     if (window) {
       window.hide()
-
-      store.data.isHide = true
-      await store.write()
     }
   })
 }

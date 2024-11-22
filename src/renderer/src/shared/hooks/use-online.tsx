@@ -16,6 +16,10 @@ export const useOnline = (intervalMs: number = 10000): boolean => {
   }
 
   useEffect(() => {
+    checkOnlineStatus()
+  }, [])
+
+  useEffect(() => {
     const interval = setInterval(() => {
       checkOnlineStatus()
     }, intervalMs)
