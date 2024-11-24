@@ -9,7 +9,7 @@ const AutoComplete: React.FC = () => {
     setQuery(value)
 
     if (value.length > 0) {
-      const cities = await window.search_cities.searchCities(value)
+      const cities = await window.api.searchCities(value)
       setResults(cities)
     } else {
       setResults([])
@@ -18,7 +18,7 @@ const AutoComplete: React.FC = () => {
 
   return (
     <div>
-      <input type="text" value={query} onChange={handleChange} placeholder="Введите город" />
+      <input type="text" value={query} onChange={handleChange} placeholder="Введите город" className='text-background' />
       {results.length > 0 && (
         <ul>
           {results.map((city, index) => (

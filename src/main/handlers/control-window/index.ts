@@ -1,15 +1,25 @@
+import AudioDeviceMonitor, { AudioMonitorOptions } from 'af-win-audio'
 import { BrowserWindow, ipcMain } from 'electron'
 
 import { Logger } from '@libs/logger'
 
 const log = new Logger('control-window')
 
-export const handlerControlWindow = (
-  window: BrowserWindow,
+export const handlerControlWindow = (window: BrowserWindow, isAutoLaunch: boolean) => {
+  const options: AudioMonitorOptions = {
+    autoStart: false,
+    delay: 100,
+    step: 1
+  }
 
-  isAutoLaunch: boolean
-) => {
+  const AudioMonitor = new AudioDeviceMonitor(options)
+
+  AudioMonitor.on('change', (device) => {
+    window.webContents.send('send-device-data', device)
+  })
+
   ipcMain.handleOnce('start-window', () => {
+    AudioMonitor.start()
     if (!isAutoLaunch) {
       window.show()
       log.info('Window is shown')

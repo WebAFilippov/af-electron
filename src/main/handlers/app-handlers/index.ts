@@ -1,9 +1,9 @@
-import { BrowserWindow } from 'electron'
 
 
 
 
-export const handlerWindow = (window: BrowserWindow) => {
+
+export const handlerWindow = () => {
   // window.on('close', () => {
   //   console.log('Окно закрывается')
   // })

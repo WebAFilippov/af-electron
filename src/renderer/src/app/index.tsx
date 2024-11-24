@@ -9,7 +9,7 @@ import './styles/globals.css'
 const App = (): JSX.Element => {
   useEffect(() => {
     const sendCommandShowWindow = async () => {
-      await window.window_control.startWindow()
+      await window.api.startWindow()
     }
 
     sendCommandShowWindow()

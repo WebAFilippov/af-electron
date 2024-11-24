@@ -1,17 +1,17 @@
-import Database from 'better-sqlite3'
+// import { is } from '@electron-toolkit/utils'
+
+import BetterSqlite3 from 'better-sqlite3'
 import csv from 'csv-parser'
 import { app } from 'electron'
 import fs from 'fs'
 import path from 'path'
 
-// import { is } from '@electron-toolkit/utils'
 
-// Настраиваем путь к базе данных
+
 const userDataPath = app.getPath('userData') // Папка для пользовательских данных
 const dbPath = path.join(userDataPath, 'app.db') // Путь к базе данных
-
 // Создаём подключение к базе данных
-export const db = new Database(dbPath)
+export const db: BetterSqlite3.DATABASE = new BetterSqlite3(dbPath)
 
 // Создаём таблицу, если она отсутствует
 db.exec(`

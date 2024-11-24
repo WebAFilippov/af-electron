@@ -1,9 +1,6 @@
-import { BrowserWindow, nativeTheme } from 'electron'
 
 
-import {  ThemeColorBackground } from '@types_app/state'
-
-export const setupBackground = ( window: BrowserWindow) => {
+export const setupBackground = ( ) => {
   // switch (store.data.theme) {
   //   case 'light':
   //     window.setBackgroundColor(ThemeColorBackground.LIGHT)

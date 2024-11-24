@@ -48,10 +48,10 @@ if (!gotTheLock) {
       const tray = createTray(window)
       console.log(tray)
 
-      setupBackground(window)
+      setupBackground()
 
       // HANDLERS
-      handlerWindow(window)
+      handlerWindow()
       handlerControlWindow(window, isAutoLaunch)
       dbHandlers()
 

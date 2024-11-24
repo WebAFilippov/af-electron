@@ -4,16 +4,16 @@ import { useState } from 'react'
 import { Button } from '@shared/components/ui'
 
 export const WindowControls = () => {
-  const [isMaximized, setIsMaximized] = useState(false)
+  const [isMaximized] = useState(false)
 
   const handleMinimize = () => {
-    window.window_control.minimizeWindow()
+    window.api.minimizeWindow()
   }
   const handleMaximize = () => {
-    window.window_control.maximizeWindow()
+    window.api.maximizeWindow()
   }
   const handleClose = () => {
-    window.window_control.closeWindow()
+    window.api.closeWindow()
   }
 
   return (
@@ -21,7 +21,7 @@ export const WindowControls = () => {
       <Button
         variant="ghost"
         size="icon"
-        className="area-no-drag [&_svg]:size-4 [&_svg]:shrink-0 rounded-none h-8 w-10"
+        className="area-no-drag [&_svg]:size-4 [&_svg]:shrink-0 rounded-none h-8 w-10 transition-colors duration-200"
         tabIndex={-1}
         onClick={handleMinimize}
       >
@@ -30,7 +30,7 @@ export const WindowControls = () => {
       <Button
         variant="ghost"
         size="icon"
-        className="area-no-drag [&_svg]:size-4 [&_svg]:shrink-0 rounded-none h-8 w-10"
+        className="area-no-drag [&_svg]:size-4 [&_svg]:shrink-0 rounded-none h-8 w-10 transition-colors duration-200"
         tabIndex={-1}
         onClick={handleMaximize}
       >
@@ -39,7 +39,7 @@ export const WindowControls = () => {
       <Button
         variant="ghost"
         size="icon"
-        className="area-no-drag text-red-500 hover:text-red-500 [&_svg]:size-5 [&_svg]:shrink-0 rounded-none h-8 w-10"
+        className="area-no-drag hover:bg-red-500 [&_svg]:size-4 [&_svg]:shrink-0 rounded-none h-8 w-10 transition-colors duration-200"
         tabIndex={-1}
         onClick={handleClose}
       >
