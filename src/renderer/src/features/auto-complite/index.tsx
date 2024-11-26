@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 
-const AutoComplete: React.FC = () => {
+export const AutoComplete: React.FC = () => {
   const [query, setQuery] = useState('')
   const [results, setResults] = useState<{ city: string; region: string }[] | string[]>([])
 
@@ -18,7 +18,13 @@ const AutoComplete: React.FC = () => {
 
   return (
     <div>
-      <input type="text" value={query} onChange={handleChange} placeholder="Введите город" className='text-background' />
+      <input
+        type="text"
+        value={query}
+        onChange={handleChange}
+        placeholder="Введите город"
+        className="text-background"
+      />
       {results.length > 0 && (
         <ul>
           {results.map((city, index) => (
@@ -31,5 +37,3 @@ const AutoComplete: React.FC = () => {
     </div>
   )
 }
-
-export default AutoComplete

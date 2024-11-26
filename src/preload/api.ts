@@ -1,6 +1,6 @@
 import { ipcRenderer } from 'electron'
 import { Api } from './index.d'
-import { IDevice } from 'af-win-audio'
+
 
 export const api: Api = {
   startWindow: () => ipcRenderer.invoke('start-window'),
@@ -10,6 +10,6 @@ export const api: Api = {
 
   searchCities: (query: string) => ipcRenderer.invoke('search_cities', query),
 
-  sendDevice: (callback: (device: IDevice) => void) =>
+  sendDevice: (callback: (device: any) => void) =>
     ipcRenderer.on('send-device-data', (_, device) => callback(device))
 }

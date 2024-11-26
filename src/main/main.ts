@@ -42,8 +42,6 @@ if (!gotTheLock) {
     try {
       await initializeDatabase()
 
-
-
       const window = createWindow()
       const tray = createTray(window)
       console.log(tray)

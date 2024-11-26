@@ -1,5 +1,5 @@
 import { ElectronAPI } from '@electron-toolkit/preload'
-import { IDevice } from 'af-win-audio'
+
 
 export interface Api {
   startWindow: () => Promise<string>
@@ -9,7 +9,7 @@ export interface Api {
 
   searchCities: (query: string) => Promise<string[]>
 
-  sendDevice: (callback: (device: IDevice) => void) => void
+  sendDevice: (callback: (device: any) => void) => void
 }
 
 declare global {

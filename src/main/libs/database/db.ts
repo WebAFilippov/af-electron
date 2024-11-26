@@ -1,15 +1,12 @@
-// import { is } from '@electron-toolkit/utils'
-
 import BetterSqlite3 from 'better-sqlite3'
 import csv from 'csv-parser'
 import { app } from 'electron'
 import fs from 'fs'
 import path from 'path'
 
-
-
 const userDataPath = app.getPath('userData') // Папка для пользовательских данных
 const dbPath = path.join(userDataPath, 'app.db') // Путь к базе данных
+
 // Создаём подключение к базе данных
 export const db: BetterSqlite3.DATABASE = new BetterSqlite3(dbPath)
 
@@ -55,7 +52,17 @@ export async function importCitiesFromCSV() {
     VALUES (?, ?, ?, ?, ?, ?, ?)
   `)
 
-  const insertMany = db.transaction((rows: any[]) => {
+  interface LocationData {
+    type_region: string
+    region: string
+    city: string
+    lower_city: string
+    latitude: number | null
+    longitude: number | null
+    population: number
+  }
+
+  const insertMany = db.transaction((rows: LocationData[]) => {
     for (const row of rows) {
       stmt.run(
         row.type_region,
@@ -69,7 +76,7 @@ export async function importCitiesFromCSV() {
     }
   })
 
-  const rows: any[] = []
+  const rows: LocationData[] = []
 
   return new Promise<void>((resolve, reject) => {
     fs.createReadStream(filePath)
@@ -79,7 +86,7 @@ export async function importCitiesFromCSV() {
           mapHeaders: ({ header }) => header.trim() // Удаляем лишние пробелы из заголовков
         })
       )
-      .on('data', (data) => {
+      .on('data', (data: LocationData[]) => {
         rows.push({
           type_region: data['Тип региона'] || '',
           region: data['Регион'] || '',

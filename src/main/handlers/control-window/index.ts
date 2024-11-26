@@ -1,7 +1,8 @@
-import AudioDeviceMonitor, { AudioMonitorOptions } from 'af-win-audio'
-import { BrowserWindow, ipcMain } from 'electron'
+// import { AudioDeviceMonitor, AudioMonitorOptions } from 'af-win-audio'
+import {  BrowserWindow, ipcMain } from 'electron'
 
 import { Logger } from '@libs/logger'
+import { AudioDeviceMonitor, AudioMonitorOptions } from '@libs/audio-monitor'
 
 const log = new Logger('control-window')
 
@@ -11,7 +12,6 @@ export const handlerControlWindow = (window: BrowserWindow, isAutoLaunch: boolea
     delay: 100,
     step: 1
   }
-
   const AudioMonitor = new AudioDeviceMonitor(options)
 
   AudioMonitor.on('change', (device) => {

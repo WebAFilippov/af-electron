@@ -1,6 +1,5 @@
 import { is } from '@electron-toolkit/utils'
 
-
 import { app, BrowserWindow, nativeImage } from 'electron'
 import { join } from 'node:path'
 
@@ -44,8 +43,6 @@ export const createWindow = (): BrowserWindow => {
   } else {
     window.loadFile(join(__dirname, '../renderer/index.html'))
   }
-
-  
 
   return window
 }
