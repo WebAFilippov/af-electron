@@ -12,10 +12,15 @@ tailwindFunctions:
 tailwindPreserveDuplicates: true
 importOrder:
   - '^[a-zA-Z0-9]'
-  - '^@handlers'
+  - '^@ui'
   - '^@libs'
   - '^@utils'
-  - '^@types'
+  - '^@database'
+  - '^@models'
+  - '^@repositories'
+  - '^@services'
+  - '^@ipc'
+  - '^@shared'
   - '^[./]'
   - '^[../]'
 importOrderCaseInsensitive: true

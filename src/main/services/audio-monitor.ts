@@ -198,10 +198,14 @@ class AudioDeviceMonitor {
       return
     }
 
-    this.exePath = path.join(app.getAppPath(), 'resources', 'af-win-audio.exe').replace('app.asar', 'app.asar.unpacked')
+    this.exePath = path
+      .join(app.getAppPath(), 'resources', 'af-win-audio.exe')
+      .replace('app.asar', 'app.asar.unpacked')
 
     // Запуск процесса
-    this.audioDeviceProcess = spawn(this.exePath, [this.delay.toString(), this.step.toString()])
+    this.audioDeviceProcess = spawn(this.exePath, [this.delay.toString(), this.step.toString()], {
+      windowsHide: true
+    })
 
     // Обработка ошибок при запуске процесса
     this.audioDeviceProcess.on('error', (err) => {

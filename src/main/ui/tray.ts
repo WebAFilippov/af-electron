@@ -1,7 +1,8 @@
 import { BrowserWindow, Menu, nativeImage, Tray } from 'electron'
 
+
 import icon from '../../../build/icon512.png?asset'
-import { toggleWindowState } from './helpers/window-control-helpers'
+import { toggleWindowState } from '@utils/window-utils'
 
 export const createTray = (window: BrowserWindow) => {
   const tray = new Tray(nativeImage.createFromPath(icon))

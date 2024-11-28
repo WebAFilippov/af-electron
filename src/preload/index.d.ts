@@ -1,6 +1,5 @@
 import { ElectronAPI } from '@electron-toolkit/preload'
 
-
 export interface Api {
   startWindow: () => Promise<string>
   minimizeWindow: () => void
@@ -9,7 +8,8 @@ export interface Api {
 
   searchCities: (query: string) => Promise<string[]>
 
-  sendDevice: (callback: (device: any) => void) => void
+  onDevice: (callback: (device: any) => void) => void
+  removeListenerDevice: () => void
 }
 
 declare global {

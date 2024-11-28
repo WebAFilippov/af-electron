@@ -1,7 +1,6 @@
 import { ipcRenderer } from 'electron'
 import { Api } from './index.d'
 
-
 export const api: Api = {
   startWindow: () => ipcRenderer.invoke('start-window'),
   minimizeWindow: () => ipcRenderer.send('minimize-window'),
@@ -10,6 +9,7 @@ export const api: Api = {
 
   searchCities: (query: string) => ipcRenderer.invoke('search_cities', query),
 
-  sendDevice: (callback: (device: any) => void) =>
-    ipcRenderer.on('send-device-data', (_, device) => callback(device))
+  onDevice: (callback: (device: any) => void) =>
+    ipcRenderer.on('send-device-data', (_, device) => callback(device)),
+  removeListenerDevice: () => ipcRenderer.removeAllListeners('send-device-data')
 }

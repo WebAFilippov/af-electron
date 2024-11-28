@@ -7,10 +7,15 @@ export default defineConfig({
     plugins: [externalizeDepsPlugin()],
     resolve: {
       alias: {
-        '@handlers': path.resolve(__dirname, './src/main/handlers'),
-        '@libs': path.resolve(__dirname, './src/main/libs'),
-        '@types_app': path.resolve(__dirname, './src/main/types_app'),
-        '@utils': path.resolve(__dirname, './src/main/utils')
+        '@': path.resolve(__dirname, './src/main'),
+        '@ui': path.resolve(__dirname, './src/main/ui'),
+        '@ipc': path.resolve(__dirname, './src/main/ipc'),
+        '@utils': path.resolve(__dirname, './src/main/utils'),
+        '@database': path.resolve(__dirname, './src/main/database'),
+        '@models': path.resolve(__dirname, './src/main/models'),
+        '@services': path.resolve(__dirname, './src/main/services'),
+        '@repositories': path.resolve(__dirname, './src/main/repositories'),
+        '@shared': path.resolve(__dirname, './src/main/shared')
       }
     },
     build: {

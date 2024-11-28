@@ -11,11 +11,16 @@ export const AppLayout: FC<PropsWithChildren> = ({ children }) => {
   const [device, setDevice] = useState({ id: '', name: '', volume: 0, muted: true })
 
   useEffect(() => {
-    window.api.sendDevice((device) => {
-      console.log(device)
+    // Если window.show слушать иначе удалить слушатель
+    window.api.onDevice((device) => {
       setDevice(device)
     })
+
+    return () => {
+      window.api.removeListenerDevice()
+    }
   }, [])
+
   return (
     <SidebarProvider>
       <WindowHeader />

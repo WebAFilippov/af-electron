@@ -5,3 +5,7 @@ out
 *.log*
 .vscode
 logs
+yarn.lock
+package-lock.json
+Scenario.md
+

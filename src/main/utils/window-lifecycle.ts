@@ -1,9 +1,4 @@
-
-
-
-
-
-export const handlerWindow = () => {
+export const windowLifecycle = () => {
   // window.on('close', () => {
   //   console.log('Окно закрывается')
   // })

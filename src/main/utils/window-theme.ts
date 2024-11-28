@@ -1,6 +1,11 @@
+// import { nativeTheme } from 'electron'
 
+// import { ThemeColorBackground } from '@shared/constants'
 
-export const setupBackground = ( ) => {
+/**
+ * Настраивает фоновую тему приложения в зависимости от текущей темы.
+ */
+export const configureTheme = (_window: Electron.BrowserWindow) => {
   // switch (store.data.theme) {
   //   case 'light':
   //     window.setBackgroundColor(ThemeColorBackground.LIGHT)
@@ -8,11 +13,11 @@ export const setupBackground = ( ) => {
   //     break
   //   case 'dark':
   //     window.setBackgroundColor(ThemeColorBackground.DARK)
-  //     nativeTheme.themeSource = 'light'
+  //     nativeTheme.themeSource = 'dark'
   //     break
   //   default:
   //     const theme = nativeTheme.shouldUseDarkColors ? 'dark' : 'light'
-  //     theme === 'dark' ? (nativeTheme.themeSource = 'dark') : (nativeTheme.themeSource = 'light')
+  //     nativeTheme.themeSource = theme
   //     window.setBackgroundColor(
   //       theme === 'dark' ? ThemeColorBackground.DARK : ThemeColorBackground.LIGHT
   //     )

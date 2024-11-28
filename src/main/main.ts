@@ -2,21 +2,21 @@ import { is } from '@electron-toolkit/utils'
 
 import { app, BrowserWindow, Menu } from 'electron'
 
-import { handlerWindow } from '@handlers/app-handlers'
-import { handlerControlWindow } from '@handlers/control-window'
-import { dbHandlers } from '@handlers/db-handlers'
+import { createWindow } from '@ui/create-window'
+import { createTray } from '@ui/tray'
 
-import { autoLaunch } from '@libs/auto-launch'
-import { setupBackground } from '@libs/create-bg-main'
-import { createWindow } from '@libs/create-window'
-import { initializeDatabase } from '@libs/database/db'
-import { Logger } from '@libs/logger'
-import { createTray } from '@libs/tray'
+import { initDatabase } from '@database/database'
+import { seedDatabase } from '@database/seed'
+
+import { setAutoLaunch } from '@services/auto-launch'
+import { Logger } from '@services/logger'
+
+import { ipcHandlers } from './ipc'
 
 Logger.setupLogger()
 const log = new Logger('main')
 
-autoLaunch(true)
+setAutoLaunch(is.dev ? false : true)
 !is.dev && Menu.setApplicationMenu(null)
 
 const isAutoLaunch = process.argv.includes('--auto-launch')
@@ -40,18 +40,15 @@ if (!gotTheLock) {
 
   app.whenReady().then(async () => {
     try {
-      await initializeDatabase()
+      await initDatabase()
+      await seedDatabase()
 
       const window = createWindow()
       const tray = createTray(window)
       console.log(tray)
 
-      setupBackground()
-
       // HANDLERS
-      handlerWindow()
-      handlerControlWindow(window, isAutoLaunch)
-      dbHandlers()
+      ipcHandlers(window, isAutoLaunch)
 
       app.on('activate', () => {
         if (BrowserWindow.getAllWindows().length === 0) {

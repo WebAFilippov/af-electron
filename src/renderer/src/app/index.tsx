@@ -17,7 +17,7 @@ const App = (): JSX.Element => {
 
   return (
     <>
-      <ThemeProvider storageKey="ui-theme">
+      <ThemeProvider storageKey="ui-theme" defaultTheme='light'>
         <AppLayout />
       </ThemeProvider>
     </>
