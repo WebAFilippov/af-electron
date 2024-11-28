@@ -15,7 +15,8 @@ export default defineConfig({
         '@models': path.resolve(__dirname, './src/main/models'),
         '@services': path.resolve(__dirname, './src/main/services'),
         '@repositories': path.resolve(__dirname, './src/main/repositories'),
-        '@shared': path.resolve(__dirname, './src/main/shared')
+        '@main/shared': path.resolve(__dirname, './src/main/shared'),
+        '@shared': path.resolve(__dirname, './src/shared'),
       }
     },
     build: {

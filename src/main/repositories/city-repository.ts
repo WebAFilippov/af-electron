@@ -1,3 +1,5 @@
+import { Op } from 'sequelize'
+
 import City from '@models/city-model'
 
 class CityRepository {
@@ -9,13 +11,19 @@ class CityRepository {
     })
   }
 
-  async findByCityLimit5OrderPopulation(lower_city_query: string): Promise<City[] | null> {
+  async findByCityLimitOrder(
+    query: string,
+    limit: number = 5,
+    order: 'DESC' | 'ASC' = 'DESC'
+  ): Promise<City[]> {
     return await City.findAll({
       where: {
-        lower_city: lower_city_query.toLowerCase()
+        lower_city: {
+          [Op.like]: `%${query.toLowerCase()}%`
+        }
       },
-      limit: 5,
-      order: [['lower_city', 'DESC']]
+      limit,
+      order: [['population', order]]
     })
   }
 }

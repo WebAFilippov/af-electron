@@ -6,6 +6,7 @@ import { AutoComplete } from '@features/auto-complite'
 
 import { SidebarProvider } from '@shared/components/ui'
 import { AppSidebar } from '@shared/components/ui/app-sidebar'
+import { VolumeSLider } from '@shared/components/ui/volume-slider'
 
 export const AppLayout: FC<PropsWithChildren> = ({ children }) => {
   const [device, setDevice] = useState({ id: '', name: '', volume: 0, muted: true })
@@ -31,7 +32,9 @@ export const AppLayout: FC<PropsWithChildren> = ({ children }) => {
         <br />
         <p>ID: {device.id}</p>
         <p>Name: {device.name}</p>
-        <p>Volume: {device.volume}</p>
+        <p className='w-1/5'>
+          <VolumeSLider volume={50} />
+        </p>
         <p>Muted: {device.muted ? 'muted' : 'unmuted'}</p>
         <br />
         <AutoComplete />

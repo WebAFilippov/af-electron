@@ -44,8 +44,7 @@ if (!gotTheLock) {
       await seedDatabase()
 
       const window = createWindow()
-      const tray = createTray(window)
-      console.log(tray)
+      createTray(window)
 
       // HANDLERS
       ipcHandlers(window, isAutoLaunch)

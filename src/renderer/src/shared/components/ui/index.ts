@@ -8,3 +8,6 @@ export * from './skeleton'
 export * from './tooltip'
 export * from './status-badge'
 export * from './hover-card'
+export * from './slider'
+export * from './label'
+

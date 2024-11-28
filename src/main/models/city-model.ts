@@ -1,15 +1,9 @@
-import {
-  CreationOptional,
-  DataTypes,
-  InferAttributes,
-  InferCreationAttributes,
-  Model
-} from 'sequelize'
+import { DataTypes, Model } from 'sequelize'
 
 import { sequelize } from '@database/database'
 
-class City extends Model<InferAttributes<City>, InferCreationAttributes<City>> {
-  declare id: CreationOptional<number>
+class City extends Model {
+  declare id: number
   declare type_region: string
   declare region: string
   declare city: string

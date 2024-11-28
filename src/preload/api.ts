@@ -7,7 +7,8 @@ export const api: Api = {
   maximizeWindow: () => ipcRenderer.send('maximize-window'),
   closeWindow: () => ipcRenderer.send('close-window'),
 
-  searchCities: (query: string) => ipcRenderer.invoke('search_cities', query),
+  searchCities: (query, limit?, order?) =>
+    ipcRenderer.invoke('city::searchCityLimitOrder', query, limit, order),
 
   onDevice: (callback: (device: any) => void) =>
     ipcRenderer.on('send-device-data', (_, device) => callback(device)),
