@@ -1,9 +1,9 @@
 import csv from 'csv-parser'
 import fs from 'fs'
 
-import City from '@models/city-model'
+import { Logger } from '@utils/logger'
 
-import { Logger } from '@services/logger'
+import City from '@models/city-model'
 
 import { config } from '@main/shared/config'
 

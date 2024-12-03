@@ -12,6 +12,7 @@ files:
 asarUnpack:
   - resources/**
 win:
+  icon: build/application.ico
   executableName: Harmonify
 nsis:
   oneClick: false

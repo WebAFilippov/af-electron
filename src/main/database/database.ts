@@ -1,6 +1,6 @@
 import { Sequelize } from 'sequelize'
 
-import { Logger } from '@services/logger'
+import { Logger } from '@utils/logger'
 
 import { config } from '@main/shared/config'
 

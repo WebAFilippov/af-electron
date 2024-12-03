@@ -3,7 +3,7 @@ import { is } from '@electron-toolkit/utils'
 import { app, BrowserWindow, nativeImage } from 'electron'
 import { join } from 'node:path'
 
-import icon from '../../../build/icon512.png?asset'
+import icon from '../../../build/window-256x256.ico?asset'
 
 export const createWindow = (): BrowserWindow => {
   const window = new BrowserWindow({
@@ -31,6 +31,9 @@ export const createWindow = (): BrowserWindow => {
       devTools: is.dev ? true : false
     }
   })
+  
+  window.flashFrame(true)
+  // window.setOverlayIcon(nativeImage.createFromPath(icon16), 'Harmonify')
 
   if (!is.dev) {
     window.setMenu(null)

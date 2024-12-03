@@ -1,8 +1,7 @@
 import { useEffect } from 'react'
 import ReactDOM from 'react-dom/client'
 
-import { AppLayout } from '@shared/layouts/app-layout'
-
+import { RouterProvider } from './providers/router'
 import { ThemeProvider } from './providers/theme'
 import './styles/globals.css'
 
@@ -17,7 +16,7 @@ const App = (): JSX.Element => {
 
   return (
     <ThemeProvider storageKey="ui-theme" defaultTheme="light">
-      <AppLayout />
+      <RouterProvider />
     </ThemeProvider>
   )
 }

@@ -1,6 +1,7 @@
 import { Binary, Wifi } from 'lucide-react'
 import { FC } from 'react'
 
+import { ModeToggle } from '@features/theme-mode'
 import { WindowControls } from '@features/window-control/ui'
 
 import { SidebarTrigger, StatusBadge, useSidebar } from '@shared/components/ui'
@@ -12,10 +13,8 @@ type Props = {
 }
 
 export const WindowHeader: FC<Props> = ({ className }) => {
-  const statusOnline = useOnline(10000)
+  const { isOnline, loading } = useOnline(10000)
   const { state, isMobile } = useSidebar()
-
-  console.log(isMobile, state)
 
   return (
     <div
@@ -36,9 +35,13 @@ export const WindowHeader: FC<Props> = ({ className }) => {
 
       {/* <SidebarTrigger className="area-no-drag" /> */}
       <div className="flex items-center gap-6">
+        <div>
+          <ModeToggle className="area-no-drag" />
+        </div>
+
         <div className="flex items-center gap-2">
-          <StatusBadge icon={<Wifi size={14} />} isActive={statusOnline} />
-          <StatusBadge icon={<Binary size={14} />} isActive={false} />
+          <StatusBadge icon={<Wifi size={14} />} isActive={isOnline} loading={loading} />
+          <StatusBadge icon={<Binary size={14} />} isActive={false} loading={true} />
         </div>
 
         {/* Кнопки свернуть/развернуть/закрыть */}

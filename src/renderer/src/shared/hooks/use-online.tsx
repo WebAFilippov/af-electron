@@ -1,18 +1,20 @@
 import { useEffect, useState } from 'react'
 
-export const useOnline = (intervalMs: number = 10000): boolean => {
+export const useOnline = (intervalMs: number = 10000): { isOnline: boolean; loading: boolean } => {
   const [isOnline, setIsOnline] = useState<boolean>(false)
+  const [loading, setLoading] = useState(true)
 
   const checkOnlineStatus = async () => {
-    console.log('try')
     try {
       const response = await fetch('https://www.yandex.ru/favicon.ico', { cache: 'no-store' })
       if (response.ok) {
         setIsOnline(true)
+        setLoading(false)
         return
       }
     } catch {
       setIsOnline(false)
+      setLoading(false)
     }
   }
 
@@ -30,5 +32,5 @@ export const useOnline = (intervalMs: number = 10000): boolean => {
     return () => clearInterval(interval)
   }, [intervalMs])
 
-  return isOnline
+  return { isOnline, loading }
 }
