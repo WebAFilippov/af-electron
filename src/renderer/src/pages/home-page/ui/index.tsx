@@ -35,7 +35,7 @@ export const HomePage: FC = () => {
   return (
     <div className="h-full overflow-auto pr-2">
       <div className="grid grid-cols-1 place-items-center gap-6 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-        {/* {cardsData.map((card, index) => (
+        {cardsData.map((card, index) => (
           <Card key={index} className="">
             <CardHeader>
               <CardTitle>Notifications</CardTitle>
@@ -46,97 +46,7 @@ export const HomePage: FC = () => {
               <Button className="w-full">Button</Button>
             </CardFooter>
           </Card>
-        ))} */}
-        <Card className="">
-          <CardHeader>
-            <CardTitle>Notifications</CardTitle>
-            <CardDescription>You have 3 unread messages.</CardDescription>
-          </CardHeader>
-          <CardContent>{cardsData[0].description}</CardContent>
-          <CardFooter>
-            <Button className="w-full">Button</Button>
-          </CardFooter>
-        </Card>
-        <Card className="">
-          <CardHeader>
-            <CardTitle>Notifications</CardTitle>
-            <CardDescription>You have 3 unread messages.</CardDescription>
-          </CardHeader>
-          <CardContent>{cardsData[0].description}</CardContent>
-          <CardFooter>
-            <Button className="w-full">Button</Button>
-          </CardFooter>
-        </Card>
-        <Card className="">
-          <CardHeader>
-            <CardTitle>Notifications</CardTitle>
-            <CardDescription>You have 3 unread messages.</CardDescription>
-          </CardHeader>
-          <CardContent>{cardsData[0].description}</CardContent>
-          <CardFooter>
-            <Button className="w-full">Button</Button>
-          </CardFooter>
-        </Card>
-        <Card className="">
-          <CardHeader>
-            <CardTitle>Notifications</CardTitle>
-            <CardDescription>You have 3 unread messages.</CardDescription>
-          </CardHeader>
-          <CardContent>{cardsData[0].description}</CardContent>
-          <CardFooter>
-            <Button className="w-full">Button</Button>
-          </CardFooter>
-        </Card>
-        <Card className="">
-          <CardHeader>
-            <CardTitle>Notifications</CardTitle>
-            <CardDescription>You have 3 unread messages.</CardDescription>
-          </CardHeader>
-          <CardContent>{cardsData[0].description}</CardContent>
-          <CardFooter>
-            <Button className="w-full">Button</Button>
-          </CardFooter>
-        </Card>
-        <Card className="">
-          <CardHeader>
-            <CardTitle>Notifications</CardTitle>
-            <CardDescription>You have 3 unread messages.</CardDescription>
-          </CardHeader>
-          <CardContent>{cardsData[0].description}</CardContent>
-          <CardFooter>
-            <Button className="w-full">Button</Button>
-          </CardFooter>
-        </Card>
-        <Card className="">
-          <CardHeader>
-            <CardTitle>Notifications</CardTitle>
-            <CardDescription>You have 3 unread messages.</CardDescription>
-          </CardHeader>
-          <CardContent>{cardsData[0].description}</CardContent>
-          <CardFooter>
-            <Button className="w-full">Button</Button>
-          </CardFooter>
-        </Card>
-        <Card className="">
-          <CardHeader>
-            <CardTitle>Notifications</CardTitle>
-            <CardDescription>You have 3 unread messages.</CardDescription>
-          </CardHeader>
-          <CardContent>{cardsData[0].description}</CardContent>
-          <CardFooter>
-            <Button className="w-full">Button</Button>
-          </CardFooter>
-        </Card>
-        <Card className="">
-          <CardHeader>
-            <CardTitle>Notifications</CardTitle>
-            <CardDescription>You have 3 unread messages.</CardDescription>
-          </CardHeader>
-          <CardContent>{cardsData[0].description}</CardContent>
-          <CardFooter>
-            <Button className="w-full">Button</Button>
-          </CardFooter>
-        </Card>
+        ))}
       </div>
     </div>
   )

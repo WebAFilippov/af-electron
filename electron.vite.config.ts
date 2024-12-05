@@ -27,6 +27,7 @@ export default defineConfig({
     plugins: [externalizeDepsPlugin()]
   },
   renderer: {
+    base: './',
     plugins: [react()],
     define: {
       'process.env': process.env

@@ -1,6 +1,6 @@
 import { is } from '@electron-toolkit/utils'
 
-import { app, BrowserWindow, Menu } from 'electron'
+import { app, BrowserWindow, } from 'electron'
 
 
 import { createWindow } from '@ui/create-window'
@@ -20,7 +20,7 @@ Logger.setupLogger()
 const log = new Logger('main')
 
 setAutoLaunch(is.dev ? false : true)
-!is.dev && Menu.setApplicationMenu(null)
+// !is.dev && Menu.setApplicationMenu(null)
 
 const isAutoLaunch = process.argv.includes('--auto-launch')
 const gotTheLock = app.requestSingleInstanceLock() // Проверка на запущенное окно -> true if once window

@@ -28,18 +28,19 @@ export const createWindow = (): BrowserWindow => {
       sandbox: false,
       allowRunningInsecureContent: false,
       plugins: false,
-      devTools: is.dev ? true : false
+      // devTools: is.dev ? true : false
+      devTools: true
     }
   })
   
   window.flashFrame(true)
   // window.setOverlayIcon(nativeImage.createFromPath(icon16), 'Harmonify')
 
-  if (!is.dev) {
-    window.setMenu(null)
-    window.setMenuBarVisibility(false)
-    window.setSkipTaskbar(false)
-  }
+  // if (!is.dev) {
+  //   window.setMenu(null)
+  //   window.setMenuBarVisibility(false)
+  //   window.setSkipTaskbar(false)
+  // }
 
   if (!app.isPackaged && process.env['ELECTRON_RENDERER_URL']) {
     window.loadURL(process.env['ELECTRON_RENDERER_URL'])

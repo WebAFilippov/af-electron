@@ -20,13 +20,13 @@ import {
 
 logo
 
-const projects = [
-  { icon: <PlusCircle />, name: 'Погода' },
-  { icon: <PlusCircle />, name: 'Стол' },
-  { icon: <PlusCircle />, name: 'Подсветка монитора' },
-  { icon: <PlusCircle />, name: 'Подсветка стола' },
-  { icon: <PlusCircle />, name: 'Громкость OS' }
-]
+// const projects = [
+//   { icon: <PlusCircle />, name: 'Погода' },
+//   { icon: <PlusCircle />, name: 'Стол' },
+//   { icon: <PlusCircle />, name: 'Подсветка монитора' },
+//   { icon: <PlusCircle />, name: 'Подсветка стола' },
+//   { icon: <PlusCircle />, name: 'Громкость OS' }
+// ]
 
 export function AppSidebar() {
   return (
@@ -37,10 +37,10 @@ export function AppSidebar() {
           size="lg"
           asChild
         >
-          <div>
+          <Link to={'/'}>
             <img src={logo} alt="" className="" />
             <span className="text-2xl">Harmonify</span>
-          </div>
+          </Link>
         </SidebarMenuButton>
       </SidebarHeader>
       <SidebarSeparator />
@@ -63,224 +63,256 @@ export function AppSidebar() {
                     <span>Стол</span>
                   </Link>
                 </SidebarMenuButton>
-              </SidebarMenuItem><SidebarMenuItem>
+              </SidebarMenuItem>
+              <SidebarMenuItem>
                 <SidebarMenuButton asChild>
                   <Link to={ROUTE.TABLE.path}>
                     <PlusCircle />
                     <span>Стол</span>
                   </Link>
                 </SidebarMenuButton>
-              </SidebarMenuItem><SidebarMenuItem>
+              </SidebarMenuItem>
+              <SidebarMenuItem>
                 <SidebarMenuButton asChild>
                   <Link to={ROUTE.TABLE.path}>
                     <PlusCircle />
                     <span>Стол</span>
                   </Link>
                 </SidebarMenuButton>
-              </SidebarMenuItem><SidebarMenuItem>
+              </SidebarMenuItem>
+              <SidebarMenuItem>
                 <SidebarMenuButton asChild>
                   <Link to={ROUTE.TABLE.path}>
                     <PlusCircle />
                     <span>Стол</span>
                   </Link>
                 </SidebarMenuButton>
-              </SidebarMenuItem><SidebarMenuItem>
+              </SidebarMenuItem>
+              <SidebarMenuItem>
                 <SidebarMenuButton asChild>
                   <Link to={ROUTE.TABLE.path}>
                     <PlusCircle />
                     <span>Стол</span>
                   </Link>
                 </SidebarMenuButton>
-              </SidebarMenuItem><SidebarMenuItem>
+              </SidebarMenuItem>
+              <SidebarMenuItem>
                 <SidebarMenuButton asChild>
                   <Link to={ROUTE.TABLE.path}>
                     <PlusCircle />
                     <span>Стол</span>
                   </Link>
                 </SidebarMenuButton>
-              </SidebarMenuItem><SidebarMenuItem>
+              </SidebarMenuItem>
+              <SidebarMenuItem>
                 <SidebarMenuButton asChild>
                   <Link to={ROUTE.TABLE.path}>
                     <PlusCircle />
                     <span>Стол</span>
                   </Link>
                 </SidebarMenuButton>
-              </SidebarMenuItem><SidebarMenuItem>
+              </SidebarMenuItem>
+              <SidebarMenuItem>
                 <SidebarMenuButton asChild>
                   <Link to={ROUTE.TABLE.path}>
                     <PlusCircle />
                     <span>Стол</span>
                   </Link>
                 </SidebarMenuButton>
-              </SidebarMenuItem><SidebarMenuItem>
+              </SidebarMenuItem>
+              <SidebarMenuItem>
                 <SidebarMenuButton asChild>
                   <Link to={ROUTE.TABLE.path}>
                     <PlusCircle />
                     <span>Стол</span>
                   </Link>
                 </SidebarMenuButton>
-              </SidebarMenuItem><SidebarMenuItem>
+              </SidebarMenuItem>
+              <SidebarMenuItem>
                 <SidebarMenuButton asChild>
                   <Link to={ROUTE.TABLE.path}>
                     <PlusCircle />
                     <span>Стол</span>
                   </Link>
                 </SidebarMenuButton>
-              </SidebarMenuItem><SidebarMenuItem>
+              </SidebarMenuItem>
+              <SidebarMenuItem>
                 <SidebarMenuButton asChild>
                   <Link to={ROUTE.TABLE.path}>
                     <PlusCircle />
                     <span>Стол</span>
                   </Link>
                 </SidebarMenuButton>
-              </SidebarMenuItem><SidebarMenuItem>
+              </SidebarMenuItem>
+              <SidebarMenuItem>
                 <SidebarMenuButton asChild>
                   <Link to={ROUTE.TABLE.path}>
                     <PlusCircle />
                     <span>Стол</span>
                   </Link>
                 </SidebarMenuButton>
-              </SidebarMenuItem><SidebarMenuItem>
+              </SidebarMenuItem>
+              <SidebarMenuItem>
                 <SidebarMenuButton asChild>
                   <Link to={ROUTE.TABLE.path}>
                     <PlusCircle />
                     <span>Стол</span>
                   </Link>
                 </SidebarMenuButton>
-              </SidebarMenuItem><SidebarMenuItem>
+              </SidebarMenuItem>
+              <SidebarMenuItem>
                 <SidebarMenuButton asChild>
                   <Link to={ROUTE.TABLE.path}>
                     <PlusCircle />
                     <span>Стол</span>
                   </Link>
                 </SidebarMenuButton>
-              </SidebarMenuItem><SidebarMenuItem>
+              </SidebarMenuItem>
+              <SidebarMenuItem>
                 <SidebarMenuButton asChild>
                   <Link to={ROUTE.TABLE.path}>
                     <PlusCircle />
                     <span>Стол</span>
                   </Link>
                 </SidebarMenuButton>
-              </SidebarMenuItem><SidebarMenuItem>
+              </SidebarMenuItem>
+              <SidebarMenuItem>
                 <SidebarMenuButton asChild>
                   <Link to={ROUTE.TABLE.path}>
                     <PlusCircle />
                     <span>Стол</span>
                   </Link>
                 </SidebarMenuButton>
-              </SidebarMenuItem><SidebarMenuItem>
+              </SidebarMenuItem>
+              <SidebarMenuItem>
                 <SidebarMenuButton asChild>
                   <Link to={ROUTE.TABLE.path}>
                     <PlusCircle />
                     <span>Стол</span>
                   </Link>
                 </SidebarMenuButton>
-              </SidebarMenuItem><SidebarMenuItem>
+              </SidebarMenuItem>
+              <SidebarMenuItem>
                 <SidebarMenuButton asChild>
                   <Link to={ROUTE.TABLE.path}>
                     <PlusCircle />
                     <span>Стол</span>
                   </Link>
                 </SidebarMenuButton>
-              </SidebarMenuItem><SidebarMenuItem>
+              </SidebarMenuItem>
+              <SidebarMenuItem>
                 <SidebarMenuButton asChild>
                   <Link to={ROUTE.TABLE.path}>
                     <PlusCircle />
                     <span>Стол</span>
                   </Link>
                 </SidebarMenuButton>
-              </SidebarMenuItem><SidebarMenuItem>
+              </SidebarMenuItem>
+              <SidebarMenuItem>
                 <SidebarMenuButton asChild>
                   <Link to={ROUTE.TABLE.path}>
                     <PlusCircle />
                     <span>Стол</span>
                   </Link>
                 </SidebarMenuButton>
-              </SidebarMenuItem><SidebarMenuItem>
+              </SidebarMenuItem>
+              <SidebarMenuItem>
                 <SidebarMenuButton asChild>
                   <Link to={ROUTE.TABLE.path}>
                     <PlusCircle />
                     <span>Стол</span>
                   </Link>
                 </SidebarMenuButton>
-              </SidebarMenuItem><SidebarMenuItem>
+              </SidebarMenuItem>
+              <SidebarMenuItem>
                 <SidebarMenuButton asChild>
                   <Link to={ROUTE.TABLE.path}>
                     <PlusCircle />
                     <span>Стол</span>
                   </Link>
                 </SidebarMenuButton>
-              </SidebarMenuItem><SidebarMenuItem>
+              </SidebarMenuItem>
+              <SidebarMenuItem>
                 <SidebarMenuButton asChild>
                   <Link to={ROUTE.TABLE.path}>
                     <PlusCircle />
                     <span>Стол</span>
                   </Link>
                 </SidebarMenuButton>
-              </SidebarMenuItem><SidebarMenuItem>
+              </SidebarMenuItem>
+              <SidebarMenuItem>
                 <SidebarMenuButton asChild>
                   <Link to={ROUTE.TABLE.path}>
                     <PlusCircle />
                     <span>Стол</span>
                   </Link>
                 </SidebarMenuButton>
-              </SidebarMenuItem><SidebarMenuItem>
+              </SidebarMenuItem>
+              <SidebarMenuItem>
                 <SidebarMenuButton asChild>
                   <Link to={ROUTE.TABLE.path}>
                     <PlusCircle />
                     <span>Стол</span>
                   </Link>
                 </SidebarMenuButton>
-              </SidebarMenuItem><SidebarMenuItem>
+              </SidebarMenuItem>
+              <SidebarMenuItem>
                 <SidebarMenuButton asChild>
                   <Link to={ROUTE.TABLE.path}>
                     <PlusCircle />
                     <span>Стол</span>
                   </Link>
                 </SidebarMenuButton>
-              </SidebarMenuItem><SidebarMenuItem>
+              </SidebarMenuItem>
+              <SidebarMenuItem>
                 <SidebarMenuButton asChild>
                   <Link to={ROUTE.TABLE.path}>
                     <PlusCircle />
                     <span>Стол</span>
                   </Link>
                 </SidebarMenuButton>
-              </SidebarMenuItem><SidebarMenuItem>
+              </SidebarMenuItem>
+              <SidebarMenuItem>
                 <SidebarMenuButton asChild>
                   <Link to={ROUTE.TABLE.path}>
                     <PlusCircle />
                     <span>Стол</span>
                   </Link>
                 </SidebarMenuButton>
-              </SidebarMenuItem><SidebarMenuItem>
+              </SidebarMenuItem>
+              <SidebarMenuItem>
                 <SidebarMenuButton asChild>
                   <Link to={ROUTE.TABLE.path}>
                     <PlusCircle />
                     <span>Стол</span>
                   </Link>
                 </SidebarMenuButton>
-              </SidebarMenuItem><SidebarMenuItem>
+              </SidebarMenuItem>
+              <SidebarMenuItem>
                 <SidebarMenuButton asChild>
                   <Link to={ROUTE.TABLE.path}>
                     <PlusCircle />
                     <span>Стол</span>
                   </Link>
                 </SidebarMenuButton>
-              </SidebarMenuItem><SidebarMenuItem>
+              </SidebarMenuItem>
+              <SidebarMenuItem>
                 <SidebarMenuButton asChild>
                   <Link to={ROUTE.TABLE.path}>
                     <PlusCircle />
                     <span>Стол</span>
                   </Link>
                 </SidebarMenuButton>
-              </SidebarMenuItem><SidebarMenuItem>
+              </SidebarMenuItem>
+              <SidebarMenuItem>
                 <SidebarMenuButton asChild>
                   <Link to={ROUTE.TABLE.path}>
                     <PlusCircle />
                     <span>Стол</span>
                   </Link>
                 </SidebarMenuButton>
-              </SidebarMenuItem><SidebarMenuItem>
+              </SidebarMenuItem>
+              <SidebarMenuItem>
                 <SidebarMenuButton asChild>
                   <Link to={ROUTE.TABLE.path}>
                     <PlusCircle />
