@@ -57,7 +57,15 @@ const config = {
           'accent-foreground': 'hsl(var(--sidebar-accent-foreground))',
           border: 'hsl(var(--sidebar-border))',
           ring: 'hsl(var(--sidebar-ring))'
-        }
+        },
+
+        topbar_controls_button_hovered: 'rgba(var(--topbar-controls-button-hovered))',
+        topbar_controls_button_close_hovered: 'rgba(var(--topbar-controls-button-close-hovered))',
+        topbar_controls_color: 'rgba(var(--topbar-color))'
+      },
+      width: {
+        sidebar_full_width: 'var(--sidebar-full-width)',
+        sidebar_collpsed_width: 'var(--sidebar-collapsed-width)'
       },
       borderRadius: {
         lg: 'var(--radius)',

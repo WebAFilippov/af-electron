@@ -15,9 +15,9 @@ export const sequelize = new Sequelize({
 export const initDatabase = async () => {
   try {
     await sequelize.authenticate()
-    log.info('Успешное подключение к Базе Данных')
+    log.info('Successful connection to the Database')
     await sequelize.sync({ alter: true })
   } catch (error) {
-    log.error('Не удается подключиться к базе данных:', error)
+    log.error('Unable to connect to the database: ', error)
   }
 }

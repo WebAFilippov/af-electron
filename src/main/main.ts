@@ -54,11 +54,12 @@ if (!gotTheLock) {
 
       windowLifecycle(window)
 
-      app.on('activate', () => {
-        if (BrowserWindow.getAllWindows().length === 0) {
-          createWindow()
-        }
-      })
+
+      // app.on('activate', () => {
+      //   if (BrowserWindow.getAllWindows().length === 0) {
+      //     createWindow()
+      //   }
+      // })
 
       log.info('Application ready')
     } catch (error) {

@@ -57,14 +57,14 @@ export async function seedDatabase() {
 
         // Сохраняем данные в базу
         await City.bulkCreate(cities)
-        console.log('Данные успешно добавлены в базу.')
+        console.log('The data has been successfully added to the database')
       } else {
-        console.error(`Файл ${config.fileCSVPath} не найден.`)
+        console.error(`The file ${config.fileCSVPath} was not found`)
       }
     } else {
-      log.info('Данные в таблице City уже существуют. Заполнение не требуется.')
+      log.info('The data in the City table already exists. No filling is required.')
     }
   } catch (error) {
-    console.error('Ошибка при заполнении базы данных:', error)
+    console.error('Error filling in the database: ', error)
   }
 }

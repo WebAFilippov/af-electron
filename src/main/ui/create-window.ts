@@ -7,7 +7,8 @@ import icon from '../../../build/window-256x256.ico?asset'
 
 export const createWindow = (): BrowserWindow => {
   const window = new BrowserWindow({
-    minWidth: 767,
+    icon: nativeImage.createFromPath(icon),
+    minWidth: 768,
     minHeight: 650,
     width: 1280,
     height: 800,
@@ -17,10 +18,11 @@ export const createWindow = (): BrowserWindow => {
     autoHideMenuBar: is.dev ? false : true,
     minimizable: true,
     maximizable: true,
-    transparent: true,
     frame: false,
-    hasShadow: false,
-    icon: nativeImage.createFromPath(icon),
+    trafficLightPosition: {
+      x: 16,
+      y: 10
+    },
     webPreferences: {
       preload: join(__dirname, '..', 'preload', 'index.mjs'),
       contextIsolation: true,
@@ -32,7 +34,7 @@ export const createWindow = (): BrowserWindow => {
       devTools: true
     }
   })
-  
+
   window.flashFrame(true)
   // window.setOverlayIcon(nativeImage.createFromPath(icon16), 'Harmonify')
 
