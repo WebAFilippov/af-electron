@@ -1,16 +1,17 @@
 import { FC, useState } from 'react'
-import { Outlet } from 'react-router-dom'
+import { Link, Outlet } from 'react-router-dom'
 
 import { ModeToggle } from '@features/theme-mode'
 import { WindowControls } from '@features/window-control/ui'
 
+import { ROUTE } from '@shared/config/routes'
 import { cn } from '@shared/lib/utils'
 
 export const ApplicationLayout: FC = () => {
   const [isCollapse] = useState(false)
 
   return (
-    <div className="relative flex h-screen min-h-screen gap-3 overflow-hidden bg-background p-8 pb-3 pl-2 pr-3 text-red-600">
+    <div className="relative flex h-screen min-h-screen gap-3 overflow-hidden bg-background p-8 pb-3 pl-2 pr-3 text-primary">
       <header
         className="absolute right-0 top-0 z-[700] flex h-8 w-full items-center justify-end gap-3 area-drag"
         id="topbar"
@@ -26,18 +27,19 @@ export const ApplicationLayout: FC = () => {
         )}
         id="sidebar"
       >
-        <div>header sidebar</div>
-        <nav className="flex-1 overflow-auto">
-          <div>sidebar content</div>
-          <div>sidebar content</div>
-          <div>sidebar content</div>
-          <div>sidebar content</div>
-          <div>sidebar content</div>
-          <div>sidebar content</div>
-          <div>sidebar content</div>
-          <div>sidebar content</div>
+        <div className="flex h-14 items-center">
+          <Link to={ROUTE.HOME.path}>{ROUTE.HOME.name}</Link>
+        </div>
+        <nav className="flex flex-1 flex-col overflow-auto">
+          <Link to={ROUTE.WEATHER.path}>{ROUTE.WEATHER.name}</Link>
+          <Link to={ROUTE.AMBILIGHT.path}>{ROUTE.AMBILIGHT.name}</Link>
+          <Link to={ROUTE.LEDLIGHT.path}>{ROUTE.LEDLIGHT.name}</Link>
+          <Link to={ROUTE.AUDIODEVICE.path}>{ROUTE.AUDIODEVICE.name}</Link>
+          <Link to={ROUTE.TABLE.path}>{ROUTE.TABLE.name}</Link>
         </nav>
-        <div>footer sidebar</div>
+        <div>
+          <Link to={ROUTE.SETTINGS.path}>{ROUTE.SETTINGS.name}</Link>
+        </div>
       </aside>
       <main
         className="h-full flex-1 rounded-xl border border-border bg-foreground p-2"

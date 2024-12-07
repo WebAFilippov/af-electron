@@ -1,4 +1,5 @@
 import { ipcRenderer } from 'electron'
+
 import { Api } from './index.d'
 
 export const api: Api = {

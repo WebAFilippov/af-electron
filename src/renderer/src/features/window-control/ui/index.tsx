@@ -12,7 +12,7 @@ export const WindowControls = () => {
   return (
     <div className="flex items-center justify-center">
       <button
-        className="hover:bg-topbar_controls_button_hovered text-topbar_controls_color hover:text-topbar_controls_color m-0 flex h-8 w-[46px] flex-col items-center justify-center gap-0 rounded-none p-0 text-[#1a1a1a] outline-none area-no-drag [&_svg]:size-min [&_svg]:shrink-0"
+        className="m-0 flex h-8 w-[46px] flex-col items-center justify-center gap-0 rounded-none p-0 text-[#1a1a1a] text-topbar_controls_color outline-none area-no-drag hover:bg-topbar_controls_button_hovered hover:text-topbar_controls_color [&_svg]:size-min [&_svg]:shrink-0"
         aria-label="Свернуть"
         tabIndex={-1}
         onClick={handleMinimize}
@@ -25,7 +25,7 @@ export const WindowControls = () => {
         </svg>
       </button>
       <button
-        className="hover:bg-topbar_controls_button_hovered text-topbar_controls_color m-0 flex h-8 w-[46px] flex-col items-center justify-center gap-0 rounded-none p-0 text-[#1a1a1a] outline-none area-no-drag [&_svg]:size-min [&_svg]:shrink-0"
+        className="m-0 flex h-8 w-[46px] flex-col items-center justify-center gap-0 rounded-none p-0 text-[#1a1a1a] text-topbar_controls_color outline-none area-no-drag hover:bg-topbar_controls_button_hovered [&_svg]:size-min [&_svg]:shrink-0"
         tabIndex={-1}
         aria-label="Развернуть"
         onClick={handleMaximize}
@@ -38,7 +38,7 @@ export const WindowControls = () => {
         </svg>
       </button>
       <button
-        className="hover:bg-topbar_controls_button_close_hovered text-topbar_controls_color m-0 flex h-8 w-[46px] flex-col items-center justify-center gap-0 rounded-none p-0 text-[#1a1a1a] outline-none area-no-drag [&_svg]:size-min [&_svg]:shrink-0"
+        className="m-0 flex h-8 w-[46px] flex-col items-center justify-center gap-0 rounded-none p-0 text-[#1a1a1a] text-topbar_controls_color outline-none area-no-drag hover:bg-topbar_controls_button_close_hovered [&_svg]:size-min [&_svg]:shrink-0"
         tabIndex={-1}
         aria-label="Закрыть"
         onClick={handleClose}

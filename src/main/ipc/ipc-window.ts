@@ -1,7 +1,6 @@
 // import { AudioDeviceMonitor, AudioMonitorOptions } from 'af-win-audio'
-import { BrowserWindow, ipcMain } from 'electron'
-
 import { Logger } from '@utils/logger'
+import { BrowserWindow, ipcMain } from 'electron'
 
 // import { AudioDeviceMonitor, AudioMonitorOptions } from '@libs/audio-monitor'
 

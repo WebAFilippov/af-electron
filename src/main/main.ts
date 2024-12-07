@@ -1,12 +1,12 @@
 import { is } from '@electron-toolkit/utils'
 
-import { app, BrowserWindow, } from 'electron'
-
+import { app, BrowserWindow } from 'electron'
 
 import { createWindow } from '@ui/create-window'
 import { createTray } from '@ui/tray'
 
 import { Logger } from '@utils/logger'
+import { windowLifecycle } from '@utils/window-lifecycle'
 
 import { initDatabase } from '@database/database'
 import { seedDatabase } from '@database/seed'
@@ -14,7 +14,6 @@ import { seedDatabase } from '@database/seed'
 import { setAutoLaunch } from '@services/auto-launch'
 
 import { ipcHandlers } from './ipc'
-import { windowLifecycle } from '@utils/window-lifecycle'
 
 Logger.setupLogger()
 const log = new Logger('main')
@@ -53,7 +52,6 @@ if (!gotTheLock) {
       ipcHandlers(window, isAutoLaunch)
 
       windowLifecycle(window)
-
 
       // app.on('activate', () => {
       //   if (BrowserWindow.getAllWindows().length === 0) {

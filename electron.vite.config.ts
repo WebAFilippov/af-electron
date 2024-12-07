@@ -16,7 +16,7 @@ export default defineConfig({
         '@services': path.resolve(__dirname, './src/main/services'),
         '@repositories': path.resolve(__dirname, './src/main/repositories'),
         '@main/shared': path.resolve(__dirname, './src/main/shared'),
-        '@shared': path.resolve(__dirname, './src/shared'),
+        '@shared': path.resolve(__dirname, './src/shared')
       }
     },
     build: {

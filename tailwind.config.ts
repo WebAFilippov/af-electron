@@ -61,7 +61,9 @@ const config = {
 
         topbar_controls_button_hovered: 'rgba(var(--topbar-controls-button-hovered))',
         topbar_controls_button_close_hovered: 'rgba(var(--topbar-controls-button-close-hovered))',
-        topbar_controls_color: 'rgba(var(--topbar-color))'
+        topbar_controls_color: 'rgba(var(--topbar-color))',
+
+        opacity_card_bg: 'hsla(var(--opacity-card-bg))'
       },
       width: {
         sidebar_full_width: 'var(--sidebar-full-width)',

@@ -1,5 +1,7 @@
 import { FC } from 'react'
 
+import WeatherCard from '@features/weather/weather-card-home/ui'
+
 import { Button } from '@shared/components/ui'
 import {
   Card,
@@ -9,44 +11,25 @@ import {
   CardHeader,
   CardTitle
 } from '@shared/components/ui/card'
+import { ROUTE } from '@shared/config/routes'
 
 export const HomePage: FC = () => {
-  const cardsData = [
-    {
-      title: 'Card 1',
-      description:
-        'Description for card 1 Description for card 1Description for card 1Description for card 1Description for card 1Description for card 1 Description for card 1Description for card 1Description for card 1Description for card 1Description for card 1 Description for card 1Description for card 1Description for card 1Description for card 1Description for card 1 Description for card 1Description for card 1Description for card 1Description for card 1'
-    },
-    { title: 'Card 2', description: 'Description for card 2Description for card 1' },
-    { title: 'Card 3', description: 'Description for card 3' },
-    { title: 'Card 4', description: 'Description for card 4' },
-    { title: 'Card 5', description: 'Description for card 5' },
-    { title: 'Card 6', description: 'Description for card 6' },
-    { title: 'Card 7', description: 'Description for card 7' },
-    { title: 'Card 8', description: 'Description for card 8' },
-    { title: 'Card 9', description: 'Description for card 9' },
-    { title: 'Card 10', description: 'Description for card 10' },
-    { title: 'Card 11', description: 'Description for card 11' },
-    { title: 'Card 12', description: 'Description for card 12' },
-    { title: 'Card 13', description: 'Description for card 13' },
-    { title: 'Card 14', description: 'Description for card 14' },
-    { title: 'Card 15', description: 'Description for card 15' }
-  ]
   return (
-    <div className="h-full overflow-auto pr-2">
-      <div className="grid grid-cols-1 place-items-center gap-6 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-        {cardsData.map((card, index) => (
-          <Card key={index} className="">
+    <div className="m-auto flex h-full items-center justify-center overflow-y-auto overflow-x-hidden pr-2">
+      <div className="m-auto flex flex-wrap place-items-center items-center justify-center gap-6">
+        {/* {Object.entries(ROUTE).map(([key, value]) => (
+          <Card key={value.name} className="">
             <CardHeader>
-              <CardTitle>Notifications</CardTitle>
+              <CardTitle>{value.name}</CardTitle>
               <CardDescription>You have 3 unread messages.</CardDescription>
             </CardHeader>
-            <CardContent>{card.description}</CardContent>
+            <CardContent>{value.name}</CardContent>
             <CardFooter>
               <Button className="w-full">Button</Button>
             </CardFooter>
           </Card>
-        ))}
+        ))} */}
+        <WeatherCard />
       </div>
     </div>
   )

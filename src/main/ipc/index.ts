@@ -1,4 +1,5 @@
 import { BrowserWindow } from 'electron'
+
 import { cityHandlers } from './city-handlers'
 import { windowHandlers } from './ipc-window'
 

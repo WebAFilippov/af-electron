@@ -17,7 +17,7 @@ $ yarn
 ### Development
 
 ```bash
-$ yarn dev
+$ yarn dev:w
 ```
 
 ### Build
@@ -25,10 +25,4 @@ $ yarn dev
 ```bash
 # For windows
 $ yarn build:win
-
-# For macOS
-$ yarn build:mac
-
-# For Linux
-$ yarn build:linux
 ```

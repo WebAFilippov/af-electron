@@ -1,4 +1,5 @@
 import { BrowserWindow } from 'electron'
+
 // import { Low } from 'lowdb/lib'
 // import { IState } from '../../types'
 // import { Logger } from '../logger'
