@@ -1,4 +1,4 @@
-import { cityRepository } from '@repositories/city-repository'
+import { cityRepository } from '@repositories/city.repository'
 
 import { ICity } from '@shared/types'
 

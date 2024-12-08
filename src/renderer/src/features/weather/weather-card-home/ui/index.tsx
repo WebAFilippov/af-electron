@@ -23,6 +23,7 @@ const WeatherCard = () => {
           'https://api.openweathermap.org/data/2.5/weather?q=Кемерово&appid=0e9abf6e9d1e571719e3fed8d179a7e9&units=metric'
         )
         const data = await response.json()
+        console.log(data)
         setWeatherData(data)
       } catch (error) {
         console.error('Error fetching weather data:', error)

@@ -1,9 +1,9 @@
 import { ElectronAPI } from '@electron-toolkit/preload'
 
-import { ICity } from '../shared/types'
+import { CitiesForWeatherPreload, ICity } from '../shared/types'
 
 export interface Api {
-  startWindow: () => Promise<string>
+  startWindow: () => Promise<CitiesForWeatherPreload>
   minimizeWindow: () => void
   maximizeWindow: () => void
   closeWindow: () => void

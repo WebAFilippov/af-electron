@@ -1,6 +1,6 @@
 import { ipcMain } from 'electron'
 
-import { cityService } from '@services/city-service'
+import { cityService } from '@services/city.service'
 
 export const cityHandlers = () => {
   ipcMain.handle('city::searchCityLimitOrder', async (_event, query, limit, order) => {

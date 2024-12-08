@@ -3,7 +3,7 @@ dist
 out
 .DS_Store
 *.log*
-.vscode
+
 logs
 yarn.lock
 package-lock.json

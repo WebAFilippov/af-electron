@@ -1,23 +1,23 @@
 import { useEffect } from 'react'
 import ReactDOM from 'react-dom/client'
+import { Provider } from 'react-redux'
+
+
 
 import { RouterProvider } from './providers/router'
 import { ThemeProvider } from './providers/theme'
+import { store } from './store'
 import './styles/globals.css'
 
 const App = (): JSX.Element => {
-  useEffect(() => {
-    const sendCommandShowWindow = async () => {
-      await window.api.startWindow()
-    }
-
-    sendCommandShowWindow()
-  })
+  
 
   return (
-    <ThemeProvider storageKey="ui-theme" defaultTheme="light">
-      <RouterProvider />
-    </ThemeProvider>
+    <Provider store={store}>
+      <ThemeProvider storageKey="ui-theme" defaultTheme="light">
+        <RouterProvider />
+      </ThemeProvider>
+    </Provider>
   )
 }
 

@@ -1,32 +1,24 @@
-// import { AudioDeviceMonitor, AudioMonitorOptions } from 'af-win-audio'
-import { Logger } from '@utils/logger'
 import { BrowserWindow, ipcMain } from 'electron'
 
-// import { AudioDeviceMonitor, AudioMonitorOptions } from '@libs/audio-monitor'
+import { Logger } from '@utils/logger'
+
+import { citiesForWeatherService } from '@services/cities-for-weather.service'
 
 const log = new Logger('control-window')
 
 export const windowHandlers = (window: BrowserWindow, isAutoLaunch: boolean) => {
-  // const options: AudioMonitorOptions = {
-  //   autoStart: false,
-  //   delay: 100,
-  //   step: 1
-  // }
-  // const AudioMonitor = new AudioDeviceMonitor(options)
+  ipcMain.handleOnce('start-window', async () => {
+    const cities = await citiesForWeatherService.getAllCitiesForWeatherWithCity()
 
-  // AudioMonitor.on('change', (device) => {
-  //   window.webContents.send('send-device-data', device)
-  // })
+    console.log(cities)
 
-  ipcMain.handleOnce('start-window', () => {
-    // AudioMonitor.start()
     if (!isAutoLaunch) {
       window.show()
       log.info('Window is shown')
-      return 'Window is shown'
+      return cities
     } else {
       log.info('Window is not shown')
-      return 'Window is not shown'
+      return cities
     }
   })
 
