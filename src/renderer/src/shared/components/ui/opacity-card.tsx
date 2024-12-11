@@ -1,7 +1,7 @@
 import { Trash2 } from 'lucide-react'
 import { FC } from 'react'
 
-import { cn } from './../../lib/utils/cn/index'
+import { cn } from '@shared/lib'
 
 type Props = {
   title: string

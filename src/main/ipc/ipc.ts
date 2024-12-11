@@ -2,23 +2,15 @@ import { BrowserWindow, ipcMain } from 'electron'
 
 import { Logger } from '@utils/logger'
 
-import { citiesForWeatherService } from '@services/cities-for-weather.service'
-
 const log = new Logger('control-window')
 
-export const windowHandlers = (window: BrowserWindow, isAutoLaunch: boolean) => {
-  ipcMain.handleOnce('start-window', async () => {
-    const cities = await citiesForWeatherService.getAllCitiesForWeatherWithCity()
-
-    console.log(cities)
-
+export const IPCHandlers = (window: BrowserWindow, isAutoLaunch: boolean) => {
+  ipcMain.on('start-window', async () => {
     if (!isAutoLaunch) {
       window.show()
       log.info('Window is shown')
-      return cities
     } else {
       log.info('Window is not shown')
-      return cities
     }
   })
 

@@ -3,7 +3,7 @@ type Props = {
   region: string
 }
 
-export const formatFullAdressCity = ({type_region, region}: Props) => {
+export const formatFullAdressCity = ({ type_region, region }: Props) => {
   if (type_region === 'Чувашия') return `${region}`
   if (type_region === 'АО') return `${region} ${type_region}`
   if (type_region === 'Респ') return `Республика ${region}`

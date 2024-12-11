@@ -1,16 +1,8 @@
-import CitiesForWeather from '@models/cities-for-weather.model'
-import City from '@models/city.model'
+import { cityForWeatherRepository } from '@repositories/cities-for-weather.repository'
 
 class CitiesForWeatherService {
   async getAllCitiesForWeatherWithCity() {
-    const cities = await CitiesForWeather.findAll({
-      include: {
-        model: City,
-        as: 'city'
-      },
-      raw: true,
-      nest: true
-    })
+    const cities = await cityForWeatherRepository.findAll()
 
     return cities
   }

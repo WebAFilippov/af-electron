@@ -9,14 +9,18 @@ class CityService {
     return city
   }
 
-  async searchCitiesLimitOrder(
-    lower_city: string,
-    limit?: number,
-    order?: 'DESC' | 'ASC'
-  ): Promise<ICity[]> {
-    const cities = await cityRepository.findByCityLimitOrder(lower_city, limit, order)
-    if (cities.length === 0) throw new Error('Город не найден')
-    return cities.map((city) => city.dataValues)
+  async searchCitiesLimitOrder(optionsQuery: {
+    query: string
+    limit?: number
+    ordering?: 'DESC' | 'ASC'
+  }): Promise<ICity[]> {
+    const cities = await cityRepository.findByCityLimitOrder(
+      optionsQuery.query,
+      optionsQuery.limit,
+      optionsQuery.ordering
+    )
+
+    return cities
   }
 }
 

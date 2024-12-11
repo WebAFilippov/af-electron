@@ -1,18 +1,14 @@
 import { ElectronAPI } from '@electron-toolkit/preload'
 
-import { CitiesForWeatherPreload, ICity } from '../shared/types'
+import { CitiesForWeatherPreload, City, SearchCitiesParams } from '../shared/types'
 
 export interface Api {
-  startWindow: () => Promise<CitiesForWeatherPreload>
+  startWindow: () => void
   minimizeWindow: () => void
   maximizeWindow: () => void
   closeWindow: () => void
 
-  searchCities: (
-    query: string,
-    limit?: number = 5,
-    order?: 'DESC' | 'ASC' = 'DESC'
-  ) => Promise<ICity[]>
+  searchCities: (optionsQuery: SearchCitiesParams) => Promise<City[]>
 
   onDevice: (callback: (device: any) => void) => void
   removeListenerDevice: () => void

@@ -2,16 +2,7 @@ import { FC } from 'react'
 
 import WeatherCard from '@features/weather/weather-card-home/ui'
 
-import { Button } from '@shared/components/ui'
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-  CardTitle
-} from '@shared/components/ui/card'
-import { ROUTE } from '@shared/config/routes'
+
 
 export const HomePage: FC = () => {
   return (

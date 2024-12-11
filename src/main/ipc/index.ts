@@ -1,9 +1,9 @@
 import { BrowserWindow } from 'electron'
 
-import { cityHandlers } from './city-handlers'
-import { windowHandlers } from './ipc-window'
+import { dataHandlers } from './data-handlers'
+import { IPCHandlers } from './ipc'
 
 export const ipcHandlers = (window: BrowserWindow, isAutoLaunch: boolean) => {
-  windowHandlers(window, isAutoLaunch)
-  cityHandlers()
+  IPCHandlers(window, isAutoLaunch)
+  dataHandlers()
 }

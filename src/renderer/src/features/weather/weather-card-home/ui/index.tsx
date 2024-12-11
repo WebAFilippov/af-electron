@@ -11,9 +11,10 @@ import {
   CardTitle
 } from '@shared/components/ui/card'
 import { ROUTE } from '@shared/config/routes'
+import { Weather } from '../../../../../../shared/types'
 
 const WeatherCard = () => {
-  const [weatherData, setWeatherData] = useState(null)
+  const [weatherData, setWeatherData] = useState<Weather | null>(null)
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {

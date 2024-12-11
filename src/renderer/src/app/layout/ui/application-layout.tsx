@@ -1,22 +1,22 @@
 import { FC, useState } from 'react'
 import { Link, Outlet } from 'react-router-dom'
 
-import { ModeToggle } from '@features/theme-mode'
-import { WindowControls } from '@features/window-control/ui'
+import { WindowControls } from '@features/window-topbar/ui'
 
+import { Toaster } from '@shared/components/ui'
 import { ROUTE } from '@shared/config/routes'
-import { cn } from '@shared/lib/utils'
+import { cn } from '@shared/lib'
 
 export const ApplicationLayout: FC = () => {
   const [isCollapse] = useState(false)
 
   return (
     <div className="relative flex h-screen min-h-screen gap-3 overflow-hidden bg-background p-8 pb-3 pl-2 pr-3 text-primary">
+      <Toaster />
       <header
         className="absolute right-0 top-0 z-[700] flex h-8 w-full items-center justify-end gap-3 area-drag"
         id="topbar"
       >
-        <ModeToggle className="area-no-drag" />
         <WindowControls />
       </header>
 

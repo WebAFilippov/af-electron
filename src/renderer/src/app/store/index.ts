@@ -1,10 +1,10 @@
 import { configureStore } from '@reduxjs/toolkit'
 
-import { citiesForWeatherSlice } from '@features/cities/model/cities.slice'
+
 
 export const store = configureStore({
   reducer: {
-    citiesForWeather: citiesForWeatherSlice
+
   },
   middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat([])
 })

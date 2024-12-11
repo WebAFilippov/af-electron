@@ -5,7 +5,7 @@ import { PanelLeftClose, PanelLeftOpen } from 'lucide-react'
 import * as React from 'react'
 
 import { useIsMobile } from '@shared/hooks'
-import { cn } from '@shared/lib/utils'
+import { cn } from '@shared/lib'
 
 import { Button } from './button'
 import { Input } from './input'

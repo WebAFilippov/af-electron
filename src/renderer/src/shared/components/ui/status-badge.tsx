@@ -1,7 +1,7 @@
 import { Loader2 } from 'lucide-react'
 import { FC, ReactNode } from 'react'
 
-import { cn } from '@shared/lib/utils'
+import { cn } from '@shared/lib'
 
 type Props = {
   icon: ReactNode

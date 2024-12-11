@@ -14,7 +14,7 @@ class CityRepository {
   async findByCityLimitOrder(
     query: string,
     limit: number = 5,
-    order: 'DESC' | 'ASC' = 'DESC'
+    ordering: 'DESC' | 'ASC' = 'DESC'
   ): Promise<City[]> {
     return await City.findAll({
       where: {
@@ -23,7 +23,8 @@ class CityRepository {
         }
       },
       limit,
-      order: [['population', order]]
+      order: [['population', ordering]],
+      raw: true
     })
   }
 }

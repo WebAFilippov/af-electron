@@ -1,5 +1,3 @@
-
-
 export interface ICity {
   id: number
   type_region: string
@@ -78,3 +76,9 @@ export type CitiesForWeatherPreload = Array<{
   city: City
   weather?: Weather
 }>
+
+export interface SearchCitiesParams {
+  query: string
+  limit?: number
+  order?: 'DESC' | 'ASC'
+}
