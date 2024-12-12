@@ -4,12 +4,11 @@
     "src/renderer/src/app/env.d.ts",
     "src/renderer/src/**/*",
     "src/shared/**/*",
-    "src/preload/*.d.ts",
+    "src/preload/*.ts",
   ],
   "compilerOptions": {
     "composite": true,
     "jsx": "react-jsx",   
-    /* Alias */
     "baseUrl": "./src/renderer/src",
     "paths": {
       "@app/*": ["app/*"],

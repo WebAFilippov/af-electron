@@ -6,6 +6,7 @@ export const useOnline = (intervalMs: number = 10000): { isOnline: boolean; load
 
   const checkOnlineStatus = async () => {
     try {
+      setLoading(true)
       const response = await fetch('https://www.yandex.ru/favicon.ico', { cache: 'no-store' })
       if (response.ok) {
         setIsOnline(true)

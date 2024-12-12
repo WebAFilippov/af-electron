@@ -3,7 +3,7 @@ import fs from 'fs'
 
 import { Logger } from '@utils/logger'
 
-import CitiesForWeather from '@models/cities-for-weather.model'
+import CitiesForWeather from '@models/city-for-weather.model'
 import City from '@models/city.model'
 
 import { config } from '@main/shared/config'
@@ -62,7 +62,7 @@ export async function seedDatabase() {
       const citiesForWeather = [
         {
           cityId: 507,
-          isSelected: true
+          isSelected: false
         },
         {
           cityId: 1,

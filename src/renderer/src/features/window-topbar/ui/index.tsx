@@ -1,21 +1,47 @@
 import { Binary, Moon, Sun, Wifi } from 'lucide-react'
 
-import { DarkMode, StatusBadge } from '@shared/components/ui'
+import {
+  DarkMode,
+  StatusBadge,
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger
+} from '@shared/components/ui'
+import { useOnline } from '@shared/hooks'
 
 import { handleClose, handleMaximize, handleMinimize } from '../api'
 
 export const WindowControls = () => {
+  const { isOnline, loading } = useOnline(15000)
+
   return (
     <div className="flex items-center justify-center gap-4">
-     
-
       <div className="flex">
-        <button className="m-0 flex h-8 w-8 flex-col items-center justify-center gap-0 rounded-none p-0 text-[#1a1a1a] text-topbar_controls_color outline-none area-no-drag hover:bg-topbar_controls_button_hovered hover:text-topbar_controls_color [&_svg]:size-min [&_svg]:shrink-0 cursor-default">
-          <StatusBadge icon={<Wifi size={14} />} isActive={true} loading={true} />
-        </button>
-        <button className="m-0 flex h-8 w-8 flex-col items-center justify-center gap-0 rounded-none p-0 text-[#1a1a1a] text-topbar_controls_color outline-none area-no-drag hover:bg-topbar_controls_button_hovered hover:text-topbar_controls_color [&_svg]:size-min [&_svg]:shrink-0 cursor-default">
-          <StatusBadge icon={<Binary size={14} />} isActive={false} loading={true} />
-        </button>
+        <TooltipProvider>
+          <Tooltip delayDuration={100}>
+            <TooltipTrigger>
+              <button className="m-0 flex h-8 w-8 cursor-default flex-col items-center justify-center gap-0 rounded-none p-0 text-[#1a1a1a] text-topbar_controls_color outline-none area-no-drag hover:bg-topbar_controls_button_hovered hover:text-topbar_controls_color [&_svg]:size-min [&_svg]:shrink-0">
+                <StatusBadge icon={<Wifi size={14} />} isActive={isOnline} loading={loading} />
+              </button>
+            </TooltipTrigger>
+            <TooltipContent className="user-select-none">
+              {loading ? <p>Проверка</p> : isOnline ? <p>В сети</p> : <p>Без сети</p>}
+            </TooltipContent>
+          </Tooltip>
+        </TooltipProvider>
+        <TooltipProvider>
+          <Tooltip delayDuration={100}>
+            <TooltipTrigger>
+              <button className="m-0 flex h-8 w-8 cursor-default flex-col items-center justify-center gap-0 rounded-none p-0 text-[#1a1a1a] text-topbar_controls_color outline-none area-no-drag hover:bg-topbar_controls_button_hovered hover:text-topbar_controls_color [&_svg]:size-min [&_svg]:shrink-0">
+                <StatusBadge icon={<Binary size={14} />} isActive={false} loading={false} />
+              </button>
+            </TooltipTrigger>
+            <TooltipContent className="user-select-none">
+              {loading ? <p>Загрузка</p> : isOnline ? <p>В сети</p> : <p>Без сети</p>}
+            </TooltipContent>
+          </Tooltip>
+        </TooltipProvider>
       </div>
 
       <DarkMode
@@ -77,4 +103,3 @@ export const WindowControls = () => {
     </div>
   )
 }
-;<li>sidebar content</li>

@@ -4,6 +4,9 @@
 
 @layer base {
   :root {
+    --slide-height: 8rem;
+    --slide-spacing: 0rem;
+
     --background: 0 0% 90%;
     --foreground: 0 0% 96%;
     --card: 0 0% 100%;
@@ -97,5 +100,3 @@
     @apply bg-background text-foreground;
   }
 }
-
-

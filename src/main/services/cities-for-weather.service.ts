@@ -1,11 +1,23 @@
-import { cityForWeatherRepository } from '@repositories/cities-for-weather.repository'
+import { cityForWeatherRepository } from '@repositories/city-for-weather.repository'
 
-class CitiesForWeatherService {
-  async getAllCitiesForWeatherWithCity() {
+class CityForWeatherService {
+  async getAllCityForWeather() {
     const cities = await cityForWeatherRepository.findAll()
 
     return cities
   }
+
+  async updateCityForWeatherByIsSelected(id: number) {
+    const response = await cityForWeatherRepository.updateSelectedForId(id)
+
+    return response
+  }
+
+  // async addCityForWeather(cityId: number) {
+  //   const response = await cityForWeatherRepository.addCity(cityId)
+
+  //   return response
+  // }
 }
 
-export const citiesForWeatherService = new CitiesForWeatherService()
+export const cityForWeatherService = new CityForWeatherService()

@@ -4,13 +4,13 @@ import { sequelize } from '@database/database'
 
 import City from './city.model'
 
-class CitiesForWeather extends Model {
+class CityForWeather extends Model {
   declare id: number
   declare cityId: number
   declare isSelected: boolean
 }
 
-CitiesForWeather.init(
+CityForWeather.init(
   {
     id: {
       type: DataTypes.INTEGER,
@@ -34,22 +34,24 @@ CitiesForWeather.init(
   },
   {
     sequelize,
-    modelName: 'CitiesForWeather',
-    tableName: 'cities_for_weather',
+    modelName: 'CityForWeather',
+    tableName: 'city_for_weather',
     timestamps: false
   }
 )
 
-City.hasOne(CitiesForWeather, {
+City.hasOne(CityForWeather, {
   foreignKey: 'cityId',
-  as: 'citiesInfo',
+  as: 'cityInfo',
   onDelete: 'SET NULL'
 })
 
-CitiesForWeather.belongsTo(City, {
+CityForWeather.belongsTo(City, {
   foreignKey: 'cityId',
-  as: 'city',
+  as: 'cityInfo',
   onDelete: 'SET NULL'
 })
 
-export default CitiesForWeather
+export default CityForWeather
+
+

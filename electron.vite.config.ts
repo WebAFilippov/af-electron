@@ -33,8 +33,7 @@ export default defineConfig({
       'process.env': process.env
     },
     build: {
-      minify: 'esbuild',
-      
+      minify: 'esbuild'
     },
     resolve: {
       alias: {

@@ -3,16 +3,15 @@
 import { ChevronsUpDown } from 'lucide-react'
 import { PropsWithChildren, useState } from 'react'
 
-import { ApiError } from '@shared/types'
-
+import { SearchCitiesParams } from '../../../../../shared/types'
 import { Button } from './button'
 import { Command, CommandGroup, CommandInput, CommandItem, CommandList } from './command'
 import { Popover, PopoverContent, PopoverTrigger } from './popover'
 
 type Props<T> = {
-  data: T[]
+  data: T[] | undefined
   isLoading: boolean
-  isError: ApiError | undefined
+  isError: boolean
   searchQuery: string
   setSearchQuery: (value: string) => void
   selected: T | undefined
@@ -46,7 +45,7 @@ export const SearchSelect = <T,>({
           variant="outline"
           role="combobox"
           aria-expanded={open}
-          className="w-[200px] justify-between"
+          className="w-[200px] justify-between user-select-none"
         >
           {selected ? setectedField : comboboxPlaceholder}
           <ChevronsUpDown className="text-primary opacity-50" />
@@ -68,7 +67,7 @@ export const SearchSelect = <T,>({
                   </div>
                 </CommandItem>
               )}
-              {!isLoading && !data?.length && (
+              {!isLoading && !data?.length && !isError && (
                 <CommandItem>
                   <div className="flex h-7 flex-col items-start justify-center text-muted-foreground">
                     {notFoundPlaceholder}
@@ -78,7 +77,7 @@ export const SearchSelect = <T,>({
               {isError && !data?.length && (
                 <CommandItem>
                   <div className="flex h-7 flex-col items-start justify-center text-muted-foreground">
-                    {`Error: [${isError.statusCode}] ${isError.message}`}
+                    Error
                   </div>
                 </CommandItem>
               )}

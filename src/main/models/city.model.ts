@@ -57,7 +57,7 @@ City.init(
   {
     sequelize,
     modelName: 'City',
-    tableName: 'cities',
+    tableName: 'city',
     timestamps: false
   }
 )

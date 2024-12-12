@@ -11,6 +11,7 @@ import {
   CardTitle
 } from '@shared/components/ui/card'
 import { ROUTE } from '@shared/config/routes'
+
 import { Weather } from '../../../../../../shared/types'
 
 const WeatherCard = () => {
