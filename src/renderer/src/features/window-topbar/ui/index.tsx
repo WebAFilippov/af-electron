@@ -20,7 +20,7 @@ export const WindowControls = () => {
       <div className="flex">
         <TooltipProvider>
           <Tooltip delayDuration={100}>
-            <TooltipTrigger>
+            <TooltipTrigger asChild>
               <button className="m-0 flex h-8 w-8 cursor-default flex-col items-center justify-center gap-0 rounded-none p-0 text-[#1a1a1a] text-topbar_controls_color outline-none area-no-drag hover:bg-topbar_controls_button_hovered hover:text-topbar_controls_color [&_svg]:size-min [&_svg]:shrink-0">
                 <StatusBadge icon={<Wifi size={14} />} isActive={isOnline} loading={loading} />
               </button>
@@ -32,7 +32,7 @@ export const WindowControls = () => {
         </TooltipProvider>
         <TooltipProvider>
           <Tooltip delayDuration={100}>
-            <TooltipTrigger>
+            <TooltipTrigger asChild>
               <button className="m-0 flex h-8 w-8 cursor-default flex-col items-center justify-center gap-0 rounded-none p-0 text-[#1a1a1a] text-topbar_controls_color outline-none area-no-drag hover:bg-topbar_controls_button_hovered hover:text-topbar_controls_color [&_svg]:size-min [&_svg]:shrink-0">
                 <StatusBadge icon={<Binary size={14} />} isActive={false} loading={false} />
               </button>
@@ -46,7 +46,7 @@ export const WindowControls = () => {
 
       <DarkMode
         triggerNode={
-          <button className="m-0 flex h-8 w-[46px] flex-col items-center justify-center gap-0 rounded-none p-0 text-[#1a1a1a] text-topbar_controls_color outline-none area-no-drag hover:bg-topbar_controls_button_hovered hover:text-topbar_controls_color [&_svg]:size-min [&_svg]:shrink-0">
+          <div className="m-0 flex h-8 w-[46px] flex-col items-center justify-center gap-0 rounded-none p-0 text-[#1a1a1a] text-topbar_controls_color outline-none area-no-drag hover:bg-topbar_controls_button_hovered hover:text-topbar_controls_color [&_svg]:size-min [&_svg]:shrink-0">
             <Sun
               size={16}
               className="rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0"
@@ -55,7 +55,7 @@ export const WindowControls = () => {
               size={16}
               className="absolute rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100"
             />
-          </button>
+          </div>
         }
       />
 

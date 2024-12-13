@@ -8,12 +8,14 @@ import { cn } from '@shared/lib'
 
 type PropType = {
   slides: CityForWeather[]
+  selected: number | null
   toggleSelected: (id: number) => void
+  toggleIsDefault: (id: number) => void
   options?: EmblaOptionsType
 }
 
 export const SliderCards: FC<PropType> = (props) => {
-  const { slides, toggleSelected, options } = props
+  const { slides, selected, toggleSelected, toggleIsDefault, options } = props
   const [emblaRef, _emblaApi] = useEmblaCarousel(options)
 
   return (
@@ -28,11 +30,22 @@ export const SliderCards: FC<PropType> = (props) => {
                     <div
                       className={cn(
                         'flex h-[var(--slide-height)] cursor-pointer items-center justify-center rounded-md bg-foreground text-4xl font-semibold shadow-inner ring-1 ring-border',
-                        slide.isSelected && 'bg-orange-400'
+                        slide.isDefault && 'bg-rose-300',
+                        selected === slide.id && 'text-amber-600'
                       )}
                       onClick={() => toggleSelected(slide.id)}
                     >
-                      {slide.cityInfo.city}
+                      <div className="flex h-full w-full justify-between p-2">
+                        <div className="text-2xl">{slide.cityInfo.city}</div>
+                        <div className="flex flex-col items-end justify-between py-4 pr-2">
+                          <div
+                            className="rounded-md bg-slate-600 px-4 py-2 text-lg hover:bg-slate-300"
+                            onClick={() => toggleIsDefault(slide.id)}
+                          >
+                            default
+                          </div>
+                        </div>
+                      </div>
                     </div>
                   </div>
                 ))}

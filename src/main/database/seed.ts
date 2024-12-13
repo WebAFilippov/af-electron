@@ -62,23 +62,23 @@ export async function seedDatabase() {
       const citiesForWeather = [
         {
           cityId: 507,
-          isSelected: false
+          isDefault: false
         },
         {
           cityId: 1,
-          isSelected: false
+          isDefault: false
         },
         {
           cityId: 213,
-          isSelected: false
+          isDefault: false
         },
         {
           cityId: 56,
-          isSelected: false
+          isDefault: false
         },
         {
           cityId: 841,
-          isSelected: false
+          isDefault: false
         }
       ]
       await CitiesForWeather.bulkCreate(citiesForWeather)

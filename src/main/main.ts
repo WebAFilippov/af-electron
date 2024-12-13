@@ -27,6 +27,7 @@ const gotTheLock = app.requestSingleInstanceLock() // Проверка на за
 if (!gotTheLock) {
   app.quit()
 } else {
+  
   app.on('second-instance', () => {
     const [window] = BrowserWindow.getAllWindows()
     if (window) {

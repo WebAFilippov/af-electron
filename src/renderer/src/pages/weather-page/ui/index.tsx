@@ -1,31 +1,32 @@
 import { EmblaOptionsType } from 'embla-carousel'
 import { Check, PlusIcon } from 'lucide-react'
-import { FC, PropsWithChildren, useCallback, useEffect, useState } from 'react'
+import { FC, PropsWithChildren, useEffect, useState } from 'react'
 
 import {
-  allCities,
-  CityForWeather,
-  getCityByIsSelected,
-  setCities,
-  toggleIsSelected
+  allCityForWeather,
+  getCityForWeatherByIsDefault,
+  getCityForWeatherBySelected,
+  getSelected,
+  toggleIsDefault,
+  toggleSelected
 } from '@entities/city-for-weather'
 
 import { Button, CommandItem, SearchSelect, SliderCards } from '@shared/components/ui'
 import { useAppDispatch, useAppSelector } from '@shared/hooks'
-import { useFetchData } from '@shared/hooks/use-fetch-data'
 import { cn } from '@shared/lib'
 import { formatFullAdressCity } from '@shared/utils'
 
-import { SearchCitiesParams } from '../../../../../shared/types'
 import { City } from '../model/types'
 
 export const WeatherPage: FC<PropsWithChildren> = () => {
   const dispatch = useAppDispatch()
 
-  const Cities = useAppSelector(allCities)
-  const SelectedCity = useAppSelector(getCityByIsSelected)
+  const selected = useAppSelector(getSelected)
+  const CityForWeather = useAppSelector(allCityForWeather)
+  const CityByIsDefault = useAppSelector(getCityForWeatherByIsDefault)
+  const CityForWeatherSelected = useAppSelector(getCityForWeatherBySelected)
 
-  const [selected, setSelected] = useState<City | undefined>()
+  const [selectedCity, setSelectedCity] = useState<City | undefined>()
   const [data, setData] = useState<City[]>()
 
   const [searchQuery, setSearchQuery] = useState<string>('')
@@ -64,14 +65,18 @@ export const WeatherPage: FC<PropsWithChildren> = () => {
   // }, [])
 
   const handleSetActive = (obj: City | undefined) => {
-    setSelected(obj)
+    setSelectedCity(obj)
+  }
+
+  const handleToggleIsDefault = async (id: number) => {
+    try {
+      const response = await window.api.updateCityForWeatherByIsDefault(id)
+      dispatch(toggleIsDefault(response))
+    } catch {}
   }
 
   const handleToggleSelected = async (id: number) => {
-    try {
-      const response = await window.api.updateCityForWeatherByIsSelected(id)
-      dispatch(toggleIsSelected(response))
-    } catch {}
+    dispatch(toggleSelected(id))
   }
 
   const OPTIONS: EmblaOptionsType = { dragFree: true, loop: false }
@@ -85,8 +90,8 @@ export const WeatherPage: FC<PropsWithChildren> = () => {
           isError={false}
           searchQuery={searchQuery}
           setSearchQuery={setSearchQuery}
-          selected={selected}
-          setectedField={selected?.city}
+          selectedCity={selectedCity}
+          setectedField={selectedCity?.city}
           comboboxPlaceholder="Город или район"
           searchInputPlaceholder="Выберите город..."
           loadingPlaceholder="Поиск..."
@@ -98,7 +103,7 @@ export const WeatherPage: FC<PropsWithChildren> = () => {
                 key={item.id}
                 value={item.city}
                 onSelect={(currentValue) => {
-                  currentValue === selected?.city
+                  currentValue === selectedCity?.city
                     ? handleSetActive(undefined)
                     : handleSetActive(item)
                 }}
@@ -115,28 +120,29 @@ export const WeatherPage: FC<PropsWithChildren> = () => {
                 <Check
                   className={cn(
                     'ml-auto text-primary',
-                    selected?.id === item.id ? 'opacity-100' : 'opacity-0'
+                    selectedCity?.id === item.id ? 'opacity-100' : 'opacity-0'
                   )}
                 />
               </CommandItem>
             ))}
         </SearchSelect>
-        <Button
-          variant="outline"
-          size="icon"
-          onClick={async () => await window.api.updateCityForWeatherByIsSelected(1)}
-        >
+
+        <Button variant="outline" size="icon">
           <PlusIcon />
         </Button>
       </div>
 
       <SliderCards
-        slides={Cities}
-        options={OPTIONS}
+        slides={CityForWeather}
+        selected={selected}
+        toggleIsDefault={handleToggleIsDefault}
         toggleSelected={handleToggleSelected}
-      ></SliderCards>
+        options={OPTIONS}
+      />
 
-      <div className="w-full flex-1 bg-blue-300">{SelectedCity && SelectedCity.cityInfo.city}</div>
+      <div className="w-full flex-1 bg-opacity_card_bg">
+        {CityForWeatherSelected && CityForWeatherSelected.cityInfo.city}
+      </div>
     </div>
   )
 }

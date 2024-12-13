@@ -16,8 +16,8 @@ export const dataHandlers = () => {
     return response
   })
 
-  ipcMain.handle('v1/city_for_weather/update', async (_event, args) => {
-    const response = await cityForWeatherService.updateCityForWeatherByIsSelected(args)
+  ipcMain.handle('v1/city_for_weather/default', async (_event, args) => {
+    const response = await cityForWeatherService.updateCityForWeatherByIsDefault(args)
     return response
   })
 }

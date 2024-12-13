@@ -7,7 +7,7 @@ import City from './city.model'
 class CityForWeather extends Model {
   declare id: number
   declare cityId: number
-  declare isSelected: boolean
+  declare isDefault: boolean
 }
 
 CityForWeather.init(
@@ -27,7 +27,7 @@ CityForWeather.init(
       },
       onDelete: 'SET NULL'
     },
-    isSelected: {
+    isDefault: {
       type: DataTypes.BOOLEAN,
       allowNull: false
     }
@@ -53,5 +53,3 @@ CityForWeather.belongsTo(City, {
 })
 
 export default CityForWeather
-
-

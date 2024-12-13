@@ -15,8 +15,8 @@ export const api = {
   // CityForWetherService
   getAllCityForWeather: (): Promise<CityForWeather[]> =>
     ipcRenderer.invoke('v1/city_for_weather/getAll'),
-  updateCityForWeatherByIsSelected: (args: number): Promise<number | null> =>
-    ipcRenderer.invoke('v1/city_for_weather/update', args)
+  updateCityForWeatherByIsDefault: (args: number): Promise<number | null> =>
+    ipcRenderer.invoke('v1/city_for_weather/default', args)
 } satisfies Record<string, (args: any) => any>
 
 declare global {

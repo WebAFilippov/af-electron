@@ -15,9 +15,14 @@ export const ApplicationLayout: FC = () => {
 
   const [isCollapse] = useState(false)
 
-  const fetchList = async () => {
+  const fetchAllCityForWeather = async () => {
     const list = await window.api.getAllCityForWeather()
-    dispatch(setCities(list))
+    const selected = list.find((city) => city.isDefault)?.id
+    const parsedList = {
+      cityForWeather: list,
+      selected: selected ? selected : null
+    }
+    dispatch(setCities(parsedList))
   }
 
   useEffect(() => {
@@ -25,7 +30,7 @@ export const ApplicationLayout: FC = () => {
       window.api.startWindow()
     }
     sendCommandShowWindow()
-    fetchList()
+    fetchAllCityForWeather()
   })
 
   return (

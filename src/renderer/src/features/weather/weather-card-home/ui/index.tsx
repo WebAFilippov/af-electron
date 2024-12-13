@@ -1,6 +1,8 @@
 import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 
+import { getCityForWeatherBySelected } from '@entities/city-for-weather'
+
 import { Button } from '@shared/components/ui'
 import {
   Card,
@@ -11,6 +13,7 @@ import {
   CardTitle
 } from '@shared/components/ui/card'
 import { ROUTE } from '@shared/config/routes'
+import { useAppSelector } from '@shared/hooks'
 
 import { Weather } from '../../../../../../shared/types'
 
@@ -18,24 +21,28 @@ const WeatherCard = () => {
   const [weatherData, setWeatherData] = useState<Weather | null>(null)
   const [loading, setLoading] = useState(true)
 
+  const CityForWeatherSelected = useAppSelector(getCityForWeatherBySelected)
+
   useEffect(() => {
     const fetchWeatherData = async () => {
-      try {
-        const response = await fetch(
-          'https://api.openweathermap.org/data/2.5/weather?q=Кемерово&appid=0e9abf6e9d1e571719e3fed8d179a7e9&units=metric'
-        )
-        const data = await response.json()
-        console.log(data)
-        setWeatherData(data)
-      } catch (error) {
-        console.error('Error fetching weather data:', error)
-      } finally {
-        setLoading(false)
+      if (CityForWeatherSelected) {
+        try {
+          const response = await fetch(
+            `https://api.openweathermap.org/data/2.5/weather?q=${CityForWeatherSelected?.cityInfo.city}&appid=0e9abf6e9d1e571719e3fed8d179a7e9&units=metric`
+          )
+          const data = await response.json()
+          console.log(data)
+          setWeatherData(data)
+        } catch (error) {
+          console.error('Error fetching weather data:', error)
+        } finally {
+          setLoading(false)
+        }
       }
     }
 
     fetchWeatherData()
-  }, [])
+  }, [CityForWeatherSelected])
 
   if (loading) {
     return <div>Loading...</div>
@@ -50,14 +57,14 @@ const WeatherCard = () => {
   return (
     <Card>
       <CardHeader>
-        <CardTitle>Погода в {name}</CardTitle>
+        <CardTitle>Погода в {name && name}</CardTitle>
         <CardDescription>
-          Температура: {main.temp}°C, {weather[0].description}
+          Температура: {main.temp && main.temp}°C, {weather && weather[0].description}
         </CardDescription>
       </CardHeader>
       <CardContent>
-        <p>Влажность: {main.humidity}%</p>
-        <p>Давление: {main.pressure} hPa</p>
+        <p>Влажность: {main && main.humidity}%</p>
+        <p>Давление: {main && main.pressure} hPa</p>
       </CardContent>
       <CardFooter>
         <Link to={ROUTE.WEATHER.path} className="w-full">

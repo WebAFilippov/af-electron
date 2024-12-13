@@ -7,8 +7,8 @@ class CityForWeatherService {
     return cities
   }
 
-  async updateCityForWeatherByIsSelected(id: number) {
-    const response = await cityForWeatherRepository.updateSelectedForId(id)
+  async updateCityForWeatherByIsDefault(id: number) {
+    const response = await cityForWeatherRepository.updateIsDefaultForId(id)
 
     return response
   }

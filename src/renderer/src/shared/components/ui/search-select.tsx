@@ -3,7 +3,6 @@
 import { ChevronsUpDown } from 'lucide-react'
 import { PropsWithChildren, useState } from 'react'
 
-import { SearchCitiesParams } from '../../../../../shared/types'
 import { Button } from './button'
 import { Command, CommandGroup, CommandInput, CommandItem, CommandList } from './command'
 import { Popover, PopoverContent, PopoverTrigger } from './popover'
@@ -14,7 +13,7 @@ type Props<T> = {
   isError: boolean
   searchQuery: string
   setSearchQuery: (value: string) => void
-  selected: T | undefined
+  selectedCity: T | undefined
   setectedField: string | undefined
   comboboxPlaceholder?: string
   searchInputPlaceholder?: string
@@ -29,7 +28,7 @@ export const SearchSelect = <T,>({
   isError,
   searchQuery,
   setSearchQuery,
-  selected,
+  selectedCity,
   setectedField,
   comboboxPlaceholder = 'comboboxPlaceholder',
   searchInputPlaceholder = 'searchInputPlaceholder',
@@ -45,13 +44,13 @@ export const SearchSelect = <T,>({
           variant="outline"
           role="combobox"
           aria-expanded={open}
-          className="w-[200px] justify-between user-select-none"
+          className="w-[300px] justify-between user-select-none"
         >
-          {selected ? setectedField : comboboxPlaceholder}
+          {selectedCity ? setectedField : comboboxPlaceholder}
           <ChevronsUpDown className="text-primary opacity-50" />
         </Button>
       </PopoverTrigger>
-      <PopoverContent className="w-[200px] p-0">
+      <PopoverContent className="w-[300px] p-0">
         <Command shouldFilter={false}>
           <CommandInput
             placeholder={searchInputPlaceholder}

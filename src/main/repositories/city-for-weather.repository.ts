@@ -1,12 +1,16 @@
 import { Transaction } from 'sequelize'
 
+import { Logger } from '@utils/logger'
+
 import CityForWeather from '@models/city-for-weather.model'
 import City from '@models/city.model'
+
+const log = new Logger('city-for-weather.repository')
 
 class CityForWeatherRepository {
   async findAll(): Promise<CityForWeather[]> {
     try {
-      const data = await CityForWeather.findAll({
+      const AllCityForWeather = await CityForWeather.findAll({
         include: {
           model: City,
           as: 'cityInfo'
@@ -14,19 +18,23 @@ class CityForWeatherRepository {
         raw: true,
         nest: true
       })
+      log.log(
+        `Запрос на получение всех записей CityForWeather завершен. Количество записей: ${AllCityForWeather.length}`
+      )
 
-      return data
+      return AllCityForWeather
     } catch (error) {
+      log.error('Ошибка при выполнении запроса findAll:', error)
       throw error
     }
   }
 
-  async updateSelectedForId(targetId: number): Promise<number | null> {
+  async updateIsDefaultForId(targetId: number): Promise<number | null> {
     const transaction: Transaction = await CityForWeather.sequelize!.transaction()
 
     try {
       const currentSelected = await CityForWeather.findOne({
-        where: { isSelected: true },
+        where: { isDefault: true },
         transaction
       })
 
@@ -36,33 +44,58 @@ class CityForWeatherRepository {
       })
 
       if (!cityForWeather) {
-        throw new Error()
+        log.error(`Запись с ID ${targetId} не найдена.`)
+        throw new Error(`CityForWeather with ID ${targetId} not found.`)
       }
 
       if (currentSelected) {
-        await currentSelected.update({ isSelected: false }, { transaction })
+        await currentSelected.update({ isDefault: false }, { transaction })
       }
 
-      await cityForWeather.update({ isSelected: true }, { transaction })
+      await cityForWeather.update({ isDefault: true }, { transaction })
 
       const result = await CityForWeather.findOne({
-        where: { isSelected: true },
+        where: { isDefault: true },
         transaction
       })
 
       await transaction.commit()
+
       if (result) {
+        log.log(`Выбранная запись после обновления: ID ${result.id}.`)
         return result.id
-      } else return null
+      } else {
+        log.log(`Выбор снят.`)
+        return null
+      }
     } catch (error) {
       await transaction.rollback()
+      log.error(`Ошибка при обновлении выбранной записи`)
       throw error
     }
   }
 
-  // async addCity(userId: number): Promise<void> {
-  //   const count = await CityForWeather.create()
-  // }
+  async createCityForWeatherWithCityId(cityId: number) {
+    try {
+      const existingCityForWeather = await CityForWeather.findOne({ where: { cityId: cityId } })
+
+      if (existingCityForWeather) {
+        log.error('Запись с таким cityId уже существует:', existingCityForWeather.toJSON())
+        throw new Error('Запись с таким cityId уже существует')
+      }
+
+      const cityForWeather = await CityForWeather.create({
+        cityId,
+        isDefault: false
+      })
+      log.log('Запись успешно создана: ', cityForWeather)
+
+      return cityForWeather
+    } catch (error) {
+      log.error('Ошибка при создании записи в CityForWeather:', error)
+      throw error
+    }
+  }
 }
 
 export const cityForWeatherRepository = new CityForWeatherRepository()
