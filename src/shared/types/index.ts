@@ -1,3 +1,5 @@
+import Application from '@models/application.model'
+
 export interface ICity {
   id: number
   type_region: string
@@ -82,3 +84,5 @@ export interface SearchCitiesParams {
   limit?: number
   order?: 'DESC' | 'ASC'
 }
+
+export type ApplicationPreload = Application

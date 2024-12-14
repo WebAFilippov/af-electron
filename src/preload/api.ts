@@ -2,6 +2,7 @@ import { ipcRenderer } from 'electron'
 
 import { ElectronAPI } from '@electron-toolkit/preload'
 import { CityForWeather } from '@entities/city-for-weather'
+import { ApplicationPreload } from '../shared/types'
 
 export const api = {
   startWindow: () => ipcRenderer.send('start-window'),
@@ -9,6 +10,11 @@ export const api = {
   maximizeWindow: () => ipcRenderer.send('maximize-window'),
   closeWindow: () => ipcRenderer.send('close-window'),
 
+  // Application
+  getApplicationSettings: (): Promise<ApplicationPreload> =>
+    ipcRenderer.invoke('v1/application/getall'),
+  updateApplicationByOpenWeatherMapApiKey: (args: string): Promise<number> =>
+    ipcRenderer.invoke('v1/application/update_openweathermap_apikey', args),
   // CityService
   searchCities: (args) => ipcRenderer.invoke('city::searchCityLimitOrder', args),
 
