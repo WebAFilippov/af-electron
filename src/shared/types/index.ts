@@ -1,29 +1,3 @@
-import Application from '@models/application.model'
-
-export interface ICity {
-  id: number
-  type_region: string
-  region: string
-  city: string
-  lower_city: string
-  latitude: number | null
-  longitude: number | null
-  population: number | null
-  utc: string | null
-}
-
-export type City = {
-  id: number
-  type_region: string
-  region: string
-  city: string
-  lower_city: string
-  latitude: number
-  longitude: number
-  population: number
-  utc: string
-}
-
 export type Weather = {
   coord: {
     lon: number
@@ -71,13 +45,25 @@ export type Weather = {
   cod: number
 }
 
-export type CitiesForWeatherPreload = Array<{
+export type CityInfo = {
+  id: number
+  type_region: string
+  region: string
+  city: string
+  lower_city: string
+  latitude: number
+  longitude: number
+  population: number
+  utc: string
+}
+
+export type CityForWeather = {
   id: number
   cityId: number
-  isSelected: boolean
-  city: City
+  isDefault: boolean
+  cityInfo: CityInfo
   weather?: Weather
-}>
+}
 
 export interface SearchCitiesParams {
   query: string
@@ -85,4 +71,13 @@ export interface SearchCitiesParams {
   order?: 'DESC' | 'ASC'
 }
 
-export type ApplicationPreload = Application
+export type Application = {
+  openWeatherMapApiKey: string
+}
+
+export type PreloadApplication = Application
+
+export type PreloadStartedPayload = {
+  storeCityForWeather: CityForWeather[]
+  storeApplication: Application
+}

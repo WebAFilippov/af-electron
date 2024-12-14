@@ -10,8 +10,8 @@ const electronBaseQuery: BaseQueryFn<void, unknown, unknown> = async () => {
   }
 }
 
-export const CityForWeatherAPI = createApi({
-  reducerPath: 'CityForWeatherApi',
+export const CityForWeatherElectronAPI = createApi({
+  reducerPath: 'CityForWeatherElectronApi',
   baseQuery: electronBaseQuery,
   endpoints: (builder) => ({
     getAllCityForWeather: builder.query<CityForWeather[], void>({
@@ -29,4 +29,4 @@ export const CityForWeatherAPI = createApi({
   })
 })
 
-export const {  useLazyGetAllCityForWeatherQuery } = CityForWeatherAPI
+export const {  useLazyGetAllCityForWeatherQuery } = CityForWeatherElectronAPI

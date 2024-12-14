@@ -1,6 +1,6 @@
-import { cityRepository } from '@repositories/city.repository'
+import City from '@models/city.model'
 
-import { ICity } from '@shared/types'
+import { cityRepository } from '@repositories/city.repository'
 
 class CityService {
   async getCityById(id: string) {
@@ -13,7 +13,7 @@ class CityService {
     query: string
     limit?: number
     ordering?: 'DESC' | 'ASC'
-  }): Promise<ICity[]> {
+  }): Promise<City[]> {
     const cities = await cityRepository.findByCityLimitOrder(
       optionsQuery.query,
       optionsQuery.limit,

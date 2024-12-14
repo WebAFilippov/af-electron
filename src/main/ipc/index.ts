@@ -4,6 +4,6 @@ import { dataHandlers } from './data-handlers'
 import { IPCHandlers } from './ipc'
 
 export const ipcHandlers = (window: BrowserWindow, isAutoLaunch: boolean) => {
-  IPCHandlers(window, isAutoLaunch)
-  dataHandlers()
+  IPCHandlers(window)
+  dataHandlers(window, isAutoLaunch)
 }

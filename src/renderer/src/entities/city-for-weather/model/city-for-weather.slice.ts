@@ -11,7 +11,7 @@ const CityForWeatherSlice = createSlice({
   name: 'city-for-weather',
   initialState,
   reducers: (create) => ({
-    setCities: create.reducer((_state, action: PayloadAction<InitialState>) => {
+    setCityForWeatherStore: create.reducer((_state, action: PayloadAction<InitialState>) => {
       return action.payload
     }),
 
@@ -61,7 +61,7 @@ export const {
 } = CityForWeatherSlice.selectors
 
 export const {
-  setCities,
+  setCityForWeatherStore,
   addCityForWeather,
   removeCityForWeather,
   toggleIsDefault,

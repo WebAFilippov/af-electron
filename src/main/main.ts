@@ -11,7 +11,7 @@ import { windowLifecycle } from '@utils/window-lifecycle'
 import { initDatabase } from '@database/database'
 import { seedDatabase } from '@database/seed'
 
-import { applicationRepository } from '@repositories/application.repository'
+
 
 import { setAutoLaunch } from '@services/auto-launch'
 

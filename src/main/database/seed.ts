@@ -5,11 +5,10 @@ import { Logger } from '@utils/logger'
 
 import Application from '@models/application.model'
 import CitiesForWeather from '@models/city-for-weather.model'
+import CityForWeather from '@models/city-for-weather.model'
 import City from '@models/city.model'
 
 import { config } from '@main/shared/config'
-
-import { ICity } from '@shared/types'
 
 const log = new Logger('seed')
 
@@ -19,7 +18,17 @@ export async function seedDatabase() {
     const countCity = await City.count()
 
     if (!countCity) {
-      const initialCity: Omit<ICity, 'id'>[] = []
+      const initialCity: Pick<
+        City,
+        | 'type_region'
+        | 'region'
+        | 'city'
+        | 'lower_city'
+        | 'latitude'
+        | 'longitude'
+        | 'population'
+        | 'utc'
+      >[] = []
 
       // Читаем данные из CSV-файла
       if (fs.existsSync(config.fileCSVPath)) {
@@ -60,14 +69,19 @@ export async function seedDatabase() {
     const countCitiesForWeather = await CitiesForWeather.count()
 
     if (!countCitiesForWeather) {
-      const initialCityForWeather = []
+      const initialCityForWeather: Pick<CityForWeather, 'cityId' | 'isDefault'>[] = [
+        { cityId: 123, isDefault: false },
+        { cityId: 321, isDefault: false },
+        { cityId: 666, isDefault: false },
+        { cityId: 999, isDefault: false }
+      ]
       await CitiesForWeather.bulkCreate(initialCityForWeather)
     }
 
     const countApplication = await Application.count()
 
     if (!countApplication) {
-      const initialApplication = [
+      const initialApplication: Pick<Application, 'openweathermap_apikey'>[] = [
         {
           openweathermap_apikey: ''
         }
