@@ -1,9 +1,21 @@
 import { ipcMain } from 'electron'
 
+import { applicationService } from '@services/application.service'
 import { cityForWeatherService } from '@services/cities-for-weather.service'
 import { cityService } from '@services/city.service'
 
 export const dataHandlers = () => {
+  // Application
+  ipcMain.handle('v1/application/getall', async () => {
+    const response = await applicationService.getApplicationSettings()
+    return response
+  })
+
+  ipcMain.handle('v1/application/update_openweathermap_apikey', async (_event, value) => {
+    const response = await applicationService.updateOpenWeatherMapApiKey(value)
+    return response
+  })
+
   // City
   ipcMain.handle('city::searchCityLimitOrder', async (_event, optionsQuery) => {
     const cities = await cityService.searchCitiesLimitOrder(optionsQuery)
