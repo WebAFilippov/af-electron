@@ -16,7 +16,7 @@ Application.init(
     },
     openweathermap_apikey: {
       type: DataTypes.TEXT,
-      allowNull: false,
+      allowNull: false
     }
   },
   {
@@ -28,3 +28,6 @@ Application.init(
 )
 
 export default Application
+
+export type ApplicationField = keyof Pick<Application, 'id' | 'openweathermap_apikey'>
+export type TApplication = Pick<Application, 'id' | 'openweathermap_apikey'>

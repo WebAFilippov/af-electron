@@ -2,22 +2,14 @@ import { Transaction } from 'sequelize'
 
 import { Logger } from '@utils/logger'
 
-import CityForWeather from '@models/city-for-weather.model'
-import City from '@models/city.model'
+import CityForWeather, { TCityForWeather } from '@models/city-for-weather.model'
 
 const log = new Logger('city-for-weather.repository')
 
 class CityForWeatherRepository {
-  async findAll(): Promise<CityForWeather[]> {
+  async getAll(): Promise<TCityForWeather[]> {
     try {
-      const AllCityForWeather = await CityForWeather.findAll({
-        include: {
-          model: City,
-          as: 'cityInfo'
-        },
-        raw: true,
-        nest: true
-      })
+      const AllCityForWeather = await CityForWeather.findAll({ raw: true })
       log.log(
         `Запрос на получение всех записей CityForWeather завершен. Количество записей: ${AllCityForWeather.length}`
       )
@@ -75,7 +67,7 @@ class CityForWeatherRepository {
     }
   }
 
-  async createCityForWeatherWithCityId(cityId: number) {
+  async createCityForWeatherWithCityId(cityId: number): Promise<TCityForWeather> {
     try {
       const existingCityForWeather = await CityForWeather.findOne({ where: { cityId: cityId } })
 
@@ -84,10 +76,13 @@ class CityForWeatherRepository {
         throw new Error('Запись с таким cityId уже существует')
       }
 
-      const cityForWeather = await CityForWeather.create({
-        cityId,
-        isDefault: false
-      })
+      const cityForWeather = await CityForWeather.create(
+        {
+          cityId,
+          isDefault: false
+        },
+        { raw: true, nest: true }
+      )
       log.log('Запись успешно создана: ', cityForWeather)
 
       return cityForWeather

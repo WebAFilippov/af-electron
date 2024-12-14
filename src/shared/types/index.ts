@@ -1,4 +1,4 @@
-export type Weather = {
+type Weather = {
   coord: {
     lon: number
     lat: number
@@ -45,7 +45,7 @@ export type Weather = {
   cod: number
 }
 
-export type CityInfo = {
+type CityInfo = {
   id: number
   type_region: string
   region: string
@@ -57,7 +57,7 @@ export type CityInfo = {
   utc: string
 }
 
-export type CityForWeather = {
+type CityForWeather = {
   id: number
   cityId: number
   isDefault: boolean

@@ -63,3 +63,17 @@ City.init(
 )
 
 export default City
+
+export type TCity = Pick<
+  City,
+  | 'id'
+  | 'type_region'
+  | 'region'
+  | 'city'
+  | 'lower_city'
+  | 'latitude'
+  | 'longitude'
+  | 'population'
+  | 'utc'
+>
+

@@ -1,11 +1,10 @@
-import City from '@models/city.model'
+import { TCity } from '@models/city.model'
 
 import { cityRepository } from '@repositories/city.repository'
 
 class CityService {
-  async getCityById(id: string) {
+  async getCityById(id: number) {
     const city = await cityRepository.findById(id)
-    if (!city) throw new Error('Город не найден')
     return city
   }
 
@@ -13,8 +12,8 @@ class CityService {
     query: string
     limit?: number
     ordering?: 'DESC' | 'ASC'
-  }): Promise<City[]> {
-    const cities = await cityRepository.findByCityLimitOrder(
+  }): Promise<TCity[]> {
+    const cities = await cityRepository.findByCityWithParams(
       optionsQuery.query,
       optionsQuery.limit,
       optionsQuery.ordering

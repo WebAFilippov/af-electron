@@ -1,21 +1,32 @@
 import { Op } from 'sequelize'
 
-import City from '@models/city.model'
+import City, { TCity } from '@models/city.model'
 
 class CityRepository {
-  async findById(id: string): Promise<City | null> {
-    return await City.findOne({
-      where: {
-        id
+  async findById(id: number): Promise<TCity> {
+    try {
+      const city = await City.findOne({
+        where: {
+          id
+        },
+        raw: true
+      })
+
+      if (city) {
+        return city
+      } else {
+        throw new Error('City not found')
       }
-    })
+    } catch (error) {
+      throw error
+    }
   }
 
-  async findByCityLimitOrder(
+  async findByCityWithParams(
     query: string,
-    limit: number = 5,
+    limit: number = 8,
     ordering: 'DESC' | 'ASC' = 'DESC'
-  ): Promise<City[]> {
+  ): Promise<TCity[]> {
     return await City.findAll({
       where: {
         lower_city: {

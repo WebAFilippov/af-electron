@@ -1,13 +1,11 @@
 import { Logger } from '@utils/logger'
 
-import Application from '@models/application.model'
+import Application, { ApplicationField, TApplication } from '@models/application.model'
 
 const log = new Logger('application.repository')
 
-type ApplicationField = keyof Pick<Application, 'id' | 'openweathermap_apikey'>
-
 class ApplicationRepository {
-  async getFirstFieldValue(field: ApplicationField) {
+  async getValueByField(field: ApplicationField): Promise<keyof TApplication> {
     try {
       const model = await Application.findOne({
         attributes: [field]
@@ -16,7 +14,7 @@ class ApplicationRepository {
       if (model) {
         const fieldValue = model.get(field)
         log.info(`Поле "${field}" успешно извлечено. Значение: ${fieldValue}`)
-        return fieldValue as string | null
+        return fieldValue as keyof TApplication
       } else {
         log.error(`Запись в таблице Application для поля "${field}" не найдена.`)
         throw new Error(`Запись не найдена: поле "${field}" отсутствует.`)
@@ -27,9 +25,9 @@ class ApplicationRepository {
     }
   }
 
-  async getAll() {
+  async getAll(): Promise<TApplication> {
     try {
-      const model = await Application.findOne({ attributes: { exclude: ['id'] }, raw: true })
+      const model = await Application.findOne({ raw: true })
 
       if (model) {
         log.info('Данные успешно извлечены из таблицы Application.')

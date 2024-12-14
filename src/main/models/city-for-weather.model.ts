@@ -2,7 +2,7 @@ import { DataTypes, Model } from 'sequelize'
 
 import { sequelize } from '@database/database'
 
-import City from './city.model'
+import City, { TCity } from './city.model'
 
 class CityForWeather extends Model {
   declare id: number
@@ -53,3 +53,6 @@ CityForWeather.belongsTo(City, {
 })
 
 export default CityForWeather
+
+export type TCityForWeather = Pick<CityForWeather, 'id' | 'cityId' | 'isDefault'>
+export type TCityForWeatherWithCityInfo = TCityForWeather & { cityInfo: TCity }
