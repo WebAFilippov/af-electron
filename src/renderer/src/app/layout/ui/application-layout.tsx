@@ -36,7 +36,7 @@ export const ApplicationLayout: FC = () => {
     }
     sendCommandShowWindow()
 
-    // console.log(data, '2')
+    console.log('effect')
     // console.log('as/dasd')
     // getWeather()
   }, [])

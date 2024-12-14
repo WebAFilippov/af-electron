@@ -1,5 +1,6 @@
 import { BrowserWindow, ipcMain } from 'electron'
 
+import { getWeatherForAllCities } from '@utils/fetch-openweathermap'
 import { Logger } from '@utils/logger'
 
 import { applicationService } from '@services/application.service'
@@ -14,9 +15,12 @@ export const dataHandlers = (window: BrowserWindow, isAutoLaunch: boolean) => {
     const responseForApplication = await applicationService.getApplicationSettings()
     const responseForCityForWeather = await cityForWeatherService.getAllCityForWeather()
 
+    const resp = await getWeatherForAllCities()
+
     const response = {
       storeCityForWeather: responseForCityForWeather,
-      storeApplication: responseForApplication
+      storeApplication: responseForApplication,
+      resp
     }
 
     if (!isAutoLaunch) {
@@ -54,5 +58,10 @@ export const dataHandlers = (window: BrowserWindow, isAutoLaunch: boolean) => {
   ipcMain.handle('v1/city_for_weather/default', async (_event, args) => {
     const response = await cityForWeatherService.updateCityForWeatherByIsDefault(args)
     return response
+  })
+
+  ipcMain.handle('v1/city_for_weather/get_weather', async () => {
+    const { openweathermap_apikey } = await applicationService.getApplicationSettings()
+    const responseForCityForWeather = await cityForWeatherService.getAllCityForWeather()
   })
 }

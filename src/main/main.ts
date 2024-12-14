@@ -5,13 +5,12 @@ import { app, BrowserWindow, Menu } from 'electron'
 import { createWindow } from '@ui/create-window'
 import { createTray } from '@ui/tray'
 
+
 import { Logger } from '@utils/logger'
 import { windowLifecycle } from '@utils/window-lifecycle'
 
 import { initDatabase } from '@database/database'
 import { seedDatabase } from '@database/seed'
-
-
 
 import { setAutoLaunch } from '@services/auto-launch'
 
@@ -54,6 +53,8 @@ if (!gotTheLock) {
       ipcHandlers(window, isAutoLaunch)
 
       windowLifecycle(window)
+
+      
 
       // app.on('activate', () => {
       //   if (BrowserWindow.getAllWindows().length === 0) {
