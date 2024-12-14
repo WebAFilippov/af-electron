@@ -2,6 +2,8 @@ import React, { createContext, useContext, useEffect, useLayoutEffect, useState 
 
 type Theme = 'dark' | 'light' | 'system'
 
+
+
 interface ThemeProviderProps {
   children: React.ReactNode
   defaultTheme?: Theme

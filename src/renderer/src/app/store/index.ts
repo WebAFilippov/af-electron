@@ -1,12 +1,13 @@
 import { configureStore } from '@reduxjs/toolkit'
 
-import { CityForWeatherReducer } from '@entities/city-for-weather'
-import { CityForWeatherAPI } from '@entities/city-for-weather/api/city-for-weather-electron.api'
+import { ApplicationReducer } from '@entities/application'
+import { CityForWeatherAPI, CityForWeatherReducer } from '@entities/city-for-weather'
 
 export const store = configureStore({
   reducer: {
     [CityForWeatherAPI.reducerPath]: CityForWeatherAPI.reducer,
-    'city-for-weather': CityForWeatherReducer
+    'city-for-weather': CityForWeatherReducer,
+    application: ApplicationReducer
   },
   devTools: true,
   middleware: (getDefaultMiddleware) =>
