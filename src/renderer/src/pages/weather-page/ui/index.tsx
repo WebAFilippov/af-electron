@@ -3,13 +3,13 @@ import { Check, PlusIcon } from 'lucide-react'
 import { FC, PropsWithChildren, useEffect, useState } from 'react'
 
 import {
-  allCityForWeather,
-  getCityForWeatherByIsDefault,
-  getCityForWeatherBySelected,
+  allCityForWeather, // getCityForWeatherBySelected,
   getSelected,
   toggleIsDefault,
-  toggleSelected
+  toggleSelected,
+  Weather
 } from '@entities/city-for-weather'
+import { WeatherComponent } from '@entities/city-for-weather/model/weather'
 
 import { Button, CommandItem, SearchSelect, SliderCards } from '@shared/components/ui'
 import { useAppDispatch, useAppSelector } from '@shared/hooks'
@@ -18,19 +18,66 @@ import { formatFullAdressCity } from '@shared/utils'
 
 import { City } from '../model/types'
 
+const mockWeather: Weather = {
+  coord: {
+    lon: 37.62,
+    lat: 55.75
+  },
+  weather: [
+    {
+      id: 800,
+      main: 'Clear',
+      description: 'clear sky',
+      icon: '01d'
+    }
+  ],
+  base: 'stations',
+  main: {
+    temp: 20,
+    feels_like: 18,
+    temp_min: 19,
+    temp_max: 21,
+    pressure: 1012,
+    humidity: 60,
+    sea_level: 1012,
+    grnd_level: 1009
+  },
+  visibility: 10000,
+  wind: {
+    speed: 3.5,
+    deg: 120
+  },
+  snow: {
+    '1h': 0
+  },
+  clouds: {
+    all: 0
+  },
+  dt: 1670000000,
+  sys: {
+    type: 1,
+    id: 9029,
+    country: 'RU',
+    sunrise: 1670040000,
+    sunset: 1670070000
+  },
+  timezone: 10800,
+  id: 524901,
+  name: 'Moscow',
+  cod: 200
+}
+
 export const WeatherPage: FC<PropsWithChildren> = () => {
   const dispatch = useAppDispatch()
 
   const selected = useAppSelector(getSelected)
   const CityForWeather = useAppSelector(allCityForWeather)
-  const CityByIsDefault = useAppSelector(getCityForWeatherByIsDefault)
-  const CityForWeatherSelected = useAppSelector(getCityForWeatherBySelected)
+  // const CityForWeatherSelected = useAppSelector(getCityForWeatherBySelected)
 
   const [selectedCity, setSelectedCity] = useState<City | undefined>()
   const [data, setData] = useState<City[]>()
 
   const [searchQuery, setSearchQuery] = useState<string>('')
-  console.log('first1')
 
   const fetchData = async () => {
     const data: City[] = await window.api.searchCities({
@@ -46,24 +93,6 @@ export const WeatherPage: FC<PropsWithChildren> = () => {
     fetchData()
   }, [searchQuery])
 
-  // const { data, isLoading, isError, fetchData } = useFetchData<City, SearchCitiesParams>(
-  //   window.api.searchCities
-  // )
-
-  // const fetchList = async () => {
-  //   const list = await window.api.getAllCityForWeather()
-  //   dispatch(setCities(list))
-  // }
-
-  // useEffect(() => {
-  //   fetchData({ query: searchQuery, limit: 5, order: 'DESC' })
-  //   console.log('da')
-  // }, [searchQuery])
-
-  // useEffect(() => {
-  //   fetchList()
-  // }, [])
-
   const handleSetActive = (obj: City | undefined) => {
     setSelectedCity(obj)
   }
@@ -72,7 +101,9 @@ export const WeatherPage: FC<PropsWithChildren> = () => {
     try {
       const response = await window.api.updateCityForWeatherByIsDefault(id)
       dispatch(toggleIsDefault(response))
-    } catch {}
+    } catch (error) {
+      console.log(error)
+    }
   }
 
   const handleToggleSelected = async (id: number) => {
@@ -88,6 +119,7 @@ export const WeatherPage: FC<PropsWithChildren> = () => {
           data={data}
           isLoading={false}
           isError={false}
+          disabled={CityForWeather.length === 10}
           searchQuery={searchQuery}
           setSearchQuery={setSearchQuery}
           selectedCity={selectedCity}
@@ -127,10 +159,12 @@ export const WeatherPage: FC<PropsWithChildren> = () => {
             ))}
         </SearchSelect>
 
-        <Button variant="outline" size="icon">
+        <Button variant="outline" size="icon" disabled={CityForWeather.length === 10}>
           <PlusIcon />
         </Button>
       </div>
+
+      <button onClick={() => handleToggleIsDefault(22)}>test</button>
 
       <SliderCards
         slides={CityForWeather}
@@ -141,7 +175,8 @@ export const WeatherPage: FC<PropsWithChildren> = () => {
       />
 
       <div className="w-full flex-1 bg-opacity_card_bg">
-        {CityForWeatherSelected && CityForWeatherSelected.cityInfo.city}
+        {/* {CityForWeatherSelected && CityForWeatherSelected.cityInfo.city} */}
+        <WeatherComponent weather={mockWeather} />
       </div>
     </div>
   )

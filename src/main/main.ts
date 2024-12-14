@@ -11,6 +11,8 @@ import { windowLifecycle } from '@utils/window-lifecycle'
 import { initDatabase } from '@database/database'
 import { seedDatabase } from '@database/seed'
 
+import { applicationRepository } from '@repositories/application.repository'
+
 import { setAutoLaunch } from '@services/auto-launch'
 
 import { ipcHandlers } from './ipc'
@@ -27,7 +29,6 @@ const gotTheLock = app.requestSingleInstanceLock() // Проверка на за
 if (!gotTheLock) {
   app.quit()
 } else {
-  
   app.on('second-instance', () => {
     const [window] = BrowserWindow.getAllWindows()
     if (window) {

@@ -3,6 +3,7 @@ import fs from 'fs'
 
 import { Logger } from '@utils/logger'
 
+import Application from '@models/application.model'
 import CitiesForWeather from '@models/city-for-weather.model'
 import City from '@models/city.model'
 
@@ -17,8 +18,8 @@ export async function seedDatabase() {
     // Проверяем, есть ли данные в таблице
     const countCity = await City.count()
 
-    if (countCity === 0) {
-      const cities: Omit<ICity, 'id'>[] = []
+    if (!countCity) {
+      const initialCity: Omit<ICity, 'id'>[] = []
 
       // Читаем данные из CSV-файла
       if (fs.existsSync(config.fileCSVPath)) {
@@ -31,13 +32,13 @@ export async function seedDatabase() {
               })
             )
             .on('data', (row) => {
-              cities.push({
+              initialCity.push({
                 type_region: row['Тип региона'] || '',
                 region: row['Регион'] || '',
                 city: row['Город'] || '',
                 lower_city: (row['Город'] || '').toLowerCase(),
-                latitude: parseFloat(row['Широта']) || null,
-                longitude: parseFloat(row['Долгота']) || null,
+                latitude: Math.round(parseFloat(row['Широта']) * 100) / 100 || null,
+                longitude: Math.round(parseFloat(row['Долгота']) * 100) / 100 || null,
                 population: parseInt(row['Население'], 10) || 0,
                 utc: row['Часовойпояс'] || null
               })
@@ -47,7 +48,7 @@ export async function seedDatabase() {
         })
 
         // Сохраняем данные в базу
-        await City.bulkCreate(cities)
+        await City.bulkCreate(initialCity)
         log.log('The data has been successfully added to the database')
       } else {
         log.error(`The file ${config.fileCSVPath} was not found`)
@@ -58,30 +59,21 @@ export async function seedDatabase() {
 
     const countCitiesForWeather = await CitiesForWeather.count()
 
-    if (countCitiesForWeather === 0) {
-      const citiesForWeather = [
+    if (!countCitiesForWeather) {
+      const initialCityForWeather = []
+      await CitiesForWeather.bulkCreate(initialCityForWeather)
+    }
+
+    const countApplication = await Application.count()
+
+    if (!countApplication) {
+      const initialApplication = [
         {
-          cityId: 507,
-          isDefault: false
-        },
-        {
-          cityId: 1,
-          isDefault: false
-        },
-        {
-          cityId: 213,
-          isDefault: false
-        },
-        {
-          cityId: 56,
-          isDefault: false
-        },
-        {
-          cityId: 841,
-          isDefault: false
+          openweathermap_apikey: ''
         }
       ]
-      await CitiesForWeather.bulkCreate(citiesForWeather)
+
+      await Application.bulkCreate(initialApplication)
     }
   } catch (error) {
     console.error('Error filling in the database: ', error)

@@ -15,16 +15,16 @@ const CityForWeatherSlice = createSlice({
       return action.payload
     }),
 
-    addCity: create.reducer((state, action: PayloadAction<CityForWeather>) => {
-      state.cityForWeather.push(action.payload)
+    addCityForWeather: create.reducer((state, action: PayloadAction<CityForWeather>) => {
+      state.cityForWeather?.push(action.payload)
     }),
 
-    removeCity: create.reducer((state, action: PayloadAction<{ id: number }>) => {
-      state.cityForWeather.filter((city) => city.id !== action.payload.id)
+    removeCityForWeather: create.reducer((state, action: PayloadAction<{ id: number }>) => {
+      state.cityForWeather?.filter((city) => city.id !== action.payload.id)
     }),
 
     toggleIsDefault: create.reducer((state, action: PayloadAction<number | null>) => {
-      state.cityForWeather.forEach((city) => (city.isDefault = city.id === action.payload))
+      state.cityForWeather?.forEach((city) => (city.isDefault = city.id === action.payload))
     }),
 
     toggleSelected: create.reducer((state, action: PayloadAction<number | null>) => {
@@ -36,7 +36,7 @@ const CityForWeatherSlice = createSlice({
 
     setWeatherForCity: create.reducer(
       (state, action: PayloadAction<{ id: number; weather: Weather }>) => {
-        const city = state.cityForWeather.find((city) => city.id === action.payload.id)
+        const city = state.cityForWeather?.find((city) => city.id === action.payload.id)
 
         if (city) {
           city.weather = action.payload.weather
@@ -46,24 +46,26 @@ const CityForWeatherSlice = createSlice({
   }),
   selectors: {
     getSelected: (state) => state.selected,
-    allCityForWeather: (state) => state.cityForWeather,
-    getCityForWeatherById: (state, id: number) =>
-      state.cityForWeather.find((city) => city.id === id),
-    getCityForWeatherByIsDefault: (state) => state.cityForWeather.find((city) => city.isDefault),
+    allCityForWeather: (state) => (state.cityForWeather ? state.cityForWeather : []),
+    getCityForWeatherByIsDefault: (state) => state.cityForWeather?.find((city) => city.isDefault),
     getCityForWeatherBySelected: (state) =>
-      state.cityForWeather.find((city) => city.id === state.selected)
+      state.cityForWeather?.find((city) => city.id === state.selected)
   }
 })
 
 export const {
   getSelected,
   allCityForWeather,
-  getCityForWeatherById,
   getCityForWeatherByIsDefault,
   getCityForWeatherBySelected
 } = CityForWeatherSlice.selectors
 
-export const { setCities, addCity, removeCity, toggleIsDefault, toggleSelected } =
-  CityForWeatherSlice.actions
+export const {
+  setCities,
+  addCityForWeather,
+  removeCityForWeather,
+  toggleIsDefault,
+  toggleSelected
+} = CityForWeatherSlice.actions
 
 export const CityForWeatherReducer = CityForWeatherSlice.reducer

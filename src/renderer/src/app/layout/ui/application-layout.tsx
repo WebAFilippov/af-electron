@@ -4,6 +4,7 @@ import { Link, Outlet } from 'react-router-dom'
 import { WindowControls } from '@features/window-topbar/ui'
 
 import { setCities } from '@entities/city-for-weather'
+import { useLazyGetAllCityForWeatherQuery } from '@entities/city-for-weather/api/city-for-weather-electron.api'
 
 import { Toaster } from '@shared/components/ui'
 import { ROUTE } from '@shared/config/routes'
@@ -11,26 +12,36 @@ import { useAppDispatch } from '@shared/hooks'
 import { cn } from '@shared/lib'
 
 export const ApplicationLayout: FC = () => {
+  // const { data } = useGetAllCityForWeatherQuery()
+  const [getWeather, { data, error, isLoading }] = useLazyGetAllCityForWeatherQuery()
+
   const dispatch = useAppDispatch()
 
   const [isCollapse] = useState(false)
-
-  const fetchAllCityForWeather = async () => {
-    const list = await window.api.getAllCityForWeather()
-    const selected = list.find((city) => city.isDefault)?.id
-    const parsedList = {
-      cityForWeather: list,
-      selected: selected ? selected : null
-    }
-    dispatch(setCities(parsedList))
-  }
 
   useEffect(() => {
     const sendCommandShowWindow = async () => {
       window.api.startWindow()
     }
     sendCommandShowWindow()
-    fetchAllCityForWeather()
+    
+    console.log(data, '2')
+    console.log('asdasd')
+    getWeather()
+  }, [])
+
+  useEffect(() => {
+    console.log(data, '1')
+
+    console.log('123')
+
+    // setInitial store CityForWeather && selected
+    const selected = data && data.find((city) => city.isDefault)?.id
+    const parsedList = {
+      cityForWeather: data ? data : [],
+      selected: selected ? selected : null
+    }
+    dispatch(setCities(parsedList))
   })
 
   return (

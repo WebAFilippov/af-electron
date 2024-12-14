@@ -11,6 +11,7 @@ type Props<T> = {
   data: T[] | undefined
   isLoading: boolean
   isError: boolean
+  disabled?: boolean
   searchQuery: string
   setSearchQuery: (value: string) => void
   selectedCity: T | undefined
@@ -26,6 +27,7 @@ export const SearchSelect = <T,>({
   data,
   isLoading,
   isError,
+  disabled = false,
   searchQuery,
   setSearchQuery,
   selectedCity,
@@ -41,6 +43,7 @@ export const SearchSelect = <T,>({
     <Popover open={open} onOpenChange={setOpen}>
       <PopoverTrigger asChild>
         <Button
+          disabled={disabled}
           variant="outline"
           role="combobox"
           aria-expanded={open}

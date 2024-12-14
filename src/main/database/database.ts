@@ -11,15 +11,15 @@ export const sequelize = new Sequelize({
   storage: config.databasePath,
   logging: false,
   dialectOptions: {
-    charset: 'utf8',
-  },
+    charset: 'utf8'
+  }
 })
 
 export const initDatabase = async () => {
   try {
     await sequelize.authenticate()
     log.info('Successful connection to the Database')
-    await sequelize.sync()
+    await sequelize.sync() 
   } catch (error) {
     log.error('Unable to connect to the database: ', error)
   }

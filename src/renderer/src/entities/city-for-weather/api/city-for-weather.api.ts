@@ -1,26 +1,40 @@
-// import { createApi } from '@reduxjs/toolkit/query/react'
+// import { BaseQueryFn, createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
 
-// import { SearchCitiesParams } from '../../../../../shared/types'
-// import { CityForWeather } from '../model/types'
+// import { CityForWeather, Weather } from '../model/types'
 
-// const CityForWeatherAPI = createApi({
+
+
+// export const CityForWeatherAPI = createApi({
 //   reducerPath: 'CityForWeatherApi',
-//   baseQuery: async () => {
-//     throw new Error('baseQuery not used')
-//   },
-//   endpoints: (builder) => ({
-//     getAllCityForWeather: builder.query<Omit<CityForWeather, 'weather'>, SearchCitiesParams>({
-//       queryFn: async (optionsQuery) => {
+//   baseQuery: fetchBaseQuery(),
+//   endpoints: (builder) => ({    
+//     getWeatherForCities: builder.query<void, void>({
+//       async queryFn(_arg, { getState, dispatch }) {
 //         try {
-//           const data: Omit<CityForWeather, 'weather'>[] = await window.api.searchCities()
-//           return { data } // Возвращаем успешный результат.
-//         } catch (error: any) {
-//           // Возвращаем ошибку, если вызов завершился неудачно.
-//           return {
-//             error: { status: 'CUSTOM_ERROR', data: error.message || 'Ошибка' }
-//           }
+//           // Шаг 1: Получаем список городов из глобального стора
+//           const state = getState() as { cityForWeather: { cityForWeather: CityForWeather[] } }
+//           const cities = state.cityForWeather.cityForWeather
+
+//           // Шаг 2: Для каждого города получаем погоду
+//           await Promise.all(
+//             cities.map(async (city) => {
+//               try {
+//                 const weather: Weather = await window.api.getWeatherByCityId(city.cityId)
+//                 // Шаг 3: Обновляем погоду для города в сторец
+//                 dispatch(setWeatherForCity({ id: city.id, weather }))
+//               } catch (error) {
+//                 console.error(`Ошибка получения погоды для города ${city.cityId}:`, error)
+//               }
+//             })
+//           )
+
+//           return { data: undefined }
+//         } catch (error: unknown) {
+//           return { error: { status: 'CUSTOM_ERROR', error: String(error) } }
 //         }
 //       }
 //     })
 //   })
 // })
+
+// export const { useGetWeatherForCitiesQuery } = CityForWeatherAPI

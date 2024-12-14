@@ -2,8 +2,6 @@ import { FC } from 'react'
 
 import WeatherCard from '@features/weather/weather-card-home/ui'
 
-
-
 export const HomePage: FC = () => {
   return (
     <div className="m-auto flex h-full items-center justify-center overflow-y-auto overflow-x-hidden pr-2">
