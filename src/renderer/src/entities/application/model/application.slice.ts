@@ -3,7 +3,8 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { InitialState } from './types'
 
 const initialState: InitialState = {
-  openWeatherMapApiKey: ''
+  openWeatherMapApiKey: '',
+  theme: 'system'
 }
 
 const ApplicationSLice = createSlice({

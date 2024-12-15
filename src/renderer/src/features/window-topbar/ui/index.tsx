@@ -1,6 +1,12 @@
 import { Binary, Moon, Sun, Wifi } from 'lucide-react'
 
 import {
+  useLazySetCloseWindowQuery,
+  useLazySetMaximazeWindowQuery,
+  useLazySetMinimazeWindowQuery
+} from '@entities/application/api/application-electron.api'
+
+import {
   DarkMode,
   StatusBadge,
   Tooltip,
@@ -10,9 +16,10 @@ import {
 } from '@shared/components/ui'
 import { useOnline } from '@shared/hooks'
 
-import { handleClose, handleMaximize, handleMinimize } from '../api'
-
 export const WindowControls = () => {
+  const [handleMinimize] = useLazySetMinimazeWindowQuery(undefined)
+  const [handleMaximize] = useLazySetMaximazeWindowQuery(undefined)
+  const [handleClose] = useLazySetCloseWindowQuery(undefined)
   const { isOnline, loading } = useOnline(15000)
 
   return (
@@ -64,7 +71,7 @@ export const WindowControls = () => {
           className="m-0 flex h-8 w-[46px] flex-col items-center justify-center gap-0 rounded-none p-0 text-[#1a1a1a] text-topbar_controls_color outline-none area-no-drag hover:bg-topbar_controls_button_hovered hover:text-topbar_controls_color [&_svg]:size-min [&_svg]:shrink-0"
           aria-label="Свернуть"
           tabIndex={-1}
-          onClick={handleMinimize}
+          onClick={() => handleMinimize(undefined)}
         >
           <svg width="10" height="1" viewBox="0 0 10 1" xmlns="http://www.w3.org/2000/svg">
             <path
@@ -77,7 +84,7 @@ export const WindowControls = () => {
           className="m-0 flex h-8 w-[46px] flex-col items-center justify-center gap-0 rounded-none p-0 text-[#1a1a1a] text-topbar_controls_color outline-none area-no-drag hover:bg-topbar_controls_button_hovered [&_svg]:size-min [&_svg]:shrink-0"
           tabIndex={-1}
           aria-label="Развернуть"
-          onClick={handleMaximize}
+          onClick={() => handleMaximize(undefined)}
         >
           <svg width="10" height="10" viewBox="0 0 10 10" xmlns="http://www.w3.org/2000/svg">
             <path
@@ -90,7 +97,7 @@ export const WindowControls = () => {
           className="m-0 flex h-8 w-[46px] flex-col items-center justify-center gap-0 rounded-none p-0 text-[#1a1a1a] text-topbar_controls_color outline-none area-no-drag hover:bg-topbar_controls_button_close_hovered [&_svg]:size-min [&_svg]:shrink-0"
           tabIndex={-1}
           aria-label="Закрыть"
-          onClick={handleClose}
+          onClick={() => handleClose(undefined)}
         >
           <svg width="10" height="10" viewBox="0 0 10 10" xmlns="http://www.w3.org/2000/svg">
             <path

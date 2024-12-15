@@ -5,28 +5,25 @@ import { ElectronAPI } from '@electron-toolkit/preload'
 import { CityForWeather, PreloadApplication, PreloadStartedPayload } from '../shared/types'
 
 export const api = {
-  // Application
-  startApplication: (): Promise<PreloadStartedPayload> =>
-    ipcRenderer.invoke('v1/application/start'),
-  getApplicationSettings: (): Promise<PreloadApplication> =>
-    ipcRenderer.invoke('v1/application/getall'),
-  updateApplicationByOpenWeatherMapApiKey: (args: string): Promise<number> =>
-    ipcRenderer.invoke('v1/application/update_openweathermap_apikey', args),
+  // Window
+  setMinimazeWindow: () => ipcRenderer.send('v1/window/minimaze'),
+  setMaximazeWindow: () => ipcRenderer.send('v1/window/maximize'),
+  setCloseWindow: () => ipcRenderer.send('v1/window/close'),
 
-  minimizeWindow: () => ipcRenderer.send('minimize-window'),
-  maximizeWindow: () => ipcRenderer.send('maximize-window'),
-  closeWindow: () => ipcRenderer.send('close-window'),
+  // Application
+  startApp: (): Promise<PreloadStartedPayload> => ipcRenderer.invoke('v1/application/start'),
+  fetchApplicationSettings: (): Promise<PreloadApplication> =>
+    ipcRenderer.invoke('v1/application/getall'),
 
   // CityService
-  searchCities: (args) => ipcRenderer.invoke('city::searchCityLimitOrder', args),
+  searchCitiesWithLimits: (args) => ipcRenderer.invoke('v1/cityInfo/search', args),
 
   // CityForWetherService
-  getAllCityForWeather: (): Promise<CityForWeather[]> =>
-    ipcRenderer.invoke('v1/city_for_weather/getAll'),
+  fetchAllCitiesForWeather: (): Promise<CityForWeather[]> => ipcRenderer.invoke('v1/city/getAll'),
   updateCityForWeatherByIsDefault: (id: number): Promise<number | null> =>
-    ipcRenderer.invoke('v1/city_for_weather/default', id),
+    ipcRenderer.invoke('v1/city/default', id),
   createCityForWeatherByCityId: (args: number): Promise<CityForWeather> =>
-    ipcRenderer.invoke('v1/city_for_weather/create', args)
+    ipcRenderer.invoke('v1/city/create', args)
 } satisfies Record<string, (args: any) => any>
 
 declare global {

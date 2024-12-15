@@ -4,6 +4,7 @@ import { Link, Outlet } from 'react-router-dom'
 import { WindowControls } from '@features/window-topbar/ui'
 
 import { setApplicationStore } from '@entities/application'
+import { useStartAppQuery } from '@entities/application/api/application-electron.api'
 import { setCityForWeatherStore } from '@entities/city-for-weather'
 
 import { Toaster } from '@shared/components/ui'
@@ -12,28 +13,24 @@ import { useAppDispatch } from '@shared/hooks'
 import { cn } from '@shared/lib'
 
 export const ApplicationLayout: FC = () => {
+  const { data } = useStartAppQuery(undefined)
   const dispatch = useAppDispatch()
 
   const [isCollapse] = useState(false)
 
   useEffect(() => {
-    const sendCommandShowWindow = async () => {
-      const response = await window.api.startApplication()
+    if (data) {
+      const { storeCity, storeApplication } = data
 
-      const { storeCityForWeather, storeApplication } = response
-
-      const selected = storeCityForWeather && storeCityForWeather.find((city) => city.isDefault)?.id
+      const selected = storeCity && storeCity.find((city) => city.isDefault)?.id
       const parsedList = {
-        cityForWeather: storeCityForWeather ? storeCityForWeather : [],
+        cityForWeather: storeCity ? storeCity : [],
         selected: selected ? selected : null
       }
       dispatch(setCityForWeatherStore(parsedList))
       dispatch(setApplicationStore(storeApplication))
     }
-    sendCommandShowWindow()
-
-    console.log('effect application-layout')
-  }, [])
+  }, [data])
 
   return (
     <div className="relative flex h-screen min-h-screen w-screen gap-3 overflow-hidden bg-background p-8 pb-3 pl-2 pr-3 text-primary">

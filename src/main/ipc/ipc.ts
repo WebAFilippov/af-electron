@@ -1,11 +1,11 @@
 import { BrowserWindow, ipcMain } from 'electron'
 
 export const IPCHandlers = (window: BrowserWindow) => {
-  ipcMain.on('minimize-window', () => {
+  ipcMain.on('v1/window/minimaze', () => {
     if (window) window.minimize()
   })
 
-  ipcMain.on('maximize-window', () => {
+  ipcMain.on('v1/window/maximize', () => {
     if (window) {
       if (window.isMaximized()) {
         window.unmaximize()
@@ -15,7 +15,7 @@ export const IPCHandlers = (window: BrowserWindow) => {
     }
   })
 
-  ipcMain.on('close-window', async () => {
+  ipcMain.on('v1/window/close', async () => {
     if (window) {
       window.hide()
     }

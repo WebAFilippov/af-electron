@@ -15,7 +15,7 @@ export const dataHandlers = (window: BrowserWindow, isAutoLaunch: boolean) => {
     const responseForCityForWeather = await cityService.getCitiesWithInfo()
 
     const response = {
-      storeCityForWeather: responseForCityForWeather,
+      storeCity: responseForCityForWeather,
       storeApplication: responseForApplication
     }
 
@@ -40,28 +40,28 @@ export const dataHandlers = (window: BrowserWindow, isAutoLaunch: boolean) => {
   })
 
   // City
-  ipcMain.handle('city::searchCityLimitOrder', async (_event, optionsQuery) => {
+  ipcMain.handle('v1/cityInfo/search', async (_event, optionsQuery) => {
     const cities = await cityInfoService.findCitiesByQuery(optionsQuery)
     return cities
   })
 
   // CityForWeather
-  // ipcMain.handle('v1/city_for_weather/getAll', async () => {
+  // ipcMain.handle('v1/city/getAll', async () => {
   //   const response = await cityForWeatherService.getAllCityForWeather()
   //   return response
   // })
 
-  ipcMain.handle('v1/city_for_weather/default', async (_event, id) => {
+  ipcMain.handle('v1/city/default', async (_event, id) => {
     const response = await cityService.setDefaultCity(id)
     return response
   })
 
-  ipcMain.handle('v1/city_for_weather/create', async (_event, cityId) => {
+  ipcMain.handle('v1/city/create', async (_event, cityId) => {
     const response = await cityService.createCityWithInfo(cityId)
     return response
   })
 
-  // ipcMain.handle('v1/city_for_weather/get_weather', async () => {
+  // ipcMain.handle('v1/city/get_weather', async () => {
   //   const response = await cityForWeatherService.getWeathersForCitites()
   //   return response
   // })

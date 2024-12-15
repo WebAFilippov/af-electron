@@ -20,7 +20,7 @@ const WeatherCard = () => {
   const [loading, setLoading] = useState(true)
 
   const CityForWeatherSelected = useAppSelector(getCityForWeatherBySelected)
-  
+
   useEffect(() => {
     const fetchWeatherData = async () => {
       console.log('test')

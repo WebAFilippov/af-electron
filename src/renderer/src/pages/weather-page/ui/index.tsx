@@ -80,7 +80,7 @@ export const WeatherPage: FC<PropsWithChildren> = () => {
   const OPTIONS: EmblaOptionsType = { dragFree: true, loop: false }
 
   const fetchData = async () => {
-    const data: City[] = await window.api.searchCities({
+    const data: City[] = await window.api.searchCitiesWithLimits({
       query: searchQuery,
       limit: 5,
       order: 'DESC'
@@ -111,6 +111,7 @@ export const WeatherPage: FC<PropsWithChildren> = () => {
   }
 
   const handleFetchCreate = async (cityId: number) => {
+    console.log('1')
     await fetchCreate(cityId)
   }
 
