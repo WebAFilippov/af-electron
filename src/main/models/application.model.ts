@@ -2,6 +2,11 @@ import { DataTypes, Model } from 'sequelize'
 
 import { sequelize } from '@database/database'
 
+export interface IApplication {
+  id: number
+  openweathermap_apikey: string
+}
+
 class Application extends Model {
   declare id: number
   declare openweathermap_apikey: string
@@ -28,6 +33,3 @@ Application.init(
 )
 
 export default Application
-
-export type ApplicationField = keyof Pick<Application, 'id' | 'openweathermap_apikey'>
-export type TApplication = Pick<Application, 'id' | 'openweathermap_apikey'>

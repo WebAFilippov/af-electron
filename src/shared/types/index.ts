@@ -57,12 +57,11 @@ type CityInfo = {
   utc: string
 }
 
-type CityForWeather = {
+export type CityForWeather = {
   id: number
   cityId: number
   isDefault: boolean
   cityInfo: CityInfo
-  weather?: Weather
 }
 
 export interface SearchCitiesParams {

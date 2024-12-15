@@ -25,8 +25,23 @@ export const CityForWeatherElectronAPI = createApi({
           }
         }
       }
+    }),
+    createCityForWeather: builder.query<CityForWeather, number>({
+      async queryFn(cityId: number) {
+        if (!cityId) {
+          throw new Error('City ID is required')
+        }
+
+        try {
+          const data = await window.api.createCityForWeatherByCityId(cityId)
+          return { data }
+        } catch (error: unknown) {
+          throw new Error('City ID is required')
+        }
+      }
     })
   })
 })
 
-export const {  useLazyGetAllCityForWeatherQuery } = CityForWeatherElectronAPI
+export const { useLazyGetAllCityForWeatherQuery, useLazyCreateCityForWeatherQuery } =
+  CityForWeatherElectronAPI

@@ -12,9 +12,6 @@ import { useAppDispatch } from '@shared/hooks'
 import { cn } from '@shared/lib'
 
 export const ApplicationLayout: FC = () => {
-  // const { data } = useGetAllCityForWeatherQuery()
-  // const [getWeather, { data, error, isLoading }] = useLazyGetAllCityForWeatherQuery()
-
   const dispatch = useAppDispatch()
 
   const [isCollapse] = useState(false)
@@ -30,30 +27,13 @@ export const ApplicationLayout: FC = () => {
         cityForWeather: storeCityForWeather ? storeCityForWeather : [],
         selected: selected ? selected : null
       }
-
       dispatch(setCityForWeatherStore(parsedList))
       dispatch(setApplicationStore(storeApplication))
     }
     sendCommandShowWindow()
 
-    console.log('effect')
-    // console.log('as/dasd')
-    // getWeather()
+    console.log('effect application-layout')
   }, [])
-
-  // useEffect(() => {
-  //   console.log(data, '1')
-
-  //   console.log('123')
-
-  //   // setInitial store CityForWeather && selected
-  //   const selected = data && data.find((city) => city.isDefault)?.id
-  //   const parsedList = {
-  //     cityForWeather: data ? data : [],
-  //     selected: selected ? selected : null
-  //   }
-  //   dispatch(setCities(parsedList))
-  // })
 
   return (
     <div className="relative flex h-screen min-h-screen w-screen gap-3 overflow-hidden bg-background p-8 pb-3 pl-2 pr-3 text-primary">

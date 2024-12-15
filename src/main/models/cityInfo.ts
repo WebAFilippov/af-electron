@@ -2,19 +2,31 @@ import { DataTypes, Model } from 'sequelize'
 
 import { sequelize } from '@database/database'
 
-class City extends Model {
+export interface ICityInfo {
+  id: number
+  type_region: string
+  region: string
+  city: string
+  lower_city: string
+  latitude: number
+  longitude: number
+  population: number
+  utc: string
+}
+
+class CityInfo extends Model {
   declare id: number
   declare type_region: string
   declare region: string
   declare city: string
   declare lower_city: string
-  declare latitude: number | null
-  declare longitude: number | null
-  declare population: number | null
-  declare utc: string | null
+  declare latitude: number
+  declare longitude: number
+  declare population: number
+  declare utc: string
 }
 
-City.init(
+CityInfo.init(
   {
     id: {
       type: DataTypes.INTEGER,
@@ -56,24 +68,10 @@ City.init(
   },
   {
     sequelize,
-    modelName: 'City',
-    tableName: 'city',
+    modelName: 'CityInfo',
+    tableName: 'cityInfo',
     timestamps: false
   }
 )
 
-export default City
-
-export type TCity = Pick<
-  City,
-  | 'id'
-  | 'type_region'
-  | 'region'
-  | 'city'
-  | 'lower_city'
-  | 'latitude'
-  | 'longitude'
-  | 'population'
-  | 'utc'
->
-
+export default CityInfo

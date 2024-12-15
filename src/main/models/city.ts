@@ -2,15 +2,25 @@ import { DataTypes, Model } from 'sequelize'
 
 import { sequelize } from '@database/database'
 
-import City, { TCity } from './city.model'
+import CityInfo, { ICityInfo } from './cityInfo'
 
-class CityForWeather extends Model {
+export interface ICity {
+  id: number
+  cityId: number
+  isDefault: boolean
+}
+
+export interface ICityWithCityInfo extends ICity {
+  cityInfo: ICityInfo
+}
+
+class City extends Model {
   declare id: number
   declare cityId: number
   declare isDefault: boolean
 }
 
-CityForWeather.init(
+City.init(
   {
     id: {
       type: DataTypes.INTEGER,
@@ -22,7 +32,7 @@ CityForWeather.init(
       allowNull: false,
       unique: true,
       references: {
-        model: City,
+        model: CityInfo,
         key: 'id'
       },
       onDelete: 'SET NULL'
@@ -34,25 +44,22 @@ CityForWeather.init(
   },
   {
     sequelize,
-    modelName: 'CityForWeather',
-    tableName: 'city_for_weather',
+    modelName: 'City',
+    tableName: 'city',
     timestamps: false
   }
 )
 
-City.hasOne(CityForWeather, {
+CityInfo.hasOne(City, {
+  foreignKey: 'cityId',
+  as: 'cityInfo',
+  onDelete: 'CASCADE'
+})
+
+City.belongsTo(CityInfo, {
   foreignKey: 'cityId',
   as: 'cityInfo',
   onDelete: 'SET NULL'
 })
 
-CityForWeather.belongsTo(City, {
-  foreignKey: 'cityId',
-  as: 'cityInfo',
-  onDelete: 'SET NULL'
-})
-
-export default CityForWeather
-
-export type TCityForWeather = Pick<CityForWeather, 'id' | 'cityId' | 'isDefault'>
-export type TCityForWeatherWithCityInfo = TCityForWeather & { cityInfo: TCity }
+export default City

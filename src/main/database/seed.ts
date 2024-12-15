@@ -4,9 +4,9 @@ import fs from 'fs'
 import { Logger } from '@utils/logger'
 
 import Application from '@models/application.model'
-import CitiesForWeather from '@models/city-for-weather.model'
-import CityForWeather from '@models/city-for-weather.model'
-import City from '@models/city.model'
+import CitiesForWeather, { ICity } from '@models/city'
+import CityForWeather from '@models/city'
+import City, { ICityInfo } from '@models/cityInfo'
 
 import { config } from '@main/shared/config'
 
@@ -18,17 +18,7 @@ export async function seedDatabase() {
     const countCity = await City.count()
 
     if (!countCity) {
-      const initialCity: Pick<
-        City,
-        | 'type_region'
-        | 'region'
-        | 'city'
-        | 'lower_city'
-        | 'latitude'
-        | 'longitude'
-        | 'population'
-        | 'utc'
-      >[] = []
+      const initialCity: Omit<ICityInfo, 'id'>[] = []
 
       // Читаем данные из CSV-файла
       if (fs.existsSync(config.fileCSVPath)) {
@@ -42,14 +32,14 @@ export async function seedDatabase() {
             )
             .on('data', (row) => {
               initialCity.push({
-                type_region: row['Тип региона'] || '',
-                region: row['Регион'] || '',
-                city: row['Город'] || '',
-                lower_city: (row['Город'] || '').toLowerCase(),
-                latitude: Math.round(parseFloat(row['Широта']) * 100) / 100 || null,
-                longitude: Math.round(parseFloat(row['Долгота']) * 100) / 100 || null,
-                population: parseInt(row['Население'], 10) || 0,
-                utc: row['Часовойпояс'] || null
+                type_region: row['Тип региона'],
+                region: row['Регион'],
+                city: row['Город'],
+                lower_city: row['Город'].toLowerCase(),
+                latitude: Math.round(parseFloat(row['Широта']) * 100) / 100,
+                longitude: Math.round(parseFloat(row['Долгота']) * 100) / 100,
+                population: parseInt(row['Население'], 10),
+                utc: row['Часовойпояс']
               })
             })
             .on('end', resolve)
@@ -69,7 +59,7 @@ export async function seedDatabase() {
     const countCitiesForWeather = await CitiesForWeather.count()
 
     if (!countCitiesForWeather) {
-      const initialCityForWeather: Pick<CityForWeather, 'cityId' | 'isDefault'>[] = [
+      const initialCityForWeather: Omit<ICity, 'id'>[] = [
         { cityId: 123, isDefault: false },
         { cityId: 321, isDefault: false },
         { cityId: 666, isDefault: false },

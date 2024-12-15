@@ -1,11 +1,11 @@
 import { Logger } from '@utils/logger'
 
-import Application, { ApplicationField, TApplication } from '@models/application.model'
+import Application, { IApplication } from '@models/application.model'
 
 const log = new Logger('application.repository')
 
 class ApplicationRepository {
-  async getValueByField(field: ApplicationField): Promise<keyof TApplication> {
+  async getValueByField(field: keyof IApplication): Promise<keyof IApplication> {
     try {
       const model = await Application.findOne({
         attributes: [field]
@@ -14,7 +14,7 @@ class ApplicationRepository {
       if (model) {
         const fieldValue = model.get(field)
         log.info(`Поле "${field}" успешно извлечено. Значение: ${fieldValue}`)
-        return fieldValue as keyof TApplication
+        return fieldValue as keyof IApplication
       } else {
         log.error(`Запись в таблице Application для поля "${field}" не найдена.`)
         throw new Error(`Запись не найдена: поле "${field}" отсутствует.`)
@@ -25,7 +25,7 @@ class ApplicationRepository {
     }
   }
 
-  async getAll(): Promise<TApplication> {
+  async getAll(): Promise<IApplication> {
     try {
       const model = await Application.findOne({ raw: true })
 
@@ -37,30 +37,36 @@ class ApplicationRepository {
         throw new Error('Запись в таблице Application не найдена.')
       }
     } catch (error) {
-      log.error(`Ошибка при извлечении данных из таблицы Application: `, error)
+      log.error('Ошибка при извлечении данных из таблицы Application: ', error)
       throw error
     }
   }
 
-  async updateValueForOpenWeatherMapApiKey(value: string) {
+  async updateApplicationForFieldByValue(
+    field: keyof Omit<IApplication, 'id'>,
+    value: string
+  ): Promise<number> {
     try {
-      const [affectedCount] = await Application.update(
-        { openweathermap_apikey: value },
-        {
-          where: { id: 1 }
-        }
-      )
-
-      if (affectedCount === 0) {
-        log.error('Не удалось обновить API-ключ OpenWeatherMap: запись с не найдена.')
-        throw new Error('Запись не найдена.')
+      const updateData = {
+        [field]: value
       }
 
-      log.info(`API-ключ OpenWeatherMap успешно обновлен. Обновлено записей: ${affectedCount}`)
+      const [affectedCount] = await Application.update(updateData, {
+        where: { id: 1 }
+      })
+
+      if (affectedCount === 0) {
+        const errorMessage = `Не удалось обновить запись: поле ${field} не найдено или уже имеет такое значение.`
+        log.error(errorMessage)
+        throw new Error(errorMessage)
+      }
+
+      log.info(`Поле ${field} успешно обновлено. Обновлено записей: ${affectedCount}`)
       return affectedCount
     } catch (error: unknown) {
-      log.error(`Ошибка при обновлении API-ключа OpenWeatherMap: `, error)
-      throw error
+      const errorMessage = error instanceof Error ? error.message : 'Неизвестная ошибка'
+      log.error(`Ошибка при обновлении записи в поле: ${errorMessage}`)
+      throw new Error(`Ошибка при обновлении записи в поле ${field}: ${errorMessage}`)
     }
   }
 }

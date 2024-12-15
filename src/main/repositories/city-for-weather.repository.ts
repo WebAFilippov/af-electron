@@ -2,14 +2,25 @@ import { Transaction } from 'sequelize'
 
 import { Logger } from '@utils/logger'
 
-import CityForWeather, { TCityForWeather } from '@models/city-for-weather.model'
+import { sequelize } from '@database/database'
+
+import CityForWeather, { TCityForWeatherWithCityInfo } from '@models/city'
+import City from '@models/cityInfo'
 
 const log = new Logger('city-for-weather.repository')
 
 class CityForWeatherRepository {
-  async getAll(): Promise<TCityForWeather[]> {
+  async getAllWithCityInfo(): Promise<TCityForWeatherWithCityInfo[]> {
     try {
-      const AllCityForWeather = await CityForWeather.findAll({ raw: true })
+      const AllCityForWeather = (await CityForWeather.findAll({
+        include: {
+          model: City,
+          as: 'cityInfo'
+        },
+        raw: true,
+        nest: true
+      })) as unknown as TCityForWeatherWithCityInfo[]
+
       log.log(
         `Запрос на получение всех записей CityForWeather завершен. Количество записей: ${AllCityForWeather.length}`
       )
@@ -67,27 +78,49 @@ class CityForWeatherRepository {
     }
   }
 
-  async createCityForWeatherWithCityId(cityId: number): Promise<TCityForWeather> {
+  async createCityForWeatherByCityId(cityId: number): Promise<TCityForWeatherWithCityInfo> {
+    const transaction: Transaction = await CityForWeather.sequelize!.transaction()
+
     try {
-      const existingCityForWeather = await CityForWeather.findOne({ where: { cityId: cityId } })
+      const existingCityForWeather = await CityForWeather.findOne({
+        where: { cityId },
+        transaction
+      })
 
       if (existingCityForWeather) {
-        log.error('Запись с таким cityId уже существует:', existingCityForWeather.toJSON())
-        throw new Error('Запись с таким cityId уже существует')
+        log.error(`Запись с cityId=${cityId} уже существует`)
+        throw new Error(`Запись с cityId=${cityId} уже существует`)
       }
 
-      const cityForWeather = await CityForWeather.create(
+      const newCityForWeather = await CityForWeather.create(
         {
           cityId,
           isDefault: false
         },
-        { raw: true, nest: true }
+        { transaction }
       )
-      log.log('Запись успешно создана: ', cityForWeather)
 
-      return cityForWeather
+      const cityForWeatherWithRelations = await CityForWeather.findByPk(newCityForWeather.id, {
+        include: [
+          {
+            model: City,
+            as: 'cityInfo'
+          }
+        ],
+        transaction
+      })
+
+      if (!cityForWeatherWithRelations) {
+        log.error(`Не удалось загрузить созданную запись с id=${newCityForWeather.id}`)
+        throw new Error(`Не удалось загрузить созданную запись с id=${newCityForWeather.id}`)
+      }
+
+      await transaction.commit()
+
+      return cityForWeatherWithRelations as unknown as TCityForWeatherWithCityInfo
     } catch (error) {
-      log.error('Ошибка при создании записи в CityForWeather:', error)
+      await transaction.rollback()
+      log.error(`Ошибка при создании записи с cityId=${cityId}`, error)
       throw error
     }
   }

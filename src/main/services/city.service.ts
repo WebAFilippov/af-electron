@@ -1,4 +1,4 @@
-import { TCity } from '@models/city.model'
+import { TCity } from '@models/cityInfo'
 
 import { cityRepository } from '@repositories/city.repository'
 

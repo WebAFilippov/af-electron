@@ -1,5 +1,5 @@
-import CityForWeather from '@models/city-for-weather.model'
-import City from '@models/city.model'
+import CityForWeather from '@models/city'
+import City from '@models/cityInfo'
 
 export type Weather = {
   coord: {

@@ -1,14 +1,17 @@
 import { applicationRepository } from '@repositories/application.repository'
 
 class ApplicationService {
-  async getApplicationSettings() {
+  async getApplication() {
     const response = await applicationRepository.getAll()
 
     return response
   }
 
-  async updateOpenWeatherMapApiKey(value: string) {
-    const response = await applicationRepository.updateValueForOpenWeatherMapApiKey(value)
+  async updateApplication(value: string) {
+    const response = await applicationRepository.updateApplicationForFieldByValue(
+      'openweathermap_apikey',
+      value
+    )
 
     return response
   }

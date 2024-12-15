@@ -1,6 +1,6 @@
 import { Op } from 'sequelize'
 
-import City, { TCity } from '@models/city.model'
+import City, { TCity } from '@models/cityInfo'
 
 class CityRepository {
   async findById(id: number): Promise<TCity> {

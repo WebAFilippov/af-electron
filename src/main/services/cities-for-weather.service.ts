@@ -1,15 +1,8 @@
-import { TCityForWeatherWithCityInfo } from '@models/city-for-weather.model'
+import { TCityForWeatherWithCityInfo } from '@models/city'
 
 import { cityForWeatherRepository } from '@repositories/city-for-weather.repository'
-import { cityRepository } from '@repositories/city.repository'
 
 class CityForWeatherService {
-  // async getAllCityForWeather() {
-  //   const cities = await cityForWeatherRepository.findAll()
-
-  //   return cities
-  // }
-
   async updateCityForWeatherByIsDefault(id: number) {
     const response = await cityForWeatherRepository.updateIsDefaultForId(id)
 
@@ -17,41 +10,14 @@ class CityForWeatherService {
   }
 
   async getAllCityForWeatherWithCityInfo(): Promise<TCityForWeatherWithCityInfo[]> {
-    const cities = await cityForWeatherRepository.getAll()
-    const CityWithCityInfo = await Promise.allSettled(
-      cities.map(async (item) => {
-        const City = await cityRepository.findById(item.id)
-        return {
-          ...item,
-          cityInfo: City
-        }
-      })
-    )
-
-    const fulfilledResults = CityWithCityInfo.filter((result) => result.status === 'fulfilled').map(
-      (result) => result.value
-    )
-
-    return fulfilledResults
+    const response = await cityForWeatherRepository.getAllWithCityInfo()
+    return response
   }
-  // const weatherResults = await Promise.all(
-  //   response.map(async (city) => {
 
-  //     if (!city || !longitude || !apikey) throw new Error('Неверный параметры')
-  //     const weather = await getWeatherByCoordinates(latitude, longitude, apikey)
-  //     return {
-
-  //     }
-  //   })
-  // )
-
-  // return weatherResults
-
-  // async addCityForWeather(cityId: number) {
-  //   const response = await cityForWeatherRepository.addCity(cityId)
-
-  //   return response
-  // }
+  async createCityForWeatherWithCityInfo(cityId: number): Promise<TCityForWeatherWithCityInfo> {
+    const response = await cityForWeatherRepository.createCityForWeatherByCityId(cityId)
+    return response
+  }
 }
 
 export const cityForWeatherService = new CityForWeatherService()

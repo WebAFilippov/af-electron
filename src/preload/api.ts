@@ -1,8 +1,8 @@
 import { ipcRenderer } from 'electron'
 
 import { ElectronAPI } from '@electron-toolkit/preload'
-import { CityForWeather } from '@entities/city-for-weather'
-import { PreloadApplication, PreloadStartedPayload } from '../shared/types'
+
+import { CityForWeather, PreloadApplication, PreloadStartedPayload } from '../shared/types'
 
 export const api = {
   // Application
@@ -24,7 +24,9 @@ export const api = {
   getAllCityForWeather: (): Promise<CityForWeather[]> =>
     ipcRenderer.invoke('v1/city_for_weather/getAll'),
   updateCityForWeatherByIsDefault: (args: number): Promise<number | null> =>
-    ipcRenderer.invoke('v1/city_for_weather/default', args)
+    ipcRenderer.invoke('v1/city_for_weather/default', args),
+  createCityForWeatherByCityId: (args: number): Promise<CityForWeather> =>
+    ipcRenderer.invoke('v1/city_for_weather/create', args)
 } satisfies Record<string, (args: any) => any>
 
 declare global {

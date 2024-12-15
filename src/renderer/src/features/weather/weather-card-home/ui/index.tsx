@@ -15,16 +15,15 @@ import {
 import { ROUTE } from '@shared/config/routes'
 import { useAppSelector } from '@shared/hooks'
 
-import { Weather } from '../../../../../../shared/types'
-
 const WeatherCard = () => {
-  const [weatherData, setWeatherData] = useState<Weather | null>(null)
+  const [weatherData, setWeatherData] = useState<any>(null)
   const [loading, setLoading] = useState(true)
 
   const CityForWeatherSelected = useAppSelector(getCityForWeatherBySelected)
-
+  
   useEffect(() => {
     const fetchWeatherData = async () => {
+      console.log('test')
       if (CityForWeatherSelected) {
         try {
           const response = await fetch(

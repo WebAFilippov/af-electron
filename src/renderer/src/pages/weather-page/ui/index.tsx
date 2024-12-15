@@ -1,20 +1,18 @@
 import { EmblaOptionsType } from 'embla-carousel'
-import { Check, PlusIcon } from 'lucide-react'
 import { FC, PropsWithChildren, useEffect, useState } from 'react'
 
 import {
-  allCityForWeather, // getCityForWeatherBySelected,
+  allCityForWeather,
   getSelected,
   toggleIsDefault,
   toggleSelected,
+  useLazyCreateCityForWeatherQuery,
   Weather
 } from '@entities/city-for-weather'
 import { WeatherComponent } from '@entities/city-for-weather/model/weather'
 
-import { Button, CommandItem, SearchSelect, SliderCards } from '@shared/components/ui'
+import { SearchSelect, SliderCards } from '@shared/components/ui'
 import { useAppDispatch, useAppSelector } from '@shared/hooks'
-import { cn } from '@shared/lib'
-import { formatFullAdressCity } from '@shared/utils'
 
 import { City } from '../model/types'
 
@@ -68,6 +66,7 @@ const mockWeather: Weather = {
 }
 
 export const WeatherPage: FC<PropsWithChildren> = () => {
+  const [fetchCreate, {data: dataFetch}] = useLazyCreateCityForWeatherQuery()
   const dispatch = useAppDispatch()
 
   const selected = useAppSelector(getSelected)
@@ -76,8 +75,9 @@ export const WeatherPage: FC<PropsWithChildren> = () => {
 
   const [selectedCity, setSelectedCity] = useState<City | undefined>()
   const [data, setData] = useState<City[]>()
-
   const [searchQuery, setSearchQuery] = useState<string>('')
+
+  const OPTIONS: EmblaOptionsType = { dragFree: true, loop: false }
 
   const fetchData = async () => {
     const data: City[] = await window.api.searchCities({
@@ -110,61 +110,27 @@ export const WeatherPage: FC<PropsWithChildren> = () => {
     dispatch(toggleSelected(id))
   }
 
-  const OPTIONS: EmblaOptionsType = { dragFree: true, loop: false }
+  const handleFetchCreate = async (cityId: number) => {
+    await fetchCreate(cityId)
+  }
 
   return (
     <div className="mx-5 flex h-full flex-col gap-5 py-5">
-      <div className="flex items-center justify-end gap-1">
-        <SearchSelect<City>
-          data={data}
-          isLoading={false}
-          isError={false}
-          disabled={CityForWeather.length === 10}
-          searchQuery={searchQuery}
-          setSearchQuery={setSearchQuery}
-          selectedCity={selectedCity}
-          setectedField={selectedCity?.city}
-          comboboxPlaceholder="Город или район"
-          searchInputPlaceholder="Выберите город..."
-          loadingPlaceholder="Поиск..."
-          notFoundPlaceholder="Город не найден"
-        >
-          {data &&
-            data.map((item) => (
-              <CommandItem
-                key={item.id}
-                value={item.city}
-                onSelect={(currentValue) => {
-                  currentValue === selectedCity?.city
-                    ? handleSetActive(undefined)
-                    : handleSetActive(item)
-                }}
-              >
-                <div className="flex cursor-pointer flex-col items-start justify-start text-primary">
-                  <span>{item.city}</span>
-                  <span className="text-xs text-muted-foreground">
-                    {formatFullAdressCity({
-                      type_region: item.type_region,
-                      region: item.region
-                    })}
-                  </span>
-                </div>
-                <Check
-                  className={cn(
-                    'ml-auto text-primary',
-                    selectedCity?.id === item.id ? 'opacity-100' : 'opacity-0'
-                  )}
-                />
-              </CommandItem>
-            ))}
-        </SearchSelect>
-
-        <Button variant="outline" size="icon" disabled={CityForWeather.length === 10}>
-          <PlusIcon />
-        </Button>
-      </div>
-
-      <button onClick={() => handleToggleIsDefault(22)}>test</button>
+      <SearchSelect
+        data={data}
+        isLoading={false}
+        isError={false}
+        searchQuery={searchQuery}
+        setSearchQuery={setSearchQuery}
+        selectedCity={selectedCity}
+        setectedField={selectedCity?.city}
+        handleSetActive={handleSetActive}
+        handleFetchCreate={handleFetchCreate}
+        comboboxPlaceholder="Город или район"
+        searchInputPlaceholder="Выберите город..."
+        loadingPlaceholder="Поиск..."
+        notFoundPlaceholder="Город не найден"
+      />
 
       <SliderCards
         slides={CityForWeather}
