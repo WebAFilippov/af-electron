@@ -1,3 +1,5 @@
+import { IApplication } from '@models/application.model'
+
 import { applicationRepository } from '@repositories/application.repository'
 
 class ApplicationService {
@@ -7,11 +9,8 @@ class ApplicationService {
     return response
   }
 
-  async updateApplication(value: string) {
-    const response = await applicationRepository.updateApplicationForFieldByValue(
-      'openweathermap_apikey',
-      value
-    )
+  async updateApplication(field: keyof Omit<IApplication, 'id'>, value: string) {
+    const response = await applicationRepository.updateApplicationForFieldByValue(field, value)
 
     return response
   }

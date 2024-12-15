@@ -2,6 +2,8 @@ import { DataTypes, Model } from 'sequelize'
 
 import { sequelize } from '@database/database'
 
+import City from './city'
+
 export interface ICityInfo {
   id: number
   type_region: string
@@ -73,5 +75,7 @@ CityInfo.init(
     timestamps: false
   }
 )
+
+
 
 export default CityInfo

@@ -23,8 +23,8 @@ export const api = {
   // CityForWetherService
   getAllCityForWeather: (): Promise<CityForWeather[]> =>
     ipcRenderer.invoke('v1/city_for_weather/getAll'),
-  updateCityForWeatherByIsDefault: (args: number): Promise<number | null> =>
-    ipcRenderer.invoke('v1/city_for_weather/default', args),
+  updateCityForWeatherByIsDefault: (id: number): Promise<number | null> =>
+    ipcRenderer.invoke('v1/city_for_weather/default', id),
   createCityForWeatherByCityId: (args: number): Promise<CityForWeather> =>
     ipcRenderer.invoke('v1/city_for_weather/create', args)
 } satisfies Record<string, (args: any) => any>

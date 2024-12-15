@@ -50,16 +50,16 @@ City.init(
   }
 )
 
-CityInfo.hasOne(City, {
-  foreignKey: 'cityId',
-  as: 'cityInfo',
-  onDelete: 'CASCADE'
-})
-
 City.belongsTo(CityInfo, {
   foreignKey: 'cityId',
   as: 'cityInfo',
   onDelete: 'SET NULL'
+})
+
+CityInfo.hasOne(City, {
+  foreignKey: 'cityId',
+  as: 'cityInfo',
+  onDelete: 'CASCADE'
 })
 
 export default City

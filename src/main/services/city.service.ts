@@ -1,25 +1,22 @@
-import { TCity } from '@models/cityInfo'
+import { ICityWithCityInfo } from '@models/city'
 
 import { cityRepository } from '@repositories/city.repository'
 
 class CityService {
-  async getCityById(id: number) {
-    const city = await cityRepository.findById(id)
-    return city
+  async setDefaultCity(id: number) {
+    const response = await cityRepository.setDefaultCityById(id)
+
+    return response
   }
 
-  async searchCitiesLimitOrder(optionsQuery: {
-    query: string
-    limit?: number
-    ordering?: 'DESC' | 'ASC'
-  }): Promise<TCity[]> {
-    const cities = await cityRepository.findByCityWithParams(
-      optionsQuery.query,
-      optionsQuery.limit,
-      optionsQuery.ordering
-    )
+  async getCitiesWithInfo(): Promise<ICityWithCityInfo[]> {
+    const response = await cityRepository.getCitiesWithInfo()
+    return response
+  }
 
-    return cities
+  async createCityWithInfo(cityId: number): Promise<ICityWithCityInfo> {
+    const response = await cityRepository.createCityByCityId(cityId)
+    return response
   }
 }
 
