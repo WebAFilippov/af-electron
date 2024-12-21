@@ -25,7 +25,7 @@ export interface SearchCitiesParams {
 
 export type Application = {
   id: number
-  openWeatherMapApiKey: string
+  openweathermap_apikey: string
   theme: 'system' | 'dark' | 'light'
 }
 

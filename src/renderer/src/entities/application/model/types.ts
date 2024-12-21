@@ -1,4 +1,5 @@
 export type InitialState = {
-  openWeatherMapApiKey: string
+  id: number
+  openweathermap_apikey: string
   theme: 'system' | 'dark' | 'light'
 }

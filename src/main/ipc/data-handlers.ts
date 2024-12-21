@@ -34,7 +34,7 @@ export const dataHandlers = (window: BrowserWindow, isAutoLaunch: boolean) => {
     return response
   })
 
-  ipcMain.handle('v1/application/update_openweathermap_apikey', async (_event, field, value) => {
+  ipcMain.handle('v1/application/update_application', async (_event, field, value) => {
     const response = await applicationService.updateApplication(field, value)
     return response
   })

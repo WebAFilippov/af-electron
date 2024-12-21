@@ -1,3 +1,5 @@
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
+
 import ReactDOM from 'react-dom/client'
 import { Provider } from 'react-redux'
 
@@ -7,12 +9,16 @@ import { store } from './store'
 import './styles/globals.css'
 
 const App = (): JSX.Element => {
+  const queryClient = new QueryClient()
+
   return (
-    <Provider store={store}>
-      <ThemeProvider storageKey="ui-theme" defaultTheme="light">
-        <RouterProvider />
-      </ThemeProvider>
-    </Provider>
+    <QueryClientProvider client={queryClient}>
+      <Provider store={store}>
+        <ThemeProvider storageKey="ui-theme">
+          <RouterProvider />
+        </ThemeProvider>
+      </Provider>
+    </QueryClientProvider>
   )
 }
 

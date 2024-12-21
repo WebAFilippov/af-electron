@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 
-import { getCityForWeatherBySelected } from '@entities/city-for-weather'
+import { getCityForWeatherBySelected } from '@entities/city'
 
 import { Button } from '@shared/components/ui'
 import {
@@ -23,7 +23,7 @@ const WeatherCard = () => {
 
   useEffect(() => {
     const fetchWeatherData = async () => {
-      console.log('test')
+      console.log('update weather-card-home fetch')
       if (CityForWeatherSelected) {
         try {
           const response = await fetch(

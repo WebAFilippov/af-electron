@@ -27,7 +27,7 @@ class ApplicationRepository {
 
   async getAll(): Promise<IApplication> {
     try {
-      const model = await Application.findOne({ raw: true })
+      const model = await Application.findOne({ attributes: { exclude: ['id'] }, raw: true })
 
       if (model) {
         log.info('Данные успешно извлечены из таблицы Application.')

@@ -1,4 +1,4 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit'
+import { createSlice,  PayloadAction } from '@reduxjs/toolkit'
 
 import { CityForWeather, InitialState, Weather } from './types'
 
@@ -20,7 +20,8 @@ const CityForWeatherSlice = createSlice({
     }),
 
     removeCityForWeather: create.reducer((state, action: PayloadAction<{ id: number }>) => {
-      state.cityForWeather?.filter((city) => city.id !== action.payload.id)
+      const newStateCity = state.cityForWeather?.filter((city) => city.id !== action.payload.id)
+      state.cityForWeather = newStateCity
     }),
 
     toggleIsDefault: create.reducer((state, action: PayloadAction<number | null>) => {
@@ -46,7 +47,7 @@ const CityForWeatherSlice = createSlice({
   }),
   selectors: {
     getSelected: (state) => state.selected,
-    allCityForWeather: (state) => (state.cityForWeather ? state.cityForWeather : []),
+    allCityForWeather: (state) => (state.cityForWeather),
     getCityForWeatherByIsDefault: (state) => state.cityForWeather?.find((city) => city.isDefault),
     getCityForWeatherBySelected: (state) =>
       state.cityForWeather?.find((city) => city.id === state.selected)

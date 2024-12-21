@@ -1,10 +1,6 @@
 import { Binary, Moon, Sun, Wifi } from 'lucide-react'
 
-import {
-  useLazySetCloseWindowQuery,
-  useLazySetMaximazeWindowQuery,
-  useLazySetMinimazeWindowQuery
-} from '@entities/application/api/application-electron.api'
+import { useCloseWindow, useMaximizeWindow, useMinimizeWindow } from '@entities/application'
 
 import {
   DarkMode,
@@ -17,10 +13,11 @@ import {
 import { useOnline } from '@shared/hooks'
 
 export const WindowControls = () => {
-  const [handleMinimize] = useLazySetMinimazeWindowQuery(undefined)
-  const [handleMaximize] = useLazySetMaximazeWindowQuery(undefined)
-  const [handleClose] = useLazySetCloseWindowQuery(undefined)
-  const { isOnline, loading } = useOnline(15000)
+  const { online, loading } = useOnline(5000)
+
+  const { mutate: handleMinimize } = useMinimizeWindow()
+  const { mutate: handleMaximize } = useMaximizeWindow()
+  const { mutate: handleClose } = useCloseWindow()
 
   return (
     <div className="flex items-center justify-center gap-4">
@@ -29,11 +26,11 @@ export const WindowControls = () => {
           <Tooltip delayDuration={100}>
             <TooltipTrigger asChild>
               <button className="m-0 flex h-8 w-8 cursor-default flex-col items-center justify-center gap-0 rounded-none p-0 text-[#1a1a1a] text-topbar_controls_color outline-none area-no-drag hover:bg-topbar_controls_button_hovered hover:text-topbar_controls_color [&_svg]:size-min [&_svg]:shrink-0">
-                <StatusBadge icon={<Wifi size={14} />} isActive={isOnline} loading={loading} />
+                <StatusBadge icon={<Wifi size={14} />} isActive={online} loading={loading} />
               </button>
             </TooltipTrigger>
             <TooltipContent className="user-select-none">
-              {loading ? <p>Проверка</p> : isOnline ? <p>В сети</p> : <p>Без сети</p>}
+              {loading ? <p>Проверка</p> : online ? <p>В сети</p> : <p>Без сети</p>}
             </TooltipContent>
           </Tooltip>
         </TooltipProvider>
@@ -45,7 +42,7 @@ export const WindowControls = () => {
               </button>
             </TooltipTrigger>
             <TooltipContent className="user-select-none">
-              {loading ? <p>Загрузка</p> : isOnline ? <p>В сети</p> : <p>Без сети</p>}
+              {loading ? <p>Загрузка</p> : online ? <p>В сети</p> : <p>Без сети</p>}
             </TooltipContent>
           </Tooltip>
         </TooltipProvider>
@@ -71,7 +68,7 @@ export const WindowControls = () => {
           className="m-0 flex h-8 w-[46px] flex-col items-center justify-center gap-0 rounded-none p-0 text-[#1a1a1a] text-topbar_controls_color outline-none area-no-drag hover:bg-topbar_controls_button_hovered hover:text-topbar_controls_color [&_svg]:size-min [&_svg]:shrink-0"
           aria-label="Свернуть"
           tabIndex={-1}
-          onClick={() => handleMinimize(undefined)}
+          onClick={() => handleMinimize()}
         >
           <svg width="10" height="1" viewBox="0 0 10 1" xmlns="http://www.w3.org/2000/svg">
             <path

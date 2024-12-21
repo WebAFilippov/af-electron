@@ -14,6 +14,10 @@ export const api = {
   startApp: (): Promise<PreloadStartedPayload> => ipcRenderer.invoke('v1/application/start'),
   fetchApplicationSettings: (): Promise<PreloadApplication> =>
     ipcRenderer.invoke('v1/application/getall'),
+  updateApplicationByField: (
+    field: keyof Omit<PreloadApplication, 'id'>,
+    value: string
+  ): Promise<number> => ipcRenderer.invoke('v1/application/update_application', field, value),
 
   // CityService
   searchCitiesWithLimits: (args) => ipcRenderer.invoke('v1/cityInfo/search', args),
@@ -24,7 +28,7 @@ export const api = {
     ipcRenderer.invoke('v1/city/default', id),
   createCityForWeatherByCityId: (args: number): Promise<CityForWeather> =>
     ipcRenderer.invoke('v1/city/create', args)
-} satisfies Record<string, (args: any) => any>
+} satisfies Record<string, (...args: any) => any>
 
 declare global {
   interface Window {

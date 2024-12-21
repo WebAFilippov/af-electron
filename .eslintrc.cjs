@@ -1,6 +1,14 @@
+import pluginQuery from '@tanstack/eslint-plugin-query'
+
 /** @type {import('eslint').Linter.Config} */
 module.exports = {
-  plugins: ['import', 'simple-import-sort', 'react', '@typescript-eslint'],
+  plugins: [
+    'import',
+    'simple-import-sort',
+    'react',
+    '@typescript-eslint',
+    { '@tanstack/query': pluginQuery }
+  ],
   extends: [
     'eslint:recommended',
     'plugin:import/recommended',
@@ -11,6 +19,7 @@ module.exports = {
     '@electron-toolkit/eslint-config-prettier'
   ],
   rules: {
+    '@tanstack/query/exhaustive-deps': 'error',
     // Сортировка импортов с разделением групп
     'simple-import-sort/imports': [
       'error',

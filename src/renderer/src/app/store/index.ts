@@ -2,7 +2,7 @@ import { configureStore } from '@reduxjs/toolkit'
 
 import { ApplicationReducer } from '@entities/application'
 import { ApplicationElectronAPI } from '@entities/application/api/application-electron.api'
-import { CityForWeatherElectronAPI, CityForWeatherReducer } from '@entities/city-for-weather'
+import { CityForWeatherElectronAPI, CityForWeatherReducer } from '@entities/city'
 
 export const store = configureStore({
   reducer: {

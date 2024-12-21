@@ -1,4 +1,5 @@
 import { BaseQueryFn, createApi } from '@reduxjs/toolkit/query/react'
+import { useMutation } from '@tanstack/react-query'
 
 const electronBaseQuery: BaseQueryFn<void, unknown, unknown> = async () => {
   try {
@@ -82,3 +83,32 @@ export const {
   useLazySetMaximazeWindowQuery,
   useLazySetCloseWindowQuery
 } = ApplicationElectronAPI
+
+const useMinimizeWindow = () => {
+  return useMutation<void, Error, void>({
+    mutationFn: (): Promise<void> => {
+      window.api.setMinimazeWindow()
+      return Promise.resolve()
+    }
+  })
+}
+
+const useMaximizeWindow = () => {
+  return useMutation<void, Error, void>({
+    mutationFn: (): Promise<void> => {
+      window.api.setMaximazeWindow()
+      return Promise.resolve()
+    }
+  })
+}
+
+const useCloseWindow = () => {
+  return useMutation<void, Error, void>({
+    mutationFn: (): Promise<void> => {
+      window.api.setCloseWindow()
+      return Promise.resolve()
+    }
+  })
+}
+
+export { useMinimizeWindow, useMaximizeWindow, useCloseWindow }

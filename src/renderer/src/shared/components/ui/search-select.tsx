@@ -5,7 +5,7 @@ import { PropsWithChildren, useState } from 'react'
 
 import { City } from '@pages/weather-page/model/types'
 
-import { allCityForWeather } from '@entities/city-for-weather'
+import { allCityForWeather } from '@entities/city'
 
 import { useAppSelector, useToast } from '@shared/hooks'
 import { cn } from '@shared/lib'

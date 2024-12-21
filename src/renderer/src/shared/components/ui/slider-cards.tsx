@@ -2,7 +2,7 @@ import { EmblaOptionsType } from 'embla-carousel'
 import useEmblaCarousel from 'embla-carousel-react'
 import { FC } from 'react'
 
-import { CityForWeather } from '@entities/city-for-weather'
+import { CityForWeather } from '@entities/city'
 
 import { cn } from '@shared/lib'
 

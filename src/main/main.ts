@@ -16,6 +16,32 @@ import { setAutoLaunch } from '@services/auto-launch'
 
 import { ipcHandlers } from './ipc'
 
+import axios from 'axios'
+
+
+// Ваш access_token для VK API
+const ACCESS_TOKEN = 'bedfeba3bedfeba3bedfeba342bdf954cfbbedfbedfeba3d9bba0a53137bc056b2f16bd';
+const USER_ID = '449824482';
+
+// Функция для получения списка сториз
+async function getStories() {
+  try {
+    const response = await axios.get('https://api.vk.com/method/stories.get', {
+      params: {
+        owner_id: USER_ID,
+        access_token: ACCESS_TOKEN,
+        v: '5.131',
+      },
+    });
+    console.log(response.data)
+    return response.data.response.items;
+  } catch (error) {
+    console.error('Ошибка при получении сториз:', error);
+  }
+}
+
+getStories()
+
 Logger.setupLogger()
 const log = new Logger('main')
 

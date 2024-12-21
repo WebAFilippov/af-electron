@@ -3,7 +3,8 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { InitialState } from './types'
 
 const initialState: InitialState = {
-  openWeatherMapApiKey: '',
+  id: 0,
+  openweathermap_apikey: '212',
   theme: 'system'
 }
 
@@ -15,11 +16,11 @@ const ApplicationSLice = createSlice({
       return action.payload
     }),
     setOpenWeatherMapApiKey: create.reducer((state, action: PayloadAction<string>) => {
-      state.openWeatherMapApiKey = action.payload
+      state.openweathermap_apikey = action.payload
     })
   }),
   selectors: {
-    getOpenWeatherMapApiKey: (state) => state.openWeatherMapApiKey
+    getOpenWeatherMapApiKey: (state) => state.openweathermap_apikey
   }
 })
 

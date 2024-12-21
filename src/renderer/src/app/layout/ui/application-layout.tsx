@@ -5,7 +5,7 @@ import { WindowControls } from '@features/window-topbar/ui'
 
 import { setApplicationStore } from '@entities/application'
 import { useStartAppQuery } from '@entities/application/api/application-electron.api'
-import { setCityForWeatherStore } from '@entities/city-for-weather'
+import { setCityForWeatherStore } from '@entities/city'
 
 import { Toaster } from '@shared/components/ui'
 import { ROUTE } from '@shared/config/routes'
@@ -21,7 +21,7 @@ export const ApplicationLayout: FC = () => {
   useEffect(() => {
     if (data) {
       const { storeCity, storeApplication } = data
-
+      console.log(storeApplication)
       const selected = storeCity && storeCity.find((city) => city.isDefault)?.id
       const parsedList = {
         cityForWeather: storeCity ? storeCity : [],

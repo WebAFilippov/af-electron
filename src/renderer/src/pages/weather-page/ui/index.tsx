@@ -8,8 +8,7 @@ import {
   toggleSelected,
   useLazyCreateCityForWeatherQuery,
   Weather
-} from '@entities/city-for-weather'
-import { WeatherComponent } from '@entities/city-for-weather/model/weather'
+} from '@entities/city'
 
 import { SearchSelect, SliderCards } from '@shared/components/ui'
 import { useAppDispatch, useAppSelector } from '@shared/hooks'
@@ -66,7 +65,7 @@ const mockWeather: Weather = {
 }
 
 export const WeatherPage: FC<PropsWithChildren> = () => {
-  const [fetchCreate, {data: dataFetch}] = useLazyCreateCityForWeatherQuery()
+  const [fetchCreate, { data: dataFetch }] = useLazyCreateCityForWeatherQuery()
   const dispatch = useAppDispatch()
 
   const selected = useAppSelector(getSelected)
@@ -141,10 +140,7 @@ export const WeatherPage: FC<PropsWithChildren> = () => {
         options={OPTIONS}
       />
 
-      <div className="w-full flex-1 bg-opacity_card_bg">
-        {/* {CityForWeatherSelected && CityForWeatherSelected.cityInfo.city} */}
-        <WeatherComponent weather={mockWeather} />
-      </div>
+      <div className="w-full flex-1 bg-opacity_card_bg">content</div>
     </div>
   )
 }

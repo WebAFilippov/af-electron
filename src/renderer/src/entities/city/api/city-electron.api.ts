@@ -14,18 +14,18 @@ export const CityForWeatherElectronAPI = createApi({
   reducerPath: 'CityForWeatherElectronApi',
   baseQuery: electronBaseQuery,
   endpoints: (builder) => ({
-    getAllCityForWeather: builder.query<CityForWeather[], void>({
-      async queryFn() {
-        try {
-          const data = await window.api.getAllCityForWeather()
-          return { data }
-        } catch (error: unknown) {
-          return {
-            error: error instanceof Error ? error : new Error(String(error))
-          }
-        }
-      }
-    }),
+    // getAllCityForWeather: builder.query<CityForWeather[], void>({
+    //   async queryFn() {
+    //     try {
+    //       const data = await window.api.getAllCityForWeather()
+    //       return { data }
+    //     } catch (error: unknown) {
+    //       return {
+    //         error: error instanceof Error ? error : new Error(String(error))
+    //       }
+    //     }
+    //   }
+    // }),
     createCityForWeather: builder.query<CityForWeather, number>({
       async queryFn(cityId: number) {
         if (!cityId) {
@@ -43,5 +43,4 @@ export const CityForWeatherElectronAPI = createApi({
   })
 })
 
-export const { useLazyGetAllCityForWeatherQuery, useLazyCreateCityForWeatherQuery } =
-  CityForWeatherElectronAPI
+export const { useLazyCreateCityForWeatherQuery } = CityForWeatherElectronAPI
