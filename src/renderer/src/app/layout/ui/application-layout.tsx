@@ -13,8 +13,8 @@ import { useAppDispatch } from '@shared/hooks'
 import { cn } from '@shared/lib'
 
 export const ApplicationLayout: FC = () => {
-  const { data } = useStartAppQuery(undefined)
   const dispatch = useAppDispatch()
+  const { data } = useStartAppQuery(undefined)
 
   const [isCollapse] = useState(false)
 

@@ -1,13 +1,15 @@
 import { ChangeEvent, FC, useState } from 'react'
 
-import { getOpenWeatherMapApiKey, useValidateApiKey } from '@entities/application'
+import { getOpenWeatherMapApiKey, setOpenWeatherMapApiKey } from '@entities/application'
+import { useValidateApiKey } from '@entities/application/api/application.api'
 
 import { Button, InputField } from '@shared/components/ui'
-import { useAppSelector } from '@shared/hooks'
+import { useAppDispatch, useAppSelector } from '@shared/hooks'
 import { useDebounce } from '@shared/hooks/use-debounce'
 
 export const SettingsPage: FC = () => {
-  const owm_apikey = useAppSelector(getOpenWeatherMapApiKey)
+  const dispatch = useAppDispatch()
+  const owm_apikey = useAppSelector(getOpenWeatherMapApiKey) // 0e9abf6e9d1e571719e3fed8d179a7e9
 
   const [owmValue, setOWMValue] = useState(owm_apikey)
   const debouncedValue = useDebounce(owmValue, 500)
@@ -22,7 +24,12 @@ export const SettingsPage: FC = () => {
     setOWMValue(e.target.value)
   }
 
-  const handleSaveSettings = () => {}
+  const handleSaveSettings = async () => {
+    if (owm_apikey !== owmValue) {
+      const response = await window.api.updateApplicationByField('openweathermap_apikey', owmValue)
+      response && dispatch(setOpenWeatherMapApiKey(owmValue))
+    }
+  }
 
   return (
     <div className="container flex h-full flex-col py-5">
@@ -84,7 +91,10 @@ export const SettingsPage: FC = () => {
       </div>
 
       <div>
-        <Button className="border-1 mt-10 w-full border-border bg-foreground text-primary shadow-md hover:bg-secondary">
+        <Button
+          className="border-1 mt-10 w-full border-border bg-foreground text-primary shadow-md hover:bg-secondary"
+          onClick={handleSaveSettings}
+        >
           Сохранить
         </Button>
       </div>
