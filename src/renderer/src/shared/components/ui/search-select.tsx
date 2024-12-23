@@ -107,7 +107,7 @@ export const SearchSelect = ({
                           : handleSetActive(item)
                       }}
                     >
-                      <div className="flex cursor-pointer flex-col items-start justify-start text-primary">
+                      <div className="flex cursor-pointer flex-col items-start justify-start border-border text-primary">
                         <span>{item.city}</span>
                         <span className="text-xs text-muted-foreground">
                           {formatFullAdressCity({

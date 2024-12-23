@@ -18,23 +18,17 @@ export const DarkMode: FC<PropsWithChildren<Props>> = ({ triggerNode }) => {
 
   return (
     <DropdownMenu>
-      <DropdownMenuTrigger asChild>{triggerNode}</DropdownMenuTrigger>
+      <DropdownMenuTrigger>{triggerNode}</DropdownMenuTrigger>
       <DropdownMenuContent align="center">
-        <DropdownMenuItem
-          onClick={() => setTheme('light')}
-          className="cursor-pointer text-xs text-primary"
-        >
+        <DropdownMenuItem onClick={() => setTheme('light')} className="cursor-pointer text-primary">
           Всегда светлый
         </DropdownMenuItem>
-        <DropdownMenuItem
-          onClick={() => setTheme('dark')}
-          className="cursor-pointer text-xs text-primary"
-        >
+        <DropdownMenuItem onClick={() => setTheme('dark')} className="cursor-pointer text-primary">
           Всегда темный
         </DropdownMenuItem>
         <DropdownMenuItem
           onClick={() => setTheme('system')}
-          className="cursor-pointer text-xs text-primary"
+          className="cursor-pointer text-primary"
         >
           Как в системе
         </DropdownMenuItem>

@@ -115,7 +115,7 @@ export const WeatherPage: FC<PropsWithChildren> = () => {
   }
 
   return (
-    <div className="mx-5 flex h-full flex-col gap-5 py-5">
+    <div className="container flex h-full flex-col gap-5 py-5">
       <SearchSelect
         data={data}
         isLoading={false}

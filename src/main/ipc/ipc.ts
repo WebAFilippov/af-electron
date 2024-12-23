@@ -1,4 +1,4 @@
-import { BrowserWindow, ipcMain } from 'electron'
+import { BrowserWindow, ipcMain, shell } from 'electron'
 
 export const IPCHandlers = (window: BrowserWindow) => {
   ipcMain.on('v1/window/minimaze', () => {
@@ -19,5 +19,9 @@ export const IPCHandlers = (window: BrowserWindow) => {
     if (window) {
       window.hide()
     }
+  })
+
+  ipcMain.on('v1/external/open', (_event, url: string) => {
+    shell.openExternal(url)
   })
 }

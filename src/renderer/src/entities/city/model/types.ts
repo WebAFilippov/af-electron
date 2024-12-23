@@ -66,6 +66,6 @@ export type CityForWeather = {
 }
 
 export type InitialState = {
-  cityForWeather: CityForWeather[] | undefined
+  cityForWeather: CityForWeather[]
   selected: number | null
 }

@@ -27,7 +27,10 @@ export const api = {
   updateCityForWeatherByIsDefault: (id: number): Promise<number | null> =>
     ipcRenderer.invoke('v1/city/default', id),
   createCityForWeatherByCityId: (args: number): Promise<CityForWeather> =>
-    ipcRenderer.invoke('v1/city/create', args)
+    ipcRenderer.invoke('v1/city/create', args),
+
+  // others
+  openExternal: (url: string) => ipcRenderer.send('v1/external/open', url)
 } satisfies Record<string, (...args: any) => any>
 
 declare global {

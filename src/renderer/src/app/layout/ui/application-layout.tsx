@@ -33,7 +33,7 @@ export const ApplicationLayout: FC = () => {
   }, [data])
 
   return (
-    <div className="relative flex h-screen min-h-screen w-screen gap-3 overflow-hidden bg-background p-8 pb-3 pl-2 pr-3 text-primary">
+    <div className="relative box-border flex h-screen min-h-screen w-screen gap-3 overflow-hidden bg-foreground p-8 pb-3 pl-2 pr-3 text-base text-primary-foreground">
       <Toaster />
       <header
         className="absolute right-0 top-0 z-[700] flex h-8 w-full items-center justify-end gap-3 area-drag"
@@ -44,7 +44,7 @@ export const ApplicationLayout: FC = () => {
 
       <aside
         className={cn(
-          'justify-s -mt-6 flex flex-col items-start gap-2',
+          'justify-s -mt-6 flex flex-col items-start gap-2 text-primary',
           isCollapse ? 'w-[72px]' : 'w-[204px]'
         )}
         id="sidebar"
@@ -64,7 +64,7 @@ export const ApplicationLayout: FC = () => {
         </div>
       </aside>
       <main
-        className="h-full w-10/12 flex-1 rounded-xl border border-border bg-foreground p-2"
+        className="h-full w-10/12 flex-1 rounded-xl border border-border bg-background p-2"
         id="content"
       >
         <Outlet />

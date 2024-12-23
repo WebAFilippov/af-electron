@@ -43,8 +43,6 @@ export const createWindow = (): BrowserWindow => {
   //   window.setSkipTaskbar(false)
   // }
 
-  
-
   if (!app.isPackaged && process.env['ELECTRON_RENDERER_URL']) {
     window.loadURL(process.env['ELECTRON_RENDERER_URL'])
   } else {

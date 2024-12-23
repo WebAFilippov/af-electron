@@ -13,7 +13,7 @@ import {
 import { useOnline } from '@shared/hooks'
 
 export const WindowControls = () => {
-  const { online, loading } = useOnline(5000)
+  const { online, loading } = useOnline(20000)
 
   const { mutate: handleMinimize } = useMinimizeWindow()
   const { mutate: handleMaximize } = useMaximizeWindow()
@@ -26,10 +26,10 @@ export const WindowControls = () => {
           <Tooltip delayDuration={100}>
             <TooltipTrigger asChild>
               <button className="m-0 flex h-8 w-8 cursor-default flex-col items-center justify-center gap-0 rounded-none p-0 text-[#1a1a1a] text-topbar_controls_color outline-none area-no-drag hover:bg-topbar_controls_button_hovered hover:text-topbar_controls_color [&_svg]:size-min [&_svg]:shrink-0">
-                <StatusBadge icon={<Wifi size={14} />} isActive={online} loading={loading} />
+                <StatusBadge icon={<Wifi size={14} />} active={online} loading={loading} />
               </button>
             </TooltipTrigger>
-            <TooltipContent className="user-select-none">
+            <TooltipContent className="user-select-none text-sm">
               {loading ? <p>Проверка</p> : online ? <p>В сети</p> : <p>Без сети</p>}
             </TooltipContent>
           </Tooltip>
@@ -38,7 +38,7 @@ export const WindowControls = () => {
           <Tooltip delayDuration={100}>
             <TooltipTrigger asChild>
               <button className="m-0 flex h-8 w-8 cursor-default flex-col items-center justify-center gap-0 rounded-none p-0 text-[#1a1a1a] text-topbar_controls_color outline-none area-no-drag hover:bg-topbar_controls_button_hovered hover:text-topbar_controls_color [&_svg]:size-min [&_svg]:shrink-0">
-                <StatusBadge icon={<Binary size={14} />} isActive={false} loading={false} />
+                <StatusBadge icon={<Binary size={14} />} active={false} loading={false} />
               </button>
             </TooltipTrigger>
             <TooltipContent className="user-select-none">
@@ -50,7 +50,7 @@ export const WindowControls = () => {
 
       <DarkMode
         triggerNode={
-          <div className="m-0 flex h-8 w-[46px] flex-col items-center justify-center gap-0 rounded-none p-0 text-[#1a1a1a] text-topbar_controls_color outline-none area-no-drag hover:bg-topbar_controls_button_hovered hover:text-topbar_controls_color [&_svg]:size-min [&_svg]:shrink-0">
+          <div className="m-0 flex h-8 w-[46px] cursor-pointer flex-col items-center justify-center gap-0 rounded-none p-0 text-primary-foreground outline-none transition-colors duration-75 area-no-drag hover:bg-secondary hover:text-primary [&_svg]:size-min [&_svg]:shrink-0 focus-visible::bg-secondary">
             <Sun
               size={16}
               className="rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0"
@@ -65,7 +65,7 @@ export const WindowControls = () => {
 
       <div className="flex">
         <button
-          className="m-0 flex h-8 w-[46px] flex-col items-center justify-center gap-0 rounded-none p-0 text-[#1a1a1a] text-topbar_controls_color outline-none area-no-drag hover:bg-topbar_controls_button_hovered hover:text-topbar_controls_color [&_svg]:size-min [&_svg]:shrink-0"
+          className="m-0 flex h-8 w-[46px] flex-col items-center justify-center gap-0 rounded-none p-0 text-primary outline-none transition-colors duration-75 area-no-drag hover:bg-secondary [&_svg]:size-min [&_svg]:shrink-0"
           aria-label="Свернуть"
           tabIndex={-1}
           onClick={() => handleMinimize()}
@@ -78,7 +78,7 @@ export const WindowControls = () => {
           </svg>
         </button>
         <button
-          className="m-0 flex h-8 w-[46px] flex-col items-center justify-center gap-0 rounded-none p-0 text-[#1a1a1a] text-topbar_controls_color outline-none area-no-drag hover:bg-topbar_controls_button_hovered [&_svg]:size-min [&_svg]:shrink-0"
+          className="m-0 flex h-8 w-[46px] flex-col items-center justify-center gap-0 rounded-none p-0 text-primary outline-none transition-colors duration-75 area-no-drag hover:bg-secondary [&_svg]:size-min [&_svg]:shrink-0"
           tabIndex={-1}
           aria-label="Развернуть"
           onClick={() => handleMaximize(undefined)}
@@ -91,7 +91,7 @@ export const WindowControls = () => {
           </svg>
         </button>
         <button
-          className="m-0 flex h-8 w-[46px] flex-col items-center justify-center gap-0 rounded-none p-0 text-[#1a1a1a] text-topbar_controls_color outline-none area-no-drag hover:bg-topbar_controls_button_close_hovered [&_svg]:size-min [&_svg]:shrink-0"
+          className="m-0 flex h-8 w-[46px] flex-col items-center justify-center gap-0 rounded-none p-0 text-primary outline-none transition-colors duration-75 area-no-drag hover:bg-destructive [&_svg]:size-min [&_svg]:shrink-0"
           tabIndex={-1}
           aria-label="Закрыть"
           onClick={() => handleClose(undefined)}
