@@ -43,7 +43,6 @@ const useStartApp = () => {
   return useQuery({
     queryKey: ['startApp'],
     queryFn: async () => {
-      console.log('useQuery StartApp')
       return window.api.startApp()
     },
     refetchOnWindowFocus: false,

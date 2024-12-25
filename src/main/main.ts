@@ -59,9 +59,9 @@ if (!gotTheLock) {
       if (is.dev) {
         try {
           await session.defaultSession.loadExtension(reduxDevToolsPath)
-          console.log('Redux DevTools загружен!')
+          log.log('Redux DevTools загружен!')
         } catch (err) {
-          console.error('Ошибка загрузки Redux DevTools:', err)
+          log.error('Ошибка загрузки Redux DevTools:', err)
         }
       }
 

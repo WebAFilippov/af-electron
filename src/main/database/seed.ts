@@ -61,8 +61,6 @@ export async function seedDatabase() {
       const initialCityForWeather: Omit<ICity, 'id'>[] = [
         { cityId: 123, isDefault: false },
         { cityId: 321, isDefault: false },
-        { cityId: 666, isDefault: false },
-        { cityId: 999, isDefault: false }
       ]
       await CitiesForWeather.bulkCreate(initialCityForWeather)
     }

@@ -50,9 +50,9 @@ const CityWeatherSlice = createSlice({
     )
   }),
   selectors: {
+    getAllCityWeather: (state) => state.cityWeather,
     getSelected: (state) => state.selected,
     getCityWeatherByIsDefault: (state) => state.cityWeather.find((city) => city.isDefault),
-    getAllCityWeather: (state) => state.cityWeather,
     getCityWeatherBySelected: (state) =>
       state.cityWeather.find((city) => city.id === state.selected)
   }
