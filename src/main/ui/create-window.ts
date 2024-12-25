@@ -30,7 +30,9 @@ export const createWindow = (): BrowserWindow => {
       sandbox: false,
       allowRunningInsecureContent: false,
       plugins: false,
-      devTools: is.dev ? true : false
+      devTools: true
+
+      // devTools: is.dev ? true : false
     }
   })
 

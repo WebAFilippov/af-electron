@@ -3,16 +3,14 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { InitialState } from './types'
 
 const initialState: InitialState = {
-  id: 0,
-  openweathermap_apikey: '212',
-  theme: 'system'
+  openweathermap_apikey: '',
 }
 
 const ApplicationSLice = createSlice({
   name: 'application',
   initialState,
   reducers: (create) => ({
-    setApplicationStore: create.reducer((_state, action: PayloadAction<InitialState>) => {
+    setInitialApplication: create.reducer((_state, action: PayloadAction<InitialState>) => {
       return action.payload
     }),
     setOpenWeatherMapApiKey: create.reducer((state, action: PayloadAction<string>) => {
@@ -26,6 +24,6 @@ const ApplicationSLice = createSlice({
 
 export const { getOpenWeatherMapApiKey } = ApplicationSLice.selectors
 
-export const { setApplicationStore, setOpenWeatherMapApiKey } = ApplicationSLice.actions
+export const { setInitialApplication, setOpenWeatherMapApiKey } = ApplicationSLice.actions
 
 export const ApplicationReducer = ApplicationSLice.reducer

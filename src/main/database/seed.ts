@@ -5,7 +5,6 @@ import { Logger } from '@utils/logger'
 
 import Application from '@models/application.model'
 import CitiesForWeather, { ICity } from '@models/city'
-import CityForWeather from '@models/city'
 import City, { ICityInfo } from '@models/cityInfo'
 
 import { config } from '@main/shared/config'

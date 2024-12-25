@@ -57,7 +57,7 @@ export type Weather = {
   cod: number
 }
 
-export type CityForWeather = {
+export type CityWeather = {
   id: number
   cityId: number
   isDefault: boolean
@@ -66,6 +66,6 @@ export type CityForWeather = {
 }
 
 export type InitialState = {
-  cityForWeather: CityForWeather[]
-  selected: number | null
+  cityWeather: CityWeather[]
+  selected: number | undefined
 }

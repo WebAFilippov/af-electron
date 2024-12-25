@@ -1,3 +1,5 @@
+import ping from 'ping'
+
 import { IApplication } from '@models/application.model'
 
 import { applicationRepository } from '@repositories/application.repository'
@@ -13,6 +15,19 @@ class ApplicationService {
     const response = await applicationRepository.updateApplicationForFieldByValue(field, value)
 
     return response
+  }
+
+  async checkConnection() {
+    try {
+      const result = await ping.promise.probe('8.8.8.8')
+      if (result.alive) {
+        return true
+      } else {
+        return false
+      }
+    } catch (error) {
+      throw new Error('Error checking connection')
+    }
   }
 }
 

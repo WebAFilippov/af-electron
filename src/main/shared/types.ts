@@ -1,4 +1,4 @@
-import CityForWeather from '@models/city'
+
 import City from '@models/cityInfo'
 
 export type Weather = {
@@ -66,4 +66,4 @@ export type PCityWith = {
   >
 }
 
-export type PCityForWeather = Pick<CityForWeather>
+

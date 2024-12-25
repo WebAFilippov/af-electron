@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import react from '@vitejs/plugin-react'
 import { defineConfig, externalizeDepsPlugin } from 'electron-vite'
 import path from 'path'
@@ -20,7 +22,16 @@ export default defineConfig({
       }
     },
     build: {
-      minify: 'esbuild'
+      minify: 'esbuild',
+      rollupOptions: {
+        output: {
+          manualChunks(id) {
+            if (id.includes('node_modules')) {
+              return id.toString().split('node_modules/')[1].split('/')[0].toString()
+            }
+          }
+        }
+      }
     }
   },
   preload: {
@@ -33,7 +44,16 @@ export default defineConfig({
       'process.env': process.env
     },
     build: {
-      minify: 'esbuild'
+      minify: 'esbuild',
+      rollupOptions: {
+        output: {
+          manualChunks(id) {
+            if (id.includes('node_modules')) {
+              return id.toString().split('node_modules/')[1].split('/')[0].toString()
+            }
+          }
+        }
+      }
     },
     resolve: {
       alias: {

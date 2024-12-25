@@ -1,5 +1,4 @@
 export * from './use-mobile'
-export * from './use-online'
 export * from './store-hooks'
 export * from './use-toast'
 export * from './use-ipc-fetch'

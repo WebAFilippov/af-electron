@@ -1,6 +1,11 @@
 import { Binary, Moon, Sun, Wifi } from 'lucide-react'
 
-import { useCloseWindow, useMaximizeWindow, useMinimizeWindow } from '@entities/application'
+import {
+  useCloseWindow,
+  useMaximizeWindow,
+  useMinimizeWindow,
+  useNetworkConnection
+} from '@entities/application'
 
 import {
   DarkMode,
@@ -10,10 +15,9 @@ import {
   TooltipProvider,
   TooltipTrigger
 } from '@shared/components/ui'
-import { useOnline } from '@shared/hooks'
 
 export const WindowControls = () => {
-  const { online, loading } = useOnline(20000)
+  const { data: online, isLoading: loading } = useNetworkConnection(5000)
 
   const { mutate: handleMinimize } = useMinimizeWindow()
   const { mutate: handleMaximize } = useMaximizeWindow()
@@ -29,7 +33,7 @@ export const WindowControls = () => {
                 <StatusBadge icon={<Wifi size={14} />} active={online} loading={loading} />
               </button>
             </TooltipTrigger>
-            <TooltipContent className="user-select-none text-sm">
+            <TooltipContent className="text-sm user-select-none">
               {loading ? <p>Проверка</p> : online ? <p>В сети</p> : <p>Без сети</p>}
             </TooltipContent>
           </Tooltip>
@@ -50,7 +54,7 @@ export const WindowControls = () => {
 
       <DarkMode
         triggerNode={
-          <div className="m-0 flex h-8 w-[46px] cursor-pointer flex-col items-center justify-center gap-0 rounded-none p-0 text-primary-foreground outline-none transition-colors duration-75 area-no-drag hover:bg-secondary hover:text-primary [&_svg]:size-min [&_svg]:shrink-0 focus-visible::bg-secondary">
+          <div className="focus-visible::bg-secondary m-0 flex h-8 w-[46px] cursor-pointer flex-col items-center justify-center gap-0 rounded-none p-0 text-primary-foreground outline-none transition-colors duration-75 area-no-drag hover:bg-secondary hover:text-primary [&_svg]:size-min [&_svg]:shrink-0">
             <Sun
               size={16}
               className="rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0"

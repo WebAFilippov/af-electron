@@ -10,7 +10,7 @@ type CityInfo = {
   utc: string
 }
 
-export type CityForWeather = {
+export type CityWeather = {
   id: number
   cityId: number
   isDefault: boolean
@@ -26,12 +26,11 @@ export interface SearchCitiesParams {
 export type Application = {
   id: number
   openweathermap_apikey: string
-  theme: 'system' | 'dark' | 'light'
 }
 
 export type PreloadApplication = Application
 
 export type PreloadStartedPayload = {
-  storeCity: CityForWeather[]
+  storeCity: CityWeather[]
   storeApplication: Application
 }

@@ -2,19 +2,20 @@ import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 
 import { getOpenWeatherMapApiKey } from '@entities/application'
-import { getCityForWeatherBySelected } from '@entities/city'
+
 
 import { Button } from '@shared/components/ui'
 import {
   Card,
-  CardContent,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-  CardTitle
+  // CardContent,
+  // CardDescription,
+  // CardFooter,
+  // CardHeader,
+  // CardTitle
 } from '@shared/components/ui/card'
 import { ROUTE } from '@shared/config/routes'
 import { useAppSelector } from '@shared/hooks'
+import { getCityWeatherBySelected } from '@entities/city'
 
 const WeatherCard = () => {
   const openWeatherMapApiKey = useAppSelector(getOpenWeatherMapApiKey)
@@ -22,7 +23,7 @@ const WeatherCard = () => {
   const [weatherData, setWeatherData] = useState(undefined)
   const [loading, setLoading] = useState(true)
 
-  const CityForWeatherSelected = useAppSelector(getCityForWeatherBySelected)
+  const CityForWeatherSelected = useAppSelector(getCityWeatherBySelected)
 
   useEffect(() => {
     const fetchWeatherData = async () => {

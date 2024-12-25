@@ -5,13 +5,11 @@ import { sequelize } from '@database/database'
 export interface IApplication {
   id: number
   openweathermap_apikey: string
-  theme: 'system' | 'dark' | 'light'
 }
 
 class Application extends Model {
   declare id: number
   declare openweathermap_apikey: string
-  declare theme: 'system' | 'dark' | 'light'
 }
 
 Application.init(
@@ -25,11 +23,6 @@ Application.init(
       type: DataTypes.TEXT,
       allowNull: false
     },
-    theme: {
-      type: DataTypes.ENUM('system', 'dark', 'light'), 
-      allowNull: false,
-      defaultValue: 'system' 
-    }
   },
   {
     sequelize,

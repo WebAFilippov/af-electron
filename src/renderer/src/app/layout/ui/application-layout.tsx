@@ -3,9 +3,8 @@ import { Link, Outlet } from 'react-router-dom'
 
 import { WindowControls } from '@features/window-topbar/ui'
 
-import { setApplicationStore } from '@entities/application'
-import { useStartAppQuery } from '@entities/application/api/application-electron.api'
-import { setCityForWeatherStore } from '@entities/city'
+import { setInitialApplication, useStartApp } from '@entities/application'
+import { setInitialCityWeather } from '@entities/city'
 
 import { Toaster } from '@shared/components/ui'
 import { ROUTE } from '@shared/config/routes'
@@ -14,23 +13,16 @@ import { cn } from '@shared/lib'
 
 export const ApplicationLayout: FC = () => {
   const dispatch = useAppDispatch()
-  const { data } = useStartAppQuery(undefined)
-
-  const [isCollapse] = useState(false)
+  const { data } = useStartApp()
 
   useEffect(() => {
     if (data) {
-      const { storeCity, storeApplication } = data
-      console.log(storeApplication)
-      const selected = storeCity && storeCity.find((city) => city.isDefault)?.id
-      const parsedList = {
-        cityForWeather: storeCity ? storeCity : [],
-        selected: selected ? selected : null
-      }
-      dispatch(setCityForWeatherStore(parsedList))
-      dispatch(setApplicationStore(storeApplication))
+      dispatch(setInitialCityWeather(data.storeCity))
+      dispatch(setInitialApplication(data.storeApplication))
     }
   }, [data])
+
+  const [isCollapse] = useState(false)
 
   return (
     <div className="relative box-border flex h-screen min-h-screen w-screen gap-3 overflow-hidden bg-foreground p-8 pb-3 pl-2 pr-3 text-base text-primary-foreground">
@@ -72,3 +64,5 @@ export const ApplicationLayout: FC = () => {
     </div>
   )
 }
+
+

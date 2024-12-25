@@ -5,7 +5,7 @@ import { cn } from '@shared/lib'
 
 type Props = {
   icon: ReactNode
-  active: boolean
+  active: boolean | undefined
   loading: boolean
 }
 

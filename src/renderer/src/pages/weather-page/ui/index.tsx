@@ -2,12 +2,11 @@ import { EmblaOptionsType } from 'embla-carousel'
 import { FC, PropsWithChildren, useEffect, useState } from 'react'
 
 import {
-  allCityForWeather,
+  getAllCityWeather,
   getSelected,
   toggleIsDefault,
   toggleSelected,
-  useLazyCreateCityForWeatherQuery,
-  Weather
+  useLazyCreateCityForWeatherQuery
 } from '@entities/city'
 
 import { SearchSelect, SliderCards } from '@shared/components/ui'
@@ -15,62 +14,12 @@ import { useAppDispatch, useAppSelector } from '@shared/hooks'
 
 import { City } from '../model/types'
 
-const mockWeather: Weather = {
-  coord: {
-    lon: 37.62,
-    lat: 55.75
-  },
-  weather: [
-    {
-      id: 800,
-      main: 'Clear',
-      description: 'clear sky',
-      icon: '01d'
-    }
-  ],
-  base: 'stations',
-  main: {
-    temp: 20,
-    feels_like: 18,
-    temp_min: 19,
-    temp_max: 21,
-    pressure: 1012,
-    humidity: 60,
-    sea_level: 1012,
-    grnd_level: 1009
-  },
-  visibility: 10000,
-  wind: {
-    speed: 3.5,
-    deg: 120
-  },
-  snow: {
-    '1h': 0
-  },
-  clouds: {
-    all: 0
-  },
-  dt: 1670000000,
-  sys: {
-    type: 1,
-    id: 9029,
-    country: 'RU',
-    sunrise: 1670040000,
-    sunset: 1670070000
-  },
-  timezone: 10800,
-  id: 524901,
-  name: 'Moscow',
-  cod: 200
-}
-
 export const WeatherPage: FC<PropsWithChildren> = () => {
-  const [fetchCreate, { data: dataFetch }] = useLazyCreateCityForWeatherQuery()
+  const [fetchCreate] = useLazyCreateCityForWeatherQuery()
   const dispatch = useAppDispatch()
 
   const selected = useAppSelector(getSelected)
-  const CityForWeather = useAppSelector(allCityForWeather)
-  // const CityForWeatherSelected = useAppSelector(getCityForWeatherBySelected)
+  const CityForWeather = useAppSelector(getAllCityWeather)
 
   const [selectedCity, setSelectedCity] = useState<City | undefined>()
   const [data, setData] = useState<City[]>()
@@ -140,7 +89,7 @@ export const WeatherPage: FC<PropsWithChildren> = () => {
         options={OPTIONS}
       />
 
-      <div className="w-full flex-1 bg-opacity_card_bg">content</div>
+      <div className="bg-opacity_card_bg w-full flex-1">content</div>
     </div>
   )
 }

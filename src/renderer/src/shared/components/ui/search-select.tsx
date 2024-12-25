@@ -5,7 +5,6 @@ import { PropsWithChildren, useState } from 'react'
 
 import { City } from '@pages/weather-page/model/types'
 
-import { allCityForWeather } from '@entities/city'
 
 import { useAppSelector, useToast } from '@shared/hooks'
 import { cn } from '@shared/lib'
@@ -14,6 +13,7 @@ import { formatFullAdressCity } from '@shared/utils'
 import { Button } from './button'
 import { Command, CommandGroup, CommandInput, CommandItem, CommandList } from './command'
 import { Popover, PopoverContent, PopoverTrigger } from './popover'
+import { getAllCityWeather } from '@entities/city'
 
 type Props = {
   data: City[] | undefined
@@ -47,7 +47,7 @@ export const SearchSelect = ({
   notFoundPlaceholder = 'notFoundPlaceholder'
 }: PropsWithChildren<Props>) => {
   const { toast } = useToast()
-  const CityForWeather = useAppSelector(allCityForWeather)
+  const CityForWeather = useAppSelector(getAllCityWeather)
 
   const [open, setOpen] = useState(false)
 

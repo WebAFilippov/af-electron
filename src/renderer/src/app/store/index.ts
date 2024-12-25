@@ -1,22 +1,15 @@
 import { configureStore } from '@reduxjs/toolkit'
 
 import { ApplicationReducer } from '@entities/application'
-import { ApplicationElectronAPI } from '@entities/application/api/application-electron.api'
-import { CityForWeatherElectronAPI, CityForWeatherReducer } from '@entities/city'
+import { CityWeatherReducer } from '@entities/city'
 
 export const store = configureStore({
   reducer: {
-    [ApplicationElectronAPI.reducerPath]: ApplicationElectronAPI.reducer,
-    [CityForWeatherElectronAPI.reducerPath]: CityForWeatherElectronAPI.reducer,
-    'city-for-weather': CityForWeatherReducer,
+    'city-weather': CityWeatherReducer,
     application: ApplicationReducer
   },
   devTools: true,
-  middleware: (getDefaultMiddleware) =>
-    getDefaultMiddleware().concat([
-      CityForWeatherElectronAPI.middleware,
-      ApplicationElectronAPI.middleware
-    ])
+  middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat([])
 })
 
 export type AppDispatch = typeof store.dispatch

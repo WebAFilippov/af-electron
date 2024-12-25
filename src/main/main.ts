@@ -1,7 +1,7 @@
 import { is } from '@electron-toolkit/utils'
 
-import axios from 'axios'
-import { app, BrowserWindow, Menu, shell } from 'electron'
+import { app, BrowserWindow, Menu, session } from 'electron'
+import path from 'node:path'
 
 import { createWindow } from '@ui/create-window'
 import { createTray } from '@ui/tray'
@@ -25,6 +25,19 @@ setAutoLaunch(is.dev ? false : true)
 const isAutoLaunch = process.argv.includes('--auto-launch')
 const gotTheLock = app.requestSingleInstanceLock() // Проверка на запущенное окно -> true if once window
 
+const reduxDevToolsPath = path.join(
+  app.getPath('home'),
+  'AppData',
+  'Local',
+  'Yandex',
+  'YandexBrowser',
+  'User Data',
+  'Default',
+  'Extensions',
+  'lmhkpmbekcpmknklioeibfkpmmfibljd',
+  '3.2.7_0'
+)
+
 if (!gotTheLock) {
   app.quit()
 } else {
@@ -43,6 +56,15 @@ if (!gotTheLock) {
 
   app.whenReady().then(async () => {
     try {
+      if (is.dev) {
+        try {
+          await session.defaultSession.loadExtension(reduxDevToolsPath)
+          console.log('Redux DevTools загружен!')
+        } catch (err) {
+          console.error('Ошибка загрузки Redux DevTools:', err)
+        }
+      }
+
       await initDatabase()
       await seedDatabase()
 

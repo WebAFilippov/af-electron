@@ -10,7 +10,7 @@ const log = new Logger('data-handlers')
 
 export const dataHandlers = (window: BrowserWindow, isAutoLaunch: boolean) => {
   // Application
-  ipcMain.handle('v1/application/start', async () => {
+  ipcMain.handle('v1/startApp', async () => {
     const responseForApplication = await applicationService.getApplication()
     const responseForCityForWeather = await cityService.getCitiesWithInfo()
 
@@ -39,17 +39,16 @@ export const dataHandlers = (window: BrowserWindow, isAutoLaunch: boolean) => {
     return response
   })
 
+  ipcMain.handle('v1/application/check_connection', async () => {
+    const response = await applicationService.checkConnection()
+    return response
+  })
+
   // City
   ipcMain.handle('v1/cityInfo/search', async (_event, optionsQuery) => {
     const cities = await cityInfoService.findCitiesByQuery(optionsQuery)
     return cities
   })
-
-  // CityForWeather
-  // ipcMain.handle('v1/city/getAll', async () => {
-  //   const response = await cityForWeatherService.getAllCityForWeather()
-  //   return response
-  // })
 
   ipcMain.handle('v1/city/default', async (_event, id) => {
     const response = await cityService.setDefaultCity(id)
@@ -60,9 +59,4 @@ export const dataHandlers = (window: BrowserWindow, isAutoLaunch: boolean) => {
     const response = await cityService.createCityWithInfo(cityId)
     return response
   })
-
-  // ipcMain.handle('v1/city/get_weather', async () => {
-  //   const response = await cityForWeatherService.getWeathersForCitites()
-  //   return response
-  // })
 }

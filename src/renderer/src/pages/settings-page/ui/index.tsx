@@ -9,7 +9,7 @@ import { useDebounce } from '@shared/hooks/use-debounce'
 
 export const SettingsPage: FC = () => {
   const dispatch = useAppDispatch()
-  const owm_apikey = useAppSelector(getOpenWeatherMapApiKey) // 0e9abf6e9d1e571719e3fed8d179a7e9
+  const owm_apikey = useAppSelector(getOpenWeatherMapApiKey) // т
 
   const [owmValue, setOWMValue] = useState(owm_apikey)
   const debouncedValue = useDebounce(owmValue, 500)
