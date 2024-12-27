@@ -1,7 +1,7 @@
 {
   "extends": "@electron-toolkit/tsconfig/tsconfig.web.json",
   "include": [
-    "src/renderer/src/app/env.d.ts",
+    "src/renderer/env.d.ts",
     "src/renderer/src/**/*",
     "src/shared/**/*",
     "src/preload/*.ts",

@@ -3,9 +3,9 @@ import { Link, Outlet } from 'react-router-dom'
 
 import { WindowControls } from '@features/window-topbar/ui'
 
-import { getOpenWeatherMapApiKey, setInitialApplication, useStartApp } from '@entities/application'
+import { setInitialApplication, useStartApp } from '@entities/application'
 import { getAllCityWeather, setInitialCityWeather } from '@entities/city'
-import { fetchWeather, useCitiesWeather } from '@entities/city/api/city.api'
+import { useCitiesWeather } from '@entities/city/api/city.api'
 
 import { Toaster } from '@shared/components/ui'
 import { ROUTE } from '@shared/config/routes'
@@ -14,12 +14,11 @@ import { cn } from '@shared/lib'
 
 export const ApplicationLayout: FC = () => {
   const dispatch = useAppDispatch()
-  const OpenWeatherMapApiKey = useAppSelector(getOpenWeatherMapApiKey)
   const CitiesWeather = useAppSelector(getAllCityWeather)
 
   const [isCollapse] = useState(false)
   const { data: dataStartApp } = useStartApp()
-  const { data: dataCitiesWeather } = useCitiesWeather(OpenWeatherMapApiKey, CitiesWeather)
+  const { data: dataCitiesWeather } = useCitiesWeather(CitiesWeather)
 
   useEffect(() => {
     if (dataStartApp) {
@@ -46,7 +45,7 @@ export const ApplicationLayout: FC = () => {
 
       <aside
         className={cn(
-          'justify-s -mt-6 flex flex-col items-start gap-2 text-primary',
+          '-mt-6 flex flex-col items-start justify-center gap-2 text-primary',
           isCollapse ? 'w-[72px]' : 'w-[204px]'
         )}
         id="sidebar"

@@ -1,5 +1,9 @@
 import { useQuery } from '@tanstack/react-query'
 
+import { getOpenWeatherMapApiKey } from '@entities/application'
+
+import { useAppSelector } from '@shared/hooks'
+
 import { CityWeather, Weather } from '../model/types'
 
 const BASE_URL = 'https://api.openweathermap.org/data/2.5/weather'
@@ -29,7 +33,7 @@ const fetchAllWeather = async (apikey: string, cities: CityWeather[]): Promise<C
       const { latitude, longitude } = city.cityInfo
       const weather = await fetchWeather(apikey, latitude, longitude)
       return { ...city, weather }
-    } catch (error) {
+    } catch {
       return { ...city, weather: undefined }
     }
   })
@@ -37,12 +41,15 @@ const fetchAllWeather = async (apikey: string, cities: CityWeather[]): Promise<C
   return Promise.all(weatherPromises)
 }
 
-const useCitiesWeather = (apikey: string, cities: CityWeather[]) => {
+const useCitiesWeather = (cities: CityWeather[]) => {
+  const apikey = useAppSelector(getOpenWeatherMapApiKey)
+
   return useQuery({
-    queryKey: ['allWeather'],
+    queryKey: ['allWeather', apikey],
     queryFn: () => fetchAllWeather(apikey, cities),
     enabled: !!apikey && !!cities.length,
     refetchOnWindowFocus: false,
+    refetchOnReconnect: false,
     retry: 0,
     staleTime: 0
   })

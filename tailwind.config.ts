@@ -31,19 +31,19 @@ const config = {
           DEFAULT: 'hsla(var(--secondary))',
           foreground: 'hsla(var(--secondary-foreground))'
         },
-        // muted: {
-        //   DEFAULT: 'hsl(var(--muted))',
-        //   foreground: 'hsl(var(--muted-foreground))'
-        // },
+        muted: {
+          DEFAULT: 'hsl(var(--muted))',
+          foreground: 'hsl(var(--muted-foreground))'
+        },
         accent: {
           DEFAULT: 'hsl(var(--accent))',
           foreground: 'hsl(var(--accent-foreground))'
         },
 
-        // card: {
-        //   DEFAULT: 'hsl(var(--card))',
-        //   foreground: 'hsl(var(--card-foreground))'
-        // },
+        card: {
+          DEFAULT: 'hsl(var(--card))',
+          foreground: 'hsl(var(--card-foreground))'
+        },
         // topbar_controls_button_hovered: 'rgba(var(--topbar-controls-button-hovered))',
         // topbar_controls_button_close_hovered: 'rgba(var(--topbar-controls-button-close-hovered))',
         // topbar_controls_color: 'rgba(var(--topbar-color))',
