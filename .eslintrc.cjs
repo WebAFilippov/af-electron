@@ -1,4 +1,4 @@
-import pluginQuery from '@tanstack/eslint-plugin-query'
+import PluginQuery from '@tanstack/eslint-plugin-query'
 
 /** @type {import('eslint').Linter.Config} */
 module.exports = {
@@ -7,7 +7,7 @@ module.exports = {
     'simple-import-sort',
     'react',
     '@typescript-eslint',
-    { '@tanstack/query': pluginQuery }
+    { '@tanstack/query': PluginQuery }
   ],
   extends: [
     'eslint:recommended',

@@ -1,6 +1,6 @@
 import { BaseQueryFn, createApi } from '@reduxjs/toolkit/query/react'
 
-import { CityForWeather } from '../model/types'
+import { CityWeather } from '../model/types'
 
 const electronBaseQuery: BaseQueryFn<void, unknown, unknown> = async () => {
   try {
@@ -26,7 +26,7 @@ export const CityForWeatherElectronAPI = createApi({
     //     }
     //   }
     // }),
-    createCityForWeather: builder.query<CityForWeather, number>({
+    createCityForWeather: builder.query<CityWeather, number>({
       async queryFn(cityId: number) {
         if (!cityId) {
           throw new Error('City ID is required')

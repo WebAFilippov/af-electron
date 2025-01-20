@@ -1,8 +1,12 @@
-import { DataTypes, Model } from 'sequelize'
+import {
+  CreationOptional,
+  DataTypes,
+  InferAttributes,
+  InferCreationAttributes,
+  Model
+} from 'sequelize'
 
 import { sequelize } from '@database/database'
-
-
 
 export interface ICityInfo {
   id: number
@@ -16,8 +20,8 @@ export interface ICityInfo {
   utc: string
 }
 
-class CityInfo extends Model {
-  declare id: number
+class CityInfo extends Model<InferAttributes<CityInfo>, InferCreationAttributes<CityInfo>> {
+  declare id: CreationOptional<number>
   declare type_region: string
   declare region: string
   declare city: string
@@ -75,7 +79,5 @@ CityInfo.init(
     timestamps: false
   }
 )
-
-
 
 export default CityInfo

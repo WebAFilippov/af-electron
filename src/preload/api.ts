@@ -26,7 +26,7 @@ export const api = {
 
   // CityWetherService
   fetchAllCitiesForWeather: (): Promise<CityWeather[]> => ipcRenderer.invoke('v1/city/getAll'),
-  updateCityForWeatherByIsDefault: (id: number): Promise<number | null> =>
+  updateCityForWeatherByIsDefault: (id: number): Promise<number | undefined> =>
     ipcRenderer.invoke('v1/city/default', id),
   createCityForWeatherByCityId: (args: number): Promise<CityWeather> =>
     ipcRenderer.invoke('v1/city/create', args),

@@ -1,8 +1,8 @@
 import { Logger } from '@utils/logger'
 
-import Application, { IApplication } from '@models/application.model'
+import Application, { IApplication } from '@models/Application.model'
 
-const log = new Logger('application.repository')
+const log = new Logger('Application.repository')
 
 class ApplicationRepository {
   async getValueByField(field: keyof IApplication): Promise<keyof IApplication> {

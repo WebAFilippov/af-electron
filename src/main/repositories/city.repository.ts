@@ -1,99 +1,98 @@
-import { Transaction } from 'sequelize'
+// eslint-disable-next-line import/no-unresolved
+import { Op, Sequelize, Transaction } from 'sequelize'
 
-import { Logger } from '@utils/logger'
-
-import City, { ICityWithCityInfo } from '@models/city'
-import CityInfo from '@models/cityInfo'
-
-const log = new Logger('city.repository')
+import City, { ICity } from '@models/City.model'
+import CityInfo from '@models/CityInfo.model'
 
 class CityRepository {
-  async getCitiesWithInfo(): Promise<ICityWithCityInfo[]> {
+  async getCities(): Promise<ICity[]> {
     try {
-      const citiesWithInfo = (await City.findAll({
+      const cities = await City.findAll({
         include: {
           model: CityInfo,
           as: 'cityInfo'
         },
+        order: [['order', 'DESC']],
         raw: true,
         nest: true
-      })) as unknown as ICityWithCityInfo[]
+      })
 
-      log.log(
-        `Запрос на получение всех городов с информацией о них завершен. Количество записей: ${citiesWithInfo.length}`
-      )
-
-      return citiesWithInfo
+      return cities
     } catch (error) {
-      log.error('Ошибка при выполнении запроса findAll для городов с информацией:', error)
-      throw new Error('Ошибка при получении данных о городах с информацией')
+      throw error
     }
   }
 
-  async setDefaultCityById(targetId: number): Promise<number | null> {
+  async setDefaultCity(cityId: number): Promise<ICity> {
     const transaction: Transaction = await City.sequelize!.transaction()
 
     try {
-      const currentSelected = await City.findOne({
-        where: { isDefault: true },
-        transaction
-      })
-
       const city = await City.findOne({
-        where: { id: targetId },
+        where: { id: cityId },
         transaction
       })
 
       if (!city) {
-        log.error(`Город с ID ${targetId} не найден.`)
-        throw new Error(`Город с ID ${targetId} не найден.`)
+        throw new Error(`Город с ID ${cityId} не найден.`)
       }
 
-      if (currentSelected) {
-        await currentSelected.update({ isDefault: false }, { transaction })
+      const currentDefaultCity = await City.findOne({
+        where: { default: true },
+        transaction
+      })
+
+      if (currentDefaultCity) {
+        currentDefaultCity.update({ default: false }, { transaction })
       }
 
-      await city.update({ isDefault: true }, { transaction })
+      await city.update({ default: true }, { transaction })
 
       const updatedCity = await City.findOne({
-        where: { isDefault: true },
+        where: { default: true },
         transaction
       })
 
       await transaction.commit()
 
       if (updatedCity) {
-        log.log(`Выбранная запись после обновления: ID ${updatedCity.id}.`)
-        return updatedCity.id
+        return updatedCity
       } else {
-        log.log(`Выбор снят.`)
-        return null
+        throw new Error('Не удалось найти обновленный город по умолчанию.')
       }
     } catch (error) {
       await transaction.rollback()
-      log.error(`Ошибка при обновлении выбранного города с ID ${targetId}: `, error)
-      throw new Error('Ошибка при обновлении города с флагом isDefault.')
+
+      throw error
     }
   }
 
-  async createCityByCityId(cityId: number): Promise<ICityWithCityInfo> {
+  async createCity(cityInfoId: number): Promise<ICity> {
     const transaction: Transaction = await City.sequelize!.transaction()
 
     try {
+      const countCity = await City.count()
+
+      if (countCity >= 10) {
+        throw new Error(
+          `Максимальное количество городов (10) достигнуто. Невозможно добавить новый город.`
+        )
+      }
+
       const existingCity = await City.findOne({
-        where: { cityId },
+        where: { cityInfoId },
         transaction
       })
 
       if (existingCity) {
-        log.error(`Город с cityId=${cityId} уже существует.`)
-        throw new Error(`Город с cityId=${cityId} уже существует.`)
+        throw new Error(`Город с ID ${existingCity.id} уже существует.`)
       }
 
+      const maxOrder = await City.max<number | null, City>('order', { raw: true, transaction })
       const newCity = await City.create(
         {
-          cityId,
-          isDefault: false
+          cityInfoId,
+          default: false,
+          order: maxOrder === null ? 0 : maxOrder + 1
         },
         { transaction }
       )
@@ -109,17 +108,87 @@ class CityRepository {
       })
 
       if (!cityWithInfo) {
-        log.error(`Не удалось загрузить созданный город с id=${newCity.id}`)
-        throw new Error(`Не удалось загрузить созданный город с id=${newCity.id}`)
+        throw new Error(`Не удалось получить созданный город ID ${newCity.id}`)
       }
 
       await transaction.commit()
 
-      return cityWithInfo as unknown as ICityWithCityInfo
+      return cityWithInfo
     } catch (error) {
       await transaction.rollback()
-      log.error(`Ошибка при создании города с cityId=${cityId}: `, error)
-      throw new Error('Ошибка при создании города с указанным cityId.')
+      throw error
+    }
+  }
+
+  async deleteCity(cityId: number): Promise<void> {
+    const transaction: Transaction = await City.sequelize!.transaction()
+
+    try {
+      const city = await City.findByPk(cityId, {
+        transaction
+      })
+
+      if (!city) {
+        throw new Error(`Город с ID ${cityId} не найден.`)
+      }
+
+      const cityOrder = city.order
+
+      await city.destroy({ transaction })
+      await City.update(
+        { order: Sequelize.literal('`order` - 1') },
+        { where: { order: { [Op.gt]: cityOrder } }, transaction }
+      )
+
+      await transaction.commit()
+    } catch (error) {
+      await transaction.rollback()
+      throw error
+    }
+  }
+
+  async updateCityOrder(cityId: number, position: number): Promise<void> {
+    const transaction: Transaction = await City.sequelize!.transaction()
+
+    try {
+      if (position < 0) {
+        throw new Error(`Позиция ${position} не может быть меньше 0.`)
+      }
+
+      const countCity = await City.count({ transaction })
+      if (position > countCity) {
+        throw new Error(
+          `Позиция ${position} выходит за пределы допустимого диапазона (максимальная позиция: ${countCity}).`
+        )
+      }
+
+      const city = await City.findByPk(cityId, { transaction, lock: true })
+      if (!city) {
+        throw new Error(`Город с ID ${cityId} не найден.`)
+      }
+
+      const oldPosition = city.order
+      //gt больше >
+      //lte меньше <=
+      if (oldPosition < position) {
+        await City.update(
+          { order: Sequelize.literal('`order` - 1') },
+          { where: { order: { [Op.lte]: position, [Op.gt]: oldPosition } }, transaction }
+        )
+      } else if (oldPosition > position) {
+        await City.update(
+          { order: Sequelize.literal('`order` + 1') },
+          { where: { order: { [Op.gte]: position, [Op.lt]: oldPosition } }, transaction }
+        )
+      }
+
+      city.order = position
+      await city.save({ transaction })
+
+      await transaction.commit()
+    } catch (error) {
+      await transaction.rollback()
+      throw error
     }
   }
 }

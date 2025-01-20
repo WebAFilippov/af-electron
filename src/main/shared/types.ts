@@ -1,5 +1,4 @@
-
-import City from '@models/cityInfo'
+import City from '@models/CityInfo.model'
 
 export type Weather = {
   coord: {
@@ -65,5 +64,3 @@ export type PCityWith = {
     | 'utc'
   >
 }
-
-

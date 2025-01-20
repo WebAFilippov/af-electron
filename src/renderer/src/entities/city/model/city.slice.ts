@@ -28,7 +28,7 @@ const CityWeatherSlice = createSlice({
     }),
 
     toggleIsDefault: create.reducer((state, action: PayloadAction<number | undefined>) => {
-      state.cityWeather.forEach((city) => (city.isDefault = city.id === action.payload))
+      action.payload && state.cityWeather.forEach((city) => (city.isDefault = city.id === action.payload))
     }),
 
     toggleSelected: create.reducer((state, action: PayloadAction<number | undefined>) => {

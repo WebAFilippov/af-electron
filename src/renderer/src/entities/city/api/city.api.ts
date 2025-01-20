@@ -49,8 +49,8 @@ const useCitiesWeather = (cities: CityWeather[]) => {
     queryFn: () => fetchAllWeather(apikey, cities),
     enabled: !!apikey && !!cities.length,
     refetchOnWindowFocus: false,
-    refetchOnReconnect: false,
-    retry: 0,
+    refetchOnReconnect: true,
+    retry: 1,
     staleTime: 0
   })
 }

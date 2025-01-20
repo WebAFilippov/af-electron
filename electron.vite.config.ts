@@ -1,7 +1,6 @@
 // @ts-nocheck
-
 import react from '@vitejs/plugin-react'
-import { defineConfig, externalizeDepsPlugin } from 'electron-vite'
+import { defineConfig, externalizeDepsPlugin , bytecodePlugin} from 'electron-vite'
 import path from 'path'
 
 export default defineConfig({

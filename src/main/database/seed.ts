@@ -3,21 +3,20 @@ import fs from 'fs'
 
 import { Logger } from '@utils/logger'
 
-import Application from '@models/application.model'
-import CitiesForWeather, { ICity } from '@models/city'
-import City, { ICityInfo } from '@models/cityInfo'
+import Application, { IApplication } from '@models/Application.model'
+import CityInfo, { ICityInfo } from '@models/CityInfo.model'
 
 import { config } from '@main/shared/config'
 
 const log = new Logger('seed')
 
-export async function seedDatabase() {
+const seedDatabase = async () => {
   try {
     // Проверяем, есть ли данные в таблице
-    const countCity = await City.count()
+    const countCityInfo = await CityInfo.count()
 
-    if (!countCity) {
-      const initialCity: Omit<ICityInfo, 'id'>[] = []
+    if (!countCityInfo) {
+      const initialCityInfo: Omit<ICityInfo, 'id'>[] = []
 
       // Читаем данные из CSV-файла
       if (fs.existsSync(config.fileCSVPath)) {
@@ -30,7 +29,7 @@ export async function seedDatabase() {
               })
             )
             .on('data', (row) => {
-              initialCity.push({
+              initialCityInfo.push({
                 type_region: row['Тип региона'],
                 region: row['Регион'],
                 city: row['Город'],
@@ -46,29 +45,19 @@ export async function seedDatabase() {
         })
 
         // Сохраняем данные в базу
-        await City.bulkCreate(initialCity)
-        log.log('The data has been successfully added to the database')
+        await CityInfo.bulkCreate(initialCityInfo)
+        log.log('Таблица CityInfo успешно заполнена.')
       } else {
-        log.error(`The file ${config.fileCSVPath} was not found`)
+        log.error(`Файл data.csv ${config.fileCSVPath} не найден.`)
       }
     } else {
-      log.info('The data in the City table already exists. No filling is required.')
-    }
-
-    const countCitiesForWeather = await CitiesForWeather.count()
-
-    if (!countCitiesForWeather) {
-      const initialCityForWeather: Omit<ICity, 'id'>[] = [
-        { cityId: 123, isDefault: true },
-        { cityId: 321, isDefault: false },
-      ]
-      await CitiesForWeather.bulkCreate(initialCityForWeather)
+      log.info('Таблица CityInfo уже заполнена.')
     }
 
     const countApplication = await Application.count()
 
     if (!countApplication) {
-      const initialApplication: Pick<Application, 'openweathermap_apikey'>[] = [
+      const initialApplication: Omit<IApplication, 'id'>[] = [
         {
           openweathermap_apikey: ''
         }
@@ -77,6 +66,8 @@ export async function seedDatabase() {
       await Application.bulkCreate(initialApplication)
     }
   } catch (error) {
-    console.error('Error filling in the database: ', error)
+    log.error('Ошибка заполнения базы данных: ', error)
   }
 }
+
+export { seedDatabase }

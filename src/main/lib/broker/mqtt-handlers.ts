@@ -1,106 +1,106 @@
 
-import { aedes, AudioMonitor } from "./mqtt-broker";
-import { IDevice } from "./new_af";
+// import { aedes, AudioMonitor } from "./mqtt-broker";
+// import { IDevice } from "./new_af";
 
-let isDisconnect: boolean | null = null
-let intervalStart: NodeJS.Timeout | null = null;
+// let isDisconnect: boolean | null = null
+// let intervalStart: NodeJS.Timeout | null = null;
 
-let deviceValue: IDevice = { id: "", name: "", volume: 0, muted: false }
-let newDefaultValue: IDevice = { id: "", name: "", volume: 0, muted: false }
+// let deviceValue: IDevice = { id: "", name: "", volume: 0, muted: false }
+// let newDefaultValue: IDevice = { id: "", name: "", volume: 0, muted: false }
 
-export const handlerMQTT = () => {
-  AudioMonitor.on('change', (deviceInfo, change) => {
-    console.log(deviceInfo)
-    newDefaultValue = deviceInfo
-    if (change.id) {
-      console.log(deviceInfo.id)
-    }
-    if (change.name) {
-      console.log(deviceInfo.name)
-    }
-    if (change.volume) {
-      if (newDefaultValue.volume > deviceValue.volume) {
-        sendToClientsIncrementVolume(newDefaultValue)
-      }
-      if (newDefaultValue.volume < deviceValue.volume) {
-        sendToClientsDecrementVolume(newDefaultValue)
-      }
-    }
-    if (change.muted) {
-      console.log('change mute:: ', deviceInfo.muted)
-    }
-    deviceValue = deviceInfo
-  });
+// export const handlerMQTT = () => {
+//   AudioMonitor.on('change', (deviceInfo, change) => {
+//     console.log(deviceInfo)
+//     newDefaultValue = deviceInfo
+//     if (change.id) {
+//       console.log(deviceInfo.id)
+//     }
+//     if (change.name) {
+//       console.log(deviceInfo.name)
+//     }
+//     if (change.volume) {
+//       if (newDefaultValue.volume > deviceValue.volume) {
+//         sendToClientsIncrementVolume(newDefaultValue)
+//       }
+//       if (newDefaultValue.volume < deviceValue.volume) {
+//         sendToClientsDecrementVolume(newDefaultValue)
+//       }
+//     }
+//     if (change.muted) {
+//       console.log('change mute:: ', deviceInfo.muted)
+//     }
+//     deviceValue = deviceInfo
+//   });
 
-  aedes.on('client', (client) => {
-    console.log(`Клиент подключен: ${(client ? client.id : 'неизвестный')}`);
-    AudioMonitor.start()
+//   aedes.on('client', (client) => {
+//     console.log(`Клиент подключен: ${(client ? client.id : 'неизвестный')}`);
+//     AudioMonitor.start()
 
-    isDisconnect = false
-    intervalStart = setInterval(() => {
-      if (!AudioMonitor.isWork() && !isDisconnect) {
-        AudioMonitor.start()
-      }
-    }, 1000) as NodeJS.Timeout
-  });
+//     isDisconnect = false
+//     intervalStart = setInterval(() => {
+//       if (!AudioMonitor.isWork() && !isDisconnect) {
+//         AudioMonitor.start()
+//       }
+//     }, 1000) as NodeJS.Timeout
+//   });
 
-  aedes.on('clientDisconnect', (client) => {
-    console.log(`Клиент отключился: ${client.id}`)
-    AudioMonitor.stop();
+//   aedes.on('clientDisconnect', (client) => {
+//     console.log(`Клиент отключился: ${client.id}`)
+//     AudioMonitor.stop();
 
-    isDisconnect = true
-    clearInterval(intervalStart as NodeJS.Timeout)
-    intervalStart = null
-  });
+//     isDisconnect = true
+//     clearInterval(intervalStart as NodeJS.Timeout)
+//     intervalStart = null
+//   });
 
-  aedes.on('publish', (packet, client) => {
-    const topic = packet.topic;
+//   aedes.on('publish', (packet, client) => {
+//     const topic = packet.topic;
 
-    if (client) {
-      if (topic === 'increment/volume') {
-        sendToProcessIncrementVolume()
-      } else if (topic === 'decrement/volume') {
-        sendToProcessDecrementVolume()
-      } else if (topic === 'toggle/volume') {
-        AudioMonitor.toggleMute()
-      }
-    }
-  });
-}
+//     if (client) {
+//       if (topic === 'increment/volume') {
+//         sendToProcessIncrementVolume()
+//       } else if (topic === 'decrement/volume') {
+//         sendToProcessDecrementVolume()
+//       } else if (topic === 'toggle/volume') {
+//         AudioMonitor.toggleMute()
+//       }
+//     }
+//   });
+// }
 
 
-const sendToProcessIncrementVolume = () => {
-  AudioMonitor.incrementVolume()
-}
+// const sendToProcessIncrementVolume = () => {
+//   AudioMonitor.incrementVolume()
+// }
 
-const sendToProcessDecrementVolume = () => {
-  AudioMonitor.decrementVolume()
-}
+// const sendToProcessDecrementVolume = () => {
+//   AudioMonitor.decrementVolume()
+// }
 
-const sendToClientsIncrementVolume = (defaultValue: IDevice) => {
-  console.log('inc ', defaultValue.volume)
-}
+// const sendToClientsIncrementVolume = (defaultValue: IDevice) => {
+//   console.log('inc ', defaultValue.volume)
+// }
 
-const sendToClientsDecrementVolume = (defaultValue: IDevice) => {
-  console.log('dec ', defaultValue.volume)
-}
+// const sendToClientsDecrementVolume = (defaultValue: IDevice) => {
+//   console.log('dec ', defaultValue.volume)
+// }
 
-// AudioMonitor.on('change', (oldDeviceInfo, newDeviceInfo) => {
+// // AudioMonitor.on('change', (oldDeviceInfo, newDeviceInfo) => {
 
-//   if (oldDeviceInfo.volume !== newDeviceInfo.volume) {
-//     if (oldDeviceInfo.volume < newDeviceInfo.volume) sendUPVolume(newDeviceInfo.volume);
-//     if (oldDeviceInfo.volume < newDeviceInfo.volume) sendDOWNVolume(newDeviceInfo.volume);
-//   }
+// //   if (oldDeviceInfo.volume !== newDeviceInfo.volume) {
+// //     if (oldDeviceInfo.volume < newDeviceInfo.volume) sendUPVolume(newDeviceInfo.volume);
+// //     if (oldDeviceInfo.volume < newDeviceInfo.volume) sendDOWNVolume(newDeviceInfo.volume);
+// //   }
 
-//   if (oldDeviceInfo.name !== newDeviceInfo.name) {
-//     sendChangeNAME(newDeviceInfo.name);
-//   }
-// });
+// //   if (oldDeviceInfo.name !== newDeviceInfo.name) {
+// //     sendChangeNAME(newDeviceInfo.name);
+// //   }
+// // });
 
-// AudioMonitor.on('change', async ({ id, volume }) => {
-//   const device = await AudioMonitor.getDevice(id);
+// // AudioMonitor.on('change', async ({ id, volume }) => {
+// //   const device = await AudioMonitor.getDevice(id);
   
-//   if (volume && volume !== device.volume) {
-//     sendToClientsChangeVolume(id, volume);
-//   }
-// });
+// //   if (volume && volume !== device.volume) {
+// //     sendToClientsChangeVolume(id, volume);
+// //   }
+// // });

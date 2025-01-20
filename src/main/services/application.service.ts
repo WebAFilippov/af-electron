@@ -1,8 +1,8 @@
 import ping from 'ping'
 
-import { IApplication } from '@models/application.model'
+import { IApplication } from '@models/Application.model'
 
-import { applicationRepository } from '@repositories/application.repository'
+import { applicationRepository } from '@repositories/Application.repository'
 
 class ApplicationService {
   async getApplication() {

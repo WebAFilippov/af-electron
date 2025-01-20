@@ -1,10 +1,10 @@
-import { ICityInfo } from '@models/cityInfo'
+import { ICityInfo } from '@models/CityInfo.model'
 
-import { cityInfoRepository } from '@repositories/cityInfo.repository'
+import { cityInfoRepository } from '@repositories/CityInfo.repository'
 
 class CityInfoService {
   async findCityById(id: number): Promise<ICityInfo | null> {
-    const city = await cityInfoRepository.findById(id)
+    const city = await cityInfoRepository.getCityById(id)
     return city
   }
 
@@ -17,7 +17,7 @@ class CityInfoService {
     limit?: number
     ordering?: 'DESC' | 'ASC'
   }): Promise<ICityInfo[]> {
-    const cities = await cityInfoRepository.findCitiesByQueryWithParams({
+    const cities = await cityInfoRepository.getCitiesBySearchParams({
       query,
       limit,
       ordering

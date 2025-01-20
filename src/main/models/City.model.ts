@@ -1,23 +1,28 @@
-import { DataTypes, Model } from 'sequelize'
+import {
+  CreationOptional,
+  DataTypes,
+  ForeignKey,
+  InferAttributes,
+  InferCreationAttributes,
+  Model
+} from 'sequelize'
 
 import { sequelize } from '@database/database'
 
-import CityInfo, { ICityInfo } from './cityInfo'
+import CityInfo from './CityInfo.model'
 
 export interface ICity {
   id: number
-  cityId: number
-  isDefault: boolean
+  cityInfoId: number
+  default: boolean
+  order: number
 }
 
-export interface ICityWithCityInfo extends ICity {
-  cityInfo: ICityInfo
-}
-
-class City extends Model {
-  declare id: number
-  declare cityId: number
-  declare isDefault: boolean
+class City extends Model<InferAttributes<City>, InferCreationAttributes<City>> {
+  declare id: CreationOptional<number>
+  declare cityInfoId: ForeignKey<number>
+  declare default: boolean
+  declare order: number
 }
 
 City.init(
@@ -27,7 +32,7 @@ City.init(
       primaryKey: true,
       autoIncrement: true
     },
-    cityId: {
+    cityInfoId: {
       type: DataTypes.INTEGER,
       allowNull: false,
       unique: true,
@@ -37,8 +42,13 @@ City.init(
       },
       onDelete: 'SET NULL'
     },
-    isDefault: {
+    default: {
       type: DataTypes.BOOLEAN,
+      defaultValue: false,
+      allowNull: false
+    },
+    order: {
+      type: DataTypes.NUMBER,
       allowNull: false
     }
   },
@@ -51,13 +61,13 @@ City.init(
 )
 
 City.belongsTo(CityInfo, {
-  foreignKey: 'cityId',
+  foreignKey: 'cityInfoId',
   as: 'cityInfo',
   onDelete: 'SET NULL'
 })
 
 CityInfo.hasOne(City, {
-  foreignKey: 'cityId',
+  foreignKey: 'cityInfoId',
   as: 'cityInfo',
   onDelete: 'CASCADE'
 })
