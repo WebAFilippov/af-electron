@@ -20,8 +20,8 @@ export const createWindow = (): BrowserWindow => {
     maximizable: true,
     frame: false,
     trafficLightPosition: {
-      x: 16,
-      y: 10
+      x: 5,
+      y: 5
     },
     webPreferences: {
       preload: join(__dirname, '..', 'preload', 'index.mjs'),
@@ -30,9 +30,7 @@ export const createWindow = (): BrowserWindow => {
       sandbox: false,
       allowRunningInsecureContent: false,
       plugins: false,
-      devTools: true
-
-      // devTools: is.dev ? true : false
+      devTools: is.dev ? true : false
     }
   })
 

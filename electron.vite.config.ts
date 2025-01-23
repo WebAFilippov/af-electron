@@ -1,7 +1,8 @@
 // @ts-nocheck
 import react from '@vitejs/plugin-react'
-import { defineConfig, externalizeDepsPlugin , bytecodePlugin} from 'electron-vite'
+import { defineConfig, externalizeDepsPlugin, bytecodePlugin } from 'electron-vite'
 import path from 'path'
+import { is } from '@electron-toolkit/utils'
 
 export default defineConfig({
   main: {
@@ -21,6 +22,7 @@ export default defineConfig({
       }
     },
     build: {
+      reportCompressedSize: false,
       minify: 'esbuild',
       rollupOptions: {
         output: {
@@ -30,11 +32,14 @@ export default defineConfig({
             }
           }
         }
-      }
+      },
     }
   },
   preload: {
-    plugins: [externalizeDepsPlugin()]
+    plugins: [externalizeDepsPlugin()],
+    build: {
+      reportCompressedSize: false
+    }
   },
   renderer: {
     base: './',
@@ -43,6 +48,7 @@ export default defineConfig({
       'process.env': process.env
     },
     build: {
+      reportCompressedSize: false,
       minify: 'esbuild',
       rollupOptions: {
         output: {

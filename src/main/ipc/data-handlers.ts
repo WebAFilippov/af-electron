@@ -2,9 +2,9 @@ import { BrowserWindow, ipcMain } from 'electron'
 
 import { Logger } from '@utils/logger'
 
-import { applicationService } from '@services/application.service'
-import { cityService } from '@services/city.service'
-import { cityInfoService } from '@services/cityInfo.service'
+import { applicationService } from '@services/Application.service'
+import { cityService } from '@services/City.service'
+import { cityInfoService } from '@services/CityInfo.service'
 
 const log = new Logger('data-handlers')
 
@@ -35,18 +35,18 @@ export const dataHandlers = (window: BrowserWindow, isAutoLaunch: boolean) => {
   })
 
   ipcMain.handle('v1/application/update_application', async (_event, field, value) => {
-    const response = await applicationService.updateApplication(field, value)
+    const response = await applicationService.updateApplicationField(field, value)
     return response
   })
 
   ipcMain.handle('v1/application/check_connection', async () => {
-    const response = await applicationService.checkConnection()
+    const response = await applicationService.isHostReachable()
     return response
   })
 
   // City
   ipcMain.handle('v1/cityInfo/search', async (_event, optionsQuery) => {
-    const cities = await cityInfoService.findCitiesByQuery(optionsQuery)
+    const cities = await cityInfoService.getCitiesBySearchParams(optionsQuery)
     return cities
   })
 

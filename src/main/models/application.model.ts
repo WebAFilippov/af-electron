@@ -1,15 +1,15 @@
-import { DataTypes, Model } from 'sequelize'
+import { CreationOptional, DataTypes, InferAttributes, InferCreationAttributes, Model } from 'sequelize'
 
 import { sequelize } from '@database/database'
 
 export interface IApplication {
   id: number
-  openweathermap_apikey: string
+  OWM_APIKEY: string
 }
 
-class Application extends Model {
-  declare id: number
-  declare openweathermap_apikey: string
+class Application extends Model<InferAttributes<Application>, InferCreationAttributes<Application>> {
+  declare id: CreationOptional<number>
+  declare OWM_APIKEY: string
 }
 
 Application.init(
@@ -19,7 +19,7 @@ Application.init(
       primaryKey: true,
       autoIncrement: true
     },
-    openweathermap_apikey: {
+    OWM_APIKEY: {
       type: DataTypes.TEXT,
       allowNull: false
     },

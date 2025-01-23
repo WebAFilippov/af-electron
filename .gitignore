@@ -3,6 +3,8 @@ dist
 out
 .DS_Store
 *.log*
+.vscode
+.idea
 
 logs
 yarn.lock

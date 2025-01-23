@@ -1,7 +1,6 @@
 import { is } from '@electron-toolkit/utils'
 
 import { app, BrowserWindow, Menu, session } from 'electron'
-import path from 'node:path'
 
 import { createWindow } from '@ui/create-window'
 import { createTray } from '@ui/tray'
@@ -13,11 +12,13 @@ import { windowLifecycle } from '@utils/window-lifecycle'
 import { initDatabase } from '@database/database'
 import { seedDatabase } from '@database/seed'
 
-import { cityRepository } from '@repositories/City.repository'
 
-import { setAutoLaunch } from '@services/auto-launch'
+
+import { setAutoLaunch } from './utils/auto-launch'
 
 import { ipcHandlers } from './ipc'
+import { cityRepository } from '@repositories/City.repository'
+
 
 Logger.setupLogger()
 const log = new Logger('main')
@@ -64,32 +65,23 @@ if (!gotTheLock) {
       const window = createWindow()
       createTray(window)
 
+
+
       // HANDLERS
       ipcHandlers(window, isAutoLaunch)
 
       windowLifecycle(window)
 
-      // for (let i = 0; i < 20; i++) {
-      //   const number1 = Math.floor(Math.random() * 1001)
-      //   console.log(i,"  ", number1)
-      //   try {
-      //     await cityRepository.createCity(number1)
-      //   } catch {
+      try {
+        // for (let i = 0; i < 10; i++) {
+        //   await cityRepository.createCity(Math.floor(Math.random() * 1000) + 1)
+        // }
 
-      //   }
-      // }
-
-      // await cityRepository.deleteCity(365)
-
-      // await cityRepository.updateCityOrder(368, 8)
-
-      // console.log(await cityRepository.getCities())
-
-      // app.on('activate', () => {
-      //   if (BrowserWindow.getAllWindows().length === 0) {
-      //     createWindow()
-      //   }
-      // })
+        // await cityRepository.deleteCity(27)
+        // await cityRepository.updateCityOrder(25, 1)
+      } catch (error) {
+        console.log(error)
+      }
 
       log.info('Application ready')
     } catch (error) {

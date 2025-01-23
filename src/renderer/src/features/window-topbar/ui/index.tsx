@@ -29,7 +29,7 @@ export const WindowControls = () => {
         <TooltipProvider>
           <Tooltip delayDuration={100}>
             <TooltipTrigger asChild>
-              <button className="m-0 flex h-8 w-8 cursor-default flex-col items-center justify-center gap-0 rounded-none p-0 text-[#1a1a1a] text-topbar_controls_color outline-none area-no-drag hover:bg-topbar_controls_button_hovered hover:text-topbar_controls_color [&_svg]:size-min [&_svg]:shrink-0">
+              <button className="text-topbar_controls_color hover:bg-topbar_controls_button_hovered hover:text-topbar_controls_color m-0 flex h-8 w-8 cursor-default flex-col items-center justify-center gap-0 rounded-none p-0 text-[#1a1a1a] outline-none area-no-drag [&_svg]:size-min [&_svg]:shrink-0">
                 <StatusBadge icon={<Wifi size={14} />} active={online} loading={loading} />
               </button>
             </TooltipTrigger>
@@ -41,7 +41,7 @@ export const WindowControls = () => {
         <TooltipProvider>
           <Tooltip delayDuration={100}>
             <TooltipTrigger asChild>
-              <button className="m-0 flex h-8 w-8 cursor-default flex-col items-center justify-center gap-0 rounded-none p-0 text-[#1a1a1a] text-topbar_controls_color outline-none area-no-drag hover:bg-topbar_controls_button_hovered hover:text-topbar_controls_color [&_svg]:size-min [&_svg]:shrink-0">
+              <button className="text-topbar_controls_color hover:bg-topbar_controls_button_hovered hover:text-topbar_controls_color m-0 flex h-8 w-8 cursor-default flex-col items-center justify-center gap-0 rounded-none p-0 text-[#1a1a1a] outline-none area-no-drag [&_svg]:size-min [&_svg]:shrink-0">
                 <StatusBadge icon={<Binary size={14} />} active={false} loading={false} />
               </button>
             </TooltipTrigger>

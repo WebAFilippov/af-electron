@@ -5,28 +5,27 @@ import { IApplication } from '@models/Application.model'
 import { applicationRepository } from '@repositories/Application.repository'
 
 class ApplicationService {
-  async getApplication() {
-    const response = await applicationRepository.getAll()
+  async getApplication(): Promise<IApplication> {
+    const response = await applicationRepository.getApplication()
 
     return response
   }
 
-  async updateApplication(field: keyof Omit<IApplication, 'id'>, value: string) {
-    const response = await applicationRepository.updateApplicationForFieldByValue(field, value)
+  async updateApplicationField<T extends keyof Omit<IApplication, 'id'>>(
+    field: T,
+    value: IApplication[T]
+  ): Promise<boolean> {
+    const response = await applicationRepository.updateApplicationField(field, value)
 
     return response
   }
 
-  async checkConnection() {
+  async isHostReachable(host: string = '8.8.8.8'): Promise<boolean> {
     try {
-      const result = await ping.promise.probe('8.8.8.8')
-      if (result.alive) {
-        return true
-      } else {
-        return false
-      }
-    } catch (error) {
-      throw new Error('Error checking connection')
+      const { alive } = await ping.promise.probe(host)
+      return alive
+    } catch {
+      throw new Error(`Failed to check connectivity to host: ${host}`)
     }
   }
 }

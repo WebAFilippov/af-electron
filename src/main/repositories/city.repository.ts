@@ -1,4 +1,3 @@
-// eslint-disable-next-line import/no-unresolved
 import { Op, Sequelize, Transaction } from 'sequelize'
 
 import City, { ICity } from '@models/City.model'
@@ -24,7 +23,7 @@ class CityRepository {
   }
 
   async setDefaultCity(cityId: number): Promise<ICity> {
-    const transaction: Transaction = await City.sequelize!.transaction()
+    const transaction = await City.sequelize!.transaction();
 
     try {
       const city = await City.findOne({
@@ -36,32 +35,30 @@ class CityRepository {
         throw new Error(`Город с ID ${cityId} не найден.`)
       }
 
-      const currentDefaultCity = await City.findOne({
-        where: { default: true },
-        transaction
-      })
+      await City.update(
+        { default: false },
+        { where: { default: true }, transaction }
+      )
 
-      if (currentDefaultCity) {
-        currentDefaultCity.update({ default: false }, { transaction })
-      }
-
-      await city.update({ default: true }, { transaction })
+      await City.update(
+        { default: true },
+        { where: { id: cityId }, transaction }
+      )
 
       const updatedCity = await City.findOne({
         where: { default: true },
         transaction
-      })
+      });
+
+      if (!updatedCity) {
+        throw new Error('Не удалось найти обновленный город по умолчанию.')
+      }
 
       await transaction.commit()
 
-      if (updatedCity) {
-        return updatedCity
-      } else {
-        throw new Error('Не удалось найти обновленный город по умолчанию.')
-      }
+      return updatedCity
     } catch (error) {
       await transaction.rollback()
-
       throw error
     }
   }
@@ -91,7 +88,7 @@ class CityRepository {
       const newCity = await City.create(
         {
           cityInfoId,
-          default: false,
+          default: maxOrder === null ? true : false,
           order: maxOrder === null ? 0 : maxOrder + 1
         },
         { transaction }
@@ -130,6 +127,19 @@ class CityRepository {
 
       if (!city) {
         throw new Error(`Город с ID ${cityId} не найден.`)
+      }      
+
+      if (city.default) {
+        const newDefaultCity = await City.findOne({
+          where: { default: false },
+          order: [['order', 'DESC']],
+          transaction
+        });
+
+        if (newDefaultCity) {
+          await City.update({ default: false }, { where: { default: true }, transaction })
+          await newDefaultCity.update({ default: true }, { transaction })
+        }
       }
 
       const cityOrder = city.order
@@ -156,9 +166,9 @@ class CityRepository {
       }
 
       const countCity = await City.count({ transaction })
-      if (position > countCity) {
+      if (position > countCity - 1) {
         throw new Error(
-          `Позиция ${position} выходит за пределы допустимого диапазона (максимальная позиция: ${countCity}).`
+          `Позиция ${position} выходит за пределы допустимого диапазона (максимальная позиция: ${countCity - 1}).`
         )
       }
 

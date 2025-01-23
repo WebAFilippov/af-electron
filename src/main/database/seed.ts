@@ -59,7 +59,7 @@ const seedDatabase = async () => {
     if (!countApplication) {
       const initialApplication: Omit<IApplication, 'id'>[] = [
         {
-          openweathermap_apikey: ''
+          OWM_APIKEY: ''
         }
       ]
 
