@@ -65,7 +65,7 @@ export const ApplicationLayout: FC = () => {
         </div>
       </aside>
       <main
-        className="h-full w-10/12 flex-1 rounded-xl border border-border bg-background p-2"
+        className="h-full w-10/12 flex-1 rounded-xl border border-border bg-blue-100 p-2"
         id="content"
       >
         <Outlet />
