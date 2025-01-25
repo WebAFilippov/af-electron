@@ -1,4 +1,5 @@
 export type Weather = {
+
   coord: {
     lon: number
     lat: number
@@ -59,8 +60,8 @@ export type CityInfo = {
 
 export type CityWeather = {
   id: number
-  cityId: number
-  isDefault: boolean
+  cityInfoId: number
+  default: boolean
   cityInfo: CityInfo
   weather?: Weather
 }

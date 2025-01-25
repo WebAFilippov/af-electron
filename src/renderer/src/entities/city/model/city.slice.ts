@@ -12,7 +12,7 @@ const CityWeatherSlice = createSlice({
   initialState,
   reducers: (create) => ({
     setInitialCityWeather: create.reducer((state, action: PayloadAction<CityWeather[]>) => {
-      const selected = action.payload.find((city) => city.isDefault)?.id
+      const selected = action.payload.find((city) => city.default)?.id
 
       state.cityWeather = action.payload
       state.selected = selected

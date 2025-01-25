@@ -14,6 +14,17 @@ const config = {
       }
     },
     extend: {
+      backdropBlur: {
+        sm: '2px',
+        DEFAULT: '4px',
+        md: '6px',
+        lg: '8px',
+        xl: '12px',
+        '2xl': '16px',
+      },
+      fontFamily: {
+        jetbrains: ['JetBrains Mono'], // Подключаем шрифт
+      },
       colors: {
         border: 'rgba(var(--border))',
         input: 'hsla(var(--input))',
@@ -39,7 +50,6 @@ const config = {
           DEFAULT: 'hsl(var(--accent))',
           foreground: 'hsl(var(--accent-foreground))'
         },
-
         card: {
           DEFAULT: 'hsl(var(--card))',
           foreground: 'hsl(var(--card-foreground))'

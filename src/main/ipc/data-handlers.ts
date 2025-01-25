@@ -1,35 +1,29 @@
 import { BrowserWindow, ipcMain } from 'electron'
 
-import { Logger } from '@utils/logger'
-
 import { applicationService } from '@services/Application.service'
 import { cityService } from '@services/City.service'
 import { cityInfoService } from '@services/CityInfo.service'
 
-const log = new Logger('data-handlers')
-
 export const dataHandlers = (window: BrowserWindow, isAutoLaunch: boolean) => {
   // Application
-  ipcMain.handle('v1/startApp', async () => {
-    const responseForApplication = await applicationService.getApplication()
-    const responseForCityForWeather = await cityService.getCitiesWithInfo()
+  ipcMain.handle('v1/start', async () => {
+    const responseCity = await cityService.getCities()
+    const responseApplication = await applicationService.getApplication()
 
     const response = {
-      storeCity: responseForCityForWeather,
-      storeApplication: responseForApplication
+      city: responseCity,
+      application: responseApplication
     }
 
     if (!isAutoLaunch) {
       window.show()
-      log.info('Application started. Window showed')
-      return response
-    } else {
-      log.info('Application started. Window is not shown')
       return response
     }
+
+    return response
   })
 
-  ipcMain.handle('v1/application/getall', async () => {
+  ipcMain.handle('v1/application/get', async () => {
     const response = await applicationService.getApplication()
     return response
   })
@@ -44,19 +38,20 @@ export const dataHandlers = (window: BrowserWindow, isAutoLaunch: boolean) => {
     return response
   })
 
-  // City
+  // CityInfo
   ipcMain.handle('v1/cityInfo/search', async (_event, optionsQuery) => {
-    const cities = await cityInfoService.getCitiesBySearchParams(optionsQuery)
-    return cities
+    const response = await cityInfoService.getCitiesQueryParams(optionsQuery)
+    return response
   })
 
-  ipcMain.handle('v1/city/default', async (_event, id) => {
+  // City
+  ipcMain.handle('v1/city/set_default', async (_event, id) => {
     const response = await cityService.setDefaultCity(id)
     return response
   })
 
   ipcMain.handle('v1/city/create', async (_event, cityId) => {
-    const response = await cityService.createCityWithInfo(cityId)
+    const response = await cityService.createCity(cityId)
     return response
   })
 }

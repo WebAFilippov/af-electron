@@ -1,15 +1,24 @@
-import { CreationOptional, DataTypes, InferAttributes, InferCreationAttributes, Model } from 'sequelize'
+import {
+  CreationOptional,
+  DataTypes,
+  InferAttributes,
+  InferCreationAttributes,
+  Model
+} from 'sequelize'
 
 import { sequelize } from '@database/database'
 
 export interface IApplication {
   id: number
-  OWM_APIKEY: string
+  owm_apikey: string
 }
 
-class Application extends Model<InferAttributes<Application>, InferCreationAttributes<Application>> {
+class Application extends Model<
+  InferAttributes<Application>,
+  InferCreationAttributes<Application>
+> {
   declare id: CreationOptional<number>
-  declare OWM_APIKEY: string
+  declare owm_apikey: string
 }
 
 Application.init(
@@ -19,10 +28,10 @@ Application.init(
       primaryKey: true,
       autoIncrement: true
     },
-    OWM_APIKEY: {
+    owm_apikey: {
       type: DataTypes.TEXT,
       allowNull: false
-    },
+    }
   },
   {
     sequelize,

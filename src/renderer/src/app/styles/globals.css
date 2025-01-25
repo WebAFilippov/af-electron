@@ -1,43 +1,24 @@
+@import './fonts.css';
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 @layer base {
   :root {
+    --wallpaper-lines: #212223;
+    --wallpaper-lines-sizes: 1em 1em;
+    --wallpaper: #191b1d;
+
+    --cursor-size: 26px;
+    --cursor-border: 2px solid #fff;
+    --cursor-bg: #fff;
+    --cursor-blend-mode: difference;
+    --cursor-opacity: 1;
+    --cursor-transition: transform 0.1s ease-out, opacity 0.3s ease-in-out, width 0.3s ease, height 0.3s ease;
+
     --slide-height: 8rem;
     --slide-spacing: 0rem;
-    --background: 0 0% 96%;
-    --foreground: 0 0% 90%;
-    --secondary: 0, 0%, 0%, 0.1;
-    --secondary-foreground: 0, 0%, 20%;
-    --primary: 0, 0%, 10%;
-    --primary-foreground: 0, 0%, 40%;
-    --success: 13%, 77%, 37%, 1;
-    --destructive: 95%, 25%, 26%, 1;
-    --popover: 0 0% 100%;
-    --accent: 0 0% 96.1%;
-    --accent-foreground: 0 0% 9%;
-    --card: 0 0% 100%;
-    --card-foreground: 0 0% 3.9%;
-    --muted: 0 0% 96.1%;
-    --muted-foreground: 0 0% 45.1%;
-
-    /* --card: 0 0% 100%;
-    --popover-foreground: 0 0% 3.9%;
-    --primary: 0 0% 9%;
-    --secondary: 0 0% 96.1%;
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 0 0% 98%; */
-    --border: 0%, 0%, 0%, 0.1;
-    --input: 0, 0%, 100%, 0.8;
-    --ring: 0 0% 3.9%;
-    --radius: 0.5rem;
-  }
-
-  .dark {
-    --slide-height: 8rem;
-    --slide-spacing: 0rem;
-    --background: 0 0% 96%;
     --foreground: 0 0% 90%;
     --secondary: 0, 0, 0, 0.1;
     --primary: 10%, 10%, 10%, 1;
@@ -56,7 +37,45 @@
   * {
     @apply border-border;
   }
+
   body {
-    @apply bg-background text-foreground;
+    @apply text-foreground;
+
+    cursor: crosshair;
+
+    width: 100vw;
+    height: 100vh;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    top: 0;
+    background-size: var(--wallpaper-lines-sizes);
+    background-color: var(--wallpaper);
+    background-image: linear-gradient(var(--wallpaper-lines), 0.1em, transparent 0),
+      linear-gradient(90deg, var(--wallpaper-lines), 0.1em, transparent 0);
+
+    .cursor-circle {
+      position: fixed;
+      /* width: var(--cursor-size);
+      height: var(--cursor-size); */
+      border: var(--cursor-border);
+      border-radius: 100%;
+      background-color: var(--cursor-bg);
+      mix-blend-mode: var(--cursor-blend-mode);
+      opacity: var(--cursor-opacity);
+      pointer-events: none;
+      transition: var(--cursor-transition);
+      z-index: 10000;
+    }
+
+    .hidden-circle {
+      opacity: 0;
+    }
+
+    /* .hovered-circle {
+      width: 60px;
+      height: 60px;
+    } */
   }
 }

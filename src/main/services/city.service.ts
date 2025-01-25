@@ -9,12 +9,12 @@ class CityService {
     return response
   }
 
-  async getCitiesWithInfo(): Promise<ICity[]> {
+  async getCities(): Promise<ICity[]> {
     const response = await cityRepository.getCities()
     return response
   }
 
-  async createCityWithInfo(cityId: number): Promise<ICity> {
+  async createCity(cityId: number): Promise<ICity> {
     const response = await cityRepository.createCity(cityId)
     return response
   }

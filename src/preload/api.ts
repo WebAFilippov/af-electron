@@ -1,11 +1,11 @@
 import { ipcRenderer } from 'electron'
-
 import { ElectronAPI } from '@electron-toolkit/preload'
 
-import { CityWeather, PreloadApplication, PreloadStartedPayload } from '../shared/types'
+import { PreloadStart } from '../shared/types'
 
 export const api = {
-  startApp: (): Promise<PreloadStartedPayload> => ipcRenderer.invoke('v1/startApp'),
+  // Programm
+  start: (): Promise<PreloadStart> => ipcRenderer.invoke('v1/start'),
 
   // Window
   setMinimazeWindow: () => ipcRenderer.send('v1/window/minimaze'),

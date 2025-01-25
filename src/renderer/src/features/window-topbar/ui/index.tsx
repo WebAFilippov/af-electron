@@ -1,4 +1,4 @@
-import { Binary, Moon, Sun, Wifi } from 'lucide-react'
+import { Binary, Wifi } from 'lucide-react'
 
 import {
   useCloseWindow,
@@ -8,7 +8,6 @@ import {
 } from '@entities/application'
 
 import {
-  DarkMode,
   StatusBadge,
   Tooltip,
   TooltipContent,
@@ -51,21 +50,6 @@ export const WindowControls = () => {
           </Tooltip>
         </TooltipProvider>
       </div>
-
-      <DarkMode
-        triggerNode={
-          <div className="focus-visible::bg-secondary m-0 flex h-8 w-[46px] cursor-pointer flex-col items-center justify-center gap-0 rounded-none p-0 text-primary-foreground outline-none transition-colors duration-75 area-no-drag hover:bg-secondary hover:text-primary [&_svg]:size-min [&_svg]:shrink-0">
-            <Sun
-              size={16}
-              className="rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0"
-            />
-            <Moon
-              size={16}
-              className="absolute rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100"
-            />
-          </div>
-        }
-      />
 
       <div className="flex">
         <button

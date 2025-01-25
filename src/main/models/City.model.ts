@@ -16,6 +16,7 @@ export interface ICity {
   cityInfoId: number
   default: boolean
   order: number
+  cityInfo: CityInfo
 }
 
 class City extends Model<InferAttributes<City>, InferCreationAttributes<City>> {

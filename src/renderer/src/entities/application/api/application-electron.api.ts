@@ -1,6 +1,5 @@
 import { useMutation, useQuery } from '@tanstack/react-query'
 
-
 const useMinimizeWindow = () => {
   return useMutation<void, Error, void>({
     mutationFn: (): Promise<void> => {
@@ -39,15 +38,21 @@ const useNetworkConnection = (delay: number) => {
   })
 }
 
-const useStartApp = () => {
+const useStartApplication = () => {
   return useQuery({
     queryKey: ['startApp'],
     queryFn: async () => {
-      return window.api.startApp()
+      return window.api.start()
     },
     refetchOnWindowFocus: false,
     retry: 0
   })
 }
 
-export { useMinimizeWindow, useMaximizeWindow, useCloseWindow, useNetworkConnection, useStartApp }
+export {
+  useMinimizeWindow,
+  useMaximizeWindow,
+  useCloseWindow,
+  useNetworkConnection,
+  useStartApplication
+}

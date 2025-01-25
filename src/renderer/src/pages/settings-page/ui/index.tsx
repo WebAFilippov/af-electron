@@ -1,6 +1,6 @@
 import { ChangeEvent, FC, useState } from 'react'
 
-import { getOpenWeatherMapApiKey, setOpenWeatherMapApiKey } from '@entities/application'
+import { getOWMApikey, setOWMApikey } from '@entities/application'
 import { useValidateApiKey } from '@entities/application/api/application.api'
 
 import { Button, InputField } from '@shared/components/ui'
@@ -9,7 +9,7 @@ import { useDebounce } from '@shared/hooks/use-debounce'
 
 export const SettingsPage: FC = () => {
   const dispatch = useAppDispatch()
-  const owm_apikey = useAppSelector(getOpenWeatherMapApiKey) // т
+  const owm_apikey = useAppSelector(getOWMApikey)
 
   const [owmValue, setOWMValue] = useState(owm_apikey)
   const debouncedValue = useDebounce(owmValue, 500)
@@ -26,8 +26,8 @@ export const SettingsPage: FC = () => {
 
   const handleSaveSettings = async () => {
     if (owm_apikey !== owmValue) {
-      const response = await window.api.updateApplicationByField('openweathermap_apikey', owmValue)
-      response && dispatch(setOpenWeatherMapApiKey(owmValue))
+      const response = await window.api.updateApplicationByField('owm_apikey', owmValue)
+      response && dispatch(setOWMApikey(owmValue))
     }
   }
 

@@ -28,8 +28,10 @@ class ApplicationRepository {
     value: IApplication[T]
   ): Promise<boolean> {
     try {
-      if (field === 'OWM_APIKEY' && typeof value != 'string') {
-        throw new Error(`Тип значения для поля 'OWM_APIKEY' должен быть 'string', получен ${typeof value}.`)
+      if (field === 'owm_apikey' && typeof value != 'string') {
+        throw new Error(
+          `Тип значения для поля 'owm_apikey' должен быть 'string', получен ${typeof value}.`
+        )
       }
 
       const updateData = {
@@ -41,7 +43,9 @@ class ApplicationRepository {
       })
 
       if (affectedCount === 0) {
-        throw new Error(`Не удалось обновить запись: поле ${field} не найдено или уже имеет такое значение.`)
+        throw new Error(
+          `Не удалось обновить запись: поле ${field} не найдено или уже имеет такое значение.`
+        )
       }
 
       return true

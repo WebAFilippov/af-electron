@@ -18,7 +18,6 @@ export default defineConfig({
         '@services': path.resolve(__dirname, './src/main/services'),
         '@repositories': path.resolve(__dirname, './src/main/repositories'),
         '@main/shared': path.resolve(__dirname, './src/main/shared'),
-        '@shared': path.resolve(__dirname, './src/shared')
       }
     },
     build: {
@@ -47,12 +46,16 @@ export default defineConfig({
     define: {
       'process.env': process.env
     },
+    output: {
+      assetFileNames: ['src/shared/assets/fonts/[name].[ext]'],
+    },
     build: {
       reportCompressedSize: false,
       minify: 'esbuild',
       rollupOptions: {
         output: {
           manualChunks(id) {
+            console.log('chunk::  ', id)
             if (id.includes('node_modules')) {
               return id.toString().split('node_modules/')[1].split('/')[0].toString()
             }

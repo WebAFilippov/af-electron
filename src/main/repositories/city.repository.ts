@@ -6,7 +6,7 @@ import CityInfo from '@models/CityInfo.model'
 class CityRepository {
   async getCities(): Promise<ICity[]> {
     try {
-      const cities = await City.findAll({
+      const cities = (await City.findAll({
         include: {
           model: CityInfo,
           as: 'cityInfo'
@@ -14,7 +14,7 @@ class CityRepository {
         order: [['order', 'DESC']],
         raw: true,
         nest: true
-      })
+      })) as unknown as ICity[]
 
       return cities
     } catch (error) {
@@ -23,7 +23,7 @@ class CityRepository {
   }
 
   async setDefaultCity(cityId: number): Promise<ICity> {
-    const transaction = await City.sequelize!.transaction();
+    const transaction = await City.sequelize!.transaction()
 
     try {
       const city = await City.findOne({
@@ -35,20 +35,14 @@ class CityRepository {
         throw new Error(`Город с ID ${cityId} не найден.`)
       }
 
-      await City.update(
-        { default: false },
-        { where: { default: true }, transaction }
-      )
+      await City.update({ default: false }, { where: { default: true }, transaction })
 
-      await City.update(
-        { default: true },
-        { where: { id: cityId }, transaction }
-      )
+      await City.update({ default: true }, { where: { id: cityId }, transaction })
 
       const updatedCity = await City.findOne({
         where: { default: true },
         transaction
-      });
+      })
 
       if (!updatedCity) {
         throw new Error('Не удалось найти обновленный город по умолчанию.')
@@ -127,14 +121,14 @@ class CityRepository {
 
       if (!city) {
         throw new Error(`Город с ID ${cityId} не найден.`)
-      }      
+      }
 
       if (city.default) {
         const newDefaultCity = await City.findOne({
           where: { default: false },
           order: [['order', 'DESC']],
           transaction
-        });
+        })
 
         if (newDefaultCity) {
           await City.update({ default: false }, { where: { default: true }, transaction })

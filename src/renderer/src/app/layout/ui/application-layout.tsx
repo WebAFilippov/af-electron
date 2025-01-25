@@ -1,29 +1,29 @@
-import { FC, useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { Link, Outlet } from 'react-router-dom'
 
 import { WindowControls } from '@features/window-topbar/ui'
 
-import { setInitialApplication, useStartApp } from '@entities/application'
+import { setOWMApikey, useStartApplication } from '@entities/application'
 import { getAllCityWeather, setInitialCityWeather } from '@entities/city'
 import { useCitiesWeather } from '@entities/city/api/city.api'
 
-import { Toaster } from '@shared/components/ui'
+import { Cursor, Toaster } from '@shared/components/ui'
 import { ROUTE } from '@shared/config/routes'
 import { useAppDispatch, useAppSelector } from '@shared/hooks'
 import { cn } from '@shared/lib'
 
-export const ApplicationLayout: FC = () => {
+export const ApplicationLayout = () => {
   const dispatch = useAppDispatch()
   const CitiesWeather = useAppSelector(getAllCityWeather)
 
   const [isCollapse] = useState(false)
-  const { data: dataStartApp } = useStartApp()
+  const { data: dataStartApp } = useStartApplication()
   const { data: dataCitiesWeather } = useCitiesWeather(CitiesWeather)
 
   useEffect(() => {
     if (dataStartApp) {
-      dispatch(setInitialCityWeather(dataStartApp.storeCity))
-      dispatch(setInitialApplication(dataStartApp.storeApplication))
+      dispatch(setInitialCityWeather(dataStartApp.city))
+      dispatch(setOWMApikey(dataStartApp.application.owm_apikey))
     }
   }, [dataStartApp])
 
@@ -34,10 +34,12 @@ export const ApplicationLayout: FC = () => {
   }, [dataCitiesWeather])
 
   return (
-    <div className="relative box-border flex h-screen min-h-screen w-screen gap-3 overflow-hidden bg-foreground p-8 pb-3 pl-2 pr-3 text-base text-primary-foreground">
+    <div className="relative box-border flex h-screen min-h-screen w-screen gap-3 overflow-hidden p-8 pb-3 pl-2 pr-3 font-jetbrains text-base font-medium text-primary-foreground">
+      <Cursor />
       <Toaster />
+
       <header
-        className="absolute right-0 top-0 z-[700] flex h-8 w-full items-center justify-end gap-3 area-drag"
+        className="absolute right-0 top-0 z-[700] flex h-8 w-full items-center justify-end gap-3 border-b border-dashed bg-[rgba(81,81,81,0.5)] area-drag"
         id="topbar"
       >
         <WindowControls />
@@ -65,11 +67,12 @@ export const ApplicationLayout: FC = () => {
         </div>
       </aside>
       <main
-        className="h-full w-10/12 flex-1 rounded-xl border border-border bg-blue-100 p-2"
+        className="h-full w-10/12 flex-1 rounded-xl border-dashed border-border bg-[rgba(81,81,81,0.5)] p-2"
         id="content"
       >
         <Outlet />
       </main>
+      <div className="circle"></div>
     </div>
   )
 }

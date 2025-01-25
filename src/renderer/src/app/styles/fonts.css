@@ -1,0 +1,55 @@
+@font-face {
+  font-family: 'JetBrains Mono'; /* Название шрифта */
+  src: url('../../shared/assets/fonts/JetBrainsMono-Regular.woff2') format('woff2');
+  font-weight: 400; /* Обычный вес */
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'JetBrains Mono';
+  src: url('../../shared/assets/fonts/JetBrainsMono-Bold.woff2') format('woff2');
+  font-weight: 700; /* Жирный */
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'JetBrains Mono';
+  src: url('../../shared/assets/fonts/JetBrainsMono-Bold-Italic.woff2') format('woff2');
+  font-weight: 700; /* Жирный */
+  font-style: italic;
+}
+
+@font-face {
+  font-family: 'JetBrains Mono';
+  src: url('../../shared/assets/fonts/JetBrainsMono-ExtraBold.woff2') format('woff2');
+  font-weight: 800; /* Очень жирный */
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'JetBrains Mono';
+  src: url('../../shared/assets/fonts/JetBrainsMono-ExtraBold-Italic.woff2') format('woff2');
+  font-weight: 800; /* Очень жирный */
+  font-style: italic;
+}
+
+@font-face {
+  font-family: 'JetBrains Mono';
+  src: url('../../shared/assets/fonts/JetBrainsMono-Italic.woff2') format('woff2');
+  font-weight: 400; /* Обычный вес */
+  font-style: italic;
+}
+
+@font-face {
+  font-family: 'JetBrains Mono';
+  src: url('../../shared/assets/fonts/JetBrainsMono-Medium.woff2') format('woff2');
+  font-weight: 500; /* Средний вес */
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'JetBrains Mono';
+  src: url('../../shared/assets/fonts/JetBrainsMono-Medium-Italic.woff2') format('woff2');
+  font-weight: 500; /* Средний вес */
+  font-style: italic;
+}

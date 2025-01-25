@@ -1,10 +1,9 @@
 import { useQuery } from '@tanstack/react-query'
 
-import { getOpenWeatherMapApiKey } from '@entities/application'
-
 import { useAppSelector } from '@shared/hooks'
 
 import { CityWeather, Weather } from '../model/types'
+import { getOWMApikey } from '@entities/application'
 
 const BASE_URL = 'https://api.openweathermap.org/data/2.5/weather'
 
@@ -42,7 +41,7 @@ const fetchAllWeather = async (apikey: string, cities: CityWeather[]): Promise<C
 }
 
 const useCitiesWeather = (cities: CityWeather[]) => {
-  const apikey = useAppSelector(getOpenWeatherMapApiKey)
+  const apikey = useAppSelector(getOWMApikey)
 
   return useQuery({
     queryKey: ['allWeather', apikey],

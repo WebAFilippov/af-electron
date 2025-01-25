@@ -1,13 +1,12 @@
 import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 
-import { getOpenWeatherMapApiKey } from '@entities/application'
-
+import { getOWMApikey } from '@entities/application'
+import { getCityWeatherBySelected } from '@entities/city'
 
 import { Button } from '@shared/components/ui'
 import {
-  Card,
-  // CardContent,
+  Card // CardContent,
   // CardDescription,
   // CardFooter,
   // CardHeader,
@@ -15,10 +14,9 @@ import {
 } from '@shared/components/ui/card'
 import { ROUTE } from '@shared/config/routes'
 import { useAppSelector } from '@shared/hooks'
-import { getCityWeatherBySelected } from '@entities/city'
 
 const WeatherCard = () => {
-  const openWeatherMapApiKey = useAppSelector(getOpenWeatherMapApiKey)
+  const openWeatherMapApiKey = useAppSelector(getOWMApikey)
 
   const [weatherData, setWeatherData] = useState(undefined)
   const [loading, setLoading] = useState(true)
@@ -59,7 +57,7 @@ const WeatherCard = () => {
   return (
     <Card>
       {/* <CardHeader> */}
-        {/* <CardTitle>Погода в {name && name}</CardTitle>
+      {/* <CardTitle>Погода в {name && name}</CardTitle>
         <CardDescription>
           Температура: {main.temp && main.temp}°C, {weather && weather[0].description}
         </CardDescription>
@@ -69,9 +67,9 @@ const WeatherCard = () => {
         <p>Давление: {main && main.pressure} hPa</p>
       </CardContent>
       <CardFooter> */}
-        <Link to={ROUTE.WEATHER.path} className="w-full">
-          <Button>Показать подробности</Button>
-        </Link>
+      <Link to={ROUTE.WEATHER.path} className="w-full">
+        <Button>Показать подробности</Button>
+      </Link>
       {/* </CardFooter> */}
     </Card>
   )
