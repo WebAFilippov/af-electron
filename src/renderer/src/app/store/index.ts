@@ -1,11 +1,11 @@
 import { configureStore } from '@reduxjs/toolkit'
 
 import { ApplicationReducer } from '@entities/application'
-import { CityWeatherReducer } from '@entities/city'
+// import { CityWeatherReducer } from '@entities/city'
 
 export const store = configureStore({
   reducer: {
-    'city-weather': CityWeatherReducer,
+    // 'city-weather': CityWeatherReducer,
     application: ApplicationReducer
   },
   devTools: true,

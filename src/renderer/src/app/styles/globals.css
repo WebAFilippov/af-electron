@@ -7,7 +7,7 @@
 @layer base {
   :root {
     --wallpaper-lines: #212223;
-    --wallpaper-lines-sizes: 1em 1em;
+    --wallpaper-lines-sizes: 1rem 1rem;
     --wallpaper: #191b1d;
 
     --cursor-size: 26px;
@@ -15,14 +15,16 @@
     --cursor-bg: #fff;
     --cursor-blend-mode: difference;
     --cursor-opacity: 1;
-    --cursor-transition: transform 0.1s ease-out, opacity 0.3s ease-in-out, width 0.3s ease, height 0.3s ease;
+    --cursor-transition: transform 0.1s ease-out, opacity 0.3s ease-in-out, width 0.3s ease,
+      height 0.3s ease, top 0.3s ease, left 0.3s ease;
 
     --slide-height: 8rem;
     --slide-spacing: 0rem;
-    --foreground: 0 0% 90%;
-    --secondary: 0, 0, 0, 0.1;
-    --primary: 10%, 10%, 10%, 1;
-    --primary-foreground: 40%, 40%, 40%, 1;
+    --background: 210, 7%, 11%;
+    --foreground: 210, 6%, 20%;
+    --secondary: 231, 6%, 50%;
+    --primary: 231, 6%, 50%;
+    --primary-foreground: 220, 100%, 97%;
     --success: 13%, 77%, 37%, 1;
     --destructive: 95%, 25%, 26%, 1;
     --popover: 0 0% 100%;
@@ -57,12 +59,10 @@
 
     .cursor-circle {
       position: fixed;
-      /* width: var(--cursor-size);
-      height: var(--cursor-size); */
       border: var(--cursor-border);
       border-radius: 100%;
       background-color: var(--cursor-bg);
-      mix-blend-mode: var(--cursor-blend-mode);
+      mix-blend-mode: difference;
       opacity: var(--cursor-opacity);
       pointer-events: none;
       transition: var(--cursor-transition);
@@ -72,10 +72,5 @@
     .hidden-circle {
       opacity: 0;
     }
-
-    /* .hovered-circle {
-      width: 60px;
-      height: 60px;
-    } */
   }
 }

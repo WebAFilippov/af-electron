@@ -31,7 +31,7 @@ const useNetworkConnection = (delay: number) => {
   return useQuery({
     queryKey: ['checkConnection'],
     queryFn: async () => {
-      return await window.api.checkConnection()
+      // return await window.api.checkConnection()
     },
     staleTime: 0,
     refetchInterval: delay

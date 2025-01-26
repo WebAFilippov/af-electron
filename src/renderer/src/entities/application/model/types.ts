@@ -1,7 +1,7 @@
 export type InitialState = {
   owm_apikey: string
   cursor: {
-    size: number
+    sizes: number
     offsetX: number
     offsetY: number
   }

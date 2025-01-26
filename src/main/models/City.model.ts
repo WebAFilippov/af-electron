@@ -9,13 +9,16 @@ import {
 
 import { sequelize } from '@database/database'
 
-import CityInfo from './CityInfo.model'
+import CityInfo from '@models/CityInfo.model'
 
 export interface ICity {
   id: number
   cityInfoId: number
   default: boolean
   order: number
+}
+
+export interface ICityFull extends ICity {
   cityInfo: CityInfo
 }
 

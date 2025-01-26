@@ -5,7 +5,7 @@ import { InitialState } from './types'
 const initialState: InitialState = {
   owm_apikey: '',
   cursor: {
-    size: 26,
+    sizes: 26,
     offsetX: 19,
     offsetY: 42
   }

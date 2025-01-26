@@ -6,7 +6,7 @@ class ApplicationRepository {
    */
   async getApplication(): Promise<IApplication> {
     try {
-      const model = await Application.findOne({ raw: true })
+      const model = await Application.findOne({ attributes: { exclude: ['id'] }, raw: true })
 
       if (!model) {
         throw new Error('Запись в таблице Application не найдена.')

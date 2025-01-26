@@ -9,7 +9,6 @@ import {
 import { sequelize } from '@database/database'
 
 export interface IApplication {
-  id: number
   owm_apikey: string
 }
 

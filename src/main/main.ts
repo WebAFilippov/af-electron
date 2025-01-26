@@ -12,13 +12,10 @@ import { windowLifecycle } from '@utils/window-lifecycle'
 import { initDatabase } from '@database/database'
 import { seedDatabase } from '@database/seed'
 
-
-
-import { setAutoLaunch } from './utils/auto-launch'
+import { cityRepository } from '@repositories/City/City.repository'
 
 import { ipcHandlers } from './ipc'
-import { cityRepository } from '@repositories/City.repository'
-
+import { setAutoLaunch } from './utils/auto-launch'
 
 Logger.setupLogger()
 const log = new Logger('main')
@@ -65,8 +62,6 @@ if (!gotTheLock) {
       const window = createWindow()
       createTray(window)
 
-
-
       // HANDLERS
       ipcHandlers(window, isAutoLaunch)
 
@@ -76,7 +71,6 @@ if (!gotTheLock) {
         // for (let i = 0; i < 10; i++) {
         //   await cityRepository.createCity(Math.floor(Math.random() * 1000) + 1)
         // }
-
         // await cityRepository.deleteCity(27)
         // await cityRepository.updateCityOrder(25, 1)
       } catch (error) {

@@ -1,12 +1,12 @@
 import { Op, Sequelize, Transaction } from 'sequelize'
 
-import City, { ICity } from '@models/City.model'
+import City, { ICity, ICityFull } from '@models/City.model'
 import CityInfo from '@models/CityInfo.model'
 
 class CityRepository {
-  async getCities(): Promise<ICity[]> {
+  async getCities(): Promise<ICityFull[]> {
     try {
-      const cities = (await City.findAll({
+      const cities = await City.findAll({
         include: {
           model: CityInfo,
           as: 'cityInfo'
@@ -14,9 +14,9 @@ class CityRepository {
         order: [['order', 'DESC']],
         raw: true,
         nest: true
-      })) as unknown as ICity[]
+      })
 
-      return cities
+      return cities as unknown as ICityFull[]
     } catch (error) {
       throw error
     }

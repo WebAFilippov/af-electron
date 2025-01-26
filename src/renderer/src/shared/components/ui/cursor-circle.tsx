@@ -57,8 +57,8 @@ export const Cursor = () => {
       className={cn('cursor-circle', hidden && 'hidden-circle')}
       style={{
         transform: `translate(${position.x}px, ${position.y}px)`,
-        width: cursorState.size,
-        height: cursorState.size,
+        width: cursorState.sizes,
+        height: cursorState.sizes,
         backdropFilter: supportsBackdropFilter ? 'grayscale(1)' : 'none',
         WebkitBackdropFilter: supportsBackdropFilter ? 'grayscale(1)' : 'none'
       }}

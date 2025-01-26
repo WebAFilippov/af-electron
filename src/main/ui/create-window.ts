@@ -1,6 +1,6 @@
 import { is } from '@electron-toolkit/utils'
 
-import { app, BrowserWindow, nativeImage } from 'electron'
+import { app, BrowserWindow, nativeImage, nativeTheme } from 'electron'
 import { join } from 'node:path'
 
 import icon from '../../../build/window-256x256.ico?asset'
@@ -42,6 +42,9 @@ export const createWindow = (): BrowserWindow => {
   //   window.setMenuBarVisibility(false)
   //   window.setSkipTaskbar(false)
   // }
+
+  window.setBackgroundColor('#191b1d')
+  nativeTheme.themeSource = 'dark'
 
   if (!app.isPackaged && process.env['ELECTRON_RENDERER_URL']) {
     window.loadURL(process.env['ELECTRON_RENDERER_URL'])

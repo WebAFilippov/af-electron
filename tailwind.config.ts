@@ -20,10 +20,10 @@ const config = {
         md: '6px',
         lg: '8px',
         xl: '12px',
-        '2xl': '16px',
+        '2xl': '16px'
       },
       fontFamily: {
-        jetbrains: ['JetBrains Mono'], // Подключаем шрифт
+        jetbrains: ['JetBrains Mono'] // Подключаем шрифт
       },
       colors: {
         border: 'rgba(var(--border))',
@@ -32,8 +32,8 @@ const config = {
         background: 'hsl(var(--background))',
         foreground: 'hsl(var(--foreground))',
         primary: {
-          DEFAULT: 'hsla(var(--primary))',
-          foreground: 'hsla(var(--primary-foreground))'
+          DEFAULT: 'hsl(var(--primary))',
+          foreground: 'hsl(var(--primary-foreground))'
         },
         destructive: 'rgba(var(--destructive))',
         success: 'rgba(var(--success))',
@@ -53,7 +53,7 @@ const config = {
         card: {
           DEFAULT: 'hsl(var(--card))',
           foreground: 'hsl(var(--card-foreground))'
-        },
+        }
         // topbar_controls_button_hovered: 'rgba(var(--topbar-controls-button-hovered))',
         // topbar_controls_button_close_hovered: 'rgba(var(--topbar-controls-button-close-hovered))',
         // topbar_controls_color: 'rgba(var(--topbar-color))',
