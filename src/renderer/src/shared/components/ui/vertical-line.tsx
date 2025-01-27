@@ -1,17 +1,26 @@
+import { FC } from 'react'
+
 import { cn } from '@shared/lib'
 
-type VerticalLineeProps = {
-  height?: string
+interface VerticalLineProps {
+  offsetTop?: number
+  offsetBottom?: number
+  className: string
 }
 
-export const VerticalLine = ({ height = '100%' }: VerticalLineeProps) => {
+export const VerticalLine: FC<VerticalLineProps> = ({
+  offsetTop = 0,
+  offsetBottom = 100,
+  className
+}) => {
   return (
     <div
       className={cn(
-        'pointer-events-none absolute top-0 left-0 block w-0 border-l border-dashed border-white/50'
+        'pointer-events-none absolute block h-full w-0 border-l border-dashed border-white/50',
+        className
       )}
       style={{
-        height: height && `${height}`,
+        maskImage: `linear-gradient(180deg, transparent, #000 ${offsetTop}%, #000 ${offsetBottom}%, transparent)`
       }}
     />
   )

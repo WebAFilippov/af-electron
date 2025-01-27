@@ -53,3 +53,10 @@
   font-weight: 500; /* Средний вес */
   font-style: italic;
 }
+
+@font-face {
+  font-family: 'Pacifico';
+  src: url('../../shared/assets/fonts/Pacifico-Regular.ttf') format('ttf');
+  font-weight: 400; /* Средний вес */
+  font-style: normal;
+}

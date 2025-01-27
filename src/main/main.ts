@@ -12,8 +12,6 @@ import { windowLifecycle } from '@utils/window-lifecycle'
 import { initDatabase } from '@database/database'
 import { seedDatabase } from '@database/seed'
 
-import { cityRepository } from '@repositories/City/City.repository'
-
 import { ipcHandlers } from './ipc'
 import { setAutoLaunch } from './utils/auto-launch'
 
@@ -25,6 +23,7 @@ setAutoLaunch(is.dev ? false : true)
 
 const isAutoLaunch = process.argv.includes('--auto-launch')
 const gotTheLock = app.requestSingleInstanceLock() // Проверка на запущенное окно -> true if once window
+// app.disableHardwareAcceleration()
 
 if (!gotTheLock) {
   app.quit()
@@ -62,20 +61,12 @@ if (!gotTheLock) {
       const window = createWindow()
       createTray(window)
 
+      app.commandLine.appendSwitch('enable-gpu-rasterization')
+      app.commandLine.appendSwitch('ignore-gpu-blacklist')
+
       // HANDLERS
       ipcHandlers(window, isAutoLaunch)
-
       windowLifecycle(window)
-
-      try {
-        // for (let i = 0; i < 10; i++) {
-        //   await cityRepository.createCity(Math.floor(Math.random() * 1000) + 1)
-        // }
-        // await cityRepository.deleteCity(27)
-        // await cityRepository.updateCityOrder(25, 1)
-      } catch (error) {
-        console.log(error)
-      }
 
       log.info('Application ready')
     } catch (error) {

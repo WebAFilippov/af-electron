@@ -23,7 +23,8 @@ const config = {
         '2xl': '16px'
       },
       fontFamily: {
-        jetbrains: ['JetBrains Mono'] // Подключаем шрифт
+        jetbrains: ['JetBrains Mono'],
+        pacifico: ['Pacifico', 'cursive']
       },
       colors: {
         border: 'rgba(var(--border))',
@@ -35,7 +36,7 @@ const config = {
           DEFAULT: 'hsl(var(--primary))',
           foreground: 'hsl(var(--primary-foreground))'
         },
-        destructive: 'rgba(var(--destructive))',
+        destructive: 'hsl(var(--destructive))',
         success: 'rgba(var(--success))',
         popover: 'hsl(var(--popover))',
         secondary: {

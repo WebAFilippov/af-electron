@@ -1,18 +1,26 @@
+import { FC } from 'react'
+
 import { cn } from '@shared/lib'
 
-type HorizontalLineProps = {
-  width?: string
+interface HorizontalLineProps {
+  offsetLeft?: number
+  offsetRight?: number
+  className?: string
 }
 
-export const HorizontalLine = ({ width = '100%' }: HorizontalLineProps) => {
+export const HorizontalLine: FC<HorizontalLineProps> = ({
+  offsetLeft = 0,
+  offsetRight = 100,
+  className
+}) => {
   return (
     <div
       className={cn(
-        'pointer-events-none absolute bottom-0 right-0 block h-0 border-t border-dashed border-white/50'
+        'pointer-events-none absolute block h-0 w-full border-b border-dashed border-white/50 transition-all duration-300',
+        className
       )}
       style={{
-        width: width && `${width}`,
-        maskImage: 'linear-gradient(90deg, transparent, #000 20%, #000 100%, transparent)'
+        maskImage: `linear-gradient(90deg, transparent, #000 ${offsetLeft}%, #000 ${offsetRight}%, transparent)`
       }}
     />
   )

@@ -22,6 +22,7 @@ export const IPCHandlers = (window: BrowserWindow) => {
   })
 
   ipcMain.on('v1/external/open', (_event, url: string) => {
+    console.log(url)
     shell.openExternal(url)
   })
 }

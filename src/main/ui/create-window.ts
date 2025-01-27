@@ -19,12 +19,14 @@ export const createWindow = (): BrowserWindow => {
     minimizable: true,
     maximizable: true,
     frame: false,
+    backgroundColor: '#191b1d',
     trafficLightPosition: {
       x: 5,
       y: 5
     },
     webPreferences: {
       preload: join(__dirname, '..', 'preload', 'index.mjs'),
+      backgroundThrottling: false,
       contextIsolation: true,
       nodeIntegration: false,
       sandbox: false,
@@ -34,14 +36,15 @@ export const createWindow = (): BrowserWindow => {
     }
   })
 
-  window.flashFrame(true)
+  window.flashFrame(false)
   // window.setOverlayIcon(nativeImage.createFromPath(icon16), 'Harmonify')
 
-  // if (!is.dev) {
-  //   window.setMenu(null)
-  //   window.setMenuBarVisibility(false)
-  //   window.setSkipTaskbar(false)
-  // }
+  if (!is.dev) {
+    window.setMenu(null)
+    window.setMenuBarVisibility(false)
+    window.setSkipTaskbar(false)
+  }
+
 
   window.setBackgroundColor('#191b1d')
   nativeTheme.themeSource = 'dark'

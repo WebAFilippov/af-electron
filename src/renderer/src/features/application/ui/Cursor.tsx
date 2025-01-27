@@ -1,5 +1,4 @@
 import { useUnit } from 'effector-react'
-import { gsap } from 'gsap'
 import { useEffect, useRef, useState } from 'react'
 
 import { $cursor } from '@features/application'
@@ -8,29 +7,21 @@ import { cn } from '@shared/lib'
 
 export const Cursor = () => {
   const [hidden, setHidden] = useState(false)
-  const [supportsBackdropFilter, setSupportsBackdropFilter] = useState(false)
 
   const cursor = useUnit($cursor)
-  const cursorRef = useRef(null)
+  const cursorRef = useRef<HTMLDivElement | null>(null)
 
   const handleMouseMove = (e: MouseEvent) => {
     const x = e.clientX - cursor.offsetX
     const y = e.clientY - cursor.offsetY
 
-    gsap.to(cursorRef.current, {
-      x,
-      y,
-      duration: 0.5,
-      ease: 'power2.out'
-    })
+    if (cursorRef.current) {
+      cursorRef.current.style.transform = `translate(${x}px, ${y}px)`
+    }
   }
 
   const handleMouseEnter = () => setHidden(false)
   const handleMouseLeave = () => setHidden(true)
-
-  useEffect(() => {
-    setSupportsBackdropFilter('backdropFilter' in document.documentElement.style)
-  }, [])
 
   useEffect(() => {
     document.addEventListener('mousemove', handleMouseMove)
@@ -51,7 +42,7 @@ export const Cursor = () => {
       style={{
         width: cursor.sizes,
         height: cursor.sizes,
-        backdropFilter: supportsBackdropFilter ? 'grayscale(1)' : 'none',
+        willChange: 'transform'
       }}
     />
   )
