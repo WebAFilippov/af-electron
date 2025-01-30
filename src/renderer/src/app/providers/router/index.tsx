@@ -15,7 +15,7 @@ export const RouterProvider = () => {
           <Route path={ROUTE.AUDIODEVICE.path} element={ROUTE.AUDIODEVICE.element} />
           <Route path={ROUTE.LEDLIGHT.path} element={ROUTE.LEDLIGHT.element} />
           <Route path={ROUTE.TABLE.path} element={ROUTE.TABLE.element} />
-          {/* <Route path={ROUTE.SETTINGS.path} element={ROUTE.SETTINGS.element} /> */}
+          <Route path={ROUTE.SETTINGS.path} element={ROUTE.SETTINGS.element} />
         </Route>
       </Routes>
     </BrowserRouter>

@@ -33,7 +33,7 @@ export const dataHandlers = (window: BrowserWindow, isAutoLaunch: boolean) => {
     return response
   })
 
-  ipcMain.handle('v1/application/check_connection', async () => {
+  ipcMain.handle('v1/application/check_network', async () => {
     const response = await applicationService.isHostReachable()
     return response
   })

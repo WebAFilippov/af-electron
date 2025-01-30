@@ -1,4 +1,4 @@
-import { FC } from 'react'
+import { FC, MouseEvent } from 'react'
 
 import { cn } from '@shared/lib'
 
@@ -6,12 +6,14 @@ interface VerticalLineProps {
   offsetTop?: number
   offsetBottom?: number
   className: string
+  onClick?: (event: MouseEvent<HTMLDivElement>) => void
 }
 
 export const VerticalLine: FC<VerticalLineProps> = ({
   offsetTop = 0,
   offsetBottom = 100,
-  className
+  className,
+  onClick
 }) => {
   return (
     <div
@@ -22,6 +24,7 @@ export const VerticalLine: FC<VerticalLineProps> = ({
       style={{
         maskImage: `linear-gradient(180deg, transparent, #000 ${offsetTop}%, #000 ${offsetBottom}%, transparent)`
       }}
+      onClick={onClick}
     />
   )
 }

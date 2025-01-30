@@ -1,5 +1,3 @@
-import { ToggleSidebar } from '@features/application/ui/ToggleSidebar'
-
 export const WindowHeader = () => {
   const handleMinimize = () => {
     window.api.setMinimazeWindow()
@@ -13,7 +11,6 @@ export const WindowHeader = () => {
 
   return (
     <header className="absolute right-0 top-0 flex h-8 w-full justify-end area-drag bg-background text-white">
-      <ToggleSidebar className=''/>
 
       <div className="m-0 flex items-center justify-center">
         <button

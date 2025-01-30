@@ -5,12 +5,15 @@ import { PreloadStart } from '../shared/types'
 
 export const api = {
   // Programm
-  start: (): Promise<PreloadStart> => ipcRenderer.invoke('v1/start'),
+  onStartup: (): Promise<PreloadStart> => ipcRenderer.invoke('v1/start'),
 
   // Window
   setMinimazeWindow: () => ipcRenderer.send('v1/window/minimaze'),
   setMaximazeWindow: () => ipcRenderer.send('v1/window/maximize'),
   setCloseWindow: () => ipcRenderer.send('v1/window/close'),
+  getWindowWidth: (): Promise<number> => ipcRenderer.invoke('v1/window/get_width'),
+  onUpdateWindowWidth: (callback: (width: number) => void) =>
+    ipcRenderer.on('v1/window/window_resize', (_event, value: number) => callback(value)),
 
   // // Application
   // fetchApplicationSettings: (): Promise<PreloadApplication> =>
@@ -19,7 +22,7 @@ export const api = {
   //   field: keyof Omit<PreloadApplication, 'id'>,
   //   value: string
   // ): Promise<number> => ipcRenderer.invoke('v1/application/update_application', field, value),
-  // checkConnection: (): Promise<boolean> => ipcRenderer.invoke('v1/application/check_connection'),
+  checkNetworkStatus: (): Promise<boolean> => ipcRenderer.invoke('v1/application/check_network'),
 
   // // CityService
   // searchCitiesWithLimits: (args) => ipcRenderer.invoke('v1/cityInfo/search', args),
@@ -32,7 +35,7 @@ export const api = {
   //   ipcRenderer.invoke('v1/city/create', args),
 
   // // others
-  openExternal: (url: string) => ipcRenderer.send('v1/external/open', url),
+  openExternal: (url: string) => ipcRenderer.send('v1/external/open', url)
 } satisfies Record<string, (...args: any) => any>
 
 declare global {

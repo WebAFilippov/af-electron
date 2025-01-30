@@ -6,17 +6,17 @@
 
 @layer base {
   :root {
+    --wallpaper: #191b1d;
     --wallpaper-lines: #212223;
     --wallpaper-lines-sizes: 1rem 1rem;
-    --wallpaper: #191b1d;
 
-    --cursor-size: 26px;
+    /* --cursor-size: 26px;
     --cursor-border: 2px solid #fff;
     --cursor-bg: #fff;
     --cursor-blend-mode: difference;
     --cursor-opacity: 1;
     --cursor-transition: transform 0.1s ease-out, opacity 0.3s ease-in-out, width 0.3s ease,
-      height 0.3s ease, top 0.3s ease, left 0.3s ease;
+      height 0.3s ease, top 0.3s ease, left 0.3s ease; */
 
     --slide-height: 8rem;
     --slide-spacing: 0rem;
@@ -45,19 +45,14 @@
 
     /* cursor: crosshair; */
 
-    width: 100vw;
-    height: 100vh;
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    top: 0;
-    background-size: var(--wallpaper-lines-sizes);
-    background-color: var(--wallpaper);
-    background-image: linear-gradient(var(--wallpaper-lines), 0.1em, transparent 0),
-      linear-gradient(90deg, var(--wallpaper-lines), 0.1em, transparent 0);
+    .wallpaper {
+      background-color: var(--wallpaper);
+      background-size: var(--wallpaper-lines-sizes);
+      background-image: linear-gradient(var(--wallpaper-lines), 0.1em, transparent 0),
+        linear-gradient(90deg, var(--wallpaper-lines), 0.1em, transparent 0);
+    }
 
-    .cursor-circle {
+    /* .cursor-circle {
       position: fixed;
       border: var(--cursor-border);
       border-radius: 100%;
@@ -75,6 +70,6 @@
 
     .hidden-circle {
       opacity: 0;
-    }
+    } */
   }
 }
