@@ -1,35 +1,17 @@
-import { useUnit } from 'effector-react'
+import { createRoute } from 'atomic-router'
 import { FC } from 'react'
 
-import { resetCursor, setCursor } from '@features/application'
-
-// import { getCityWeatherByIsDefault } from '@entities/city'
-
-import { Button } from '@shared/components/ui'
-import { WeatherHomeCard } from '@shared/components/ui/weather-home-card'
-import { useAppSelector } from '@shared/hooks'
+export const homePage = createRoute()
 
 export const HomePage: FC = () => {
-  // const CityWeather = useAppSelector(getCityWeatherByIsDefault)
-
-  const $setCursor = useUnit(setCursor)
-  const $resetCursor = useUnit(resetCursor)
-
   return (
-    <div className="container flex h-full items-center justify-center gap-2 overflow-auto py-8">
-      <Button
-        onMouseEnter={() =>
-          $setCursor({
-            sizes: 60,
-            offsetX: 37,
-            offsetY: 61
-          })
-        }
-        onMouseLeave={() => $resetCursor()}
-      >
-        TEST
-      </Button>
-      {/* <WeatherHomeCard card={CityWeather} /> */}
+    <div className="container grid h-full grid-cols-3 place-content-stretch gap-[2rem] py-[4rem] ">
+      <div className="rounded-lg bg-foreground">01</div>
+      <div className="rounded-lg bg-foreground">02</div>
+      <div className="rounded-lg bg-foreground">03</div>
+      <div className="rounded-lg bg-foreground">04</div>
+      <div className="rounded-lg bg-foreground">05</div>
+      <div className="rounded-lg bg-foreground">06</div>
     </div>
   )
 }

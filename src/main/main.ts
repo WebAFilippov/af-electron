@@ -14,6 +14,7 @@ import { seedDatabase } from '@database/seed'
 
 import { ipcHandlers } from './ipc'
 import { setAutoLaunch } from './utils/auto-launch'
+import { cityService } from '@services/City.service'
 
 Logger.setupLogger()
 const log = new Logger('main')
@@ -67,6 +68,10 @@ if (!gotTheLock) {
       // HANDLERS
       ipcHandlers(window, isAutoLaunch)
       windowLifecycle(window)
+
+      // for (let i = 0; i < 10; i++) {
+      //   await cityService.createCity(Math.round(Math.random() * 100))
+      // }
 
       log.info('Application ready')
     } catch (error) {

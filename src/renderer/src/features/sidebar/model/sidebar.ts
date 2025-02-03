@@ -1,9 +1,24 @@
-import { createEvent, createStore, sample } from 'effector'
+import { createEffect, createEvent, createStore, sample } from 'effector'
+
+import { SIDEBAR_KEYBOARD_SHORTCUT } from '@shared/config/constant'
+
+const KeyDownToSidebar = (event: KeyboardEvent) => {
+  if (SIDEBAR_KEYBOARD_SHORTCUT.includes(event.key) && event.ctrlKey) {
+    event.preventDefault()
+    toggleSidebar()
+  }
+}
+
+const addListenerSidebarFx = createEffect(() => {
+  window.addEventListener('keydown', KeyDownToSidebar)
+})
+const removeListenerSidebarFx = createEffect(() => {
+  window.removeEventListener('keydown', KeyDownToSidebar)
+})
 
 const openSidebar = createEvent()
 const closeSidebar = createEvent()
 const toggleSidebar = createEvent()
-
 const $sidebar = createStore<boolean>(true)
 
 sample({
@@ -25,4 +40,13 @@ sample({
   target: $sidebar
 })
 
-export { openSidebar, closeSidebar, toggleSidebar, $sidebar }
+$sidebar.watch((state) => console.log(state))
+
+export {
+  $sidebar,
+  openSidebar,
+  closeSidebar,
+  toggleSidebar,
+  addListenerSidebarFx,
+  removeListenerSidebarFx
+}

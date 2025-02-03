@@ -1,6 +1,6 @@
 import { useUnit } from 'effector-react'
 import { motion } from 'framer-motion'
-import { PanelLeftClose, PanelLeftOpen } from 'lucide-react'
+import { ChevronsRight, PanelLeftClose, PanelLeftOpen } from 'lucide-react'
 import { FC } from 'react'
 
 import { cn } from '@shared/lib'
@@ -12,43 +12,43 @@ interface ToggleSidebarProps {
 }
 
 export const ToggleSidebar: FC<ToggleSidebarProps> = ({ className }) => {
-  const sidebarState = useUnit($sidebar)
+  const isOpenSidebar = useUnit($sidebar)
   const handleToggleSidebar = useUnit(toggleSidebar)
 
   return (
-    <motion.button
-      className={cn(
-        'absolute -top-[2em] z-50 flex h-[2em] w-[5em] items-center justify-center bg-background text-primary transition-colors duration-200 area-no-drag hover:bg-foreground hover:text-primary-foreground',
-        sidebarState ? 'left-[14em]' : 'left-[3em]',
-        className
-      )}
-      style={{
-        maskImage: 'linear-gradient(180deg, transparent, #000 20%)'
-      }}
-      initial={{ left: '10em' }}
-      animate={{ left: sidebarState ? '10em' : '0' }}
-      transition={{ duration: 0.3 }}
-      onClick={handleToggleSidebar}
-    >
-      <motion.div className="relative h-[1.1em] w-[1.1em]">
+    <>
+      <button
+        className={cn(
+          'flex h-[2rem] w-[2.5rem] items-center justify-center border-0 text-primary area-no-drag hover:bg-foreground hover:text-primary-foreground focus-visible:ring focus-visible:ring-blue-500 outline-none' ,
+          className
+        )}
+        style={{
+          maskImage: 'linear-gradient(180deg, transparent, #000 20%)'
+        }}
+        onClick={handleToggleSidebar}
+      >
         <motion.div
-          initial={{ opacity: 1, scale: 1 }}
-          animate={sidebarState ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.1 }}
+          animate={isOpenSidebar ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.9 }}
           transition={{ duration: 0.3 }}
-          className="absolute inset-0"
+          className="absolute flex size-[2rem] items-center justify-center"
         >
-          <PanelLeftClose className="mt-[0.1em] size-[1.1em]" />
+          <PanelLeftClose className="size-[1.1rem]" />
         </motion.div>
-
         <motion.div
-          initial={{ opacity: 0, scale: 0.1 }}
-          animate={sidebarState ? { opacity: 0, scale: 0.8 } : { opacity: 1, scale: 1 }}
+          animate={isOpenSidebar ? { opacity: 0, scale: 0.9 } : { opacity: 1, scale: 1 }}
           transition={{ duration: 0.3 }}
-          className="absolute inset-0"
+          className="absolute flex size-[2rem] items-center justify-center"
         >
-          <PanelLeftOpen className="mt-[0.1em] size-[1.1em]" />
+          <PanelLeftOpen className="size-[1.1rem]" />
         </motion.div>
-      </motion.div>
-    </motion.button>
+      </button>
+      <span
+        className={cn(
+          'absolute bottom-0 left-[4em] -translate-y-1/2 -rotate-12 select-none font-pacifico text-xs font-light text-primary'
+        )}
+      >
+        Ctrl + B
+      </span>
+    </>
   )
 }

@@ -9,7 +9,7 @@ import {
 
 import { sequelize } from '@database/database'
 
-import CityInfo from '@models/CityInfo.model'
+import CityInfo, { ICityInfo } from '@models/CityInfo.model'
 
 export interface ICity {
   id: number
@@ -19,7 +19,7 @@ export interface ICity {
 }
 
 export interface ICityFull extends ICity {
-  cityInfo: CityInfo
+  cityInfo: ICityInfo
 }
 
 class City extends Model<InferAttributes<City>, InferCreationAttributes<City>> {

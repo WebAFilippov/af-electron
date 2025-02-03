@@ -86,11 +86,16 @@ const config = {
           to: {
             height: '0'
           }
-        }
+        },
+        'marquee': {
+          '0%': { transform: 'translateX(100%)' },
+          '100%': { transform: 'translateX(-100%)' },
+        },
       },
       animation: {
         'accordion-down': 'accordion-down 0.2s ease-out',
-        'accordion-up': 'accordion-up 0.2s ease-out'
+        'accordion-up': 'accordion-up 0.2s ease-out',
+        'marquee': 'marquee 10s linear infinite'
       }
     }
   },
@@ -110,22 +115,48 @@ const config = {
         }
       })
       addComponents({
-        '.scrollbar': {
+        '.custom-scrollbar': {
+          'scrollbar-gutter': 'stable',
+
+          '&::-webkit-scrollbar': {
+            width: '4px'
+          },
+          '&::-webkit-scrollbar-track': {
+            background: 'transparent',
+            borderRadius: '10px'
+          },
+          '&::-webkit-scrollbar-thumb': {
+            backgroundColor: 'transparent',
+            borderRadius: '10px',
+            cursor: 'grab'
+          },
+          '&::-webkit-scrollbar-thumb:active': {
+            cursor: 'grabbing'
+          },
+          '&:hover::-webkit-scrollbar-thumb': {
+            backgroundColor: 'hsl(var(--primary))'
+          }
+        },
+        '.custom-scrollbar-2': {
+          'scrollbar-gutter': 'stable',
+
           '&::-webkit-scrollbar': {
             width: '8px'
           },
           '&::-webkit-scrollbar-track': {
-            background: '#e0e0e0'
+            background: 'transparent',
+            borderRadius: '10px'
           },
           '&::-webkit-scrollbar-thumb': {
-            backgroundColor: '#888',
+            backgroundColor: 'transparent',
             borderRadius: '10px',
-            border: '2px solid #e0e0e0',
-            opacity: '0',
-            transition: 'opacity 0.3s ease'
+            cursor: 'grab'
           },
-          '&.scrollbar-visible::-webkit-scrollbar-thumb': {
-            opacity: '1'
+          '&::-webkit-scrollbar-thumb:active': {
+            cursor: 'grabbing'
+          },
+          '&:hover::-webkit-scrollbar-thumb': {
+            backgroundColor: 'hsl(var(--primary))'
           }
         }
       })

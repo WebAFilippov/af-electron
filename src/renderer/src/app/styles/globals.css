@@ -10,14 +10,6 @@
     --wallpaper-lines: #212223;
     --wallpaper-lines-sizes: 1rem 1rem;
 
-    /* --cursor-size: 26px;
-    --cursor-border: 2px solid #fff;
-    --cursor-bg: #fff;
-    --cursor-blend-mode: difference;
-    --cursor-opacity: 1;
-    --cursor-transition: transform 0.1s ease-out, opacity 0.3s ease-in-out, width 0.3s ease,
-      height 0.3s ease, top 0.3s ease, left 0.3s ease; */
-
     --slide-height: 8rem;
     --slide-spacing: 0rem;
     --background: 210, 7%, 11%;
@@ -36,6 +28,11 @@
 }
 
 @layer base {
+  html {
+    font-size: calc(1vw + 5px);
+    line-height: calc(1vw + 5px);
+  }
+
   * {
     @apply border-border;
   }
@@ -43,33 +40,14 @@
   body {
     @apply text-foreground;
 
-    /* cursor: crosshair; */
-
     .wallpaper {
       background-color: var(--wallpaper);
       background-size: var(--wallpaper-lines-sizes);
       background-image: linear-gradient(var(--wallpaper-lines), 0.1em, transparent 0),
         linear-gradient(90deg, var(--wallpaper-lines), 0.1em, transparent 0);
     }
-
-    /* .cursor-circle {
-      position: fixed;
-      border: var(--cursor-border);
-      border-radius: 100%;
-      background-color: var(--cursor-bg);
-      mix-blend-mode: var(--cursor-blend-mode);
-      opacity: var(--cursor-opacity);
-      pointer-events: none;
-      transition: var(--cursor-transition);
-      z-index: 100000;
-      will-change: transform, opacity;
-      backdrop-filter: grayscale(1);
-      left: 0;
-      top: 0;
-    }
-
-    .hidden-circle {
-      opacity: 0;
-    } */
   }
+
+ 
+
 }
