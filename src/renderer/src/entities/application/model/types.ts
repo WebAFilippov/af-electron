@@ -1,3 +1,8 @@
 export type InitialState = {
-  openweathermap_apikey: string
+  owm_apikey: string
+  cursor: {
+    sizes: number
+    offsetX: number
+    offsetY: number
+  }
 }

@@ -10,7 +10,11 @@ class CityInfoService {
   }): Promise<ICityInfo[]> {
     const { query, limit, ordering } = queryParams
 
-    const cities = await cityInfoRepository.getCitiesQueryParams({ query, limit, ordering })
+    const cities = await cityInfoRepository.getCitiesQueryParams({
+      query,
+      limit,
+      ordering
+    })
 
     return cities
   }

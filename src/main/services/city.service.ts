@@ -1,4 +1,4 @@
-import { ICity } from '@models/City.model'
+import { ICity, ICityFull } from '@models/City.model'
 
 import { cityRepository } from '@repositories/City.repository'
 
@@ -9,12 +9,12 @@ class CityService {
     return response
   }
 
-  async getCitiesWithInfo(): Promise<ICity[]> {
+  async getCities(): Promise<ICityFull[]> {
     const response = await cityRepository.getCities()
     return response
   }
 
-  async createCityWithInfo(cityId: number): Promise<ICity> {
+  async createCity(cityId: number): Promise<ICity> {
     const response = await cityRepository.createCity(cityId)
     return response
   }

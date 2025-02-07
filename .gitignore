@@ -11,3 +11,6 @@ yarn.lock
 package-lock.json
 Scenario.md
 electron.vite.config.*.mjs
+.aider*
+
+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

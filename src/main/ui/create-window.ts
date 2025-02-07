@@ -1,6 +1,6 @@
 import { is } from '@electron-toolkit/utils'
 
-import { app, BrowserWindow, nativeImage } from 'electron'
+import { app, BrowserWindow, nativeImage, nativeTheme } from 'electron'
 import { join } from 'node:path'
 
 import icon from '../../../build/window-256x256.ico?asset'
@@ -19,12 +19,14 @@ export const createWindow = (): BrowserWindow => {
     minimizable: true,
     maximizable: true,
     frame: false,
+    backgroundColor: '#191b1d',
     trafficLightPosition: {
       x: 5,
       y: 5
     },
     webPreferences: {
       preload: join(__dirname, '..', 'preload', 'index.mjs'),
+      backgroundThrottling: false,
       contextIsolation: true,
       nodeIntegration: false,
       sandbox: false,
@@ -34,14 +36,17 @@ export const createWindow = (): BrowserWindow => {
     }
   })
 
-  window.flashFrame(true)
+  window.flashFrame(false)
   // window.setOverlayIcon(nativeImage.createFromPath(icon16), 'Harmonify')
 
-  // if (!is.dev) {
-  //   window.setMenu(null)
-  //   window.setMenuBarVisibility(false)
-  //   window.setSkipTaskbar(false)
-  // }
+  if (!is.dev) {
+    window.setMenu(null)
+    window.setMenuBarVisibility(false)
+    window.setSkipTaskbar(false)
+  }
+
+  window.setBackgroundColor('#191b1d')
+  nativeTheme.themeSource = 'dark'
 
   if (!app.isPackaged && process.env['ELECTRON_RENDERER_URL']) {
     window.loadURL(process.env['ELECTRON_RENDERER_URL'])

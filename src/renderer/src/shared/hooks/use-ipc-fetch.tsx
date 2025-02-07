@@ -1,6 +1,8 @@
 import { useState } from 'react'
 
-export const useIpcFetch = <T, P>(fetchFunction: (params?: P) => Promise<T>) => {
+export const useIpcFetch = <T, P>(
+  fetchFunction: (params?: P) => Promise<T>
+) => {
   const [data, setData] = useState<T>()
   const [loading, setLoading] = useState<boolean>(false)
   const [error, setError] = useState<Error | null>(null)

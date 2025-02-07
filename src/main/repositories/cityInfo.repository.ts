@@ -22,7 +22,10 @@ class CityInfoRepository {
         raw: true
       })
 
-      if (!cities.length) throw new Error(`Города с названием, содержащим "${query}", не найдены.`)
+      if (!cities.length)
+        throw new Error(
+          `Города с названием, содержащим "${query}", не найдены.`
+        )
 
       return cities
     } catch (error) {

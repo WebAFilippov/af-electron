@@ -6,7 +6,11 @@ type Props = {
   className?: string
 }
 
-const WeatherIcon802_03d: FC<Props> = ({ width = 64, height = 64, className = '' }) => {
+const WeatherIcon802_03d: FC<Props> = ({
+  width = 64,
+  height = 64,
+  className = ''
+}) => {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -39,7 +43,12 @@ const WeatherIcon802_03d: FC<Props> = ({ width = 64, height = 64, className = ''
           />
         </symbol>
       </defs>
-      <use width="350" height="222" transform="translate(81 145)" xlinkHref="#b">
+      <use
+        width="350"
+        height="222"
+        transform="translate(81 145)"
+        xlinkHref="#b"
+      >
         <animateTransform
           attributeName="transform"
           additive="sum"

@@ -1,20 +1,20 @@
 import { ChangeEvent, FC, useState } from 'react'
 
-import { getOpenWeatherMapApiKey, setOpenWeatherMapApiKey } from '@entities/application'
-import { useValidateApiKey } from '@entities/application/api/application.api'
+import { getOWMApikey, setOWMApikey } from '@entities/application'
 
+// import { useValidateApiKey } from '@entities/application/api/application.api'
 import { Button, InputField } from '@shared/components/ui'
 import { useAppDispatch, useAppSelector } from '@shared/hooks'
 import { useDebounce } from '@shared/hooks/use-debounce'
 
 export const SettingsPage: FC = () => {
   const dispatch = useAppDispatch()
-  const owm_apikey = useAppSelector(getOpenWeatherMapApiKey) // т
+  const owm_apikey = useAppSelector(getOWMApikey)
 
   const [owmValue, setOWMValue] = useState(owm_apikey)
   const debouncedValue = useDebounce(owmValue, 500)
 
-  const { data, error } = useValidateApiKey(debouncedValue)
+  // const { data, error } = useValidateApiKey(debouncedValue)
 
   const handleExternalOpen = (url: string) => {
     window.api.openExternal(url)
@@ -26,8 +26,8 @@ export const SettingsPage: FC = () => {
 
   const handleSaveSettings = async () => {
     if (owm_apikey !== owmValue) {
-      const response = await window.api.updateApplicationByField('openweathermap_apikey', owmValue)
-      response && dispatch(setOpenWeatherMapApiKey(owmValue))
+      // const response = await window.api('owm_apikey', owmValue)
+      // response && dispatch(setOWMApikey(owmValue))
     }
   }
 
@@ -42,18 +42,22 @@ export const SettingsPage: FC = () => {
           onChange={handleOnChange}
           id="opm_apikey"
           label="OpenWeatherMap API KEY"
-          success={data}
-          error={error}
+          success={true}
+          error={null}
           hint={
             <>
-              <h3 className="text-md mb-2 font-semibold">Инструкция по получению API Key:</h3>
+              <h3 className="text-md mb-2 font-semibold">
+                Инструкция по получению API Key:
+              </h3>
               <ol className="list-inside list-decimal space-y-2">
                 <li>
                   Перейдите на сайт{' '}
                   <button
                     className="text-blue-600 underline hover:text-blue-800"
                     onClick={() =>
-                      handleExternalOpen('https://home.openweathermap.org/users/sign_up')
+                      handleExternalOpen(
+                        'https://home.openweathermap.org/users/sign_up'
+                      )
                     }
                   >
                     OpenWeatherMap
@@ -66,7 +70,11 @@ export const SettingsPage: FC = () => {
                   Перейдите в раздел{' '}
                   <button
                     className="text-blue-600 underline hover:text-blue-800"
-                    onClick={() => handleExternalOpen('https://home.openweathermap.org/api_keys')}
+                    onClick={() =>
+                      handleExternalOpen(
+                        'https://home.openweathermap.org/api_keys'
+                      )
+                    }
                   >
                     API Keys
                   </button>
@@ -79,7 +87,9 @@ export const SettingsPage: FC = () => {
                 Если возникнут вопросы, обратитесь в{' '}
                 <button
                   className="text-blue-600 underline hover:text-blue-800"
-                  onClick={() => handleExternalOpen('https://openweathermap.org/faq')}
+                  onClick={() =>
+                    handleExternalOpen('https://openweathermap.org/faq')
+                  }
                 >
                   FAQ
                 </button>

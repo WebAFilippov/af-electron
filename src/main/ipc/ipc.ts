@@ -15,7 +15,7 @@ export const IPCHandlers = (window: BrowserWindow) => {
     }
   })
 
-  ipcMain.on('v1/window/close', async () => {
+  ipcMain.on('v1/window/close', () => {
     if (window) {
       window.hide()
     }

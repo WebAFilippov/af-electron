@@ -6,7 +6,11 @@ type Props = {
   className?: string
 }
 
-const WeatherIconSmokeDay: FC<Props> = ({ width = 64, height = 64, className = '' }) => {
+const WeatherIconSmokeDay: FC<Props> = ({
+  width = 64,
+  height = 64,
+  className = ''
+}) => {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -25,9 +29,9 @@ const WeatherIconSmokeDay: FC<Props> = ({ width = 64, height = 64, className = '
           y2="261.37"
           gradientUnits="userSpaceOnUse"
         >
-          <stop offset="0" stop-color="#f3f7fe" />
-          <stop offset="0.45" stop-color="#f3f7fe" />
-          <stop offset="1" stop-color="#deeafb" />
+          <stop offset="0" stopColor="#f3f7fe" />
+          <stop offset="0.45" stopColor="#f3f7fe" />
+          <stop offset="1" stopColor="#deeafb" />
         </linearGradient>
         <linearGradient
           id="b"
@@ -37,9 +41,9 @@ const WeatherIconSmokeDay: FC<Props> = ({ width = 64, height = 64, className = '
           y2="206.79"
           gradientUnits="userSpaceOnUse"
         >
-          <stop offset="0" stop-color="#b8bdc6" />
-          <stop offset="0.45" stop-color="#b8bdc6" />
-          <stop offset="1" stop-color="#a5aab2" />
+          <stop offset="0" stopColor="#b8bdc6" />
+          <stop offset="0.45" stopColor="#b8bdc6" />
+          <stop offset="1" stopColor="#a5aab2" />
         </linearGradient>
         <linearGradient
           id="e"
@@ -49,9 +53,9 @@ const WeatherIconSmokeDay: FC<Props> = ({ width = 64, height = 64, className = '
           y2="132.65"
           gradientUnits="userSpaceOnUse"
         >
-          <stop offset="0" stop-color="#fbbf24" />
-          <stop offset="0.45" stop-color="#fbbf24" />
-          <stop offset="1" stop-color="#f59e0b" />
+          <stop offset="0" stopColor="#fbbf24" />
+          <stop offset="0.45" stopColor="#fbbf24" />
+          <stop offset="1" stopColor="#f59e0b" />
         </linearGradient>
         <symbol id="g" viewBox="0 0 196 196">
           <circle
@@ -59,8 +63,8 @@ const WeatherIconSmokeDay: FC<Props> = ({ width = 64, height = 64, className = '
             cy="98"
             r="40"
             stroke="#f8af18"
-            stroke-miterlimit="10"
-            stroke-width="4"
+            strokeMiterlimit="10"
+            strokeWidth="4"
             fill="url(#e)"
           />
 
@@ -68,9 +72,9 @@ const WeatherIconSmokeDay: FC<Props> = ({ width = 64, height = 64, className = '
             d="M98,31.38V6m0,184V164.62M145.11,50.89,163.05,33M33,163.05l17.94-17.94m0-94.22L33,33m130.1,130.1-17.94-17.94M6,98H31.38M190,98H164.62"
             fill="none"
             stroke="#fbbf24"
-            stroke-linecap="round"
-            stroke-miterlimit="10"
-            stroke-width="12"
+            strokeLinecap="round"
+            strokeMiterlimit="10"
+            strokeWidth="12"
           >
             <animateTransform
               attributeName="transform"
@@ -86,14 +90,19 @@ const WeatherIconSmokeDay: FC<Props> = ({ width = 64, height = 64, className = '
           <path
             d="M291,107c-.85,0-1.68.09-2.53.13A83.9,83.9,0,0,0,135.6,42.92,55.91,55.91,0,0,0,51,91a56.56,56.56,0,0,0,.8,9.08A60,60,0,0,0,63,219c1.35,0,2.67-.11,4-.2v.2H291a56,56,0,0,0,0-112Z"
             stroke="#e6effc"
-            stroke-miterlimit="10"
-            stroke-width="6"
+            strokeMiterlimit="10"
+            strokeWidth="6"
             fill="url(#a)"
           />
         </symbol>
         <symbol id="f" viewBox="0 0 363 258">
           <use width="196" height="196" xlinkHref="#g" />
-          <use width="350" height="222" transform="translate(13 36)" xlinkHref="#h" />
+          <use
+            width="350"
+            height="222"
+            transform="translate(13 36)"
+            xlinkHref="#h"
+          />
         </symbol>
         <symbol id="i" viewBox="0 0 168 212" overflow="visible">
           <circle
@@ -101,8 +110,8 @@ const WeatherIconSmokeDay: FC<Props> = ({ width = 64, height = 64, className = '
             cy="186"
             r="24"
             stroke="#afb4bc"
-            stroke-miterlimit="10"
-            stroke-width="4"
+            strokeMiterlimit="10"
+            strokeWidth="4"
             fill="url(#b)"
             opacity="0"
           >
@@ -138,8 +147,8 @@ const WeatherIconSmokeDay: FC<Props> = ({ width = 64, height = 64, className = '
             cy="186"
             r="24"
             stroke="#afb4bc"
-            stroke-miterlimit="10"
-            stroke-width="4"
+            strokeMiterlimit="10"
+            strokeWidth="4"
             fill="url(#b)"
             opacity="0"
           >
@@ -175,8 +184,8 @@ const WeatherIconSmokeDay: FC<Props> = ({ width = 64, height = 64, className = '
             cy="186"
             r="24"
             stroke="#afb4bc"
-            stroke-miterlimit="10"
-            stroke-width="4"
+            strokeMiterlimit="10"
+            strokeWidth="4"
             fill="url(#b)"
             opacity="0"
           >
@@ -209,8 +218,18 @@ const WeatherIconSmokeDay: FC<Props> = ({ width = 64, height = 64, className = '
           </circle>
         </symbol>
       </defs>
-      <use width="363" height="258" transform="translate(68 109)" xlinkHref="#f" />
-      <use width="168" height="212" transform="translate(172 232)" xlinkHref="#i" />
+      <use
+        width="363"
+        height="258"
+        transform="translate(68 109)"
+        xlinkHref="#f"
+      />
+      <use
+        width="168"
+        height="212"
+        transform="translate(172 232)"
+        xlinkHref="#i"
+      />
     </svg>
   )
 }

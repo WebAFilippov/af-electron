@@ -20,7 +20,10 @@ export interface ICityInfo {
   utc: string
 }
 
-class CityInfo extends Model<InferAttributes<CityInfo>, InferCreationAttributes<CityInfo>> {
+class CityInfo extends Model<
+  InferAttributes<CityInfo>,
+  InferCreationAttributes<CityInfo>
+> {
   declare id: CreationOptional<number>
   declare type_region: string
   declare region: string

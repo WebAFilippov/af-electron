@@ -1,51 +1,64 @@
 import { BrowserWindow } from 'electron'
 
+import { WindowState } from '@main/shared/types'
+
+// export const windowState: WindowState = {
+//   minimize: false,
+//   maximize: false,
+//   unmaximize: false,
+//   hide: false,
+//   show: false,
+//   focus: false,
+//   blur: false
+// }
+
+// isNormal() Находится ли окно в обычном состоянии (не развёрнуто, не свернуто, не в полноэкранном режиме).
+
 export const windowLifecycle = (window: BrowserWindow) => {
-  // window.on('close', () => {
-  //   console.log('Окно закрывается')
-  // })
-  // window.on('closed', async () => {
-  //   store.data.isHide = false
-  //   store.data.isMaximaze = false
-  //   store.data.isMinisize = false
-  //   await store.write()
-  //   console.log('Окно закрыто')
-  // })
-  // window.on('minimize', () => {
-  //   console.log('Окно свернуто')
-  // })
-  // window.on('maximize', async () => {
-  //   store.data.isMaximaze = true
-  //   await store.write()
-  //   console.log('Окно развернуто')
-  // })
-  // window.on('unmaximize', async () => {
-  //   store.data.isMaximaze = false
-  //   await store.write()
-  //   console.log('Окно восстановлено из развернутого состояния')
-  // })
-  // window.on('restore', () => {
-  //   console.log('Окно восстановлено')
-  // })
-  // window.on('show', () => {
-  //   console.log('Окно показано')
-  // })
-  // window.on('hide', () => {
-  //   console.log('Окно скрыто')
-  // })
-  window.on('focus', () => {
-    window.flashFrame(false)
+  const windowState: WindowState = {
+    maximize: false,
+    fullscreen: false,
+    show: true
+  }
+
+  const updateWindowState = (key: keyof WindowState, value: boolean) => {
+    windowState[key] = value
+    console.log(key, { ...windowState })
+  }
+
+  window.on('maximize', () => {
+    console.log('maximize')
+
+    updateWindowState('maximize', window.isMaximized())
   })
-  // window.on('blur', () => {
-  //   console.log('Окно потеряло фокус')
-  // })
-  // window.on('enter-full-screen', () => {
-  //   console.log('Окно перешло в полноэкранный режим')
-  // })
-  // window.on('leave-full-screen', () => {
-  //   console.log('Окно вышло из полноэкранного режима')
-  // })
-  // window.on('ready-to-show', () => {
-  //   console.log('Окно готово к отображению')
-  // })
+
+  window.on('unmaximize', () => {
+    console.log('unmaximize')
+
+    updateWindowState('maximize', window.isMaximized())
+  })
+
+  window.on('enter-full-screen', () => {
+    console.log('enter')
+
+    updateWindowState('fullscreen', true)
+  })
+
+  window.on('leave-full-screen', () => {
+    console.log('leave')
+
+    updateWindowState('fullscreen', false)
+  })
+
+  window.on('hide', () => {
+    console.log('hide')
+
+    updateWindowState('show', window.isVisible())
+  })
+
+  window.on('show', () => {
+    console.log('show')
+
+    updateWindowState('show', true)
+  })
 }

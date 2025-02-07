@@ -81,7 +81,10 @@ class CustomEventEmitter {
    * @param {keyof AudioMonitorEvents} event - Название события.
    * @param {AudioMonitorEvents[keyof AudioMonitorEvents]} listener - Обработчик события.
    */
-  on<K extends keyof AudioMonitorEvents>(event: K, listener: AudioMonitorEvents[K]) {
+  on<K extends keyof AudioMonitorEvents>(
+    event: K,
+    listener: AudioMonitorEvents[K]
+  ) {
     if (!this.listeners[event]) {
       this.listeners[event] = []
     }
@@ -156,7 +159,8 @@ class AudioDeviceMonitor {
   constructor(options?: AudioMonitorOptions) {
     this.autoStart = options?.autoStart ?? true
     this.logger = options?.logger ?? true
-    this.delay = options?.delay !== undefined ? Math.max(options.delay, 75) : 250
+    this.delay =
+      options?.delay !== undefined ? Math.max(options.delay, 75) : 250
     this.step = options?.step || 5
 
     if (this.autoStart) {
@@ -178,7 +182,10 @@ class AudioDeviceMonitor {
    * - Для события 'exit': (message: number) => void
    * - Для события 'forceExit': (message: string) => void
    */
-  on(event: 'change', listener: (deviceInfo: IDevice, change: IChange) => void): void
+  on(
+    event: 'change',
+    listener: (deviceInfo: IDevice, change: IChange) => void
+  ): void
   on(event: 'alert', listener: (message: string) => void): void
   on(event: 'command', listener: (message: string) => void): void
   on(event: 'error', listener: (message: string) => void): void
@@ -204,7 +211,10 @@ class AudioDeviceMonitor {
     this.exePath = path
       .join(app.getAppPath(), 'resources', 'af-win-audio.exe')
       .replace('app.asar', 'app.asar.unpacked')
-    this.audioDeviceProcess = spawn(this.exePath, [this.delay.toString(), this.step.toString()])
+    this.audioDeviceProcess = spawn(this.exePath, [
+      this.delay.toString(),
+      this.step.toString()
+    ])
     this.printMessage('alert', `Процесс запущен`)
 
     // Обработка ошибок при запуске процесса
@@ -279,7 +289,10 @@ class AudioDeviceMonitor {
           if (this.audioDeviceProcess?.killed === false) {
             this.audioDeviceProcess?.kill('SIGKILL')
             this.audioDeviceProcess = null
-            this.printMessage('forceExit', 'Процесс был принудительно завершён.')
+            this.printMessage(
+              'forceExit',
+              'Процесс был принудительно завершён.'
+            )
           }
         })
       } else {
@@ -311,7 +324,10 @@ class AudioDeviceMonitor {
         this.audioDeviceProcess.stdin.write('upvolume\n')
       }
     } else {
-      this.printMessage('error', 'Процесс не запущен или стандартный ввод недоступен.')
+      this.printMessage(
+        'error',
+        'Процесс не запущен или стандартный ввод недоступен.'
+      )
     }
   }
 
@@ -329,7 +345,10 @@ class AudioDeviceMonitor {
         this.audioDeviceProcess.stdin.write('downvolume\n')
       }
     } else {
-      this.printMessage('error', 'Процесс не запущен или стандартный ввод недоступен.')
+      this.printMessage(
+        'error',
+        'Процесс не запущен или стандартный ввод недоступен.'
+      )
     }
   }
 
@@ -338,7 +357,10 @@ class AudioDeviceMonitor {
       this.printMessage('command', 'Звук заглушен.')
       this.audioDeviceProcess.stdin.write('mute\n')
     } else {
-      this.printMessage('error', 'Процесс не запущен или стандартный ввод недоступен.')
+      this.printMessage(
+        'error',
+        'Процесс не запущен или стандартный ввод недоступен.'
+      )
     }
   }
 
@@ -347,7 +369,10 @@ class AudioDeviceMonitor {
       this.printMessage('command', 'Звук восстановлен.')
       this.audioDeviceProcess.stdin.write('unmute\n')
     } else {
-      this.printMessage('error', 'Процесс не запущен или стандартный ввод недоступен.')
+      this.printMessage(
+        'error',
+        'Процесс не запущен или стандартный ввод недоступен.'
+      )
     }
   }
 
@@ -356,7 +381,10 @@ class AudioDeviceMonitor {
       this.printMessage('command', 'Переключение состояния звука выполнено.')
       this.audioDeviceProcess.stdin.write('togglemute\n')
     } else {
-      this.printMessage('error', 'Процесс не запущен или стандартный ввод недоступен.')
+      this.printMessage(
+        'error',
+        'Процесс не запущен или стандартный ввод недоступен.'
+      )
     }
   }
 
@@ -371,7 +399,10 @@ class AudioDeviceMonitor {
         this.printMessage('error', 'Задержка должна быть не менее 75 мс.')
       }
     } else {
-      this.printMessage('error', 'Процесс не запущен или стандартный ввод недоступен.')
+      this.printMessage(
+        'error',
+        'Процесс не запущен или стандартный ввод недоступен.'
+      )
     }
   }
 
@@ -383,10 +414,16 @@ class AudioDeviceMonitor {
         this.printMessage('command', `Шаг громкости обновлён до ${this.step}.`)
         this.audioDeviceProcess.stdin.write(`setstepvolume ${this.step}\n`)
       } else {
-        this.printMessage('error', 'Шаг громкости должен быть больше в диапозоне от 1 до 100.')
+        this.printMessage(
+          'error',
+          'Шаг громкости должен быть больше в диапозоне от 1 до 100.'
+        )
       }
     } else {
-      this.printMessage('error', 'Процесс не запущен или стандартный ввод недоступен.')
+      this.printMessage(
+        'error',
+        'Процесс не запущен или стандартный ввод недоступен.'
+      )
     }
   }
 
@@ -403,7 +440,10 @@ class AudioDeviceMonitor {
    */
   private checkChange(newDeviceInfo: IDevice): void {
     for (const key in newDeviceInfo) {
-      if (newDeviceInfo[key as keyof IDevice] !== this.deviceInfo[key as keyof IDevice]) {
+      if (
+        newDeviceInfo[key as keyof IDevice] !==
+        this.deviceInfo[key as keyof IDevice]
+      ) {
         this.deviceChange[key as keyof IChange] = true
         // this.printMessage(
         //   'alert',

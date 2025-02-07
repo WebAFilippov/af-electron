@@ -6,7 +6,11 @@ type Props = {
   className?: string
 }
 
-const WeatherIconTornado: FC<Props> = ({ width = 64, height = 64, className = '' }) => {
+const WeatherIconTornado: FC<Props> = ({
+  width = 64,
+  height = 64,
+  className = ''
+}) => {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -25,14 +29,42 @@ const WeatherIconTornado: FC<Props> = ({ width = 64, height = 64, className = ''
           y2="222.35"
           gradientUnits="userSpaceOnUse"
         >
-          <stop offset="0" stop-color="#d4d7dd" />
-          <stop offset="0.45" stop-color="#d4d7dd" />
-          <stop offset="1" stop-color="#bec1c6" />
+          <stop offset="0" stopColor="#d4d7dd" />
+          <stop offset="0.45" stopColor="#d4d7dd" />
+          <stop offset="1" stopColor="#bec1c6" />
         </linearGradient>
-        <linearGradient id="b" x1="224" y1="152.57" x2="288" y2="263.43" xlinkHref="#a" />
-        <linearGradient id="c" x1="229" y1="209.23" x2="283" y2="302.77" xlinkHref="#a" />
-        <linearGradient id="d" x1="234" y1="265.89" x2="278" y2="342.11" xlinkHref="#a" />
-        <linearGradient id="e" x1="242" y1="327.75" x2="270" y2="376.25" xlinkHref="#a" />
+        <linearGradient
+          id="b"
+          x1="224"
+          y1="152.57"
+          x2="288"
+          y2="263.43"
+          xlinkHref="#a"
+        />
+        <linearGradient
+          id="c"
+          x1="229"
+          y1="209.23"
+          x2="283"
+          y2="302.77"
+          xlinkHref="#a"
+        />
+        <linearGradient
+          id="d"
+          x1="234"
+          y1="265.89"
+          x2="278"
+          y2="342.11"
+          xlinkHref="#a"
+        />
+        <linearGradient
+          id="e"
+          x1="242"
+          y1="327.75"
+          x2="270"
+          y2="376.25"
+          xlinkHref="#a"
+        />
       </defs>
 
       <line
@@ -41,9 +73,9 @@ const WeatherIconTornado: FC<Props> = ({ width = 64, height = 64, className = ''
         x2="376"
         y2="160"
         fill="none"
-        stroke-linecap="round"
-        stroke-miterlimit="10"
-        stroke-width="24"
+        strokeLinecap="round"
+        strokeMiterlimit="10"
+        strokeWidth="24"
         stroke="url(#a)"
       >
         <animateTransform
@@ -65,9 +97,9 @@ const WeatherIconTornado: FC<Props> = ({ width = 64, height = 64, className = ''
         x2="360"
         y2="208"
         fill="none"
-        stroke-linecap="round"
-        stroke-miterlimit="10"
-        stroke-width="24"
+        strokeLinecap="round"
+        strokeMiterlimit="10"
+        strokeWidth="24"
         stroke="url(#b)"
       >
         <animateTransform
@@ -89,9 +121,9 @@ const WeatherIconTornado: FC<Props> = ({ width = 64, height = 64, className = ''
         x2="340"
         y2="256"
         fill="none"
-        stroke-linecap="round"
-        stroke-miterlimit="10"
-        stroke-width="24"
+        strokeLinecap="round"
+        strokeMiterlimit="10"
+        strokeWidth="24"
         stroke="url(#c)"
       >
         <animateTransform
@@ -113,9 +145,9 @@ const WeatherIconTornado: FC<Props> = ({ width = 64, height = 64, className = ''
         x2="320"
         y2="304"
         fill="none"
-        stroke-linecap="round"
-        stroke-miterlimit="10"
-        stroke-width="24"
+        strokeLinecap="round"
+        strokeMiterlimit="10"
+        strokeWidth="24"
         stroke="url(#d)"
       >
         <animateTransform
@@ -137,9 +169,9 @@ const WeatherIconTornado: FC<Props> = ({ width = 64, height = 64, className = ''
         x2="288"
         y2="352"
         fill="none"
-        stroke-linecap="round"
-        stroke-miterlimit="10"
-        stroke-width="24"
+        strokeLinecap="round"
+        strokeMiterlimit="10"
+        strokeWidth="24"
         stroke="url(#e)"
       >
         <animateTransform

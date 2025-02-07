@@ -6,7 +6,11 @@ type Props = {
   className?: string
 }
 
-const WeatherIcon800_01n: FC<Props> = ({ width = 64, height = 64, className = '' }) => {
+const WeatherIcon800_01n: FC<Props> = ({
+  width = 64,
+  height = 64,
+  className = ''
+}) => {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -25,17 +29,17 @@ const WeatherIcon800_01n: FC<Props> = ({ width = 64, height = 64, className = ''
           y2="259.13"
           gradientUnits="userSpaceOnUse"
         >
-          <stop offset="0" stop-color="#86c3db" />
-          <stop offset="0.45" stop-color="#86c3db" />
-          <stop offset="1" stop-color="#5eafcf" />
+          <stop offset="0" stopColor="#86c3db" />
+          <stop offset="0.45" stopColor="#86c3db" />
+          <stop offset="1" stopColor="#5eafcf" />
         </linearGradient>
         <symbol id="b" viewBox="0 0 270 270" overflow="visible">
           <path
             d="M252.25,168.63C178.13,168.63,118,109.35,118,36.21A130.48,130.48,0,0,1,122.47,3C55.29,10.25,3,66.37,3,134.58,3,207.71,63.09,267,137.21,267,199.69,267,252,224.82,267,167.79A135.56,135.56,0,0,1,252.25,168.63Z"
             stroke="#72b9d5"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            stroke-width="6"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeWidth="6"
             fill="url(#a)"
           >
             <animateTransform
@@ -49,7 +53,12 @@ const WeatherIcon800_01n: FC<Props> = ({ width = 64, height = 64, className = ''
           </path>
         </symbol>
       </defs>
-      <use width="270" height="270" transform="translate(121 121)" xlinkHref="#b" />
+      <use
+        width="270"
+        height="270"
+        transform="translate(121 121)"
+        xlinkHref="#b"
+      />
     </svg>
   )
 }

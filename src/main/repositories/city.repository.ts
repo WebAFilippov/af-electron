@@ -1,10 +1,10 @@
 import { Op, Sequelize, Transaction } from 'sequelize'
 
-import City, { ICity } from '@models/City.model'
+import City, { ICity, ICityFull } from '@models/City.model'
 import CityInfo from '@models/CityInfo.model'
 
 class CityRepository {
-  async getCities(): Promise<ICity[]> {
+  async getCities(): Promise<ICityFull[]> {
     try {
       const cities = await City.findAll({
         include: {
@@ -16,14 +16,14 @@ class CityRepository {
         nest: true
       })
 
-      return cities
+      return cities as unknown as ICityFull[]
     } catch (error) {
       throw error
     }
   }
 
   async setDefaultCity(cityId: number): Promise<ICity> {
-    const transaction = await City.sequelize!.transaction();
+    const transaction = await City.sequelize!.transaction()
 
     try {
       const city = await City.findOne({
@@ -48,7 +48,7 @@ class CityRepository {
       const updatedCity = await City.findOne({
         where: { default: true },
         transaction
-      });
+      })
 
       if (!updatedCity) {
         throw new Error('Не удалось найти обновленный город по умолчанию.')
@@ -84,7 +84,10 @@ class CityRepository {
         throw new Error(`Город с ID ${existingCity.id} уже существует.`)
       }
 
-      const maxOrder = await City.max<number | null, City>('order', { raw: true, transaction })
+      const maxOrder = await City.max<number | null, City>('order', {
+        raw: true,
+        transaction
+      })
       const newCity = await City.create(
         {
           cityInfoId,
@@ -127,17 +130,20 @@ class CityRepository {
 
       if (!city) {
         throw new Error(`Город с ID ${cityId} не найден.`)
-      }      
+      }
 
       if (city.default) {
         const newDefaultCity = await City.findOne({
           where: { default: false },
           order: [['order', 'DESC']],
           transaction
-        });
+        })
 
         if (newDefaultCity) {
-          await City.update({ default: false }, { where: { default: true }, transaction })
+          await City.update(
+            { default: false },
+            { where: { default: true }, transaction }
+          )
           await newDefaultCity.update({ default: true }, { transaction })
         }
       }
@@ -183,12 +189,18 @@ class CityRepository {
       if (oldPosition < position) {
         await City.update(
           { order: Sequelize.literal('`order` - 1') },
-          { where: { order: { [Op.lte]: position, [Op.gt]: oldPosition } }, transaction }
+          {
+            where: { order: { [Op.lte]: position, [Op.gt]: oldPosition } },
+            transaction
+          }
         )
       } else if (oldPosition > position) {
         await City.update(
           { order: Sequelize.literal('`order` + 1') },
-          { where: { order: { [Op.gte]: position, [Op.lt]: oldPosition } }, transaction }
+          {
+            where: { order: { [Op.gte]: position, [Op.lt]: oldPosition } },
+            transaction
+          }
         )
       }
 

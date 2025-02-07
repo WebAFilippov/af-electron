@@ -1,15 +1,9 @@
 singleQuote: true
 semi: false
-printWidth: 100
+printWidth: 80
 trailingComma: none
 plugins:
-  - prettier-plugin-tailwindcss
   - '@trivago/prettier-plugin-sort-imports'
-tailwindFunctions:
-  - clsx
-  - cva
-  - twMerge
-tailwindPreserveDuplicates: true
 importOrder:
   - '^[a-zA-Z0-9]'
   - '^@ui'
@@ -19,6 +13,7 @@ importOrder:
   - '^@models'
   - '^@repositories'
   - '^@services'
+  - '^@controllers'
   - '^@ipc'
   - '^@main/shared'
   - '^@shared'

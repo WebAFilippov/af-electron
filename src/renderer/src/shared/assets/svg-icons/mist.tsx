@@ -6,7 +6,11 @@ type Props = {
   className?: string
 }
 
-const WeatherIconMist: FC<Props> = ({ width = 64, height = 64, className = '' }) => {
+const WeatherIconMist: FC<Props> = ({
+  width = 64,
+  height = 64,
+  className = ''
+}) => {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -25,9 +29,9 @@ const WeatherIconMist: FC<Props> = ({ width = 64, height = 64, className = '' })
           y2="262.35"
           gradientUnits="userSpaceOnUse"
         >
-          <stop offset="0" stop-color="#d4d7dd" />
-          <stop offset="0.45" stop-color="#d4d7dd" />
-          <stop offset="1" stop-color="#bec1c6" />
+          <stop offset="0" stopColor="#d4d7dd" />
+          <stop offset="0.45" stopColor="#d4d7dd" />
+          <stop offset="1" stopColor="#bec1c6" />
         </linearGradient>
         <linearGradient id="b" y1="193.65" y2="318.35" xlinkHref="#a" />
         <linearGradient id="c" y1="249.65" y2="374.35" xlinkHref="#a" />
@@ -39,9 +43,9 @@ const WeatherIconMist: FC<Props> = ({ width = 64, height = 64, className = '' })
         x2="376"
         y2="200"
         fill="none"
-        stroke-linecap="round"
-        stroke-miterlimit="10"
-        stroke-width="24"
+        strokeLinecap="round"
+        strokeMiterlimit="10"
+        strokeWidth="24"
         stroke="url(#a)"
       >
         <animateTransform
@@ -60,9 +64,9 @@ const WeatherIconMist: FC<Props> = ({ width = 64, height = 64, className = '' })
         x2="376"
         y2="256"
         fill="none"
-        stroke-linecap="round"
-        stroke-miterlimit="10"
-        stroke-width="24"
+        strokeLinecap="round"
+        strokeMiterlimit="10"
+        strokeWidth="24"
         stroke="url(#b)"
       >
         <animateTransform
@@ -82,9 +86,9 @@ const WeatherIconMist: FC<Props> = ({ width = 64, height = 64, className = '' })
         x2="376"
         y2="312"
         fill="none"
-        stroke-linecap="round"
-        stroke-miterlimit="10"
-        stroke-width="24"
+        strokeLinecap="round"
+        strokeMiterlimit="10"
+        strokeWidth="24"
         stroke="url(#c)"
       >
         <animateTransform

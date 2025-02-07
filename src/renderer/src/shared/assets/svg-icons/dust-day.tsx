@@ -6,7 +6,11 @@ type Props = {
   className?: string
 }
 
-const WeatherIconDustDay: FC<Props> = ({ width = 64, height = 64, className = '' }) => {
+const WeatherIconDustDay: FC<Props> = ({
+  width = 64,
+  height = 64,
+  className = ''
+}) => {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -25,21 +29,98 @@ const WeatherIconDustDay: FC<Props> = ({ width = 64, height = 64, className = ''
           y2="190.39"
           gradientUnits="userSpaceOnUse"
         >
-          <stop offset="0" stop-color="#fde68a" />
-          <stop offset="0.45" stop-color="#fde68a" />
-          <stop offset="1" stop-color="#fde171" />
+          <stop offset="0" stopColor="#fde68a" />
+          <stop offset="0.45" stopColor="#fde68a" />
+          <stop offset="1" stopColor="#fde171" />
         </linearGradient>
-        <linearGradient id="b" x1="66" y1="169.61" x2="78" y2="190.39" xlinkHref="#a" />
-        <linearGradient id="c" x1="38" y1="137.61" x2="50" y2="158.39" xlinkHref="#a" />
-        <linearGradient id="d" x1="98" y1="137.61" x2="110" y2="158.39" xlinkHref="#a" />
-        <linearGradient id="e" x1="70" y1="101.61" x2="82" y2="122.39" xlinkHref="#a" />
-        <linearGradient id="f" x1="130" y1="101.61" x2="142" y2="122.39" xlinkHref="#a" />
-        <linearGradient id="g" x1="102" y1="69.61" x2="114" y2="90.39" xlinkHref="#a" />
-        <linearGradient id="h" x1="162" y1="69.61" x2="174" y2="90.39" xlinkHref="#a" />
-        <linearGradient id="i" x1="134" y1="33.61" x2="146" y2="54.39" xlinkHref="#a" />
-        <linearGradient id="j" x1="194" y1="33.61" x2="206" y2="54.39" xlinkHref="#a" />
-        <linearGradient id="k" x1="166" y1="1.61" x2="178" y2="22.39" xlinkHref="#a" />
-        <linearGradient id="l" x1="226" y1="1.61" x2="238" y2="22.39" xlinkHref="#a" />
+        <linearGradient
+          id="b"
+          x1="66"
+          y1="169.61"
+          x2="78"
+          y2="190.39"
+          xlinkHref="#a"
+        />
+        <linearGradient
+          id="c"
+          x1="38"
+          y1="137.61"
+          x2="50"
+          y2="158.39"
+          xlinkHref="#a"
+        />
+        <linearGradient
+          id="d"
+          x1="98"
+          y1="137.61"
+          x2="110"
+          y2="158.39"
+          xlinkHref="#a"
+        />
+        <linearGradient
+          id="e"
+          x1="70"
+          y1="101.61"
+          x2="82"
+          y2="122.39"
+          xlinkHref="#a"
+        />
+        <linearGradient
+          id="f"
+          x1="130"
+          y1="101.61"
+          x2="142"
+          y2="122.39"
+          xlinkHref="#a"
+        />
+        <linearGradient
+          id="g"
+          x1="102"
+          y1="69.61"
+          x2="114"
+          y2="90.39"
+          xlinkHref="#a"
+        />
+        <linearGradient
+          id="h"
+          x1="162"
+          y1="69.61"
+          x2="174"
+          y2="90.39"
+          xlinkHref="#a"
+        />
+        <linearGradient
+          id="i"
+          x1="134"
+          y1="33.61"
+          x2="146"
+          y2="54.39"
+          xlinkHref="#a"
+        />
+        <linearGradient
+          id="j"
+          x1="194"
+          y1="33.61"
+          x2="206"
+          y2="54.39"
+          xlinkHref="#a"
+        />
+        <linearGradient
+          id="k"
+          x1="166"
+          y1="1.61"
+          x2="178"
+          y2="22.39"
+          xlinkHref="#a"
+        />
+        <linearGradient
+          id="l"
+          x1="226"
+          y1="1.61"
+          x2="238"
+          y2="22.39"
+          xlinkHref="#a"
+        />
         <linearGradient
           id="m"
           x1="149.99"
@@ -48,9 +129,9 @@ const WeatherIconDustDay: FC<Props> = ({ width = 64, height = 64, className = ''
           y2="264.76"
           gradientUnits="userSpaceOnUse"
         >
-          <stop offset="0" stop-color="#fbbf24" />
-          <stop offset="0.45" stop-color="#fbbf24" />
-          <stop offset="1" stop-color="#f59e0b" />
+          <stop offset="0" stopColor="#fbbf24" />
+          <stop offset="0.45" stopColor="#fbbf24" />
+          <stop offset="1" stopColor="#f59e0b" />
         </linearGradient>
         <clipPath id="n">
           <polygon points="0 0 512 0 0 512 0 0" fill="none" />
@@ -61,8 +142,8 @@ const WeatherIconDustDay: FC<Props> = ({ width = 64, height = 64, className = ''
             cy="192"
             r="84"
             stroke="#f8af18"
-            stroke-miterlimit="10"
-            stroke-width="6"
+            strokeMiterlimit="10"
+            strokeWidth="6"
             fill="url(#m)"
           />
 
@@ -70,9 +151,9 @@ const WeatherIconDustDay: FC<Props> = ({ width = 64, height = 64, className = ''
             d="M192,61.66V12m0,360V322.34M284.17,99.83l35.11-35.11M64.72,319.28l35.11-35.11m0-184.34L64.72,64.72M319.28,319.28l-35.11-35.11M61.66,192H12m360,0H322.34"
             fill="none"
             stroke="#fbbf24"
-            stroke-linecap="round"
-            stroke-miterlimit="10"
-            stroke-width="24"
+            strokeLinecap="round"
+            strokeMiterlimit="10"
+            strokeWidth="24"
           >
             <animateTransform
               attributeName="transform"
@@ -206,10 +287,20 @@ const WeatherIconDustDay: FC<Props> = ({ width = 64, height = 64, className = ''
           </circle>
         </symbol>
       </defs>
-      <g clip-path="url(#n)">
-        <use width="384" height="384" transform="translate(64 64)" xlinkHref="#o" />
+      <g clipPath="url(#n)">
+        <use
+          width="384"
+          height="384"
+          transform="translate(64 64)"
+          xlinkHref="#o"
+        />
       </g>
-      <use width="244" height="192" transform="translate(192 182)" xlinkHref="#p" />
+      <use
+        width="244"
+        height="192"
+        transform="translate(192 182)"
+        xlinkHref="#p"
+      />
     </svg>
   )
 }

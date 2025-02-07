@@ -5,6 +5,8 @@ import { Logger } from '@utils/logger'
 
 import Application, { IApplication } from '@models/Application.model'
 import CityInfo, { ICityInfo } from '@models/CityInfo.model'
+import { ISidebar } from '@models/Sidebar.model'
+import Sidebar from '@models/Sidebar.model'
 
 import { config } from '@main/shared/config'
 
@@ -59,11 +61,38 @@ const seedDatabase = async () => {
     if (!countApplication) {
       const initialApplication: Omit<IApplication, 'id'>[] = [
         {
-          OWM_APIKEY: ''
+          owm_apikey: ''
         }
       ]
 
       await Application.bulkCreate(initialApplication)
+    }
+
+    const countSidebar = await Sidebar.count()
+
+    if (!countSidebar) {
+      const initialSidebar: Omit<ISidebar, 'id'>[] = [
+        {
+          name: 'Weather',
+          path: 'weather',
+          icon: 'weather',
+          order: 1
+        },
+        {
+          name: 'Settings',
+          path: 'settings',
+          icon: 'settings',
+          order: 2
+        },
+        {
+          name: 'Audio',
+          path: 'audio',
+          icon: 'audio_device',
+          order: 3
+        }
+      ]
+
+      await Sidebar.bulkCreate(initialSidebar)
     }
   } catch (error) {
     log.error('Ошибка заполнения базы данных: ', error)

@@ -9,4 +9,3 @@ export type City = {
   population: number | null
   utc: string | null
 }
-
