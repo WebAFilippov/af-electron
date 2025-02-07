@@ -35,9 +35,15 @@ class CityRepository {
         throw new Error(`Город с ID ${cityId} не найден.`)
       }
 
-      await City.update({ default: false }, { where: { default: true }, transaction })
+      await City.update(
+        { default: false },
+        { where: { default: true }, transaction }
+      )
 
-      await City.update({ default: true }, { where: { id: cityId }, transaction })
+      await City.update(
+        { default: true },
+        { where: { id: cityId }, transaction }
+      )
 
       const updatedCity = await City.findOne({
         where: { default: true },
@@ -78,7 +84,10 @@ class CityRepository {
         throw new Error(`Город с ID ${existingCity.id} уже существует.`)
       }
 
-      const maxOrder = await City.max<number | null, City>('order', { raw: true, transaction })
+      const maxOrder = await City.max<number | null, City>('order', {
+        raw: true,
+        transaction
+      })
       const newCity = await City.create(
         {
           cityInfoId,
@@ -131,7 +140,10 @@ class CityRepository {
         })
 
         if (newDefaultCity) {
-          await City.update({ default: false }, { where: { default: true }, transaction })
+          await City.update(
+            { default: false },
+            { where: { default: true }, transaction }
+          )
           await newDefaultCity.update({ default: true }, { transaction })
         }
       }
@@ -177,12 +189,18 @@ class CityRepository {
       if (oldPosition < position) {
         await City.update(
           { order: Sequelize.literal('`order` - 1') },
-          { where: { order: { [Op.lte]: position, [Op.gt]: oldPosition } }, transaction }
+          {
+            where: { order: { [Op.lte]: position, [Op.gt]: oldPosition } },
+            transaction
+          }
         )
       } else if (oldPosition > position) {
         await City.update(
           { order: Sequelize.literal('`order` + 1') },
-          { where: { order: { [Op.gte]: position, [Op.lt]: oldPosition } }, transaction }
+          {
+            where: { order: { [Op.gte]: position, [Op.lt]: oldPosition } },
+            transaction
+          }
         )
       }
 

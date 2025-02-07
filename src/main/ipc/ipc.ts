@@ -24,16 +24,4 @@ export const IPCHandlers = (window: BrowserWindow) => {
   ipcMain.on('v1/external/open', (_event, url: string) => {
     shell.openExternal(url)
   })
-
-  ipcMain.handle('v1/window/get_width', () => {
-    const { width } = window.getBounds()
-
-    return width
-  })
-
-  window.on('resize', () => {
-    const { width } = window.getBounds()
-
-    window.webContents.send('v1/window/window_resize', width)
-  })
 }

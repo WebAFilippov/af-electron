@@ -1,6 +1,7 @@
 import { configureStore } from '@reduxjs/toolkit'
 
 import { ApplicationReducer } from '@entities/application'
+
 // import { CityWeatherReducer } from '@entities/city'
 
 export const store = configureStore({

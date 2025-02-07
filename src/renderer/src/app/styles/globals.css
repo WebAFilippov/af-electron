@@ -29,8 +29,8 @@
 
 @layer base {
   html {
-    font-size: calc(1vw + 5px);
-    line-height: calc(1vw + 5px);
+    font-size: calc(1vw + 3px);
+    line-height: calc(1vw + 3px);
   }
 
   * {
@@ -47,7 +47,4 @@
         linear-gradient(90deg, var(--wallpaper-lines), 0.1em, transparent 0);
     }
   }
-
- 
-
 }

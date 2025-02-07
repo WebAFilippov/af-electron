@@ -6,7 +6,11 @@ type Props = {
   className?: string
 }
 
-const WeatherIconFogDay: FC<Props> = ({ width = 64, height = 64, className = '' }) => {
+const WeatherIconFogDay: FC<Props> = ({
+  width = 64,
+  height = 64,
+  className = ''
+}) => {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -25,9 +29,9 @@ const WeatherIconFogDay: FC<Props> = ({ width = 64, height = 64, className = '' 
           y2="122.35"
           gradientUnits="userSpaceOnUse"
         >
-          <stop offset="0" stop-color="#d4d7dd" />
-          <stop offset="0.45" stop-color="#d4d7dd" />
-          <stop offset="1" stop-color="#bec1c6" />
+          <stop offset="0" stopColor="#d4d7dd" />
+          <stop offset="0.45" stopColor="#d4d7dd" />
+          <stop offset="1" stopColor="#bec1c6" />
         </linearGradient>
         <linearGradient id="b" y1="-50.35" x2="168" y2="74.35" xlinkHref="#a" />
         <linearGradient
@@ -38,9 +42,9 @@ const WeatherIconFogDay: FC<Props> = ({ width = 64, height = 64, className = '' 
           y2="264.76"
           gradientUnits="userSpaceOnUse"
         >
-          <stop offset="0" stop-color="#fbbf24" />
-          <stop offset="0.45" stop-color="#fbbf24" />
-          <stop offset="1" stop-color="#f59e0b" />
+          <stop offset="0" stopColor="#fbbf24" />
+          <stop offset="0.45" stopColor="#fbbf24" />
+          <stop offset="1" stopColor="#f59e0b" />
         </linearGradient>
         <clipPath id="d">
           <rect width="512" height="306" fill="none" />
@@ -51,8 +55,8 @@ const WeatherIconFogDay: FC<Props> = ({ width = 64, height = 64, className = '' 
             cy="192"
             r="84"
             stroke="#f8af18"
-            stroke-miterlimit="10"
-            stroke-width="6"
+            strokeMiterlimit="10"
+            strokeWidth="6"
             fill="url(#c)"
           />
 
@@ -60,9 +64,9 @@ const WeatherIconFogDay: FC<Props> = ({ width = 64, height = 64, className = '' 
             d="M192,61.66V12m0,360V322.34M284.17,99.83l35.11-35.11M64.72,319.28l35.11-35.11m0-184.34L64.72,64.72M319.28,319.28l-35.11-35.11M61.66,192H12m360,0H322.34"
             fill="none"
             stroke="#fbbf24"
-            stroke-linecap="round"
-            stroke-miterlimit="10"
-            stroke-width="24"
+            strokeLinecap="round"
+            strokeMiterlimit="10"
+            strokeWidth="24"
           >
             <animateTransform
               attributeName="transform"
@@ -81,9 +85,9 @@ const WeatherIconFogDay: FC<Props> = ({ width = 64, height = 64, className = '' 
             x2="252"
             y2="60"
             fill="none"
-            stroke-linecap="round"
-            stroke-miterlimit="10"
-            stroke-width="24"
+            strokeLinecap="round"
+            strokeMiterlimit="10"
+            strokeWidth="24"
             stroke="url(#a)"
           >
             <animateTransform
@@ -101,9 +105,9 @@ const WeatherIconFogDay: FC<Props> = ({ width = 64, height = 64, className = '' 
             x2="252"
             y2="12"
             fill="none"
-            stroke-linecap="round"
-            stroke-miterlimit="10"
-            stroke-width="24"
+            strokeLinecap="round"
+            strokeMiterlimit="10"
+            strokeWidth="24"
             stroke="url(#b)"
           >
             <animateTransform
@@ -117,10 +121,20 @@ const WeatherIconFogDay: FC<Props> = ({ width = 64, height = 64, className = '' 
           </line>
         </symbol>
       </defs>
-      <g clip-path="url(#d)">
-        <use width="384" height="384" transform="translate(64 100)" xlinkHref="#e" />
+      <g clipPath="url(#d)">
+        <use
+          width="384"
+          height="384"
+          transform="translate(64 100)"
+          xlinkHref="#e"
+        />
       </g>
-      <use width="264" height="72" transform="translate(124 336)" xlinkHref="#f" />
+      <use
+        width="264"
+        height="72"
+        transform="translate(124 336)"
+        xlinkHref="#f"
+      />
     </svg>
   )
 }

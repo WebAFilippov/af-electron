@@ -5,7 +5,6 @@
 
 // import { City } from '@pages/weather-page/model/types'
 
-
 // import { useAppSelector, useToast } from '@shared/hooks'
 // import { cn } from '@shared/lib'
 // import { formatFullAdressCity } from '@shared/utils'

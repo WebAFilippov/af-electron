@@ -45,7 +45,6 @@ export const createWindow = (): BrowserWindow => {
     window.setSkipTaskbar(false)
   }
 
-
   window.setBackgroundColor('#191b1d')
   nativeTheme.themeSource = 'dark'
 

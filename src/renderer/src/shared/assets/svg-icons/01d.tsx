@@ -6,7 +6,11 @@ type Props = {
   className?: string
 }
 
-const WeatherIcon800_01d: FC<Props> = ({ width = 64, height = 64, className = '' }) => {
+const WeatherIcon800_01d: FC<Props> = ({
+  width = 64,
+  height = 64,
+  className = ''
+}) => {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -25,9 +29,9 @@ const WeatherIcon800_01d: FC<Props> = ({ width = 64, height = 64, className = ''
           y2="264.76"
           gradientUnits="userSpaceOnUse"
         >
-          <stop offset="0" stop-color="#fbbf24" />
-          <stop offset="0.45" stop-color="#fbbf24" />
-          <stop offset="1" stop-color="#f59e0b" />
+          <stop offset="0" stopColor="#fbbf24" />
+          <stop offset="0.45" stopColor="#fbbf24" />
+          <stop offset="1" stopColor="#f59e0b" />
         </linearGradient>
         <symbol id="b" viewBox="0 0 384 384">
           <circle
@@ -35,8 +39,8 @@ const WeatherIcon800_01d: FC<Props> = ({ width = 64, height = 64, className = ''
             cy="192"
             r="84"
             stroke="#f8af18"
-            stroke-miterlimit="10"
-            stroke-width="6"
+            strokeMiterlimit="10"
+            strokeWidth="6"
             fill="url(#a)"
           />
 
@@ -44,9 +48,9 @@ const WeatherIcon800_01d: FC<Props> = ({ width = 64, height = 64, className = ''
             d="M192,61.66V12m0,360V322.34M284.17,99.83l35.11-35.11M64.72,319.28l35.11-35.11m0-184.34L64.72,64.72M319.28,319.28l-35.11-35.11M61.66,192H12m360,0H322.34"
             fill="none"
             stroke="#fbbf24"
-            stroke-linecap="round"
-            stroke-miterlimit="10"
-            stroke-width="24"
+            strokeLinecap="round"
+            strokeMiterlimit="10"
+            strokeWidth="24"
           >
             <animateTransform
               attributeName="transform"
@@ -59,7 +63,12 @@ const WeatherIcon800_01d: FC<Props> = ({ width = 64, height = 64, className = ''
           </path>
         </symbol>
       </defs>
-      <use width="384" height="384" transform="translate(64 64)" xlinkHref="#b" />
+      <use
+        width="384"
+        height="384"
+        transform="translate(64 64)"
+        xlinkHref="#b"
+      />
     </svg>
   )
 }

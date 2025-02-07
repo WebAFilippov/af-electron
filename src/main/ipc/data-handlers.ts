@@ -28,10 +28,16 @@ export const dataHandlers = (window: BrowserWindow, isAutoLaunch: boolean) => {
     return response
   })
 
-  ipcMain.handle('v1/application/update_application', async (_event, field, value) => {
-    const response = await applicationService.updateApplicationField(field, value)
-    return response
-  })
+  ipcMain.handle(
+    'v1/application/update_application',
+    async (_event, field, value) => {
+      const response = await applicationService.updateApplicationField(
+        field,
+        value
+      )
+      return response
+    }
+  )
 
   ipcMain.handle('v1/application/check_network', async () => {
     const response = await applicationService.isHostReachable()

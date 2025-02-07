@@ -13,12 +13,16 @@ type Position = {
 export const Cursor = () => {
   const [position, setPosition] = useState<Position>({ x: 0, y: 0 })
   const [hidden, setHidden] = useState<boolean>(false)
-  const [supportsBackdropFilter, setSupportsBackdropFilter] = useState<boolean>(false)
+  const [supportsBackdropFilter, setSupportsBackdropFilter] =
+    useState<boolean>(false)
 
   const cursorState = useAppSelector(getCursor)
 
   const handleMouseMove = (e: MouseEvent) => {
-    setPosition({ x: e.clientX - cursorState.offsetX, y: e.clientY - cursorState.offsetY })
+    setPosition({
+      x: e.clientX - cursorState.offsetX,
+      y: e.clientY - cursorState.offsetY
+    })
   }
 
   const handleMouseEnter = () => {

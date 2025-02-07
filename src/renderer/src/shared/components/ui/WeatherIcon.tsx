@@ -20,30 +20,72 @@ type Props = {
   className?: string
 }
 
-const WeatherIcon_01d = lazy<FC<IconProps>>(() => import('../../assets/svg-icons/01d'))
-const WeatherIcon_01n = lazy<FC<IconProps>>(() => import('../../assets/svg-icons/01n'))
-const WeatherIcon02d = lazy<FC<IconProps>>(() => import('../../assets/svg-icons/02d'))
-const WeatherIcon02n = lazy<FC<IconProps>>(() => import('../../assets/svg-icons/02n'))
-const WeatherIcon03d = lazy<FC<IconProps>>(() => import('../../assets/svg-icons/03d'))
-const WeatherIcon03n = lazy<FC<IconProps>>(() => import('../../assets/svg-icons/03n'))
-const WeatherIcon04d = lazy<FC<IconProps>>(() => import('../../assets/svg-icons/04d'))
-const WeatherIcon04n = lazy<FC<IconProps>>(() => import('../../assets/svg-icons/04n'))
-const WeatherIconMist = lazy<FC<IconProps>>(() => import('../../assets/svg-icons/mist'))
-const WeatherIconSmokeDay = lazy<FC<IconProps>>(() => import('../../assets/svg-icons/smoke-day'))
+const WeatherIcon_01d = lazy<FC<IconProps>>(
+  () => import('../../assets/svg-icons/01d')
+)
+const WeatherIcon_01n = lazy<FC<IconProps>>(
+  () => import('../../assets/svg-icons/01n')
+)
+const WeatherIcon02d = lazy<FC<IconProps>>(
+  () => import('../../assets/svg-icons/02d')
+)
+const WeatherIcon02n = lazy<FC<IconProps>>(
+  () => import('../../assets/svg-icons/02n')
+)
+const WeatherIcon03d = lazy<FC<IconProps>>(
+  () => import('../../assets/svg-icons/03d')
+)
+const WeatherIcon03n = lazy<FC<IconProps>>(
+  () => import('../../assets/svg-icons/03n')
+)
+const WeatherIcon04d = lazy<FC<IconProps>>(
+  () => import('../../assets/svg-icons/04d')
+)
+const WeatherIcon04n = lazy<FC<IconProps>>(
+  () => import('../../assets/svg-icons/04n')
+)
+const WeatherIconMist = lazy<FC<IconProps>>(
+  () => import('../../assets/svg-icons/mist')
+)
+const WeatherIconSmokeDay = lazy<FC<IconProps>>(
+  () => import('../../assets/svg-icons/smoke-day')
+)
 const WeatherIconSmokeNight = lazy<FC<IconProps>>(
   () => import('../../assets/svg-icons/smoke-night')
 )
-const WeatherIconHazeDay = lazy<FC<IconProps>>(() => import('../../assets/svg-icons/haze-day'))
-const WeatherIconHazeNight = lazy<FC<IconProps>>(() => import('../../assets/svg-icons/haze-night'))
-const WeatherIconSandDust = lazy<FC<IconProps>>(() => import('../../assets/svg-icons/sand-dust'))
-const WeatherIconFogDay = lazy<FC<IconProps>>(() => import('../../assets/svg-icons/fog-day'))
-const WeatherIconFogNight = lazy<FC<IconProps>>(() => import('../../assets/svg-icons/fog-night'))
-const WeatherIconDustDay = lazy<FC<IconProps>>(() => import('../../assets/svg-icons/dust-day'))
-const WeatherIconDustNight = lazy<FC<IconProps>>(() => import('../../assets/svg-icons/dust-night'))
-const WeatherIconTornado = lazy<FC<IconProps>>(() => import('../../assets/svg-icons/tornado'))
-const WeatherIconSnowDay = lazy<FC<IconProps>>(() => import('../../assets/svg-icons/snow-day'))
-const WeatherIconSnowNight = lazy<FC<IconProps>>(() => import('../../assets/svg-icons/snow-night'))
-const WeatherIconSleetDay = lazy<FC<IconProps>>(() => import('../../assets/svg-icons/sleet-day'))
+const WeatherIconHazeDay = lazy<FC<IconProps>>(
+  () => import('../../assets/svg-icons/haze-day')
+)
+const WeatherIconHazeNight = lazy<FC<IconProps>>(
+  () => import('../../assets/svg-icons/haze-night')
+)
+const WeatherIconSandDust = lazy<FC<IconProps>>(
+  () => import('../../assets/svg-icons/sand-dust')
+)
+const WeatherIconFogDay = lazy<FC<IconProps>>(
+  () => import('../../assets/svg-icons/fog-day')
+)
+const WeatherIconFogNight = lazy<FC<IconProps>>(
+  () => import('../../assets/svg-icons/fog-night')
+)
+const WeatherIconDustDay = lazy<FC<IconProps>>(
+  () => import('../../assets/svg-icons/dust-day')
+)
+const WeatherIconDustNight = lazy<FC<IconProps>>(
+  () => import('../../assets/svg-icons/dust-night')
+)
+const WeatherIconTornado = lazy<FC<IconProps>>(
+  () => import('../../assets/svg-icons/tornado')
+)
+const WeatherIconSnowDay = lazy<FC<IconProps>>(
+  () => import('../../assets/svg-icons/snow-day')
+)
+const WeatherIconSnowNight = lazy<FC<IconProps>>(
+  () => import('../../assets/svg-icons/snow-night')
+)
+const WeatherIconSleetDay = lazy<FC<IconProps>>(
+  () => import('../../assets/svg-icons/sleet-day')
+)
 const WeatherIconSleetNight = lazy<FC<IconProps>>(
   () => import('../../assets/svg-icons/sleet-night')
 )
@@ -134,11 +176,20 @@ const getIcon = (weatherId: number, weatherIcon: string) => {
   return icons[weatherId]?.[weatherIcon] || WeatherIcon03d
 }
 
-export const WeatherIcon: FC<Props> = ({ weather, width, height, className }) => {
+export const WeatherIcon: FC<Props> = ({
+  weather,
+  width,
+  height,
+  className
+}) => {
   const ComponentIcon = getIcon(weather.id, weather.icon)
 
   return (
-    <Suspense fallback={<Skeleton style={{ width, height }} className="bg-muted-foreground" />}>
+    <Suspense
+      fallback={
+        <Skeleton style={{ width, height }} className="bg-muted-foreground" />
+      }
+    >
       <ComponentIcon width={width} height={height} className={className} />
     </Suspense>
   )

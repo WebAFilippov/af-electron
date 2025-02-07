@@ -51,7 +51,14 @@ export const InputField: FC<PropsWithRef<InputFieldProps>> = forwardRef<
         </FieldLabel>
       }
       input={
-        <FieldInput id={id} ref={ref} success={success} error={error} value={value} {...rest} />
+        <FieldInput
+          id={id}
+          ref={ref}
+          success={success}
+          error={error}
+          value={value}
+          {...rest}
+        />
       }
     />
   )
@@ -66,7 +73,11 @@ const FieldLayout: FC<FieldLayoutProps> = ({ label, input }) => {
   )
 }
 
-const FieldLabel: FC<PropsWithChildren<FieldLabelProps>> = ({ children, id, hint }) => {
+const FieldLabel: FC<PropsWithChildren<FieldLabelProps>> = ({
+  children,
+  id,
+  hint
+}) => {
   return (
     <label
       htmlFor={id}
@@ -134,7 +145,7 @@ const FieldInput = forwardRef<HTMLInputElement, FieldInputProps>(
             error &&
               'shadow-[0_0_4px_1px] shadow-destructive hover:shadow-[0_0_4px_1px] hover:shadow-destructive focus-visible:shadow-[0_0_4px_1px] focus-visible:shadow-destructive',
             success &&
-              'shadow-success hover:shadow-success focus-visible:shadow-success shadow-[0_0_4px_1px] hover:shadow-[0_0_4px_1px] focus-visible:shadow-[0_0_4px_1px]',
+              'shadow-[0_0_4px_1px] shadow-success hover:shadow-[0_0_4px_1px] hover:shadow-success focus-visible:shadow-[0_0_4px_1px] focus-visible:shadow-success',
 
             className
           )}

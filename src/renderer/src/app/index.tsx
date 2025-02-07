@@ -1,21 +1,20 @@
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
-
 import ReactDOM from 'react-dom/client'
 import { Provider } from 'react-redux'
+
+import { DebugMenu } from '@entities/debug-mode/ui/DebugMenu'
 
 import { RouterProvider } from './providers/router'
 import { store } from './store'
 import './styles/globals.css'
 
 const App = (): JSX.Element => {
-  const queryClient = new QueryClient()
-
   return (
-    <QueryClientProvider client={queryClient}>
+    <>
+      <DebugMenu />
       <Provider store={store}>
         <RouterProvider />
       </Provider>
-    </QueryClientProvider>
+    </>
   )
 }
 

@@ -14,7 +14,6 @@ import { seedDatabase } from '@database/seed'
 
 import { ipcHandlers } from './ipc'
 import { setAutoLaunch } from './utils/auto-launch'
-import { cityService } from '@services/City.service'
 
 Logger.setupLogger()
 const log = new Logger('main')

@@ -15,7 +15,10 @@ class ApplicationService {
     field: T,
     value: IApplication[T]
   ): Promise<boolean> {
-    const response = await applicationRepository.updateApplicationField(field, value)
+    const response = await applicationRepository.updateApplicationField(
+      field,
+      value
+    )
 
     return response
   }

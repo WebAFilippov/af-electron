@@ -5,6 +5,7 @@ import { LedlightPage } from '@pages/ledlight-page/ui'
 import { SettingsPage } from '@pages/settings-page/ui'
 // import { SettingsPage } from '@pages/settings-page/ui'
 import { TablePage } from '@pages/table-page/ui'
+
 // import { WeatherPage } from '@pages/weather-page/ui'
 
 export const ROUTE = {

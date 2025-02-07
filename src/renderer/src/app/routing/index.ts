@@ -1,10 +1,9 @@
-// @/app/routing
 import { createHistoryRouter } from 'atomic-router'
 import { createBrowserHistory } from 'history'
 
-import { layoutRoute } from '@app/layout/ui/Layout'
+import { homePage } from '@pages/home-page/ui'
 
-const routes = [{ path: '/', route: layoutRoute }]
+const routes = [{ path: '/', route: homePage }]
 
 const router = createHistoryRouter({
   routes: routes

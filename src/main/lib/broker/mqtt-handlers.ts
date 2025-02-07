@@ -1,4 +1,3 @@
-
 // import { aedes, AudioMonitor } from "./mqtt-broker";
 // import { IDevice } from "./new_af";
 
@@ -68,7 +67,6 @@
 //   });
 // }
 
-
 // const sendToProcessIncrementVolume = () => {
 //   AudioMonitor.incrementVolume()
 // }
@@ -99,7 +97,7 @@
 
 // // AudioMonitor.on('change', async ({ id, volume }) => {
 // //   const device = await AudioMonitor.getDevice(id);
-  
+
 // //   if (volume && volume !== device.volume) {
 // //     sendToClientsChangeVolume(id, volume);
 // //   }

@@ -6,7 +6,11 @@ type Props = {
   className?: string
 }
 
-const WeatherIconHazeNight: FC<Props> = ({ width = 64, height = 64, className = '' }) => {
+const WeatherIconHazeNight: FC<Props> = ({
+  width = 64,
+  height = 64,
+  className = ''
+}) => {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -25,15 +29,49 @@ const WeatherIconHazeNight: FC<Props> = ({ width = 64, height = 64, className = 
           y2="167.82"
           gradientUnits="userSpaceOnUse"
         >
-          <stop offset="0" stop-color="#d4d7dd" />
-          <stop offset="0.45" stop-color="#d4d7dd" />
-          <stop offset="1" stop-color="#bec1c6" />
+          <stop offset="0" stopColor="#d4d7dd" />
+          <stop offset="0.45" stopColor="#d4d7dd" />
+          <stop offset="1" stopColor="#bec1c6" />
         </linearGradient>
-        <linearGradient id="b" x1="107.25" y1="-8.85" x2="179.25" y2="115.86" xlinkHref="#a" />
-        <linearGradient id="c" x1="174.75" y1="-47.82" x2="246.75" y2="76.89" xlinkHref="#a" />
-        <linearGradient id="d" y1="-4.89" x2="89.25" y2="119.82" xlinkHref="#a" />
-        <linearGradient id="e" x1="107.25" y1="-56.85" x2="179.25" y2="67.86" xlinkHref="#a" />
-        <linearGradient id="f" x1="174.75" y1="-95.82" x2="246.75" y2="28.89" xlinkHref="#a" />
+        <linearGradient
+          id="b"
+          x1="107.25"
+          y1="-8.85"
+          x2="179.25"
+          y2="115.86"
+          xlinkHref="#a"
+        />
+        <linearGradient
+          id="c"
+          x1="174.75"
+          y1="-47.82"
+          x2="246.75"
+          y2="76.89"
+          xlinkHref="#a"
+        />
+        <linearGradient
+          id="d"
+          y1="-4.89"
+          x2="89.25"
+          y2="119.82"
+          xlinkHref="#a"
+        />
+        <linearGradient
+          id="e"
+          x1="107.25"
+          y1="-56.85"
+          x2="179.25"
+          y2="67.86"
+          xlinkHref="#a"
+        />
+        <linearGradient
+          id="f"
+          x1="174.75"
+          y1="-95.82"
+          x2="246.75"
+          y2="28.89"
+          xlinkHref="#a"
+        />
         <linearGradient
           id="g"
           x1="54.33"
@@ -42,9 +80,9 @@ const WeatherIconHazeNight: FC<Props> = ({ width = 64, height = 64, className = 
           y2="259.13"
           gradientUnits="userSpaceOnUse"
         >
-          <stop offset="0" stop-color="#86c3db" />
-          <stop offset="0.45" stop-color="#86c3db" />
-          <stop offset="1" stop-color="#5eafcf" />
+          <stop offset="0" stopColor="#86c3db" />
+          <stop offset="0.45" stopColor="#86c3db" />
+          <stop offset="1" stopColor="#5eafcf" />
         </linearGradient>
         <clipPath id="h">
           <rect width="512" height="306" fill="none" />
@@ -53,9 +91,9 @@ const WeatherIconHazeNight: FC<Props> = ({ width = 64, height = 64, className = 
           <path
             d="M252.25,168.63C178.13,168.63,118,109.35,118,36.21A130.48,130.48,0,0,1,122.47,3C55.29,10.25,3,66.37,3,134.58,3,207.71,63.09,267,137.21,267,199.69,267,252,224.82,267,167.79A135.56,135.56,0,0,1,252.25,168.63Z"
             stroke="#72b9d5"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            stroke-width="6"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeWidth="6"
             fill="url(#g)"
           >
             <animateTransform
@@ -76,9 +114,9 @@ const WeatherIconHazeNight: FC<Props> = ({ width = 64, height = 64, className = 
               x2="42"
               y2="60"
               fill="none"
-              stroke-linecap="round"
-              stroke-miterlimit="10"
-              stroke-width="24"
+              strokeLinecap="round"
+              strokeMiterlimit="10"
+              strokeWidth="24"
               stroke="url(#a)"
             />
             <line
@@ -87,10 +125,10 @@ const WeatherIconHazeNight: FC<Props> = ({ width = 64, height = 64, className = 
               x2="192"
               y2="60"
               fill="none"
-              stroke-linecap="round"
-              stroke-miterlimit="10"
-              stroke-width="24"
-              stroke-dasharray="60 60"
+              strokeLinecap="round"
+              strokeMiterlimit="10"
+              strokeWidth="24"
+              strokeDasharray="60 60"
               stroke="url(#b)"
             />
             <line
@@ -99,9 +137,9 @@ const WeatherIconHazeNight: FC<Props> = ({ width = 64, height = 64, className = 
               x2="252"
               y2="60"
               fill="none"
-              stroke-linecap="round"
-              stroke-miterlimit="10"
-              stroke-width="24"
+              strokeLinecap="round"
+              strokeMiterlimit="10"
+              strokeWidth="24"
               stroke="url(#c)"
             />
 
@@ -121,9 +159,9 @@ const WeatherIconHazeNight: FC<Props> = ({ width = 64, height = 64, className = 
               x2="42"
               y2="12"
               fill="none"
-              stroke-linecap="round"
-              stroke-miterlimit="10"
-              stroke-width="24"
+              strokeLinecap="round"
+              strokeMiterlimit="10"
+              strokeWidth="24"
               stroke="url(#d)"
             />
             <line
@@ -132,10 +170,10 @@ const WeatherIconHazeNight: FC<Props> = ({ width = 64, height = 64, className = 
               x2="192"
               y2="12"
               fill="none"
-              stroke-linecap="round"
-              stroke-miterlimit="10"
-              stroke-width="24"
-              stroke-dasharray="60 60"
+              strokeLinecap="round"
+              strokeMiterlimit="10"
+              strokeWidth="24"
+              strokeDasharray="60 60"
               stroke="url(#e)"
             />
             <line
@@ -144,9 +182,9 @@ const WeatherIconHazeNight: FC<Props> = ({ width = 64, height = 64, className = 
               x2="252"
               y2="12"
               fill="none"
-              stroke-linecap="round"
-              stroke-miterlimit="10"
-              stroke-width="24"
+              strokeLinecap="round"
+              strokeMiterlimit="10"
+              strokeWidth="24"
               stroke="url(#f)"
             />
 
@@ -161,10 +199,20 @@ const WeatherIconHazeNight: FC<Props> = ({ width = 64, height = 64, className = 
           </g>
         </symbol>
       </defs>
-      <g clip-path="url(#h)">
-        <use width="270" height="270" transform="translate(121 121)" xlinkHref="#i" />
+      <g clipPath="url(#h)">
+        <use
+          width="270"
+          height="270"
+          transform="translate(121 121)"
+          xlinkHref="#i"
+        />
       </g>
-      <use width="264" height="72" transform="translate(124 336)" xlinkHref="#j" />
+      <use
+        width="264"
+        height="72"
+        transform="translate(124 336)"
+        xlinkHref="#j"
+      />
     </svg>
   )
 }

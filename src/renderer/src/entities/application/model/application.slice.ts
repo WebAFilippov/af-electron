@@ -18,13 +18,15 @@ const ApplicationSLice = createSlice({
     setOWMApikey: create.reducer((state, action: PayloadAction<string>) => {
       state.owm_apikey = action.payload
     }),
-    setCursor: create.reducer((state, action: PayloadAction<InitialState['cursor']>) => {
-      state.cursor = action.payload
-    })
+    setCursor: create.reducer(
+      (state, action: PayloadAction<InitialState['cursor']>) => {
+        state.cursor = action.payload
+      }
+    )
   }),
   selectors: {
-    getOWMApikey: state => state.owm_apikey,
-    getCursor: state => state.cursor
+    getOWMApikey: (state) => state.owm_apikey,
+    getCursor: (state) => state.cursor
   }
 })
 

@@ -1,8 +1,8 @@
 import { ChangeEvent, FC, useState } from 'react'
 
 import { getOWMApikey, setOWMApikey } from '@entities/application'
-// import { useValidateApiKey } from '@entities/application/api/application.api'
 
+// import { useValidateApiKey } from '@entities/application/api/application.api'
 import { Button, InputField } from '@shared/components/ui'
 import { useAppDispatch, useAppSelector } from '@shared/hooks'
 import { useDebounce } from '@shared/hooks/use-debounce'
@@ -46,14 +46,18 @@ export const SettingsPage: FC = () => {
           error={null}
           hint={
             <>
-              <h3 className="text-md mb-2 font-semibold">Инструкция по получению API Key:</h3>
+              <h3 className="text-md mb-2 font-semibold">
+                Инструкция по получению API Key:
+              </h3>
               <ol className="list-inside list-decimal space-y-2">
                 <li>
                   Перейдите на сайт{' '}
                   <button
                     className="text-blue-600 underline hover:text-blue-800"
                     onClick={() =>
-                      handleExternalOpen('https://home.openweathermap.org/users/sign_up')
+                      handleExternalOpen(
+                        'https://home.openweathermap.org/users/sign_up'
+                      )
                     }
                   >
                     OpenWeatherMap
@@ -66,7 +70,11 @@ export const SettingsPage: FC = () => {
                   Перейдите в раздел{' '}
                   <button
                     className="text-blue-600 underline hover:text-blue-800"
-                    onClick={() => handleExternalOpen('https://home.openweathermap.org/api_keys')}
+                    onClick={() =>
+                      handleExternalOpen(
+                        'https://home.openweathermap.org/api_keys'
+                      )
+                    }
                   >
                     API Keys
                   </button>
@@ -79,7 +87,9 @@ export const SettingsPage: FC = () => {
                 Если возникнут вопросы, обратитесь в{' '}
                 <button
                   className="text-blue-600 underline hover:text-blue-800"
-                  onClick={() => handleExternalOpen('https://openweathermap.org/faq')}
+                  onClick={() =>
+                    handleExternalOpen('https://openweathermap.org/faq')
+                  }
                 >
                   FAQ
                 </button>
