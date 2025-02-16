@@ -1,21 +1,13 @@
 import ReactDOM from 'react-dom/client'
-import { Provider } from 'react-redux'
 
-import { DebugMenu } from '@entities/debug-mode/ui/DebugMenu'
+import { AppStarted } from '@shared/config/init'
 
-import { RouterProvider } from './providers/router'
-import { store } from './store'
+import { App } from './application'
 import './styles/globals.css'
 
-const App = (): JSX.Element => {
-  return (
-    <>
-      <DebugMenu />
-      <Provider store={store}>
-        <RouterProvider />
-      </Provider>
-    </>
-  )
-}
 
-ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(<App />)
+const container = document.getElementById('root') as HTMLElement
+const root = ReactDOM.createRoot(container)
+
+AppStarted()
+root.render(<App />)

@@ -1,20 +1,19 @@
+import { RouterProvider } from 'atomic-router-react'
 import { sample } from 'effector'
 import { createGate, useGate } from 'effector-react'
-import { Outlet } from 'react-router-dom'
+
+import { Pages } from '@pages/index'
+
+import { Sidebar } from '@widgets/sidebar/ui/sidebar'
+import { Topbar } from '@widgets/topbar'
 
 import { addListenerWindowFx, removeListenerWindowFx } from '@features/application'
-import {
-  addListenerSidebarFx,
-  getSidebarItemsFx,
-  removeListenerSidebarFx,
-  Sidebar
-} from '@features/sidebar'
-import { WindowHeader } from '@features/window-topbar/ui'
+import { addListenerSidebarFx, getSidebarItemsFx, removeListenerSidebarFx } from '@features/sidebar'
 
 import { removeListenerDebugFx } from '@entities/debug-mode/model/debug'
-import { DebugWrapper } from '@entities/debug-mode/ui/DebugWrapper'
+import { useDebugLayer } from '@entities/debug-mode/ui/use-debug-layer'
 
-import { Toaster } from '@shared/components/ui'
+import { router } from '@shared/config/routing'
 import { cn } from '@shared/lib'
 
 const Gate = createGate()
@@ -28,28 +27,29 @@ sample({
 })
 
 export const Layout = () => {
+  const { ref } = useDebugLayer<HTMLDivElement>('app')
+
   useGate(Gate)
 
   return (
     <div
+      ref={ref}
       className={cn(
-        'relative m-0 box-border flex h-[100dvh] w-full flex-col p-0 font-jetbrains font-medium text-primary-foreground'
+        'relative m-0 box-border flex h-[100dvh] w-full flex-col border border-dashed border-primary p-0 font-jetbrains font-medium text-primary-foreground'
       )}
     >
-      <DebugWrapper layer="app" />
-      <Toaster />
-
-      <WindowHeader />
+      <Topbar />
 
       <div className="relative flex h-full w-full overflow-hidden">
         <Sidebar />
-
         <main
           className={cn(
             'overflow-y-auto" wallpaper custom-scrollbar-2 relative grow overflow-y-auto'
           )}
         >
-          <Outlet />
+          <RouterProvider router={router}>
+            <Pages />
+          </RouterProvider>
         </main>
       </div>
     </div>

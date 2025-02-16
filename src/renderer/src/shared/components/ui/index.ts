@@ -1,6 +1,5 @@
 export * from './button'
 export * from './command'
-export * from './cursor-circle'
 export * from './dialog'
 export * from './dropdown-menu'
 export * from './horizontal-line'

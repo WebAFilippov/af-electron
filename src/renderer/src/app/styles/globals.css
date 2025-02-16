@@ -10,6 +10,12 @@
     --wallpaper-lines: #212223;
     --wallpaper-lines-sizes: 1rem 1rem;
 
+    --color-1: 0 100% 63%;
+    --color-2: 270 100% 63%;
+    --color-3: 210 100% 63%;
+    --color-4: 195 100% 63%;
+    --color-5: 90 100% 63%;
+
     --slide-height: 8rem;
     --slide-spacing: 0rem;
     --background: 210, 7%, 11%;

@@ -27,11 +27,10 @@ sample({
 })
 
 export const DebugMenu = () => {
-  // Проверка, только если режим разработки
   if (process.env.NODE_ENV !== 'development') {
     return null
   }
-  
+
   useGate(Gate)
   const menuRef = useRef<HTMLDivElement | null>(null)
   const [openMenu, setOpenMenu] = useState<boolean>(false)
@@ -62,10 +61,17 @@ export const DebugMenu = () => {
             })
           }
         >
-          <option value="solid">Solid</option>
-          <option value="dashed">Dashed</option>
+          <option value="none">None</option>
+          <option value="hidden">Hidden</option>
           <option value="dotted">Dotted</option>
+          <option value="dashed">Dashed</option>
+          <option value="solid">Solid</option>
           <option value="double">Double</option>
+          <option value="groove">Groove</option>
+          <option value="ridge">Ridge</option>
+          <option value="inset">Inset</option>
+          <option value="outset">Outset</option>
+          <option value="inherit">Inherit</option>
         </select>
         <input
           type="color"
@@ -140,7 +146,6 @@ export const DebugMenu = () => {
             strokeWidth="2"
             strokeLinecap="round"
             strokeLinejoin="round"
-            className="lucide lucide-separator-vertical"
           >
             <line x1="12" x2="12" y1="3" y2="21" />
             <polyline points="8 8 4 12 8 16" />
@@ -148,10 +153,20 @@ export const DebugMenu = () => {
           </svg>
         </button>
 
-        <div className="absolute right-0 top-0 flex h-full w-[calc(100%_-_3rem)] flex-1 flex-col bg-white p-[1rem] pr-[0.4rem]">
-          <span className="mx-auto mb-[1rem] text-[1.8rem] font-black leading-[1.8rem] text-black">
-            Debug Menu 🚀
-          </span>
+        <div className="absolute right-0 top-0 flex h-full w-[calc(100%_-_3rem)] flex-1 flex-col gap-[0.5rem] bg-white p-[1rem] pr-[0.4rem]">
+          <div className="flex items-center justify-between">
+            <span className="mx-auto mb-[1rem] text-[1.8rem] font-black leading-[1.8rem] text-black">
+              Debug Menu 🚀
+            </span>
+            <div className="flex h-full flex-col items-end justify-start gap-[0.1rem] pr-[1rem]">
+              <code className="rounded-md bg-gray-100 p-[0.3rem] text-[1rem] font-semibold leading-[1rem] text-black">
+                on/off Ctrl+D
+              </code>
+              <code className="rounded-md bg-gray-100 p-[0.3rem] text-[1rem] font-semibold leading-[1rem] text-black">
+                open/close Ctrl+F
+              </code>
+            </div>
+          </div>
 
           <div
             id="list"

@@ -12,7 +12,7 @@ import {
   // CardHeader,
   // CardTitle
 } from '@shared/components/ui/card'
-import { ROUTE } from '@shared/config/routes'
+import { ROUTE } from '@shared/config/routing'
 import { useAppSelector } from '@shared/hooks'
 
 const WeatherCard = () => {

@@ -25,16 +25,23 @@ export const createWindow = (): BrowserWindow => {
       y: 5
     },
     webPreferences: {
+      devTools: true,
       preload: join(__dirname, '..', 'preload', 'index.mjs'),
       backgroundThrottling: false,
       contextIsolation: true,
       nodeIntegration: false,
       sandbox: false,
       allowRunningInsecureContent: false,
-      plugins: false,
-      devTools: is.dev ? true : false
+      plugins: false
+      // devTools: is.dev ? true : false
     }
   })
+
+  // if (is.dev) {
+  //   window.webContents.openDevTools();
+  // }
+
+  window.webContents.openDevTools()
 
   window.flashFrame(false)
   // window.setOverlayIcon(nativeImage.createFromPath(icon16), 'Harmonify')

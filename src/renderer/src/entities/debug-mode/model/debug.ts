@@ -6,7 +6,18 @@ import { DEBUG_KEYBOARD_SHORTCUT, DEBUG_MODE_STORAGE_KEY } from '@shared/config/
 export interface DebugLayerInfo {
   enabled: boolean
   layer: 'app' | 'processes' | 'widgets' | 'features' | 'entities' | 'pages' | 'shared' | 'unknown'
-  type: 'solid' | 'dashed' | 'dotted' | 'double'
+  type:
+    | 'none'
+    | 'hidden'
+    | 'dotted'
+    | 'dashed'
+    | 'solid'
+    | 'double'
+    | 'groove'
+    | 'ridge'
+    | 'inset'
+    | 'outset'
+    | 'inherit'
   color: string
 }
 
@@ -73,7 +84,6 @@ const $debugMenu = createStore<DebugLayerInfo[]>([
     type: 'solid',
     color: '#FDD6D7'
   },
-
   { enabled: true, layer: 'unknown', type: 'solid', color: '#FC5912' }
 ])
 
@@ -96,7 +106,7 @@ sample({
   target: $debug
 })
 
-$debug.watch((store) => console.log('#debug ', store))
+// $debug.watch((store) => console.log('#debug ', store))
 $debugMenu.watch((store) => console.log('#debugMenu ', store))
 
 export { $debug, $debugMenu, addListenerDebugFx, removeListenerDebugFx, setDebugLayerOption }

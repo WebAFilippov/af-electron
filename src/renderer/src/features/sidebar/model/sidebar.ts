@@ -33,7 +33,6 @@ const toggleSidebar = createEvent()
 
 const getSidebarItemById = createEvent<UniqueIdentifier>()
 const sortSidebarItems = createEvent<SortSidebarItemsProps>()
-
 const setSidebarActiveId = createEvent<UniqueIdentifier | null>()
 const resetSidebarActiveId = createEvent()
 
@@ -76,19 +75,19 @@ sample({
   target: [$sidebarItems, updateSidebarItemsFx]
 })
 sample({
+  clock: getSidebarItemById,
+  source: $sidebarItems,
+  fn: (store, itemId) => {
+    return store.find((item) => item.id === itemId)
+  }
+})
+sample({
   clock: setSidebarActiveId,
   target: $sidebarActiveId
 })
 sample({
   clock: getSidebarItemsFx.doneData,
   target: $sidebarItems
-})
-sample({
-  clock: getSidebarItemById,
-  source: $sidebarItems,
-  fn: (store, itemId) => {
-    return store.find((item) => item.id === itemId)
-  }
 })
 sample({
   clock: openSidebar,
@@ -131,4 +130,4 @@ export {
 // $sidebarIds.watch((state) => console.log('sidebarIds ', state))
 // $sidebarActiveId.watch((state) => console.log(state))
 // $sidebarActiveIndex.watch((state) => console.log(state))
-$isDnd.watch((state) => console.log('isDnd ', state))
+// $isDnd.watch((state) => console.log('isDnd ', state))

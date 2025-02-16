@@ -18,12 +18,11 @@ import { setAutoLaunch } from './utils/auto-launch'
 Logger.setupLogger()
 const log = new Logger('main')
 
-setAutoLaunch(is.dev ? false : true)
+setAutoLaunch(!is.dev)
 !is.dev && Menu.setApplicationMenu(null)
 
 const isAutoLaunch = process.argv.includes('--auto-launch')
 const gotTheLock = app.requestSingleInstanceLock() // Проверка на запущенное окно -> true if once window
-// app.disableHardwareAcceleration()
 
 if (!gotTheLock) {
   app.quit()
@@ -34,9 +33,9 @@ if (!gotTheLock) {
       if (window.isMinimized()) {
         window.restore()
       }
-      if (!window.isVisible()) {
-        window.show()
-      }
+      // if (!window.isVisible()) {
+      //   window.show()
+      // }
       window.focus()
     }
   })
@@ -61,16 +60,9 @@ if (!gotTheLock) {
       const window = createWindow()
       createTray(window)
 
-      app.commandLine.appendSwitch('enable-gpu-rasterization')
-      app.commandLine.appendSwitch('ignore-gpu-blacklist')
-
       // HANDLERS
       ipcHandlers(window, isAutoLaunch)
       windowLifecycle(window)
-
-      // for (let i = 0; i < 10; i++) {
-      //   await cityService.createCity(Math.round(Math.random() * 100))
-      // }
 
       log.info('Application ready')
     } catch (error) {

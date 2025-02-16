@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 
 import { CityWeather } from '@entities/city'
 
-import { ROUTE } from '@shared/config/routes'
+import { ROUTE } from '@shared/config/routing'
 
 import { Button } from './button'
 import { Skeleton } from './skeleton'
@@ -22,8 +22,7 @@ export const WeatherHomeCard: FC<Props> = ({ card }) => {
             `Погода в ${card?.cityInfo.city}`
           ) : (
             <div className="flex gap-2">
-              Погода{' '}
-              <Skeleton className="h-[18px] w-full bg-muted-foreground" />
+              Погода <Skeleton className="h-[18px] w-full bg-muted-foreground" />
             </div>
           )}
         </h1>
@@ -32,18 +31,14 @@ export const WeatherHomeCard: FC<Props> = ({ card }) => {
         <div className="flex items-center justify-start gap-3">
           {card && card.weather ? (
             <div className="flex items-center justify-center gap-1 px-2">
-              <span className="text-4xl">
-                {Math.round(card.weather.main.temp)}°
-              </span>
+              <span className="text-4xl">{Math.round(card.weather.main.temp)}°</span>
               <div className="flex size-10 items-center justify-center">
                 {card.weather.weather.map((item) => (
                   <WeatherIcon weather={item} key={item.id} />
                 ))}
               </div>
               <div className="flex flex-col justify-between gap-1">
-                <p className="text-sm leading-none">
-                  {card.weather.weather[0].description}
-                </p>
+                <p className="text-sm leading-none">{card.weather.weather[0].description}</p>
                 <p className="text-sm leading-none">
                   ощущается как {Math.round(card.weather.main.feels_like)}°
                 </p>

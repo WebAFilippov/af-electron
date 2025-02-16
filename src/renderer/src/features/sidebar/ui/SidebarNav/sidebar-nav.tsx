@@ -28,16 +28,16 @@ import { FC } from 'react'
 
 import {
   $sidebarActiveId,
-  $sidebarActiveIndex,
   $sidebarIds,
   resetSidebarActiveId,
   setSidebarActiveId,
   sortSidebarItems
 } from '@features/sidebar/model/sidebar'
 
+import { useDebugLayer } from '@entities/debug-mode/ui/use-debug-layer'
+
 import { cn } from '@shared/lib'
 
-import { SidebarItem } from './sidebar-item'
 import { MeasuringStrategy } from './types'
 import { WrapperSidebarItem } from './wrapper-nav-sidebar-item'
 
@@ -49,10 +49,10 @@ const measuring: MeasuringConfiguration = {
 
 export const SidebarNav: FC<DndContextProps> = () => {
   const sidebarIds = useUnit($sidebarIds)
-  const sidebarActiveId = useUnit($sidebarActiveId)
   const handleSortSidebarList = useUnit(sortSidebarItems)
   const handleSetSidebarActiveId = useUnit(setSidebarActiveId)
   const handleResetSidebarActiveId = useUnit(resetSidebarActiveId)
+
   const sidebarIdsList = useList($sidebarIds, (item) => {
     return <WrapperSidebarItem id={item} />
   })
@@ -106,9 +106,6 @@ export const SidebarNav: FC<DndContextProps> = () => {
         <SortableContext items={sidebarIds} strategy={verticalListSortingStrategy}>
           {sidebarIdsList}
         </SortableContext>
-        <DragOverlay>
-          <WrapperSidebarItem id={sidebarActiveId} />
-        </DragOverlay>
       </ul>
     </DndContext>
   )

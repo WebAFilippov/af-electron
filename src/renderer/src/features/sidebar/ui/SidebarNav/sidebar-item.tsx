@@ -5,10 +5,9 @@ import { forwardRef, HTMLAttributes } from 'react'
 
 import { $isDnd, $sidebarItems } from '@features/sidebar/model/sidebar'
 
-import { DebugWrapper } from '@entities/debug-mode/ui/DebugWrapper'
-
 import { AudioLinesIcon, Settings, Thermometer } from '@shared/assets/svg-icons'
 import { cn } from '@shared/lib'
+import { useDebugLayer } from '@entities/debug-mode/ui/use-debug-layer'
 
 const iconMap = {
   weather: <Thermometer />,
@@ -30,6 +29,7 @@ export const SidebarItem = forwardRef<HTMLLIElement, SidebarItemProps>(({ id, ..
   })
   const isDnd = useUnit($isDnd)
 
+
   if (!sidebarItem) {
     return null
   }
@@ -45,9 +45,7 @@ export const SidebarItem = forwardRef<HTMLLIElement, SidebarItemProps>(({ id, ..
       )}
       {...props}
     >
-      <DebugWrapper layer="features" />
-
-      <span className="flex min-h-[3rem] min-w-[3rem] items-center justify-center">
+      <span className="flex min-h-[3rem] min-w-[3rem] items-center justify-center" >
         {getIcon(sidebarItem.icon as keyof typeof iconMap)}
       </span>
       <span className="flex h-full grow items-center pr-1 text-justify align-middle text-base">
@@ -57,5 +55,5 @@ export const SidebarItem = forwardRef<HTMLLIElement, SidebarItemProps>(({ id, ..
   )
 })
 
-// Указываем displayName для удобства отладки
+
 SidebarItem.displayName = 'SidebarItem'
