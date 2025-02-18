@@ -1,4 +1,4 @@
 export enum ThemeColorBackground {
-  DARK = '#1e8c16',
-  LIGHT = '#de4343'
+  DARK = '#000000',
+  LIGHT = '#ffffff'
 }

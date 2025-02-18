@@ -27,14 +27,14 @@ import { useList, useUnit } from 'effector-react'
 import { FC } from 'react'
 
 import {
-  $sidebarActiveId,
+
   $sidebarIds,
   resetSidebarActiveId,
   setSidebarActiveId,
   sortSidebarItems
 } from '@features/sidebar/model/sidebar'
 
-import { useDebugLayer } from '@entities/debug-mode/ui/use-debug-layer'
+
 
 import { cn } from '@shared/lib'
 

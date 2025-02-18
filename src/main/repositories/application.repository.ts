@@ -31,9 +31,12 @@ class ApplicationRepository {
     value: IApplication[T]
   ): Promise<boolean> {
     try {
-      if (field === 'owm_apikey' && typeof value != 'string') {
+      if (
+        (field === 'owm_apikey' || field === 'theme') &&
+        typeof value != 'string'
+      ) {
         throw new Error(
-          `Тип значения для поля 'owm_apikey' должен быть 'string', получен ${typeof value}.`
+          `Тип значения для поля '${field}' должен быть 'string', получен ${typeof value}.`
         )
       }
 

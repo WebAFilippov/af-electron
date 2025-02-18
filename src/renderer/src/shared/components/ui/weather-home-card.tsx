@@ -5,7 +5,7 @@ import { CityWeather } from '@entities/city'
 
 import { ROUTE } from '@shared/config/routing'
 
-import { Button } from './button'
+import { Button } from '../../ui/button'
 import { Skeleton } from './skeleton'
 import { WeatherIcon } from './WeatherIcon'
 

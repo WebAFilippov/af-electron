@@ -9,6 +9,7 @@ import {
 import { sequelize } from '@database/database'
 
 export interface IApplication {
+  theme: string
   owm_apikey: string
 }
 
@@ -17,6 +18,7 @@ class Application extends Model<
   InferCreationAttributes<Application>
 > {
   declare id: CreationOptional<number>
+  declare theme: string
   declare owm_apikey: string
 }
 
@@ -26,6 +28,10 @@ Application.init(
       type: DataTypes.INTEGER,
       primaryKey: true,
       autoIncrement: true
+    },
+    theme: {
+      type: DataTypes.STRING,
+      allowNull: false
     },
     owm_apikey: {
       type: DataTypes.TEXT,

@@ -1,7 +1,7 @@
 export const SettingsPage = () => {
-  const handleExternalOpen = (url: string) => {
-    window.api.openExternal(url)
-  }
+  // const handleExternalOpen = (url: string) => {
+  //   window.api.openExternal(url)
+  // }
 
   return (
     <div className="container flex h-full flex-col py-5">

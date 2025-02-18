@@ -11,21 +11,18 @@ import { AppStarted } from './init'
 
 export const routes = {
   home: createRoute(),
+  weather: createRoute(),
   settings: createRoute()
 }
 
 const routesMap: UnmappedRouteObject<any>[] = [
-  {
-    path: '/',
-    route: routes.home
-  },
-  {
-    path: '/settings',
-    route: routes.settings
-  }
+  { path: '/', route: routes.home },
+  { path: '/weather', route: routes.weather },
+  { path: '/settings', route: routes.settings }
 ]
 
 export const controls: ReturnType<typeof createRouterControls> = createRouterControls()
+export const history = createBrowserHistory()
 
 export const router: ReturnType<typeof createHistoryRouter> = createHistoryRouter({
   routes: routesMap,
@@ -34,6 +31,6 @@ export const router: ReturnType<typeof createHistoryRouter> = createHistoryRoute
 
 sample({
   clock: AppStarted,
-  fn: () => createBrowserHistory(),
+  fn: () => history,
   target: router.setHistory
 })

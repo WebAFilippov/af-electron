@@ -4,10 +4,7 @@ interface IconProps extends SVGProps<SVGSVGElement> {
   size?: string | number
 }
 
-export const PanelLeftOpenIcon: FC<IconProps> = ({
-  size = '1.5rem',
-  ...props
-}) => {
+export const PanelLeftOpenIcon: FC<IconProps> = ({ size = '1.5rem', ...props }) => {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
