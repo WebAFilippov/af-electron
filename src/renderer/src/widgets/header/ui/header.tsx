@@ -1,13 +1,14 @@
 import { Link } from 'atomic-router-react'
 import { useUnit } from 'effector-react'
+import { PanelLeftCloseIcon, PanelLeftOpenIcon } from 'lucide-react'
 
 import { $sidebar, toggleSidebar } from '@widgets/sidebar'
 
+import { ThemeSwitcher } from '@features/theme-switcher/ui/ThemeSwither'
+
 import { useDebugLayer } from '@entities/debug-mode'
 
-import { PanelLeftCloseIcon, PanelLeftOpenIcon } from '@shared/assets/svg-icons'
 import { routes } from '@shared/config/routing'
-import { cn } from '@shared/lib'
 import { Button, RainbowButton } from '@shared/ui'
 
 export const Header = () => {
@@ -17,11 +18,10 @@ export const Header = () => {
   const handleToggleSidebar = useUnit(toggleSidebar)
 
   return (
-    <div className="relative my-auto flex min-h-12 w-full items-center justify-around bg-transparent">
+    <div className="relative my-auto flex min-h-12 w-full items-center justify-between bg-transparent px-20">
       <Button
         ref={refButton}
         variant="outline"
-        size="icon"
         onClick={handleToggleSidebar}
         className="absolute left-1 top-1 flex h-8 w-8 items-center justify-center"
       >
@@ -29,14 +29,15 @@ export const Header = () => {
       </Button>
 
       <Link to={routes.home}>
-        <RainbowButton className="h-9 px-6 select-none">
-          afilippov
+        <RainbowButton className="h-9 select-none px-6">
+          🚀afilippov
           <span className="italic">/ui</span>
         </RainbowButton>
       </Link>
-      <Link to={routes.settings}>
-        <div className="pointer-events-none select-none">Control</div>
-      </Link>
+
+      <div>
+        <ThemeSwitcher />
+      </div>
     </div>
   )
 }

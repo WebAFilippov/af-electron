@@ -32,9 +32,9 @@ export const Sidebar: FC = () => {
           <Link
             to={item.link}
             key={item.title}
-            className="flex select-none items-center gap-2 overflow-hidden rounded-xl border border-input p-2 text-lg font-medium ring-offset-background transition-colors duration-300 hover:bg-accent hover:text-accent-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 h-12"
-            activeClassName="bg-accent text-accent-foreground"
-            inactiveClassName="bg-background text-foreground"
+            className="flex h-12 select-none items-center gap-2 overflow-hidden rounded-xl border border-input p-2 text-lg font-medium ring-offset-background transition-colors duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
+            activeClassName="bg-primary text-primary-foreground"
+            inactiveClassName="bg-secondary text-secondary-foreground hover:bg-primary/90 hover:text-primary-foreground"
           >
             <div>{item.icon}</div>
             <span>{item.title}</span>

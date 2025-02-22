@@ -1,3 +1,5 @@
 {
-  "test": "Контрол"
+  "translation": {
+    "sidebar": { "weather": "Погода", "settings": "Настройки" }
+  }
 }

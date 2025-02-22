@@ -1,3 +1,5 @@
 {
-  "test": "Control"
+  "translation": {
+    "sidebar": { "weather": "Weather", "settings": "Settings" }
+  }
 }

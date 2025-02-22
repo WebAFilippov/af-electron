@@ -1,5 +1,5 @@
 import { sample } from 'effector'
-import { createGate, useGate } from 'effector-react'
+import { createGate, useGate, useUnit } from 'effector-react'
 import { FC, PropsWithChildren } from 'react'
 
 import { Header } from '@widgets/header'
@@ -11,6 +11,7 @@ import { addListenerWindowFx, removeListenerWindowFx } from '@features/applicati
 
 import { addListenerDebugFx, removeListenerDebugFx } from '@entities/debug-mode/model/debug'
 import { useDebugLayer } from '@entities/debug-mode/ui/use-debug-layer'
+import { $isDarkTheme, $theme } from '@entities/theme/model/model'
 
 import { cn } from '@shared/lib'
 import { Particles } from '@shared/ui'
@@ -27,6 +28,7 @@ sample({
 
 export const Layout: FC<PropsWithChildren> = ({ children }) => {
   const { ref } = useDebugLayer<HTMLDivElement>('app')
+  const isDarkTheme = useUnit($isDarkTheme)
 
   useGate(Gate)
 
@@ -42,7 +44,7 @@ export const Layout: FC<PropsWithChildren> = ({ children }) => {
         className="absolute inset-0 z-0"
         quantity={300}
         ease={50}
-        color={'#000000'}
+        color={isDarkTheme ? '#ffffff' : '#000000'}
         refresh
       />
 
@@ -54,7 +56,7 @@ export const Layout: FC<PropsWithChildren> = ({ children }) => {
         <Sidebar />
         <main
           className={cn(
-            'custom-scrollbar-2 relative m-2 mt-0 ml-0 grow overflow-y-auto rounded-2xl border border-t p-4'
+            'custom-scrollbar-2 relative m-2 ml-0 mt-0 grow overflow-y-auto rounded-2xl border border-t p-4'
           )}
         >
           {children}

@@ -12,7 +12,10 @@ export const api = {
   setMaximazeWindow: () => ipcRenderer.send("v1/window/maximize"),
   setCloseWindow: () => ipcRenderer.send("v1/window/close"),
 
-  // SIdebar
+  // News
+  fetchNews: () => ipcRenderer.invoke("v1/news/fetch_news"),
+
+  // Sidebar
   getSidebarList: () => ipcRenderer.invoke('v1/sidebar/getAll'),
   updateSidebarOrder: (list) => ipcRenderer.invoke('v1/sidebar/updateSidebar', list),
 
