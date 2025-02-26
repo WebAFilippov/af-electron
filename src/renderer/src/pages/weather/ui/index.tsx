@@ -1,3 +1,3 @@
-export const Weather = () => {
+export const WeatherPage = () => {
   return <div>Weather</div>
 }

@@ -1,23 +1,17 @@
-import { RouterProvider } from 'atomic-router-react'
 import { FC } from 'react'
-
-import { Pages } from '@pages/index'
+import { BrowserRouter } from 'react-router'
 
 import { DebugMenu } from '@entities/debug-mode/ui/DebugMenu'
 
-import { router } from '@shared/config/routing'
-
-import { Layout } from './layout/ui/Layout'
+import { Routing } from './routing'
 
 export const App: FC = () => {
   return (
     <>
       <DebugMenu />
-      <RouterProvider router={router}>
-        <Layout>
-          <Pages />
-        </Layout>
-      </RouterProvider>
+      <BrowserRouter basename={window.location.pathname}>
+        <Routing />
+      </BrowserRouter>
     </>
   )
 }

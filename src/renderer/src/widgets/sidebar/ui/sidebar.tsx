@@ -1,19 +1,13 @@
-import { Link } from 'atomic-router-react'
 import { useUnit } from 'effector-react'
 import { FC } from 'react'
+import { NavLink } from 'react-router'
 
 import { useDebugLayer } from '@entities/debug-mode/ui/use-debug-layer'
 
-import { Settings, Thermometer } from '@shared/assets/svg-icons'
 import { routes } from '@shared/config/routing'
 import { cn } from '@shared/lib'
 
 import { $sidebar } from '../model/sidebar'
-
-const navItems = [
-  { title: 'Weather', icon: <Thermometer />, link: routes.weather },
-  { title: 'Settings', icon: <Settings />, link: routes.settings }
-]
 
 export const Sidebar: FC = () => {
   const isOpen = useUnit($sidebar)
@@ -23,22 +17,35 @@ export const Sidebar: FC = () => {
     <aside
       ref={ref}
       className={cn(
-        'transition-[width, height] relative z-10 flex flex-col gap-4 p-4 duration-300',
-        isOpen ? 'w-[15rem]' : 'w-[5rem]'
+        'transition-[width, height] relative z-10 flex flex-col gap-2 pt-4 duration-300',
+        isOpen ? 'w-44' : 'w-12'
       )}
     >
-      {navItems.map((item) => {
+      {routes.map((item) => {
         return (
-          <Link
-            to={item.link}
+          <NavLink
+            to={item.path}
             key={item.title}
-            className="flex h-12 select-none items-center gap-2 overflow-hidden rounded-xl border border-input p-2 text-lg font-medium ring-offset-background transition-colors duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
-            activeClassName="bg-primary text-primary-foreground"
-            inactiveClassName="bg-secondary text-secondary-foreground hover:bg-primary/90 hover:text-primary-foreground"
+            className={({ isActive }) =>
+              cn(
+                'flex select-none items-center gap-3 overflow-hidden border-b border-t border-input shadow-sm ring-offset-background transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2',
+                isOpen ? 'px-3 py-3' : 'px-3 py-3',
+                isActive
+                  ? 'bg-primary text-primary-foreground'
+                  : 'bg-background text-foreground hover:bg-accent hover:text-accent-foreground'
+              )
+            }
           >
-            <div>{item.icon}</div>
-            <span>{item.title}</span>
-          </Link>
+            <div className="flex h-6 w-6 items-center justify-center">{item.icon}</div>
+            <span
+              className={cn(
+                'flex-1 text-lg font-normal leading-none transition-opacity duration-300',
+                isOpen ? 'opacity-100' : 'opacity-0'
+              )}
+            >
+              {item.title}
+            </span>
+          </NavLink>
         )
       })}
     </aside>

@@ -1,14 +1,15 @@
-import { Link } from 'atomic-router-react'
+// import { Link } from 'atomic-router-react'
 import { useUnit } from 'effector-react'
 import { PanelLeftCloseIcon, PanelLeftOpenIcon } from 'lucide-react'
+import { Link } from 'react-router'
 
 import { $sidebar, toggleSidebar } from '@widgets/sidebar'
 
+import { LanguageSwitcher } from '@features/language-switcher/ui/LanguageSwitcher'
 import { ThemeSwitcher } from '@features/theme-switcher/ui/ThemeSwither'
 
 import { useDebugLayer } from '@entities/debug-mode'
 
-import { routes } from '@shared/config/routing'
 import { Button, RainbowButton } from '@shared/ui'
 
 export const Header = () => {
@@ -17,25 +18,28 @@ export const Header = () => {
   const isOpen = useUnit($sidebar)
   const handleToggleSidebar = useUnit(toggleSidebar)
 
+  const isOnline = true
+
   return (
     <div className="relative my-auto flex min-h-12 w-full items-center justify-between bg-transparent px-20">
-      <Button
-        ref={refButton}
-        variant="outline"
-        onClick={handleToggleSidebar}
-        className="absolute left-1 top-1 flex h-8 w-8 items-center justify-center"
-      >
-        {isOpen ? <PanelLeftCloseIcon size="1rem" /> : <PanelLeftOpenIcon size="1rem" />}
-      </Button>
+      <div className="absolute left-2 top-0 flex h-12 w-8 items-center justify-center">
+        <Button ref={refButton} variant="outline" onClick={handleToggleSidebar} className="h-8 w-8">
+          {isOpen ? <PanelLeftCloseIcon size="1rem" /> : <PanelLeftOpenIcon size="1rem" />}
+        </Button>
+      </div>
 
-      <Link to={routes.home}>
+      <Link to="/">
         <RainbowButton className="h-9 select-none px-6">
-          🚀afilippov
+          🚀a.filippov
           <span className="italic">/ui</span>
         </RainbowButton>
       </Link>
 
-      <div>
+      <div className="flex items-center gap-2">
+        <span className="relative flex size-2">
+          <span className="relative inline-flex size-2 rounded-full bg-green-500/30"></span>
+          <span className="absolute inline-flex h-full w-full animate-ping rounded-full  bg-green-400 opacity-75 "></span>
+        </span>
         <ThemeSwitcher />
       </div>
     </div>

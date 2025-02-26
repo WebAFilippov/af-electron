@@ -73,18 +73,7 @@ const config = {
   			md: 'calc(var(--radius) - 2px)',
   			sm: 'calc(var(--radius) - 4px)'
   		},
-      keyframes: {    
-        meteor: {
-          "0%": {
-            transform: "rotate(var(--angle)) translateX(0)",
-            opacity: "1",
-          },
-          "70%": { opacity: "1" },
-          "100%": {
-            transform: "rotate(var(--angle)) translateX(-500px)",
-            opacity: "0",
-          },
-        },    
+      keyframes: {      
         "accordion-down": {
           from: {
             height: "0",
@@ -109,7 +98,6 @@ const config = {
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
-        "meteor": "meteor 5s linear infinite",
         rainbow: "rainbow var(--speed, 2s) infinite linear",
       },
     },
@@ -123,10 +111,6 @@ const config = {
         },
         ".area-no-drag": {
           "-webkit-app-region": "no-drag",
-        },
-        ".user-select-none": {
-          "-webkit-user-select": "none",
-          "user-select": "none",
         },
       });
       addComponents({
@@ -142,27 +126,6 @@ const config = {
           "&::-webkit-scrollbar-thumb": {
             backgroundColor: "transparent",
             borderRadius: "10px",
-            cursor: "grab",
-          },
-          "&::-webkit-scrollbar-thumb:active": {
-            cursor: "grabbing",
-          },
-          "&:hover::-webkit-scrollbar-thumb": {
-            backgroundColor: "hsl(var(--primary))",
-          },
-        },
-        ".custom-scrollbar-2": {
-          "scrollbar-gutter": "stable",
-          "&::-webkit-scrollbar": {
-            width: ".6rem",
-          },
-          "&::-webkit-scrollbar-track": {
-            background: "transparent",
-            borderRadius: "none",
-          },
-          "&::-webkit-scrollbar-thumb": {
-            backgroundColor: "transparent",
-            borderRadius: "none",
             cursor: "grab",
           },
           "&::-webkit-scrollbar-thumb:active": {

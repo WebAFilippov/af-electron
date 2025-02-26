@@ -40,7 +40,7 @@ export const Topbar = () => {
         </Button>
         <Button
           variant="outline"
-          className="h-8 w-8 hover:bg-destructive hover:text-primary-foreground"
+          className="h-8 w-8 hover:bg-destructive hover:text-destructive-foreground"
           tabIndex={-1}
           onClick={() => handleClose()}
         >

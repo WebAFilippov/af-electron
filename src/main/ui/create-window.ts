@@ -32,12 +32,14 @@ export const createWindow = (): BrowserWindow => {
       sandbox: false,
       allowRunningInsecureContent: false,
       plugins: false,
-      devTools: is.dev ? true : false
+      devTools: true
     }
   })
-  
+
   window.flashFrame(false)
   // window.setOverlayIcon(nativeImage.createFromPath(icon16), 'Harmonify')
+
+  window.webContents.openDevTools()
 
   if (!is.dev) {
     window.setMenu(null)

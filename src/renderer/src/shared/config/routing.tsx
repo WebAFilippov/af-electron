@@ -1,36 +1,26 @@
-import {
-  createHistoryRouter,
-  createRoute,
-  createRouterControls,
-  UnmappedRouteObject
-} from 'atomic-router'
-import { sample } from 'effector'
-import { createBrowserHistory } from 'history'
+import { Newspaper, Settings, Thermometer } from 'lucide-react'
 
-import { AppStarted } from './init'
+import { NewsPage } from '@pages/news'
+import { SettingsPage } from '@pages/settings'
+import { WeatherPage } from '@pages/weather'
 
-export const routes = {
-  home: createRoute(),
-  weather: createRoute(),
-  settings: createRoute()
-}
-
-const routesMap: UnmappedRouteObject<any>[] = [
-  { path: '/', route: routes.home },
-  { path: '/weather', route: routes.weather },
-  { path: '/settings', route: routes.settings }
+export const routes = [
+  {
+    path: '/news',
+    title: 'News',
+    icon: <Newspaper size="1.5rem" />,
+    element: <NewsPage />
+  },
+  {
+    path: '/weather',
+    title: 'Weather',
+    icon: <Thermometer size="1.5rem" />,
+    element: <WeatherPage />
+  },
+  {
+    path: '/settings',
+    title: 'Settings',
+    icon: <Settings size="1.5rem" />,
+    element: <SettingsPage />
+  }
 ]
-
-export const controls: ReturnType<typeof createRouterControls> = createRouterControls()
-export const history = createBrowserHistory()
-
-export const router: ReturnType<typeof createHistoryRouter> = createHistoryRouter({
-  routes: routesMap,
-  controls
-})
-
-sample({
-  clock: AppStarted,
-  fn: () => history,
-  target: router.setHistory
-})

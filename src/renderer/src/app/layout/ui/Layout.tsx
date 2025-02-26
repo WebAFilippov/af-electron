@@ -1,6 +1,6 @@
 import { sample } from 'effector'
 import { createGate, useGate, useUnit } from 'effector-react'
-import { FC, PropsWithChildren } from 'react'
+import { Outlet } from 'react-router'
 
 import { Header } from '@widgets/header'
 import { addListenerSidebarFx, removeListenerSidebarFx } from '@widgets/sidebar/model/sidebar'
@@ -11,7 +11,7 @@ import { addListenerWindowFx, removeListenerWindowFx } from '@features/applicati
 
 import { addListenerDebugFx, removeListenerDebugFx } from '@entities/debug-mode/model/debug'
 import { useDebugLayer } from '@entities/debug-mode/ui/use-debug-layer'
-import { $isDarkTheme, $theme } from '@entities/theme/model/model'
+import { $isDarkTheme } from '@entities/theme/model/model'
 
 import { cn } from '@shared/lib'
 import { Particles } from '@shared/ui'
@@ -26,7 +26,7 @@ sample({
   target: [removeListenerWindowFx, removeListenerSidebarFx, removeListenerDebugFx]
 })
 
-export const Layout: FC<PropsWithChildren> = ({ children }) => {
+export const Layout = () => {
   const { ref } = useDebugLayer<HTMLDivElement>('app')
   const isDarkTheme = useUnit($isDarkTheme)
 
@@ -56,10 +56,10 @@ export const Layout: FC<PropsWithChildren> = ({ children }) => {
         <Sidebar />
         <main
           className={cn(
-            'custom-scrollbar-2 relative m-2 ml-0 mt-0 grow overflow-y-auto rounded-2xl border border-t p-4'
+            'custom-scrollbar-2 relative flex-1 rounded-tl-2xl border-t border-l bg-background '
           )}
         >
-          {children}
+          <Outlet />
         </main>
       </div>
     </div>
