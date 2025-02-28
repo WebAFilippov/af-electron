@@ -27,14 +27,14 @@ interface NewsItem {
 export const HomePage = () => {
   const [news, setNews] = useState<NewsItem[]>([])
 
-  useEffect(() => {
-    window.api
-      .fetchNews()
-      .then((items: NewsItem[]) => {
-        setNews(items)
-      })
-      .catch((error: Error) => console.error(error))
-  }, [])
+  // useEffect(() => {
+  //   window.api
+  //     .fetchNews()
+  //     .then((items: NewsItem[]) => {
+  //       setNews(items)
+  //     })
+  //     .catch((error: Error) => console.error(error))
+  // }, [])
 
   return (
     <div className="min-h-screen bg-background px-4 py-8 text-foreground sm:px-6 lg:px-8">
@@ -66,12 +66,9 @@ export const HomePage = () => {
                   </a>
                 </h3>
                 <div className="mt-1 space-y-0.5 text-xs text-foreground">
-                  <p className="line-clamp-2 font-medium">
-                    {item.content[0]?.text || ''}
-                  </p>
+                  <p className="line-clamp-2 font-medium">{item.content[0]?.text || ''}</p>
                   <p>
-                    <span className="font-medium">Категория:</span>{' '}
-                    {item.category || 'Не указана'}
+                    <span className="font-medium">Категория:</span> {item.category || 'Не указана'}
                   </p>
                   <p>
                     <span className="font-medium">Автор:</span> {item.creator || 'Не указан'}

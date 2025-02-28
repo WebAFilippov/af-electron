@@ -6,12 +6,16 @@ export const formatRelativeDate = (pubDate: string): string => {
   if (isNaN(date.getTime())) return 'Дата неизвестна'
 
   const diffMs = now.getTime() - date.getTime()
+  const diffSeconds = Math.floor(diffMs / 1000)
   const diffMinutes = Math.floor(diffMs / (1000 * 60))
   const diffHours = Math.floor(diffMs / (1000 * 60 * 60))
   const diffDays = Math.floor(diffMs / (1000 * 60 * 60 * 24))
 
   if (diffDays < 1) {
     if (diffHours < 1) {
+      if (diffMinutes < 1) {
+        return `${diffSeconds} сек. назад`
+      }
       return `${diffMinutes} мин. назад`
     }
     return `${diffHours} ч. назад`
@@ -67,7 +71,7 @@ export const useIntersectionObserver = (pubDate: string) => {
     if (isVisible) {
       intervalId = setInterval(() => {
         setFormattedDate(formatRelativeDate(pubDate))
-      }, 15000)
+      }, 5000)
     }
 
     return () => {

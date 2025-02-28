@@ -1,6 +1,7 @@
-import { sample } from 'effector'
+import { createEvent, restore, sample } from 'effector'
 import { createGate, useGate, useUnit } from 'effector-react'
-import { Outlet } from 'react-router'
+import { useEffect } from 'react'
+import { Outlet, useLocation } from 'react-router'
 
 import { Header } from '@widgets/header'
 import { addListenerSidebarFx, removeListenerSidebarFx } from '@widgets/sidebar/model/sidebar'
@@ -11,6 +12,7 @@ import { addListenerWindowFx, removeListenerWindowFx } from '@features/applicati
 
 import { addListenerDebugFx, removeListenerDebugFx } from '@entities/debug-mode/model/debug'
 import { useDebugLayer } from '@entities/debug-mode/ui/use-debug-layer'
+import { $news, fetchNewsFx } from '@entities/news'
 import { $isDarkTheme } from '@entities/theme/model/model'
 
 import { cn } from '@shared/lib'
@@ -26,11 +28,33 @@ sample({
   target: [removeListenerWindowFx, removeListenerSidebarFx, removeListenerDebugFx]
 })
 
+const changePathname = createEvent<string>()
+const $pathname = restore(changePathname, '/')
+
+sample({
+  clock: changePathname,
+  target: $pathname
+})
+
+sample({
+  clock: $pathname,
+  source: $news,
+  filter: (news, pathname) => pathname.startsWith('/news') && news.length === 0,
+  target: fetchNewsFx
+})
+
+$pathname.watch((pathname) => console.log('#pathname', pathname))
+
 export const Layout = () => {
+  useGate(Gate)
   const { ref } = useDebugLayer<HTMLDivElement>('app')
   const isDarkTheme = useUnit($isDarkTheme)
 
-  useGate(Gate)
+  const location = useLocation()
+
+  useEffect(() => {
+    changePathname(location.pathname)
+  }, [location.pathname])
 
   return (
     <div
@@ -56,7 +80,7 @@ export const Layout = () => {
         <Sidebar />
         <main
           className={cn(
-            'custom-scrollbar-2 relative flex-1 rounded-tl-2xl border-t border-l bg-background '
+            'custom-scrollbar-2 relative flex-1 rounded-tl-2xl border-l border-t bg-background'
           )}
         >
           <Outlet />

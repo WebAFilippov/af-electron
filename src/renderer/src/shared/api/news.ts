@@ -1,9 +1,7 @@
-import { createEffect } from 'effector'
+import { NewsItem } from '@entities/news'
 
+const fetchNews = async (): Promise<NewsItem[]> => {
+  return await window.api.fetchNews()
+}
 
-
-const fetchNewsFx = createEffect(() => {
-  return window.api.fetchNews()
-})
-
-export { fetchNewsFx }
+export { fetchNews }

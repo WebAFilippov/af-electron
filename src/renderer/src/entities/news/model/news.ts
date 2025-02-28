@@ -1,16 +1,23 @@
-import { createApi, createEffect, createStore, sample } from 'effector'
+import { createEffect, createEvent, createStore, sample } from 'effector'
+
+import { fetchNews } from '@shared/api/news'
 
 import { NewsItem } from '../types'
 
-const $loading = createStore<boolean>(false)
-const $news = createStore<NewsItem[]>([])
-
-const { setLoading } = createApi($loading, {
-  setLoading: (_, loading: boolean) => loading
+const fetchNewsFx = createEffect(async () => {
+  return await fetchNews()
 })
 
-const fetchNewsFx = createEffect(async () => {
-  return await window.api.fetchNews()
+const firstFetchNews = createEvent()
+
+const $isLoading = fetchNewsFx.pending
+const $news = createStore<NewsItem[]>([])
+
+sample({
+  clock: firstFetchNews,
+  source: $news,
+  filter: (existingNews) => existingNews.length === 0,
+  target: fetchNewsFx
 })
 
 sample({
@@ -23,18 +30,7 @@ sample({
   target: $news
 })
 
-sample({
-  clock: fetchNewsFx,
-  fn: () => true,
-  target: setLoading
-})
-
-sample({
-  clock: fetchNewsFx.finally,
-  fn: () => false,
-  target: setLoading
-})
-
-export { $news, $loading, fetchNewsFx }
+export { $news, $isLoading, fetchNewsFx, firstFetchNews }
 
 $news.watch((store) => console.log('#news ', store))
+$isLoading.watch((store) => console.log('#isLoading ', store))

@@ -2,10 +2,15 @@ import { combine, createApi, createStore } from 'effector'
 
 import { $news } from '@entities/news'
 
-const $categories = $news.map((news) => ['Все', ...new Set(news.map((item) => item.category))])
+const $categories = $news.map((news) => {
+  const validCategories = news
+    .map((item) => item.category)
+    .filter((category): category is string => !!category && category.trim() !== '') // Исключаем null, undefined и пустые строки
+  return ['Все', ...new Set(validCategories)]
+})
 const $currentCategory = createStore<string>('Все')
 const $filteredNews = combine($news, $currentCategory, (news, category) =>
-  category === 'Все' ? news : news.filter((news) => news.category === category)
+  category === 'Все' ? news : news.filter((news) => news.category.includes(category))
 )
 
 const { setCategory } = createApi($currentCategory, {

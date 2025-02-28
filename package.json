@@ -57,6 +57,7 @@
     "i18next": "^24.2.2",
     "i18next-browser-languagedetector": "^8.0.3",
     "lucide-react": "^0.460.0",
+    "patronum": "^2.3.0",
     "ping": "^0.4.4",
     "react-i18next": "^15.4.1",
     "react-router": "^7.2.0",

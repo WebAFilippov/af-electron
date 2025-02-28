@@ -1,0 +1,1 @@
+import { fetchNews } from './news'

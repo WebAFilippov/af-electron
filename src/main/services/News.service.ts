@@ -1,6 +1,8 @@
 import { load } from 'cheerio'
 import { parseStringPromise } from 'xml2js'
 
+import { createSlug } from '../shared'
+
 class NewsService {
   async fetchNews() {
     try {
@@ -23,7 +25,7 @@ class NewsService {
           return {
             root,
             tag: node.tagName || 'text',
-            text: $node.text(),
+            text: $node.text() || '',
             attributes: node.attribs || {},
             children: $node.children().length
               ? $node
@@ -38,11 +40,17 @@ class NewsService {
           content.push(parseNode(elem, true))
         })
 
+        const title = item.title?.[0] || 'untitled'
+        const pubDate = item.pubDate?.[0] || new Date().toISOString()
+        const makedSlug = createSlug(title)
+        const timestamp = Date.parse(pubDate)
+        const slug = `${makedSlug}-${timestamp}`
 
         return {
-          title: item.title?.[0] || '',
+          title,
+          slug,
+          pubDate,
           link: item.link?.[0] || '',
-          pubDate: item.pubDate?.[0] || '',
           description: item.description?.[0] || '',
           category: item.category?.[0] || '',
           creator: item['dc:creator']?.[0] || '',

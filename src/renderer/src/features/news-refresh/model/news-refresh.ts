@@ -1,4 +1,5 @@
 import { createEffect, createEvent, sample } from 'effector'
+import { not } from 'patronum'
 
 import { fetchNewsFx } from '@entities/news'
 
@@ -36,6 +37,7 @@ const refreshNews = createEvent()
 
 sample({
   clock: refreshNews,
+  filter: not(fetchNewsFx.pending),
   target: fetchNewsFx
 })
 

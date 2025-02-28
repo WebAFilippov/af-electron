@@ -1,4 +1,5 @@
 import { FC } from 'react'
+import { Link } from 'react-router'
 
 import { useIntersectionObserver } from '@shared/lib'
 import { Card, CardDescription, CardHeader, CardTitle, Separator } from '@shared/ui'
@@ -35,15 +36,13 @@ export const CardNews: FC<CardNewsProps> = ({ news }) => {
           </div>
         )}
         <div className="flex flex-col gap-2">
-          <CardTitle className="cursor-pointer text-xl font-extrabold leading-6 antialiased hover:underline">
-            <a
-              href={news.link}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="transition-colors hover:text-primary"
+          <CardTitle>
+            <Link
+              to={`/news/${news.slug}`}
+              className="cursor-pointer text-xl font-extrabold leading-6 antialiased hover:underline"
             >
               {news.title}
-            </a>
+            </Link>
           </CardTitle>
           <CardDescription className="line-clamp-3 text-base italic leading-4 antialiased">
             {getContentText()}
