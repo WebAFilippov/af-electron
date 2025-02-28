@@ -1,11 +1,9 @@
-// import { Link } from 'atomic-router-react'
 import { useUnit } from 'effector-react'
 import { PanelLeftCloseIcon, PanelLeftOpenIcon } from 'lucide-react'
-import { Link } from 'react-router'
+import { Link } from 'react-router-dom'
 
 import { $sidebar, toggleSidebar } from '@widgets/sidebar'
 
-import { LanguageSwitcher } from '@features/language-switcher/ui/LanguageSwitcher'
 import { ThemeSwitcher } from '@features/theme-switcher/ui/ThemeSwither'
 
 import { useDebugLayer } from '@entities/debug-mode'
@@ -28,7 +26,7 @@ export const Header = () => {
         </Button>
       </div>
 
-      <Link to="/">
+      <Link to="../">
         <RainbowButton className="h-9 select-none px-6">
           🚀a.filippov
           <span className="italic">/ui</span>
@@ -38,7 +36,7 @@ export const Header = () => {
       <div className="flex items-center gap-2">
         <span className="relative flex size-2">
           <span className="relative inline-flex size-2 rounded-full bg-green-500/30"></span>
-          <span className="absolute inline-flex h-full w-full animate-ping rounded-full  bg-green-400 opacity-75 "></span>
+          <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-green-400 opacity-75"></span>
         </span>
         <ThemeSwitcher />
       </div>

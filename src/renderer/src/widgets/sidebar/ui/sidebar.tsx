@@ -1,6 +1,6 @@
 import { useUnit } from 'effector-react'
 import { FC } from 'react'
-import { NavLink } from 'react-router'
+import { NavLink } from 'react-router-dom'
 
 import { useDebugLayer } from '@entities/debug-mode/ui/use-debug-layer'
 

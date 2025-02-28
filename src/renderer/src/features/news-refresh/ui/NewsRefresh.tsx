@@ -19,7 +19,7 @@ export const NewsRefresh: FC = () => {
       size="icon"
       onClick={handleRefreshNews}
       disabled={isLoading}
-      className={cn('h-8 w-8 disabled:cursor-not-allowed')}
+      className={cn('h-8 w-8 disabled:cursor-progress')}
     >
       <RefreshCw strokeWidth={1} className={cn('h-6 w-6', isLoading && 'animate-spin')} />
     </Button>

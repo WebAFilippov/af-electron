@@ -1,5 +1,5 @@
 import { sample } from 'effector'
-import { createGate, useGate, useStoreMap, useUnit } from 'effector-react'
+import { createGate, useGate, useStoreMap } from 'effector-react'
 import { FC } from 'react'
 import { useNavigate, useParams } from 'react-router'
 
@@ -10,7 +10,7 @@ import { Button } from '@shared/ui'
 const Gate = createGate()
 sample({
   clock: Gate.open,
-  target: []
+  target: [firstFetchNews]
 })
 
 export const NewsDetail: FC = () => {

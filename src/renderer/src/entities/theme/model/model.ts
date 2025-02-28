@@ -26,8 +26,8 @@ const setTheme = createEvent<Theme>()
 const $theme = createStore<Theme>('system')
 const $isDarkTheme = $theme.map(
   (theme) =>
-    theme === 'dark' ||
-    (theme === 'system' && window.matchMedia('(prefers-color-scheme: dark)').matches)
+    (theme === 'system' && window.matchMedia('(prefers-color-scheme: dark)').matches) ||
+    theme === 'dark'
 )
 
 persist({

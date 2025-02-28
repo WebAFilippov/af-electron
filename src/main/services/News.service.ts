@@ -1,18 +1,11 @@
 import { load } from 'cheerio'
-import { parseStringPromise } from 'xml2js'
 
+// import { parseStringPromise } from 'xml2js'
 import { createSlug } from '../shared'
 
 class NewsService {
-  async fetchNews() {
+  async fetchNews(parsedData) {
     try {
-      const response = await fetch('https://lenta.ru/rss/google-newsstand/main/')
-      if (!response.ok) {
-        throw new Error(`Ошибка HTTP: ${response.status}`)
-      }
-      const data = await response.text()
-
-      const parsedData = await parseStringPromise(data)
       const items = parsedData.rss.channel[0].item
 
       const news = items.map((item: any) => {

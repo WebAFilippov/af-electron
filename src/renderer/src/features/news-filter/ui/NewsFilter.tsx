@@ -3,6 +3,7 @@ import { FC } from 'react'
 
 import { $isLoading } from '@entities/news'
 
+import { cn } from '@shared/lib'
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@shared/ui'
 
 import { $categories, $currentCategory, setCategory } from '../model/news-filter'
@@ -17,7 +18,7 @@ export const NewsFilter: FC = () => {
 
   return (
     <Select value={currentCategory} onValueChange={handleSetCategory} disabled={isLoading}>
-      <SelectTrigger className="h-8 w-48">
+      <SelectTrigger className={cn('h-8 flex-1 overflow-hidden', isLoading && 'disabled:cursor-progress')}>
         <SelectValue placeholder="Выберите категорию" />
       </SelectTrigger>
       <SelectContent>

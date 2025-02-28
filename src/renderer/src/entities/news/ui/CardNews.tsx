@@ -1,5 +1,5 @@
 import { FC } from 'react'
-import { Link } from 'react-router'
+import { Link } from 'react-router-dom'
 
 import { useIntersectionObserver } from '@shared/lib'
 import { Card, CardDescription, CardHeader, CardTitle, Separator } from '@shared/ui'
