@@ -21,14 +21,14 @@ export const Topbar = () => {
       className="relative z-10 flex h-8 w-full items-center justify-end bg-gray-300/20 area-drag"
       ref={ref}
     >
-      <div className="flex gap-[.1rem] area-no-drag">
+      <div className="flex space-x-0 area-no-drag">
         <Button
           variant="outline"
           className="h-8 w-8"
           tabIndex={-1}
           onClick={() => handleMinimize()}
         >
-          <MinusIcon size="2rem" />
+          <MinusIcon strokeWidth={1} className="h-4 w-4" />
         </Button>
         <Button
           variant="outline"
@@ -36,7 +36,11 @@ export const Topbar = () => {
           tabIndex={-1}
           onClick={() => handleMaximize()}
         >
-          {true ? <MaximizeIcon size="2rem" /> : <MinimizeIcon size="1rem" />}
+          {true ? (
+            <MaximizeIcon strokeWidth={1} className="h-4 w-4" />
+          ) : (
+            <MinimizeIcon strokeWidth={1} className="h-4 w-4" />
+          )}
         </Button>
         <Button
           variant="outline"
@@ -44,7 +48,7 @@ export const Topbar = () => {
           tabIndex={-1}
           onClick={() => handleClose()}
         >
-          <CloseIcon size="2rem" />
+          <CloseIcon strokeWidth={1} className="h-5 w-5" />
         </Button>
       </div>
     </div>

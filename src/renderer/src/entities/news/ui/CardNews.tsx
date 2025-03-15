@@ -1,8 +1,10 @@
-import { FC } from 'react'
+import { useIntersectionObserver } from '@uidotdev/usehooks'
+
+import { FC, useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 
-import { useIntersectionObserver } from '@shared/lib'
-import { Card, CardDescription, CardHeader, CardTitle, Separator } from '@shared/ui'
+import { cn, formatedDate } from '@shared/lib'
+import { Card, CardDescription, CardHeader, CardTitle } from '@shared/ui'
 
 import { NewsItem } from '../types'
 
@@ -11,7 +13,30 @@ interface CardNewsProps {
 }
 
 export const CardNews: FC<CardNewsProps> = ({ news }) => {
-  const { ref, formattedDate } = useIntersectionObserver(news.pubDate)
+  const [isVisible, setIsVisible] = useState(false)
+  const [date, setDate] = useState(formatedDate(news.pubDate))
+  const [ref, entry] = useIntersectionObserver({
+    threshold: [0.2, 0.8],
+    root: null,
+    rootMargin: '0px 0px 0px 0px'
+  })
+
+  useEffect(() => {
+    let intervalId: NodeJS.Timeout | null = null
+    if (entry?.isIntersecting) {
+      setIsVisible(true)
+      intervalId = setInterval(() => {
+        setDate(formatedDate(news.pubDate))
+      }, 3000)
+    }
+
+    return () => {
+      if (intervalId) {
+        setIsVisible(false)
+        clearInterval(intervalId)
+      }
+    }
+  }, [entry?.isIntersecting])
 
   const getContentText = (): string => {
     if (!news.content || news.content.length === 0) return 'Нет описания'
@@ -20,14 +45,17 @@ export const CardNews: FC<CardNewsProps> = ({ news }) => {
   }
 
   return (
-    <Card ref={ref}>
-      <CardHeader className="flex select-none flex-row gap-2 p-3">
+    <Card
+      ref={ref}
+      className={cn('opacity-5 transition-all duration-500', isVisible && 'opacity-100')}
+    >
+      <CardHeader className={cn('z-0 flex select-none flex-row gap-2 p-3')}>
         {news.media?.thumbnailUrl ? (
           <div className="pointer-events-none m-1 h-36 w-36 flex-shrink-0">
             <img
               src={news.media.thumbnailUrl}
               alt={news.media.credit || news.title}
-              className="h-full w-full rounded-md object-cover"
+              className={cn('h-full w-full rounded-md bg-muted object-cover')}
             />
           </div>
         ) : (
@@ -39,7 +67,7 @@ export const CardNews: FC<CardNewsProps> = ({ news }) => {
           <CardTitle>
             <Link
               to={`/news/${news.slug}`}
-              className="cursor-pointer text-xl font-extrabold leading-6 antialiased hover:underline"
+              className="cursor-pointer text-xl font-extrabold leading-6 antialiased outline-black hover:underline"
             >
               {news.title}
             </Link>
@@ -47,16 +75,14 @@ export const CardNews: FC<CardNewsProps> = ({ news }) => {
           <CardDescription className="line-clamp-3 text-base italic leading-4 antialiased">
             {getContentText()}
           </CardDescription>
-          <div className="flex gap-2">
-            <CardDescription className="text-sm italic tracking-tighter text-card-foreground">
-              {formattedDate}
+          <div className="flex divide-x divide-dotted divide-card-foreground/50">
+            <CardDescription className="pr-2 text-sm italic tracking-tighter text-card-foreground">
+              {date}
             </CardDescription>
-            <Separator orientation="vertical" />
-            <CardDescription className="text-sm italic tracking-tighter text-card-foreground">
+            <CardDescription className="px-2 text-sm italic tracking-tighter text-card-foreground">
               {news.category || 'Не указана'}
             </CardDescription>
-            <Separator orientation="vertical" />
-            <CardDescription className="text-sm italic tracking-tighter text-card-foreground">
+            <CardDescription className="pl-2 text-sm italic tracking-tighter text-card-foreground">
               {news.creator || 'Не указан'}
             </CardDescription>
           </div>

@@ -1,1 +1,3 @@
-import { fetchNews } from './news'
+export { fetchNews } from './news'
+
+export { externalLink } from './link'

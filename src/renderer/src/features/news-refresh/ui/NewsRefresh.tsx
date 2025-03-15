@@ -15,13 +15,15 @@ export const NewsRefresh: FC = () => {
 
   return (
     <Button
-      variant="outline"
       size="icon"
       onClick={handleRefreshNews}
       disabled={isLoading}
       className={cn('h-8 w-8 disabled:cursor-progress')}
     >
-      <RefreshCw strokeWidth={1} className={cn('h-6 w-6', isLoading && 'animate-spin')} />
+      <RefreshCw
+        strokeWidth={2}
+        className={cn('h-4 w-4 stroke-background', isLoading && 'animate-spin')}
+      />
     </Button>
   )
 }

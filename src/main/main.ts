@@ -24,8 +24,6 @@ setAutoLaunch(!is.dev)
 const isAutoLaunch = process.argv.includes('--auto-launch')
 const gotTheLock = app.requestSingleInstanceLock() // Проверка на запущенное окно -> true if once window
 
-
-
 if (!gotTheLock) {
   app.quit()
 } else {

@@ -106,7 +106,8 @@ sample({
   target: $debug
 })
 
-// $debug.watch((store) => console.log('#debug ', store))
-$debugMenu.watch((store) => console.log('#debugMenu ', store))
 
 export { $debug, $debugMenu, addListenerDebugFx, removeListenerDebugFx, setDebugLayerOption }
+
+// $debug.watch((store) => console.log('#debug ', store))
+// $debugMenu.watch((store) => console.log('#debugMenu ', store))

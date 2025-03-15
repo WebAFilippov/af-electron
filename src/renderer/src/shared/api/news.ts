@@ -1,7 +1,5 @@
 import { NewsItem } from '@entities/news'
 
-const fetchNews = async (): Promise<NewsItem[]> => {
+export const fetchNews = async (): Promise<NewsItem[]> => {
   return await window.api.fetchNews()
 }
-
-export { fetchNews }

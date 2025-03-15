@@ -115,24 +115,19 @@ const config = {
       });
       addComponents({
         ".custom-scrollbar": {
-          "scrollbar-gutter": "stable",
           "&::-webkit-scrollbar": {
-            width: "0.3rem",
+            width: "0.4rem",
           },
           "&::-webkit-scrollbar-track": {
             background: "transparent",
-            borderRadius: "10px",
+            borderRadius: "0px",
           },
           "&::-webkit-scrollbar-thumb": {
-            backgroundColor: "transparent",
-            borderRadius: "10px",
-            cursor: "grab",
-          },
-          "&::-webkit-scrollbar-thumb:active": {
-            cursor: "grabbing",
+            backgroundColor: "hsl(var(--border))",
+            borderRadius: "0px",
           },
           "&:hover::-webkit-scrollbar-thumb": {
-            backgroundColor: "hsl(var(--primary))",
+            backgroundColor: "hsl(var(--border))",
           },
         },
         ".debug-widgets": {

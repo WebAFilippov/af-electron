@@ -53,5 +53,5 @@ sample({
 
 export { $theme, $isDarkTheme, setTheme, applyThemeFx }
 
-$theme.watch((store) => console.log(`theme change: ${store}`))
-$isDarkTheme.watch((store) => console.log(`isDarkTheme change: ${store}`))
+// $theme.watch((store) => console.log(`theme change: ${store}`))
+// $isDarkTheme.watch((store) => console.log(`isDarkTheme change: ${store}`))

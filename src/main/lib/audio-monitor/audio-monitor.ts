@@ -1,6 +1,5 @@
 import { ChildProcess, spawn } from 'child_process'
 import { app } from 'electron'
-// import { app } from 'electron'
 import path from 'path'
 
 /**

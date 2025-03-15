@@ -1,26 +1,21 @@
-import { Route, Routes } from 'react-router'
+import { createBrowserRouter } from 'react-router-dom'
 
 import { Layout } from '@app/layout/ui/Layout'
 
 import { HomePage } from '@pages/home'
 import { NewsPage } from '@pages/news'
 import { NewsDetail } from '@pages/news-full/ui/NewsDetail'
-import { SettingsPage } from '@pages/settings'
-import { WeatherPage } from '@pages/weather'
+import { NotFound404 } from '@pages/not-found'
 
-export const Routing = () => {
-  return (
-    <Routes>
-      <Route path="/" element={<Layout />}>
-        <Route index element={<HomePage />} />
-
-        <Route path="news">
-          <Route index element={<NewsPage />} />
-          <Route path=":slug" element={<NewsDetail />} />
-        </Route>
-        <Route path="/weather" element={<WeatherPage />} />
-        <Route path="/settings" element={<SettingsPage />} />
-      </Route>
-    </Routes>
-  )
-}
+export const router = createBrowserRouter([
+  {
+    path: '/',
+    element: <Layout />,
+    children: [
+      { index: true, element: <HomePage /> },
+      { path: 'news', element: <NewsPage /> },
+      { path: 'news/:slug', element: <NewsDetail /> },
+      { path: '*', element: <NotFound404 /> }
+    ]
+  }
+])

@@ -1,2 +1,2 @@
-export * from './model/news-filter'
-export * from './ui/NewsFilter'
+export { NewsFilter } from './ul/NewsFilter'
+export { $isOpen, toggleIsOpen } from './model/model'

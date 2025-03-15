@@ -1,2 +1,3 @@
-export * from './cn'
-export * from './useIntersectionObserver'
+export { cn } from './cn'
+export { formatedDate } from './formatedDate'
+

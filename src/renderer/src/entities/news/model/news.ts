@@ -1,6 +1,6 @@
 import { createEffect, createEvent, createStore, sample } from 'effector'
 
-import { fetchNews } from '@shared/api/news'
+import { fetchNews } from '@shared/api'
 
 import { NewsItem } from '../types'
 
@@ -10,8 +10,8 @@ const fetchNewsFx = createEffect(async () => {
 
 const firstFetchNews = createEvent()
 
-const $isLoading = fetchNewsFx.pending
 const $news = createStore<NewsItem[]>([])
+const $isLoading = fetchNewsFx.pending
 
 sample({
   clock: firstFetchNews,
@@ -30,7 +30,6 @@ sample({
   target: $news
 })
 
-export { $news, $isLoading, fetchNewsFx, firstFetchNews }
+export { $news, fetchNewsFx, $isLoading, firstFetchNews }
 
 $news.watch((store) => console.log('#news ', store))
-$isLoading.watch((store) => console.log('#isLoading ', store))

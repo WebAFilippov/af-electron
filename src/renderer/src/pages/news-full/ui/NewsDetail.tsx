@@ -1,11 +1,14 @@
 import { sample } from 'effector'
 import { createGate, useGate, useStoreMap } from 'effector-react'
+import { ChevronsLeft } from 'lucide-react'
 import { FC } from 'react'
-import { useNavigate, useParams } from 'react-router'
+import { useNavigate, useParams } from 'react-router-dom'
+
+import { NotFound404 } from '@pages/not-found'
 
 import { $news, firstFetchNews } from '@entities/news'
 
-import { Button } from '@shared/ui'
+import { Button, ProgressiveImage } from '@shared/ui'
 
 const Gate = createGate()
 sample({
@@ -28,39 +31,61 @@ export const NewsDetail: FC = () => {
     navigate(-1)
   }
 
+  console.log(selectedNews)
+
   if (!selectedNews) {
-    return (
-      <div className="flex h-full w-full flex-col items-center justify-center p-8">
-        <h1 className="text-2xl font-bold text-gray-900">Новость не найдена</h1>
-        <p className="mt-2 text-gray-600">Проверьте URL или вернитесь к списку новостей.</p>
-        <Button onClick={handleGoBack} variant="outline" className="mt-4">
-          Назад
-        </Button>
-      </div>
-    )
+    return <NotFound404 />
   }
 
   return (
-    <div className="flex h-full w-full flex-col gap-4 p-8">
-      <h1 className="text-3xl font-bold text-gray-900">{selectedNews.title}</h1>
-      <p className="text-sm text-gray-600">Дата: {selectedNews.pubDate}</p>
-      <p className="text-sm text-gray-600">Автор: {selectedNews.creator || 'Не указан'}</p>
-      <p className="text-sm text-gray-600">Категория: {selectedNews.category || 'Не указана'}</p>
-      {selectedNews.media?.contentUrl && (
-        <img
-          src={selectedNews.media.contentUrl}
-          alt={selectedNews.media.credit || selectedNews.title}
-          className="my-4 h-64 w-full rounded-md object-cover"
-        />
-      )}
-      <div className="text-base text-gray-900">
-        {selectedNews.content.map((node, index) => (
-          <p key={index}>{node.text || 'Нет описания'}</p>
-        ))}
+    <div className="relative flex h-full w-full select-none flex-col overflow-y-auto overflow-x-hidden">
+      <div className="sticky top-0 z-30 flex space-x-4 rounded-tl-2xl border-b border-border bg-card/65 backdrop-blur-xl">
+        <Button
+          variant="ghost"
+          className="h-full w-16 rounded-none rounded-tl-2xl border-r border-border"
+          onClick={handleGoBack}
+        >
+          <ChevronsLeft className="h-8 w-8" strokeWidth={2} />
+        </Button>
+        <div className="space-y-1 py-3 pr-8">
+          <h1 className="w-full text-3xl font-bold leading-7 text-card-foreground">
+            {selectedNews.title}
+          </h1>
+          <div className="w-full divide-x divide-dotted divide-card-foreground/50">
+            <span className="pr-2 text-sm italic tracking-tighter text-muted-foreground">
+              {formatRelativeDate(selectedNews.pubDate)}
+            </span>
+            <span className="px-2 text-sm italic tracking-tighter text-muted-foreground">
+              {selectedNews.category || 'Не указана'}
+            </span>
+            <span className="pl-2 text-sm italic tracking-tighter text-muted-foreground">
+              {selectedNews.creator || 'Не указан'}
+            </span>
+          </div>
+        </div>
       </div>
-      <Button onClick={handleGoBack} variant="outline" className="mt-4 w-fit">
-        Назад
-      </Button>
+
+      <div className="w-9/12 items-center self-center py-3">
+        <ProgressiveImage mediaData={selectedNews.media} />
+
+        {selectedNews.content.map((node, index) => {
+          if (node.tag === 'p') {
+            return (
+              <p
+                key={index}
+                className="mb-4 text-wrap text-justify indent-3 text-base text-card-foreground"
+              >
+                {node.text}
+              </p>
+            )
+          }
+
+          return null
+        })}
+        <p className="mr-5 mt-2 text-right text-base font-bold italic text-foreground">
+          Источник: <span className="cursor-pointer not-italic">Lenta.ru</span>
+        </p>
+      </div>
     </div>
   )
 }
