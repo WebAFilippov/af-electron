@@ -51,7 +51,11 @@ export default defineConfig({
   },
   renderer: {
     base: "./",
-    plugins: [react()],
+    plugins: [react({
+      babel: {
+        plugins: ['effector/babel-plugin'],
+      },
+    }),],
     define: {
       "process.env": process.env,
     },

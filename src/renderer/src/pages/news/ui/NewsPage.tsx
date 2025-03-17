@@ -1,19 +1,23 @@
 import { sample } from 'effector'
 import { createGate, useGate, useStoreMap, useUnit } from 'effector-react'
 
-import { NewsFilter } from '@features/news-filter'
-import { $currentCategory, fetchCategoriesFx } from '@features/news-filter-category'
+import {
+  $currentCategory,
+  
+  loadCategories,
+  NewsFilter
+} from '@features/news-filter'
 import { NewsFilterSearch } from '@features/news-filter-queryString'
 import { addRefreshListener, NewsRefresh, removeRefreshListener } from '@features/news-refresh'
 
-import { $isLoading, $news, firstFetchNews } from '@entities/news'
+import { $isLoading, $news } from '@entities/news'
 import { CardNews } from '@entities/news/ui/CardNews'
 import { CardNewsSkeleton } from '@entities/news/ui/CardNewsSkeleton'
 
 const Gate = createGate()
 sample({
   clock: Gate.open,
-  target: [firstFetchNews, addRefreshListener, fetchCategoriesFx]
+  target: [addRefreshListener, loadCategories]
 })
 sample({
   clock: Gate.close,
@@ -24,19 +28,17 @@ export const NewsPage = () => {
   useGate(Gate)
   const isLoading = useUnit($isLoading)
   const currentCategory = useUnit($currentCategory)
-  const filteredNews = useStoreMap({
-    store: $news,
-    keys: [currentCategory],
-    fn: (news, [category]) =>
-      category === 'Все' ? news : news.filter((news) => news.category.includes(category))
-  })
+  // const filteredNews = useStoreMap({
+  //   store: $news,
+  //   keys: [currentCategory],
+  //   fn: (news, [category]) =>
+  //     category === 'Все' ? news : news.filter((news) => news.category.includes(category))
+  // })
 
   return (
     <div className="relative flex h-full w-full select-none flex-col overflow-y-auto overflow-x-hidden">
       <div className="sticky top-0 z-50 flex items-center justify-between rounded-tl-2xl border-b bg-background/65 px-8 py-3 backdrop-blur-xl">
-        <h1 className="text-3xl font-bold">
-          {`Новости: ${currentCategory}`}
-        </h1>
+        <h1 className="text-3xl font-bold">{!currentCategory ? 'Новости' : currentCategory}</h1>
         <div className="flex items-center justify-center gap-2">
           <NewsRefresh />
           <NewsFilter />
@@ -44,7 +46,13 @@ export const NewsPage = () => {
         </div>
       </div>
 
-      {isLoading ? (
+      {!currentCategory && (
+        <div className="flex h-full w-full items-center justify-center">
+          <p className="text-center text-4xl italic text-muted-foreground">Выберите категорию</p>
+        </div>
+      )}
+
+      {/* {isLoading ? (
         <div className="space-y-6 px-8 py-3">
           {Array(10)
             .fill(null)
@@ -64,7 +72,7 @@ export const NewsPage = () => {
             <p className="text-center text-muted-foreground">Нет новостей в выбранной категории</p>
           )}
         </ul>
-      )}
+      )} */}
     </div>
   )
 }
