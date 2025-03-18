@@ -6,40 +6,37 @@ import { useNavigate, useParams } from 'react-router-dom'
 
 import { NotFound404 } from '@pages/not-found'
 
-import { $news, firstFetchNews } from '@entities/news'
-
 import { Button, ProgressiveImage } from '@shared/ui'
 
-const Gate = createGate()
-sample({
-  clock: Gate.open,
-  target: [firstFetchNews]
-})
+// const Gate = createGate()
+// sample({
+//   clock: Gate.open,
+//   target: [fetchNewsFx.start]
+// })
 
 export const NewsDetail: FC = () => {
-  useGate(Gate)
-  const navigate = useNavigate()
-  const { slug } = useParams<{ slug: string }>()
+  // useGate(Gate)
+  // const navigate = useNavigate()
+  // const { slug } = useParams<{ slug: string }>()
 
-  const selectedNews = useStoreMap({
-    store: $news,
-    keys: [slug],
-    fn: (store, [slug]) => store.find((item) => item.slug === slug)
-  })
+  // const selectedNews = useStoreMap({
+  //   store: $news,
+  //   keys: [slug],
+  //   fn: (store, [slug]) => store.find((item) => item.slug === slug)
+  // })
 
-  const handleGoBack = () => {
-    navigate(-1)
-  }
+  // const handleGoBack = () => {
+  //   navigate(-1)
+  // }
 
-  console.log(selectedNews)
-
-  if (!selectedNews) {
-    return <NotFound404 />
-  }
+  // if (!selectedNews) {
+  //   return <NotFound404 />
+  // }
 
   return (
     <div className="relative flex h-full w-full select-none flex-col overflow-y-auto overflow-x-hidden">
-      <div className="sticky top-0 z-30 flex space-x-4 rounded-tl-2xl border-b border-border bg-card/65 backdrop-blur-xl">
+      news detailed
+      {/* <div className="sticky top-0 z-30 flex space-x-4 rounded-tl-2xl border-b border-border bg-card/65 backdrop-blur-xl">
         <Button
           variant="ghost"
           className="h-full w-16 rounded-none rounded-tl-2xl border-r border-border"
@@ -66,8 +63,7 @@ export const NewsDetail: FC = () => {
       </div>
 
       <div className="w-9/12 items-center self-center py-3">
-        <ProgressiveImage mediaData={selectedNews.media} />
-
+        
         {selectedNews.content.map((node, index) => {
           if (node.tag === 'p') {
             return (
@@ -85,7 +81,7 @@ export const NewsDetail: FC = () => {
         <p className="mr-5 mt-2 text-right text-base font-bold italic text-foreground">
           Источник: <span className="cursor-pointer not-italic">Lenta.ru</span>
         </p>
-      </div>
+      </div> */}
     </div>
   )
 }

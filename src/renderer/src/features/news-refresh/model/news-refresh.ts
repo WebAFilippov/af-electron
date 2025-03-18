@@ -1,9 +1,6 @@
 import { createEffect, createEvent, sample } from 'effector'
-import { and, not } from 'patronum'
 
-import { fetchCategoriesFx } from '@features/news-filter'
-
-import { fetchNewsFx } from '@entities/news'
+import { refreshCategories } from '@features/news-filter'
 
 import { REFRESH_NEWS_KEYBOARD_SHORTCUT } from '@shared/config/constant'
 
@@ -39,8 +36,7 @@ const refreshNews = createEvent()
 
 sample({
   clock: refreshNews,
-  filter: and(not(fetchNewsFx.pending), not(fetchCategoriesFx.$pending)),
-  target: fetchNewsFx
+  target: refreshCategories
 })
 
 export { refreshNews, addRefreshListener, removeRefreshListener }

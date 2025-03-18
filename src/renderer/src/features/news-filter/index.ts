@@ -1,8 +1,7 @@
 export { NewsFilter } from './ul/NewsFilter'
 export {
-  $isOpen,
-  toggleIsOpen,
   loadCategories,
+  refreshCategories,
   setCategory,
   fetchCategoriesFx,
   $currentCategory,
@@ -10,3 +9,4 @@ export {
   $categoriesError
 } from './model/category'
 export { SORT_OPTIONS, $sort, setSort } from './model/sort'
+export { TAKE_OPTIONS, $take, setTake } from './model/take'

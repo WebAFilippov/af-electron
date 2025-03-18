@@ -2,15 +2,9 @@ import { useUnit } from 'effector-react'
 
 import { Button, Popover, PopoverContent, PopoverTrigger, Skeleton } from '@shared/ui'
 
-import {
-  $categories,
-  $currentCategory,
-  $isOpen,
-  fetchCategoriesFx,
-  setCategory,
-  toggleIsOpen
-} from '../model/category'
+import { $categories, $currentCategory, fetchCategoriesFx, setCategory } from '../model/category'
 import { $sort, setSort, SORT_OPTIONS } from '../model/sort'
+import { $take, setTake, TAKE_OPTIONS } from '../model/take'
 
 export const NewsFilter = () => {
   const [categories, currentCategory, handleSetCategory, pending] = useUnit([
@@ -21,6 +15,7 @@ export const NewsFilter = () => {
   ])
 
   const [sort, handleSetSort] = useUnit([$sort, setSort])
+  const [take, handleSetTake] = useUnit([$take, setTake])
 
   return (
     <Popover defaultOpen={false}>
@@ -81,27 +76,19 @@ export const NewsFilter = () => {
           <div className="flex flex-col gap-2">
             <h1 className="mt-2 select-none text-base font-bold leading-none">Количество</h1>
             <div className="flex justify-center">
-              <Button
-                variant="ghost"
-                className="max-h-6 w-full select-none rounded-none px-2 py-1 text-[0.7rem]"
-                size="sm"
-              >
-                10
-              </Button>
-              <Button
-                variant="default"
-                className="max-h-6 w-full rounded-none px-2 py-1 text-[0.7rem]"
-                size="sm"
-              >
-                20
-              </Button>
-              <Button
-                variant="ghost"
-                className="max-h-6 w-full rounded-none px-2 py-1 text-[0.7rem]"
-                size="sm"
-              >
-                30
-              </Button>
+              {TAKE_OPTIONS.map((option) => {
+                return (
+                  <Button
+                    key={option}
+                    variant={option === take ? 'default' : 'ghost'}
+                    className="max-h-6 w-full select-none rounded-none px-2 py-1 text-[0.7rem]"
+                    size="sm"
+                    onClick={() => handleSetTake(option)}
+                  >
+                    {option}
+                  </Button>
+                )
+              })}
             </div>
           </div>
         </div>

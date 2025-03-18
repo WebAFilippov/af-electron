@@ -1,1 +1,1 @@
-export * from './ui/NewsPage'
+export {News} from './ui/News'

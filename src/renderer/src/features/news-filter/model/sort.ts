@@ -13,4 +13,4 @@ const $sort = restore(setSort, { by: 'pubDate', order: 'desc' })
 
 export { SORT_OPTIONS, $sort, setSort }
 
-$sort.watch((sort) => console.log('#sort', sort))
+// $sort.watch((sort) => console.log('#sort', sort))

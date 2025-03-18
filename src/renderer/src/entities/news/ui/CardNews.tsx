@@ -6,15 +6,13 @@ import { Link } from 'react-router-dom'
 import { cn, formatedDate } from '@shared/lib'
 import { Card, CardDescription, CardHeader, CardTitle } from '@shared/ui'
 
-import { NewsItem } from '../types'
-
 interface CardNewsProps {
-  news: NewsItem
+  news: any
 }
 
 export const CardNews: FC<CardNewsProps> = ({ news }) => {
   const [isVisible, setIsVisible] = useState(false)
-  const [date, setDate] = useState(formatedDate(news.pubDate))
+  const [date, setDate] = useState(formatedDate(news.pubDate.toISOString()))
   const [ref, entry] = useIntersectionObserver({
     threshold: [0.2, 0.8],
     root: null,
@@ -26,7 +24,7 @@ export const CardNews: FC<CardNewsProps> = ({ news }) => {
     if (entry?.isIntersecting) {
       setIsVisible(true)
       intervalId = setInterval(() => {
-        setDate(formatedDate(news.pubDate))
+        setDate(formatedDate(news.pubDate.toISOString()))
       }, 3000)
     }
 
@@ -54,7 +52,7 @@ export const CardNews: FC<CardNewsProps> = ({ news }) => {
           <div className="pointer-events-none m-1 h-36 w-36 flex-shrink-0">
             <img
               src={news.media.thumbnailUrl}
-              alt={news.media.credit || news.title}
+              alt={'Фото'}
               className={cn('h-full w-full rounded-md bg-muted object-cover')}
             />
           </div>
@@ -79,12 +77,12 @@ export const CardNews: FC<CardNewsProps> = ({ news }) => {
             <CardDescription className="pr-2 text-sm italic tracking-tighter text-card-foreground">
               {date}
             </CardDescription>
-            <CardDescription className="px-2 text-sm italic tracking-tighter text-card-foreground">
+            {/* <CardDescription className="px-2 text-sm italic tracking-tighter text-card-foreground">
               {news.category || 'Не указана'}
             </CardDescription>
             <CardDescription className="pl-2 text-sm italic tracking-tighter text-card-foreground">
               {news.creator || 'Не указан'}
-            </CardDescription>
+            </CardDescription> */}
           </div>
         </div>
       </CardHeader>

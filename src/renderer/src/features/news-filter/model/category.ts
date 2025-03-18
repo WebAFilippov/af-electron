@@ -1,7 +1,7 @@
 import { concurrency, createJsonQuery } from '@farfetched/core'
 import { zodContract } from '@farfetched/zod'
 
-import { createEvent, createStore, restore, sample } from 'effector'
+import { createEvent, createStore, sample } from 'effector'
 import { z } from 'zod'
 
 const ResponseCategories = z.object({
@@ -10,11 +10,10 @@ const ResponseCategories = z.object({
   message: z.string().optional()
 })
 
-const toggleIsOpen = createEvent<boolean>()
 const setCategory = createEvent<string>()
 const loadCategories = createEvent()
+const refreshCategories = createEvent()
 
-const $isOpen = restore(toggleIsOpen, false)
 const $categories = createStore<string[]>([])
 const $currentCategory = createStore<string | null>(null)
 const $categoriesError = createStore<string | null>(null)
@@ -44,16 +43,15 @@ sample({
 })
 
 sample({
-  clock: fetchCategoriesFx.finished.success,
-  filter: (response) => response.result.success,
-  fn: (response) => ['Все', ...(response.result.data?.map(({ title }) => title) || [])],
-  target: $categories
+  clock: refreshCategories,
+  target: fetchCategoriesFx.start
 })
 
 sample({
   clock: fetchCategoriesFx.finished.success,
-  fn: () => 'Все',
-  target: $currentCategory
+  filter: (response) => response.result.success,
+  fn: (response) => ['Все', ...(response.result.data?.map(({ title }) => title) || [])],
+  target: $categories
 })
 
 sample({
@@ -70,18 +68,31 @@ sample({
   target: $categoriesError
 })
 
+sample({
+  clock: $categories,
+  source: $currentCategory,
+  fn: (current, categories) => {
+    if (current) {
+      if (categories.includes(current)) return current
+    }
+
+    if (categories.length) return 'Все'
+
+    return null
+  },
+  target: $currentCategory
+})
+
 export {
-  $isOpen,
   $categories,
   $currentCategory,
   $categoriesError,
   loadCategories,
   setCategory,
-  toggleIsOpen,
+  refreshCategories,
   fetchCategoriesFx
 }
 
-// $isOpen.watch((open) => console.log(`#open-popover ${open}`))
 // $categories.watch((categories) => console.log(`#categories ${categories}`))
 // $currentCategory.watch((currentCategory) => console.log(`#currentCategory ${currentCategory}`))
 // $categoriesError.watch((categoriesError) => console.log(`#categoriesError ${categoriesError}`))
