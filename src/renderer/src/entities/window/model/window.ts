@@ -1,4 +1,4 @@
-import { createEvent, createStore, sample } from 'effector'
+import { createEffect, createEvent, createStore, sample } from 'effector'
 
 window.api.onWindowState((state) => changeWindowState(state))
 
@@ -22,11 +22,24 @@ const $windowShow = $window.map((state) => state.show)
 
 const changeWindowState = createEvent<WindowState>()
 
+const setWindowMinimoize = createEffect(() => window.api.setMinimazeWindow())
+const setWindowMaximize = createEffect(() => window.api.setMaximazeWindow())
+const setWindowClose = createEffect(() => window.api.setCloseWindow())
+
 sample({
   clock: changeWindowState,
   target: $window
 })
 
-export { $window, $windowMinimize, $windowMaximize, $windowFullscreen, $windowShow }
+export {
+  $window,
+  $windowMinimize,
+  $windowMaximize,
+  $windowFullscreen,
+  $windowShow,
+  setWindowMinimoize,
+  setWindowMaximize,
+  setWindowClose
+}
 
-$window.watch((state) => console.log('#window ', state))
+// $window.watch((state) => console.log('#window ', state))

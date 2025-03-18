@@ -3,5 +3,8 @@ export {
   $windowMinimize,
   $windowMaximize,
   $windowFullscreen,
-  $windowShow
+  $windowShow,
+  setWindowMinimoize,
+  setWindowMaximize,
+  setWindowClose
 } from './model/window'
