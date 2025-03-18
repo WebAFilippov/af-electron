@@ -7,7 +7,7 @@ import { addListenerSidebarFx, removeListenerSidebarFx } from '@widgets/sidebar/
 import { Sidebar } from '@widgets/sidebar/ui/sidebar'
 import { Topbar } from '@widgets/topbar'
 
-import { addListenerWindowFx, removeListenerWindowFx } from '@features/application'
+import { addListenerWindowFx, removeListenerWindowFx } from '@features/window'
 
 import { addListenerDebugFx, removeListenerDebugFx } from '@entities/debug-mode/model/debug'
 import { useDebugLayer } from '@entities/debug-mode/ui/use-debug-layer'

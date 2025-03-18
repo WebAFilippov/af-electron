@@ -1,28 +1,25 @@
-import { BrowserWindow } from 'electron'
+import { BrowserWindow, } from 'electron'
 
 import { WindowState } from '@main/shared/types'
 
 // isNormal() Находится ли окно в обычном состоянии (не развёрнуто, не свернуто, не в полноэкранном режиме).
 
 export const windowLifecycle = (window: BrowserWindow) => {
-  const windowState: WindowState = {
-    minimize: false,
-    maximize: false,
-    fullscreen: false,
-    show: false
-  }
-
   const updateWindowState = (key: string) => {
-    windowState.minimize = window.isMinimized()
-    windowState.maximize = window.isMaximized()
-    windowState.fullscreen =
-      key === 'enter-full-screen'
-        ? true
-        : key === 'leave-full-screen'
-          ? false
-          : window.isFullScreen()
-    windowState.show = window.isVisible()
+    const windowState: WindowState = {
+      minimize: window.isMinimized(),
+      maximize: window.isMaximized(),
+      fullscreen:
+        key === 'enter-full-screen'
+          ? true
+          : key === 'leave-full-screen'
+            ? false
+            : window.isFullScreen(),
+      show: window.isVisible()
+    }
     console.log(key, { ...windowState })
+
+    window.webContents.send('v1/window/state', windowState)
   }
 
   window.on('maximize', () => updateWindowState('maximize'))

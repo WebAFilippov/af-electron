@@ -31,6 +31,7 @@ export const createTray = (window: BrowserWindow) => {
   ])
 
   tray.setToolTip('Harmonify')
+  tray.setTitle('Harmonify')
   tray.setContextMenu(contextMenu)
 
   tray.on('click', () => {

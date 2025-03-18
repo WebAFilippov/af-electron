@@ -1,6 +1,6 @@
 import { ElectronAPI } from "@electron-toolkit/preload";
 import { ipcRenderer } from "electron";
-
+import { WindowState } from "./transport";
 
 
 export const api = {
@@ -11,6 +11,9 @@ export const api = {
   setMinimazeWindow: () => ipcRenderer.send("v1/window/minimaze"),
   setMaximazeWindow: () => ipcRenderer.send("v1/window/maximize"),
   setCloseWindow: () => ipcRenderer.send("v1/window/close"),
+  onWindowState: (callback: (state: WindowState) => void ) => {
+    ipcRenderer.on('v1/window/state', (_event, state: WindowState) => callback(state))
+  },
 
   // News
   fetchNews: () => ipcRenderer.invoke("v1/news/fetch_news"),

@@ -1,10 +1,15 @@
+import { useUnit } from 'effector-react'
+
 import { useDebugLayer } from '@entities/debug-mode/ui/use-debug-layer'
+import { $windowFullscreen } from '@entities/window'
 
 import { CloseIcon, MaximizeIcon, MinimizeIcon, MinusIcon } from '@shared/assets/svg-icons'
+import { cn } from '@shared/lib'
 import { Button } from '@shared/ui'
 
 export const Topbar = () => {
   const { ref } = useDebugLayer<HTMLDivElement>('widgets')
+  const windowFullscreen = useUnit($windowFullscreen)
 
   const handleMinimize = () => {
     window.api.setMinimazeWindow()
@@ -18,7 +23,10 @@ export const Topbar = () => {
 
   return (
     <div
-      className="relative z-10 flex h-8 w-full items-center justify-end bg-gray-300/20 area-drag"
+      className={cn(
+        'relative z-10 flex h-8 w-full items-center justify-end bg-gray-300/20 area-drag',
+        windowFullscreen && 'hidden'
+      )}
       ref={ref}
     >
       <div className="flex space-x-0 area-no-drag">
