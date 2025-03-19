@@ -8,11 +8,8 @@ export const HomePage = () => {
     <div className="flex h-full w-full flex-col items-center p-10">
       <div className="grid w-full grid-cols-2 justify-center gap-6">
         {ROUTES.map((item) => (
-          <Link to={item.path} className="flex justify-center">
-            <Card
-              key={item.path}
-              className="flex cursor-pointer select-none flex-col justify-between p-4 transition-all hover:shadow-lg"
-            >
+          <Link to={item.path} key={item.path} className="flex justify-center">
+            <Card className="flex cursor-pointer select-none flex-col justify-between p-4 transition-all hover:shadow-lg">
               <CardTitle>{item.title}</CardTitle>
               <CardDescription>{item.description}</CardDescription>
             </Card>

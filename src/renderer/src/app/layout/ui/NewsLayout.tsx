@@ -1,23 +1,19 @@
-import { sample } from 'effector'
-import { createGate, useGate } from 'effector-react'
 import { Outlet } from 'react-router-dom'
 
-import { loadCategories } from '@features/news-filter'
+import { NewsTopbar } from '@widgets/news-topbar'
 
-import { NewsFilters } from '@entities/news-filter'
-
-const Gate = createGate()
-sample({
-  clock: Gate.open,
-  target: [loadCategories]
-})
+import { NewsFilter } from '@features/news-filter'
+import { NewsFilterSearch } from '@features/news-filter-queryString'
+import { NewsRefresh } from '@features/news-refresh'
 
 export const NewsLayout = () => {
-  useGate(Gate)
-
   return (
     <div className="relative flex h-full w-full select-none flex-col overflow-y-auto overflow-x-hidden">
-      <NewsFilters />
+      <NewsTopbar
+        NewsRefresh={<NewsRefresh />}
+        NewsFilter={<NewsFilter />}
+        NewsFilterSearch={<NewsFilterSearch />}
+      />
 
       <Outlet />
     </div>

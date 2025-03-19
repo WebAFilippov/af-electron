@@ -1,4 +1,5 @@
 import { useUnit } from 'effector-react'
+import { useNavigate } from 'react-router-dom'
 
 import { Button, Popover, PopoverContent, PopoverTrigger, Skeleton } from '@shared/ui'
 
@@ -7,6 +8,7 @@ import { $sort, setSort, SORT_OPTIONS } from '../model/sort'
 import { $take, setTake, TAKE_OPTIONS } from '../model/take'
 
 export const NewsFilter = () => {
+  const navigate = useNavigate()
   const [categories, currentCategory, handleSetCategory, pending] = useUnit([
     $categories,
     $currentCategory,
@@ -38,7 +40,10 @@ export const NewsFilter = () => {
                     variant={currentCategory === category.title ? 'default' : 'ghost'}
                     className="flex max-h-6 min-w-44 select-none items-center justify-between rounded-none px-3 py-1"
                     size="sm"
-                    onClick={() => handleSetCategory(category.title)}
+                    onClick={() => {
+                      handleSetCategory(category.title)
+                      navigate(`/news/${category.slug}`)
+                    }}
                   >
                     <p>{category.title}</p>
                     <b>{category.count}</b>

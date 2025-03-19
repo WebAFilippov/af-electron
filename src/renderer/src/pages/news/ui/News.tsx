@@ -1,54 +1,41 @@
 import { sample } from 'effector'
-import { createGate, useGate } from 'effector-react'
+import { createGate, useGate, useUnit } from 'effector-react'
+import { Link } from 'react-router-dom'
 
-import { loadCategories, resetCurrentCategory } from '@features/news-filter'
-import { addRefreshListener, removeRefreshListener } from '@features/news-refresh'
+import {
+  $categories,
+  fetchCategoriesFx,
+  loadCategories,
+  resetCurrentCategory
+} from '@features/news-filter'
+
+import { Card, CardDescription, CardTitle, Skeleton } from '@shared/ui'
 
 const Gate = createGate()
 sample({
   clock: Gate.open,
-  target: [addRefreshListener, loadCategories, loadCategories, resetCurrentCategory]
-})
-sample({
-  clock: Gate.close,
-  target: [removeRefreshListener]
+  target: [loadCategories, resetCurrentCategory]
 })
 
 export const News = () => {
   useGate(Gate)
 
+  const [categories, isLoading] = useUnit([$categories, fetchCategoriesFx.$pending])
+
   return (
-    <div className="relative flex h-full w-full select-none flex-col overflow-y-auto overflow-x-hidden">
-      News INDEX
-      {/* {categories.map((category) => {
-        return <div></div>
-      })} */}
-      {/* {!currentCategory && (
-        <div className="flex h-full w-full items-center justify-center">
-          <p className="text-center text-4xl italic text-muted-foreground">Выберите категорию</p>
-        </div>
-      )} */}
-      {/* {isLoading ? (
-        <div className="space-y-6 px-8 py-3">
-          {Array(10)
+    <div className="relative grid h-full w-full select-none grid-cols-4 flex-col gap-6 overflow-y-auto overflow-x-hidden p-10">
+      {isLoading
+        ? Array(20)
             .fill(null)
-            .map((_, index) => (
-              <CardNewsSkeleton key={index} />
-            ))}
-        </div>
-      ) : (
-        <ul className="space-y-6 px-8 py-3">
-          {filteredNews.length > 0 ? (
-            filteredNews.map((news, index) => (
-              <li key={index}>
-                <CardNews news={news} />
-              </li>
-            ))
-          ) : (
-            <p className="text-center text-muted-foreground">Нет новостей в выбранной категории</p>
-          )}
-        </ul>
-      )} */}
+            .map((_, index) => <Skeleton key={index} />)
+        : categories.map((category) => (
+            <Link to={category.slug} key={category.slug}>
+              <Card className="h-full p-10 transition-shadow duration-300 hover:shadow-lg">
+                <CardTitle>{category.title}</CardTitle>
+                <CardDescription>{category.count}</CardDescription>
+              </Card>
+            </Link>
+          ))}
     </div>
   )
 }

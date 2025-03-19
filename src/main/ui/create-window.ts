@@ -39,7 +39,7 @@ export const createWindow = (): BrowserWindow => {
   window.flashFrame(false)
   // window.setOverlayIcon(nativeImage.createFromPath(icon16), 'Harmonify')
 
-  window.webContents.openDevTools()
+  if (is.dev) window.webContents.openDevTools()
 
   if (!is.dev) {
     window.setMenu(null)
