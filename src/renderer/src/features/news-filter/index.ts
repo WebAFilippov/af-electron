@@ -3,6 +3,7 @@ export {
   loadCategories,
   refreshCategories,
   setCategory,
+  resetCurrentCategory,
   fetchCategoriesFx,
   $currentCategory,
   $categories,

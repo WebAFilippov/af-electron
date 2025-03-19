@@ -33,9 +33,9 @@ if (!gotTheLock) {
       if (window.isMinimized()) {
         window.restore()
       }
-      // if (!window.isVisible()) {
-      //   window.show()
-      // }
+      if (!window.isVisible()) {
+        window.show()
+      }
       window.focus()
     }
   })

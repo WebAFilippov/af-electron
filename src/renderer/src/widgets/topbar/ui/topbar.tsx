@@ -1,10 +1,11 @@
-import { useUnit } from 'effector-react'
+import { useGate, useUnit } from 'effector-react'
 import { MaximizeIcon, MinimizeIcon, MinusIcon, X } from 'lucide-react'
 
 import { useDebugLayer } from '@entities/debug-mode'
 import {
   $windowFullscreen,
   $windowMaximize,
+  GateWindow,
   setWindowClose,
   setWindowMaximize,
   setWindowMinimoize
@@ -14,6 +15,7 @@ import { cn } from '@shared/lib'
 import { Button } from '@shared/ui'
 
 export const Topbar = () => {
+  useGate(GateWindow)
   const { ref } = useDebugLayer<HTMLDivElement>('widgets')
   const [windowFullscreen, windowMaximize, handleMinimize, handleMaximize, handleClose] = useUnit([
     $windowFullscreen,

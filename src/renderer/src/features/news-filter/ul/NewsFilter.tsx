@@ -34,13 +34,14 @@ export const NewsFilter = () => {
               categories.map((category) => {
                 return (
                   <Button
-                    key={category}
-                    variant={currentCategory === category ? 'default' : 'ghost'}
-                    className="max-h-6 min-w-44 select-none items-center justify-start rounded-none px-3 py-1"
+                    key={category.title}
+                    variant={currentCategory === category.title ? 'default' : 'ghost'}
+                    className="flex max-h-6 min-w-44 select-none items-center justify-between rounded-none px-3 py-1"
                     size="sm"
-                    onClick={() => handleSetCategory(category)}
+                    onClick={() => handleSetCategory(category.title)}
                   >
-                    {category}
+                    <p>{category.title}</p>
+                    <b>{category.count}</b>
                   </Button>
                 )
               })

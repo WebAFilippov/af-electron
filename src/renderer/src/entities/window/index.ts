@@ -6,5 +6,6 @@ export {
   $windowShow,
   setWindowMinimoize,
   setWindowMaximize,
-  setWindowClose
+  setWindowClose,
+  GateWindow
 } from './model/window'

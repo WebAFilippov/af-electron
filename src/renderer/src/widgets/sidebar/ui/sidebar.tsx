@@ -4,7 +4,7 @@ import { NavLink } from 'react-router-dom'
 
 import { useDebugLayer } from '@entities/debug-mode/ui/use-debug-layer'
 
-import { routes } from '@shared/config/routing'
+import { ROUTES } from '@shared/config/routing'
 import { cn } from '@shared/lib'
 
 import { $sidebar } from '../model/sidebar'
@@ -21,7 +21,7 @@ export const Sidebar: FC = () => {
         isOpen ? 'w-44' : 'w-12'
       )}
     >
-      {routes.map((item) => {
+      {ROUTES.map((item) => {
         return (
           <NavLink
             to={item.path}

@@ -7,8 +7,6 @@ import { addListenerSidebarFx, removeListenerSidebarFx } from '@widgets/sidebar/
 import { Sidebar } from '@widgets/sidebar/ui/sidebar'
 import { Topbar } from '@widgets/topbar'
 
-import { addListenerWindowFx, removeListenerWindowFx } from '@features/window'
-
 import { addListenerDebugFx, removeListenerDebugFx } from '@entities/debug-mode/model/debug'
 import { useDebugLayer } from '@entities/debug-mode/ui/use-debug-layer'
 import { $isDarkTheme } from '@entities/theme/model/model'
@@ -19,11 +17,11 @@ import { Particles } from '@shared/ui'
 const Gate = createGate()
 sample({
   clock: Gate.open,
-  target: [addListenerWindowFx, addListenerSidebarFx, addListenerDebugFx]
+  target: [addListenerSidebarFx, addListenerDebugFx]
 })
 sample({
   clock: Gate.close,
-  target: [removeListenerWindowFx, removeListenerSidebarFx, removeListenerDebugFx]
+  target: [removeListenerSidebarFx, removeListenerDebugFx]
 })
 
 export const Layout = () => {

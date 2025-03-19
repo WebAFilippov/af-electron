@@ -4,18 +4,24 @@ import { zodContract } from '@farfetched/zod'
 import { createEvent, createStore, sample } from 'effector'
 import { z } from 'zod'
 
+interface ResponseData {
+  title: string
+  count: number
+}
+
 const ResponseCategories = z.object({
   success: z.boolean(),
-  data: z.array(z.object({ title: z.string() })).optional(),
+  data: z.array(z.object({ title: z.string(), count: z.number() })).optional(),
   message: z.string().optional()
 })
 
 const setCategory = createEvent<string>()
+const resetCurrentCategory = createEvent()
 const loadCategories = createEvent()
 const refreshCategories = createEvent()
 
-const $categories = createStore<string[]>([])
-const $currentCategory = createStore<string | null>(null)
+const $categories = createStore<ResponseData[]>([])
+const $currentCategory = createStore<string | null>(null).reset(resetCurrentCategory)
 const $categoriesError = createStore<string | null>(null)
 
 const fetchCategoriesFx = createJsonQuery({
@@ -50,7 +56,11 @@ sample({
 sample({
   clock: fetchCategoriesFx.finished.success,
   filter: (response) => response.result.success,
-  fn: (response) => ['Все', ...(response.result.data?.map(({ title }) => title) || [])],
+  fn: (response) => {
+    const allCount = response.result.data?.reduce((acc, { count }) => acc + count, 0) || 0
+    const all = { title: 'Все', count: allCount }
+    return [all, ...(response.result.data || [])]
+  },
   target: $categories
 })
 
@@ -73,7 +83,7 @@ sample({
   source: $currentCategory,
   fn: (current, categories) => {
     if (current) {
-      if (categories.includes(current)) return current
+      if (categories.find((category) => category.title === current)) return current
     }
 
     if (categories.length) return 'Все'
@@ -89,6 +99,7 @@ export {
   $categoriesError,
   loadCategories,
   setCategory,
+  resetCurrentCategory,
   refreshCategories,
   fetchCategoriesFx
 }

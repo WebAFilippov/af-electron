@@ -1,13 +1,13 @@
 import { sample } from 'effector'
 import { createGate, useGate } from 'effector-react'
 
-import { loadCategories } from '@features/news-filter'
+import { loadCategories, resetCurrentCategory } from '@features/news-filter'
 import { addRefreshListener, removeRefreshListener } from '@features/news-refresh'
 
 const Gate = createGate()
 sample({
   clock: Gate.open,
-  target: [addRefreshListener, loadCategories, loadCategories]
+  target: [addRefreshListener, loadCategories, loadCategories, resetCurrentCategory]
 })
 sample({
   clock: Gate.close,

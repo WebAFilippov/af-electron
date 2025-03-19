@@ -1,4 +1,5 @@
 import { createEffect, createEvent, createStore, sample } from 'effector'
+import { createGate } from 'effector-react'
 import { persist } from 'effector-storage/local'
 
 import { DEBUG_KEYBOARD_SHORTCUT, DEBUG_MODE_STORAGE_KEY } from '@shared/config/constant'
@@ -105,7 +106,6 @@ sample({
   fn: (store) => !store,
   target: $debug
 })
-
 
 export { $debug, $debugMenu, addListenerDebugFx, removeListenerDebugFx, setDebugLayerOption }
 
