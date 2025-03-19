@@ -2,7 +2,7 @@ export { NewsFilter } from './ul/NewsFilter'
 export {
   loadCategories,
   refreshCategories,
-  setCategory,
+  setCurrentCategory,
   resetCurrentCategory,
   fetchCategoriesFx,
   $currentCategory,

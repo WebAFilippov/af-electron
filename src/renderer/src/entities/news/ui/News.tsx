@@ -10,7 +10,7 @@ interface CardNewsProps {
   news: any
 }
 
-export const CardNews: FC<CardNewsProps> = ({ news }) => {
+export const News: FC<CardNewsProps> = ({ news }) => {
   const [isVisible, setIsVisible] = useState(false)
   const [date, setDate] = useState(formatedDate(news.pubDate.toISOString()))
   const [ref, entry] = useIntersectionObserver({

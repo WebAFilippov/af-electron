@@ -6,7 +6,8 @@ import {
   $categories,
   fetchCategoriesFx,
   loadCategories,
-  resetCurrentCategory
+  resetCurrentCategory,
+  setCurrentCategory
 } from '@features/news-filter'
 
 import { Card, CardDescription, CardTitle, Skeleton } from '@shared/ui'
@@ -20,7 +21,11 @@ sample({
 export const News = () => {
   useGate(Gate)
 
-  const [categories, isLoading] = useUnit([$categories, fetchCategoriesFx.$pending])
+  const [categories, handleSetCurrentCategory, isLoading] = useUnit([
+    $categories,
+    setCurrentCategory,
+    fetchCategoriesFx.$pending
+  ])
 
   return (
     <div className="relative grid h-full w-full select-none grid-cols-4 flex-col gap-6 overflow-y-auto overflow-x-hidden p-10">
@@ -29,7 +34,11 @@ export const News = () => {
             .fill(null)
             .map((_, index) => <Skeleton key={index} />)
         : categories.map((category) => (
-            <Link to={category.slug} key={category.slug}>
+            <Link
+              to={category.slug}
+              key={category.slug}
+              onClick={() => handleSetCurrentCategory(category.title)}
+            >
               <Card className="h-full p-10 transition-shadow duration-300 hover:shadow-lg">
                 <CardTitle>{category.title}</CardTitle>
                 <CardDescription>{category.count}</CardDescription>

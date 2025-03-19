@@ -16,7 +16,7 @@ const ResponseCategories = z.object({
   message: z.string().optional()
 })
 
-const setCategory = createEvent<string>()
+const setCurrentCategory = createEvent<string>()
 const resetCurrentCategory = createEvent()
 const loadCategories = createEvent()
 const refreshCategories = createEvent()
@@ -38,7 +38,7 @@ const fetchCategoriesFx = createJsonQuery({
 concurrency(fetchCategoriesFx, { strategy: 'TAKE_FIRST' })
 
 sample({
-  clock: setCategory,
+  clock: setCurrentCategory,
   target: $currentCategory
 })
 
@@ -99,7 +99,7 @@ export {
   $currentCategory,
   $categoriesError,
   loadCategories,
-  setCategory,
+  setCurrentCategory,
   resetCurrentCategory,
   refreshCategories,
   fetchCategoriesFx

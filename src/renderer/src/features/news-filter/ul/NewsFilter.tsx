@@ -3,16 +3,21 @@ import { useNavigate } from 'react-router-dom'
 
 import { Button, Popover, PopoverContent, PopoverTrigger, Skeleton } from '@shared/ui'
 
-import { $categories, $currentCategory, fetchCategoriesFx, setCategory } from '../model/category'
+import {
+  $categories,
+  $currentCategory,
+  fetchCategoriesFx,
+  setCurrentCategory
+} from '../model/category'
 import { $sort, setSort, SORT_OPTIONS } from '../model/sort'
 import { $take, setTake, TAKE_OPTIONS } from '../model/take'
 
 export const NewsFilter = () => {
   const navigate = useNavigate()
-  const [categories, currentCategory, handleSetCategory, pending] = useUnit([
+  const [categories, currentCategory, handleSetCurrentCategory, pending] = useUnit([
     $categories,
     $currentCategory,
-    setCategory,
+    setCurrentCategory,
     fetchCategoriesFx.$pending
   ])
 
@@ -41,7 +46,7 @@ export const NewsFilter = () => {
                     className="flex max-h-6 min-w-44 select-none items-center justify-between rounded-none px-3 py-1"
                     size="sm"
                     onClick={() => {
-                      handleSetCategory(category.title)
+                      handleSetCurrentCategory(category.title)
                       navigate(`/news/${category.slug}`)
                     }}
                   >

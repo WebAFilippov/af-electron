@@ -2,11 +2,12 @@ import { concurrency, createJsonQuery } from '@farfetched/core'
 import { zodContract } from '@farfetched/zod'
 
 import { combine, createStore, sample } from 'effector'
-
 import { z } from 'zod'
 
-import { $categories, $currentCategory, $sort, $take } from '@features/news-filter'
+import { $categories, $currentCategory, $sort } from '@features/news-filter'
 import { $searchQuery } from '@features/news-filter-queryString'
+
+import { SORT_OPTIONS, TAKE_OPTIONS } from '../config/constants'
 
 const ParsedNodeSchema = z.lazy(() =>
   z.object({
@@ -57,15 +58,19 @@ interface CategoryNews {
   hasNextPage: boolean
 }
 
-const $lastTimeFetch = createStore<number | null>(null)
+const $sorting = createStore(SORT_OPTIONS)
+const $currentSorting = createStore({ by: 'pubDate', order: 'desc' })
+const $take = createStore(TAKE_OPTIONS)
+const $currentTake = createStore(25)
 const $news = createStore<CategoryNews[]>([])
 const $newsError = createStore<string | null>(null)
+const $lastTimeFetch = createStore<number | null>(null)
 const $queryString = combine(
   $news,
   $searchQuery,
   $currentCategory,
-  $sort,
-  $take,
+  $currentSorting,
+  $currentTake,
   $lastTimeFetch,
   (news, qs, category, sort, take, lastTime) => {
     const queryString = new URLSearchParams()
@@ -87,8 +92,6 @@ const $queryString = combine(
         queryString.set(key, value.toString())
       }
     })
-
-    console.log(queryString.toString())
 
     return queryString.toString()
   }
@@ -147,8 +150,6 @@ sample({
     const newNews = news
     newNews[index] = mapped
 
-    console.log(newNews)
-
     return newNews
   },
   target: $news
@@ -170,11 +171,16 @@ sample({
   target: $newsError
 })
 
-export { $news, fetchNewsFx }
+export { $news, fetchNewsFx, $sorting, $currentSorting, $take, $currentTake }
 
-$lastTimeFetch.watch((date) => console.log(`#lastTimeFetch ${date}`))
-$news.watch((store) => console.log('#news ', store))
-$newsError.watch((error) => console.log('#newsError ', error))
-fetchNewsFx.$pending.watch((pending) => console.log(`#fetchNewsFx-pending ${pending}`))
-fetchNewsFx.$failed.watch((fail) => console.log(`#fail ${fail}`))
-$queryString.watch((query) => console.log('#queryString ', query))
+// $lastTimeFetch.watch((date) => console.log(`#lastTimeFetch ${date}`))
+// $news.watch((store) => console.log('#news ', store))
+// $newsError.watch((error) => console.log('#newsError ', error))
+// fetchNewsFx.$pending.watch((pending) => console.log(`#fetchNewsFx-pending ${pending}`))
+// fetchNewsFx.$failed.watch((fail) => console.log(`#fail ${fail}`))
+// $queryString.watch((query) => console.log('#queryString ', query))
+
+$currentSorting.watch((currentSorting) =>
+  console.log(`#currentSorting: _by ${currentSorting.by} _order ${currentSorting.order}`)
+)
+$currentTake.watch((currentTake) => console.log(`#currentTake: ${currentTake}`))

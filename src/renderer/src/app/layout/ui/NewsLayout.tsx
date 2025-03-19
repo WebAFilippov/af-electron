@@ -2,8 +2,9 @@ import { Outlet } from 'react-router-dom'
 
 import { NewsTopbar } from '@widgets/news-topbar'
 
-import { NewsFilter } from '@features/news-filter'
+import { NewsFilterCount } from '@features/news-filter-count'
 import { NewsFilterSearch } from '@features/news-filter-queryString'
+import { NewsFilterSorting } from '@features/news-filter-sort'
 import { NewsRefresh } from '@features/news-refresh'
 
 export const NewsLayout = () => {
@@ -11,7 +12,8 @@ export const NewsLayout = () => {
     <div className="relative flex h-full w-full select-none flex-col overflow-y-auto overflow-x-hidden">
       <NewsTopbar
         NewsRefresh={<NewsRefresh />}
-        NewsFilter={<NewsFilter />}
+        NewsFilterCount={<NewsFilterCount />}
+        NewsFilterSorting={<NewsFilterSorting />}
         NewsFilterSearch={<NewsFilterSearch />}
       />
 
