@@ -8,7 +8,7 @@ import {
   GateWindow,
   setWindowClose,
   setWindowMaximize,
-  setWindowMinimoize
+  setWindowMinimize
 } from '@entities/window'
 
 import { cn } from '@shared/lib'
@@ -20,7 +20,7 @@ export const Topbar = () => {
   const [windowFullscreen, windowMaximize, handleMinimize, handleMaximize, handleClose] = useUnit([
     $windowFullscreen,
     $windowMaximize,
-    setWindowMinimoize,
+    setWindowMinimize,
     setWindowMaximize,
     setWindowClose
   ])

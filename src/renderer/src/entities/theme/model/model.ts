@@ -3,7 +3,16 @@ import { persist } from 'effector-storage/local'
 
 import { AppStarted } from '@shared/config/init'
 
-type Theme = 'system' | 'light' | 'dark'
+import { Theme } from '../types'
+
+const setTheme = createEvent<Theme>()
+
+const $theme = createStore<Theme>('system')
+const $isDarkTheme = $theme.map(
+  (theme) =>
+    (theme === 'system' && window.matchMedia('(prefers-color-scheme: dark)').matches) ||
+    theme === 'dark'
+)
 
 const applyThemeFx = createEffect<Theme, void, Error>((store) => {
   const root = document.getElementById('root')
@@ -20,14 +29,8 @@ const applyThemeFx = createEffect<Theme, void, Error>((store) => {
   }
   root.classList.add(store)
 })
-
-const setTheme = createEvent<Theme>()
-
-const $theme = createStore<Theme>('system')
-const $isDarkTheme = $theme.map(
-  (theme) =>
-    (theme === 'system' && window.matchMedia('(prefers-color-scheme: dark)').matches) ||
-    theme === 'dark'
+const sendWindowTheme = createEffect<Theme, void, Error>((theme) =>
+  window.api.sendWindowTheme(theme)
 )
 
 persist({
@@ -42,7 +45,7 @@ sample({
 
 sample({
   clock: $theme,
-  target: applyThemeFx
+  target: [applyThemeFx, sendWindowTheme]
 })
 
 sample({

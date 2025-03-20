@@ -1,8 +1,8 @@
 import ping from 'ping'
 
-import { IApplication } from '@models/Application.model'
+import { IApplication } from '@models/application.model'
 
-import { applicationRepository } from '@repositories/Application.repository'
+import { applicationRepository } from '@repositories/application.repository'
 
 class ApplicationService {
   async getApplication(): Promise<IApplication> {
@@ -15,10 +15,7 @@ class ApplicationService {
     field: T,
     value: IApplication[T]
   ): Promise<boolean> {
-    const response = await applicationRepository.updateApplicationField(
-      field,
-      value
-    )
+    const response = await applicationRepository.updateApplicationField(field, value)
 
     return response
   }

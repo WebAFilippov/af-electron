@@ -1,6 +1,6 @@
 import { createEffect, createEvent, sample } from 'effector'
 
-import { refreshCategories } from '@features/news-filter'
+
 
 import { REFRESH_NEWS_KEYBOARD_SHORTCUT } from '@shared/config/constant'
 
@@ -34,9 +34,5 @@ sample({
 
 const refreshNews = createEvent()
 
-sample({
-  clock: refreshNews,
-  target: refreshCategories
-})
 
 export { refreshNews, addRefreshListener, removeRefreshListener }

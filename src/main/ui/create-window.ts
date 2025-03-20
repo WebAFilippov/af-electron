@@ -3,9 +3,13 @@ import { is } from '@electron-toolkit/utils'
 import { app, BrowserWindow, nativeImage, nativeTheme } from 'electron'
 import { join } from 'node:path'
 
+import { configureTheme } from '@utils/window-theme'
+
+import { Theme } from '@main/shared/types'
+
 import icon from '../../../build/window-256x256.ico?asset'
 
-export const createWindow = (): BrowserWindow => {
+export const createWindow = (theme: Theme): BrowserWindow => {
   const window = new BrowserWindow({
     icon: nativeImage.createFromPath(icon),
     minWidth: 768,
@@ -35,6 +39,8 @@ export const createWindow = (): BrowserWindow => {
       devTools: true
     }
   })
+
+  configureTheme(window, theme)
 
   window.flashFrame(false)
   // window.setOverlayIcon(nativeImage.createFromPath(icon16), 'Harmonify')

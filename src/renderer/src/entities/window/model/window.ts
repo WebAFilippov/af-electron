@@ -32,15 +32,15 @@ const $windowShow = $window.map((state) => state.show)
 
 const changeWindowState = createEvent<WindowState>()
 
-const setWindowMinimoize = createEffect(() => window.api.setMinimazeWindow())
-const setWindowMaximize = createEffect(() => window.api.setMaximazeWindow())
-const setWindowClose = createEffect(() => window.api.setCloseWindow())
 const addListenerWindowFx = createEffect(() => {
   window.addEventListener('keydown', KeyDownToWindow)
 })
 const removeListenerWindowFx = createEffect(() => {
   window.removeEventListener('keydown', KeyDownToWindow)
 })
+const setWindowClose = createEffect(() => window.api.setCloseWindow())
+const setWindowMaximize = createEffect(() => window.api.setMaximazeWindow())
+const setWindowMinimize = createEffect(() => window.api.setMinimazeWindow())
 
 sample({
   clock: changeWindowState,
@@ -62,7 +62,7 @@ export {
   $windowMaximize,
   $windowFullscreen,
   $windowShow,
-  setWindowMinimoize,
+  setWindowMinimize,
   setWindowMaximize,
   setWindowClose,
   GateWindow

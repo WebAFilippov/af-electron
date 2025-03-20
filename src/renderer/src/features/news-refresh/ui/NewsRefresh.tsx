@@ -3,7 +3,7 @@ import { createGate, useGate, useUnit } from 'effector-react'
 import { RefreshCw } from 'lucide-react'
 import { FC } from 'react'
 
-import { fetchCategoriesFx } from '@features/news-filter'
+
 
 import { cn } from '@shared/lib'
 import { Button } from '@shared/ui'
@@ -24,7 +24,7 @@ export const NewsRefresh: FC = () => {
   useGate(Gate)
   const handleRefreshNews = useUnit(refreshNews)
 
-  const isPendingFetchCategories = useUnit(fetchCategoriesFx.$pending)
+  const isPendingFetchCategories = true
 
 
   return (

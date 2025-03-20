@@ -1,8 +1,8 @@
 import { BrowserWindow, ipcMain } from 'electron'
 
-import { applicationService } from '@services/Application.service'
-import { cityService } from '@services/City.service'
-import { cityInfoService } from '@services/CityInfo.service'
+import { applicationService } from '@services/application.service'
+import { cityService } from '@services/city.service'
+import { cityInfoService } from '@services/cityInfo.service'
 
 export const dataHandlers = (window: BrowserWindow, isAutoLaunch: boolean) => {
   // Application
@@ -28,16 +28,10 @@ export const dataHandlers = (window: BrowserWindow, isAutoLaunch: boolean) => {
     return response
   })
 
-  ipcMain.handle(
-    'v1/application/update_application',
-    async (_event, field, value) => {
-      const response = await applicationService.updateApplicationField(
-        field,
-        value
-      )
-      return response
-    }
-  )
+  ipcMain.handle('v1/application/update_application', async (_event, field, value) => {
+    const response = await applicationService.updateApplicationField(field, value)
+    return response
+  })
 
   ipcMain.handle('v1/application/check_network', async () => {
     const response = await applicationService.isHostReachable()

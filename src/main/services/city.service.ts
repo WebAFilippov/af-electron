@@ -1,6 +1,6 @@
 import { ICity, ICityFull } from '@models/City.model'
 
-import { cityRepository } from '@repositories/City.repository'
+import { cityRepository } from '@repositories/city.repository'
 
 class CityService {
   async setDefaultCity(id: number) {

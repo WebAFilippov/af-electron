@@ -12,7 +12,11 @@ import { windowLifecycle } from '@utils/window-lifecycle'
 import { initDatabase } from '@database/database'
 import { seedDatabase } from '@database/seed'
 
+import { applicationService } from '@services/application.service'
+
 import { ipcHandlers } from './ipc'
+import { ThemeColorBackground } from './shared/constants'
+import { Theme } from './shared/types'
 import { setAutoLaunch } from './utils/auto-launch'
 
 Logger.setupLogger()
@@ -56,8 +60,9 @@ if (!gotTheLock) {
 
       await initDatabase()
       await seedDatabase()
+      const { theme } = await applicationService.getApplication()
 
-      const window = createWindow()
+      const window = createWindow(theme as Theme)
       createTray(window)
 
       // HANDLERS

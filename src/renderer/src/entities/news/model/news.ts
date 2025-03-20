@@ -104,74 +104,74 @@ sample({
   target: $lastTimeFetch
 })
 
-sample({
-  clock: $categories,
-  filter: (categories) => categories.length > 1,
-  fn: (categories) => {
-    return categories.map((category) => ({
-      category,
-      data: [],
-      scroll: 0,
-      cursor: null,
-      hasNextPage: true
-    }))
-  },
-  target: $news
-})
+// sample({
+//   clock: $categories,
+//   filter: (categories) => categories.length > 1,
+//   fn: (categories) => {
+//     return categories.map((category) => ({
+//       category,
+//       data: [],
+//       scroll: 0,
+//       cursor: null,
+//       hasNextPage: true
+//     }))
+//   },
+//   target: $news
+// })
 
-const fetchNewsFx = createJsonQuery({
-  request: {
-    method: 'GET',
-    url: () => 'http://localhost:4444/news',
-    query: $queryString
-  },
-  response: {
-    contract: zodContract(ResponseNewsSchema)
-  }
-})
+// const fetchNewsFx = createJsonQuery({
+//   request: {
+//     method: 'GET',
+//     url: () => 'http://localhost:4444/news',
+//     query: () => ,
+//   },
+//   response: {
+//     contract: zodContract(ResponseNewsSchema)
+//   }
+// })
 
-concurrency(fetchNewsFx, { strategy: 'TAKE_LATEST' })
+// concurrency(fetchNewsFx, { strategy: 'TAKE_LATEST' })
 
-sample({
-  clock: fetchNewsFx.finished.success,
-  source: { news: $news, currentCategory: $currentCategory },
-  filter: (_, response) => response.result.success,
-  fn: ({ news, currentCategory }, response) => {
-    const index = news.findIndex((n) => n.category === currentCategory)
+// sample({
+//   clock: fetchNewsFx.finished.success,
+//   source: { news: $news, currentCategory: $currentCategory },
+//   filter: (_, response) => response.result.success,
+//   fn: ({ news, currentCategory }, response) => {
+//     const index = news.findIndex((n) => n.category === currentCategory)
 
-    const mapped: CategoryNews = {
-      category: currentCategory || 'Все',
-      data: response.result.data || [],
-      scroll: 0,
-      cursor: response.result.nextCursor || null,
-      hasNextPage: response.result.hasNextPage || false
-    }
+//     const mapped: CategoryNews = {
+//       category: currentCategory || 'Все',
+//       data: response.result.data || [],
+//       scroll: 0,
+//       cursor: response.result.nextCursor || null,
+//       hasNextPage: response.result.hasNextPage || false
+//     }
 
-    const newNews = news
-    newNews[index] = mapped
+//     const newNews = news
+//     newNews[index] = mapped
 
-    return newNews
-  },
-  target: $news
-})
+//     return newNews
+//   },
+//   target: $news
+// })
 
-sample({
-  clock: fetchNewsFx.finished.success,
-  filter: (response) => !response.result.success,
-  fn: (response) => response.result.message || 'Неизвестная ошибка',
-  target: $newsError
-})
+// sample({
+//   clock: fetchNewsFx.finished.success,
+//   filter: (response) => !response.result.success,
+//   fn: (response) => response.result.message || 'Неизвестная ошибка',
+//   target: $newsError
+// })
 
-sample({
-  clock: fetchNewsFx.finished.failure,
-  fn: ({ error }) => {
-    console.log(error)
-    return 'error'
-  },
-  target: $newsError
-})
+// sample({
+//   clock: fetchNewsFx.finished.failure,
+//   fn: ({ error }) => {
+//     console.log(error)
+//     return 'error'
+//   },
+//   target: $newsError
+// })
 
-export { $news, fetchNewsFx, $sorting, $currentSorting, $take, $currentTake }
+export { $news,  $sorting, $currentSorting, $take, $currentTake }
 
 // $lastTimeFetch.watch((date) => console.log(`#lastTimeFetch ${date}`))
 // $news.watch((store) => console.log('#news ', store))

@@ -1,6 +1,6 @@
 import { Newspaper } from 'lucide-react'
 
-import { News } from '@pages/news'
+import { NewsCategories } from '@pages/news-categories'
 
 export const ROUTES = [
   {
@@ -8,6 +8,6 @@ export const ROUTES = [
     title: 'Новости',
     description: 'Список новостей',
     icon: <Newspaper size="1.5rem" />,
-    element: <News />
+    element: <NewsCategories />
   }
 ]

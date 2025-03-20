@@ -3,7 +3,7 @@ import fs from 'fs'
 
 import { Logger } from '@utils/logger'
 
-import Application, { IApplication } from '@models/Application.model'
+import Application, { IApplication } from '@models/application.model'
 import CityInfo, { ICityInfo } from '@models/CityInfo.model'
 
 import { config } from '@main/shared/config'

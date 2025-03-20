@@ -1,9 +1,6 @@
-import Application, { IApplication } from '@models/Application.model'
+import Application, { IApplication } from '@models/application.model'
 
 class ApplicationRepository {
-  /**
-   * Получает первую запись из таблицы Application.
-   */
   async getApplication(): Promise<IApplication> {
     try {
       const model = await Application.findOne({
@@ -21,20 +18,12 @@ class ApplicationRepository {
     }
   }
 
-  /**
-   * Обновляет указанное поле записи в таблице Application.
-   * @param field Поле, которое нужно обновить.
-   * @param value Новое значение для поля.
-   */
   async updateApplicationField<T extends keyof Omit<IApplication, 'id'>>(
     field: T,
     value: IApplication[T]
   ): Promise<boolean> {
     try {
-      if (
-        (field === 'owm_apikey' || field === 'theme') &&
-        typeof value != 'string'
-      ) {
+      if ((field === 'owm_apikey' || field === 'theme') && typeof value != 'string') {
         throw new Error(
           `Тип значения для поля '${field}' должен быть 'string', получен ${typeof value}.`
         )

@@ -4,9 +4,8 @@ import { Link } from 'react-router-dom'
 
 import { $sidebar, toggleSidebar } from '@widgets/sidebar'
 
-import { ThemeSwitcher } from '@features/theme-switcher/ui/ThemeSwither'
-
 import { useDebugLayer } from '@entities/debug-mode'
+import { ThemeSwitcher } from '@entities/theme'
 
 import { Button, RainbowButton } from '@shared/ui'
 

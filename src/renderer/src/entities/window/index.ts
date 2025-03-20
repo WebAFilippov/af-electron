@@ -4,7 +4,7 @@ export {
   $windowMaximize,
   $windowFullscreen,
   $windowShow,
-  setWindowMinimoize,
+  setWindowMinimize,
   setWindowMaximize,
   setWindowClose,
   GateWindow
