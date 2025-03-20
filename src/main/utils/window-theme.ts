@@ -14,12 +14,5 @@ export const configureTheme = (window: BrowserWindow, theme: Theme) => {
       window.setBackgroundColor(ThemeColorBackground.DARK)
       nativeTheme.themeSource = 'dark'
       break
-    default:
-      const theme = nativeTheme.shouldUseDarkColors ? 'dark' : 'light'
-      nativeTheme.themeSource = theme
-      window.setBackgroundColor(
-        theme === 'dark' ? ThemeColorBackground.DARK : ThemeColorBackground.LIGHT
-      )
-      break
   }
 }

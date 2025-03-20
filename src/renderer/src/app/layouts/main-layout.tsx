@@ -9,7 +9,7 @@ import { Topbar } from '@widgets/topbar'
 
 import { addListenerDebugFx, removeListenerDebugFx } from '@entities/debug-mode/model/debug'
 import { useDebugLayer } from '@entities/debug-mode/ui/use-debug-layer'
-import { $isDarkTheme } from '@entities/theme/model/model'
+import { $theme } from '@entities/theme'
 
 import { cn } from '@shared/lib'
 import { Particles } from '@shared/ui'
@@ -27,7 +27,7 @@ sample({
 export const MainLayout = () => {
   useGate(Gate)
   const { ref } = useDebugLayer<HTMLDivElement>('app')
-  const isDarkTheme = useUnit($isDarkTheme)
+  const theme = useUnit($theme)
 
   return (
     <div
@@ -41,7 +41,7 @@ export const MainLayout = () => {
         className="absolute inset-0 z-0"
         quantity={300}
         ease={50}
-        color={isDarkTheme ? '#ffffff' : '#000000'}
+        color={theme === 'dark' ? '#ffffff' : '#000000'}
         refresh
       />
 

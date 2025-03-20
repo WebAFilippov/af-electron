@@ -1,5 +1,4 @@
 import { createEffect, createEvent, createStore, sample } from 'effector'
-import { persist } from 'effector-storage/local'
 
 import { AppStarted } from '@shared/config/init'
 
@@ -7,54 +6,43 @@ import { Theme } from '../types'
 
 const setTheme = createEvent<Theme>()
 
-const $theme = createStore<Theme>('system')
-const $isDarkTheme = $theme.map(
-  (theme) =>
-    (theme === 'system' && window.matchMedia('(prefers-color-scheme: dark)').matches) ||
-    theme === 'dark'
-)
+const $theme = createStore<Theme>('light')
 
-const applyThemeFx = createEffect<Theme, void, Error>((store) => {
+const applyThemeFx = createEffect<Theme, void, Error>((theme) => {
   const root = document.getElementById('root')
   if (!root) {
     throw new Error('Root element not found')
   }
 
   root.classList.remove('light', 'dark')
-  if (store === 'system') {
-    const systemTheme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'
-
-    root.classList.add(systemTheme)
-    return
+  root.classList.add(theme)
+})
+const getWindowTheme = createEffect<void, Theme, Error>(async () => {
+  try {
+    return await window.api.getWindowTheme()
+  } catch (err) {
+    throw new Error('Error getting window theme')
   }
-  root.classList.add(store)
 })
 const sendWindowTheme = createEffect<Theme, void, Error>((theme) =>
   window.api.sendWindowTheme(theme)
 )
 
-persist({
-  store: $theme,
-  key: 'theme-app'
-})
-
 sample({
   clock: setTheme,
-  target: $theme
+  target: [$theme, applyThemeFx, sendWindowTheme]
 })
 
 sample({
-  clock: $theme,
-  target: [applyThemeFx, sendWindowTheme]
+  clock: getWindowTheme.doneData,
+  target: setTheme
 })
 
 sample({
   clock: AppStarted,
-  source: $theme,
-  target: applyThemeFx
+  target: [getWindowTheme]
 })
 
-export { $theme, $isDarkTheme, setTheme, applyThemeFx }
+export { $theme, setTheme, applyThemeFx }
 
 // $theme.watch((store) => console.log(`theme change: ${store}`))
-// $isDarkTheme.watch((store) => console.log(`isDarkTheme change: ${store}`))

@@ -40,10 +40,10 @@ export const createWindow = (theme: Theme): BrowserWindow => {
     }
   })
 
-  configureTheme(window, theme)
-
+  
   window.flashFrame(false)
   // window.setOverlayIcon(nativeImage.createFromPath(icon16), 'Harmonify')
+  configureTheme(window, theme)
 
   if (is.dev) window.webContents.openDevTools()
 

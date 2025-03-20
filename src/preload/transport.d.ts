@@ -5,6 +5,6 @@ interface WindowState {
   show: boolean
 }
 
-type Theme = 'light' | 'dark' | 'system'
+type Theme = 'light' | 'dark'
 
 export type { WindowState, Theme }

@@ -59,7 +59,7 @@ const seedDatabase = async () => {
     if (!countApplication) {
       const initialApplication: Omit<IApplication, 'id'>[] = [
         {
-          theme: 'system',
+          theme: 'light',
           owm_apikey: ''
         }
       ]

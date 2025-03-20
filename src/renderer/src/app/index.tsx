@@ -10,3 +10,4 @@ const root = ReactDOM.createRoot(container)
 
 AppStarted()
 root.render(<App />)
+

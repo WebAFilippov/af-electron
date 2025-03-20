@@ -13,6 +13,11 @@ export const IPCHandlers = (window: BrowserWindow) => {
     configureTheme(window, theme)
   })
 
+  ipcMain.handle('v1/window/get_theme', async () => {
+    const { theme } = await applicationService.getApplication()
+    return theme as Theme
+  })
+
   ipcMain.on('v1/window/minimaze', () => {
     if (window) window.minimize()
   })
