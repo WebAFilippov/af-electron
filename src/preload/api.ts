@@ -5,7 +5,8 @@ import { Theme, WindowState } from "./transport";
 
 export const api = {
   // Programm
-  onStartup: () => ipcRenderer.invoke("v1/start"),
+  onStartup: () => ipcRenderer.invoke("v1/programm/start"),
+  checkNetworkStatus: (callback: (state: boolean) => void) => ipcRenderer.on('v1/programm/check_network', (_event, state: boolean) => callback(state)),
 
   // Window
   sendWindowTheme: (theme: Theme) => ipcRenderer.send("v1/window/theme", theme),
@@ -32,8 +33,7 @@ export const api = {
   //   field: keyof Omit<PreloadApplication, 'id'>,
   //   value: string
   // ): Promise<number> => ipcRenderer.invoke('v1/application/update_application', field, value),
-  checkNetworkStatus: () =>
-    ipcRenderer.invoke("v1/application/check_network"),
+  
 
   // // CityService
   // searchCitiesWithLimits: (args) => ipcRenderer.invoke('v1/cityInfo/search', args),

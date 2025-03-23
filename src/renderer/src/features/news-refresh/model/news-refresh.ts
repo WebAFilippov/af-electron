@@ -1,38 +1,55 @@
 import { createEffect, createEvent, sample } from 'effector'
+import { createGate } from 'effector-react'
+import { useNavigate } from 'react-router-dom'
 
-
+import { fetchCategoriesFx } from '@entities/categories'
 
 import { REFRESH_NEWS_KEYBOARD_SHORTCUT } from '@shared/config/constant'
 
 const handleKeyDown = (event: KeyboardEvent) => {
   if (REFRESH_NEWS_KEYBOARD_SHORTCUT.includes(event.key)) {
     event.preventDefault()
-    refreshNews()
+    refreshCategories()
   }
 }
 
-const addListenerFx = createEffect(() => {
+const GateRefresh = createGate<{ navigate: ReturnType<typeof useNavigate> }>()
+
+const refreshCategories = createEvent()
+const navigateToNews = createEvent()
+
+const addListenerRefreshFx = createEffect(() => {
   window.addEventListener('keydown', handleKeyDown)
 })
 
-const removeListenerFx = createEffect(() => {
+const removeListenerRefreshFx = createEffect(() => {
   window.removeEventListener('keydown', handleKeyDown)
 })
 
-const addRefreshListener = createEvent()
-const removeRefreshListener = createEvent()
-
-sample({
-  clock: addRefreshListener,
-  target: addListenerFx
+const navigateFx = createEffect(({ navigate }) => {
+  navigate('/news')
 })
 
 sample({
-  clock: removeRefreshListener,
-  target: removeListenerFx
+  clock: navigateToNews,
+  source: GateRefresh.state,
+  fn: ({ navigate }) => ({ navigate }),
+  target: navigateFx
 })
 
-const refreshNews = createEvent()
+sample({
+  clock: refreshCategories,
+  target: [fetchCategoriesFx.start, navigateToNews]
+})
 
+sample({
+  clock: GateRefresh.open,
+  target: addListenerRefreshFx
+})
 
-export { refreshNews, addRefreshListener, removeRefreshListener }
+sample({
+  clock: GateRefresh.close,
+  target: removeListenerRefreshFx
+})
+
+export { refreshCategories, GateRefresh }

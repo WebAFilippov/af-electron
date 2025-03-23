@@ -5,7 +5,7 @@ import { $categories, $currentCategory, fetchCategoriesFx } from '@entities/cate
 
 import { Button, Popover, PopoverContent, PopoverTrigger, Skeleton } from '@shared/ui'
 
-import { setCurrentCetegory } from '../model/categories'
+import { setCurrentCategory } from '../model/categories'
 import { $currentSorting, $sorting, setCurrentSorting } from '../model/sorting'
 import { $currentTake, $take, setCurrentTake } from '../model/take'
 
@@ -21,7 +21,7 @@ export const FilterNews = () => {
     setCurrentSorting
   ])
   const [take, currentTake, handleSetCurrentTake] = useUnit([$take, $currentTake, setCurrentTake])
-  const handleSelectCurrentCetegory = useUnit(setCurrentCetegory)
+  const handleSelectCurrentCetegory = useUnit(setCurrentCategory)
 
   return (
     <Popover>
@@ -39,12 +39,12 @@ export const FilterNews = () => {
             ) : (
               categories.map((category) => {
                 return (
-                  <Link to={`/news/${category.slug}`} key={category.title} className='select-none'>
+                  <Link to={`/news/${category.id}`} key={category.id} className="select-none">
                     <Button
-                      variant={currentCategory === category.title ? 'default' : 'ghost'}
+                      variant={currentCategory?.id === category.id ? 'default' : 'ghost'}
                       className="flex max-h-6 min-w-44 select-none items-center justify-between rounded-none px-3 py-1"
                       size="sm"
-                      onClick={() => handleSelectCurrentCetegory(category.title)}
+                      onClick={() => handleSelectCurrentCetegory(category)}
                     >
                       <p>{category.title}</p>
                       <b>{category.count}</b>

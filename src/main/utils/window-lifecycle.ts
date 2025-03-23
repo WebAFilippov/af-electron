@@ -17,8 +17,7 @@ export const windowLifecycle = (window: BrowserWindow) => {
             : window.isFullScreen(),
       show: window.isVisible()
     }
-    console.log(key, { ...windowState })
-
+    
     window.webContents.send('v1/window/state', windowState)
   }
 

@@ -1,12 +1,12 @@
 import { createEvent, createStore, sample } from 'effector'
 
 import { fetchCategoriesFx } from '../api/fetch-categories'
-import { ICategory } from '../types'
+import { Category } from '../types'
 
 const loadCategories = createEvent()
 
-const $categories = createStore<ICategory[]>([])
-const $currentCategory = createStore<string | null>(null)
+const $categories = createStore<Category[]>([])
+const $currentCategory = createStore<Category | null>(null)
 
 sample({
   clock: loadCategories,
@@ -19,26 +19,27 @@ sample({
   clock: fetchCategoriesFx.finished.success,
   filter: (response) => response.result.success,
   fn: (response) => {
-    const allCount = response.result.data?.reduce((acc, { count }) => acc + count, 0) || 0
-    const all = { slug: 'All', title: 'Все', count: allCount }
-    return [all, ...(response.result.data || [])]
+    return response.result.data || []
   },
   target: $categories
 })
 
-sample({
-  clock: $categories,
-  source: $currentCategory,
-  fn: (current, categories) => {
-    if (current) {
-      if (categories.find((category) => category.title === current)) return current
-    }
+// sample({
+//   clock: $categories,
+//   source: $currentCategory,
+//   fn: (current, categories) => {
+//     if (current) {
+//       if (categories.find((category) => category.title === current)) return current
+//     }
 
-    if (categories.length) return 'Все'
+//     if (categories.length) return 'Все'
 
-    return null
-  },
-  target: $currentCategory
-})
+//     return null
+//   },
+//   target: $currentCategory
+// })
 
 export { $categories, $currentCategory, loadCategories }
+
+// $categories.watch((categories) => console.log('#categories: ', categories))
+// $currentCategory.watch((category) => console.log('#currentCategory: ', category))

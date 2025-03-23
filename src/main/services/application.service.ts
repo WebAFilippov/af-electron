@@ -25,7 +25,7 @@ class ApplicationService {
       const { alive } = await ping.promise.probe(host)
       return alive
     } catch {
-      throw new Error(`Failed to check connectivity to host: ${host}`)
+      return false
     }
   }
 }

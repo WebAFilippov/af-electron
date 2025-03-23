@@ -1,104 +1,183 @@
-// import { aedes, AudioMonitor } from "./mqtt-broker";
-// import { IDevice } from "./new_af";
+import AudioMonitor, { AudioEventData, AudioMonitorOptions } from '@lib/audio-monitor/audio-monitor'
 
-// let isDisconnect: boolean | null = null
-// let intervalStart: NodeJS.Timeout | null = null;
+import Aedes from 'aedes'
 
-// let deviceValue: IDevice = { id: "", name: "", volume: 0, muted: false }
-// let newDefaultValue: IDevice = { id: "", name: "", volume: 0, muted: false }
+interface PublishPacket {
+  cmd: 'publish'
+  topic: string
+  payload: Buffer
+  qos: 0 | 1 | 2
+  retain: boolean 
+  dup: boolean 
+}
 
-// export const handlerMQTT = () => {
-//   AudioMonitor.on('change', (deviceInfo, change) => {
-//     console.log(deviceInfo)
-//     newDefaultValue = deviceInfo
-//     if (change.id) {
-//       console.log(deviceInfo.id)
-//     }
-//     if (change.name) {
-//       console.log(deviceInfo.name)
-//     }
-//     if (change.volume) {
-//       if (newDefaultValue.volume > deviceValue.volume) {
-//         sendToClientsIncrementVolume(newDefaultValue)
-//       }
-//       if (newDefaultValue.volume < deviceValue.volume) {
-//         sendToClientsDecrementVolume(newDefaultValue)
-//       }
-//     }
-//     if (change.muted) {
-//       console.log('change mute:: ', deviceInfo.muted)
-//     }
-//     deviceValue = deviceInfo
-//   });
+const publishAsync = (aedes: Aedes, packet: PublishPacket): Promise<void> => {
+  return new Promise((resolve, reject) => {
+    aedes.publish(packet, (error) => {
+      if (error) reject(error)
+      else resolve()
+    })
+  })
+}
 
-//   aedes.on('client', (client) => {
-//     console.log(`Клиент подключен: ${(client ? client.id : 'неизвестный')}`);
-//     AudioMonitor.start()
+const OPTIONS: AudioMonitorOptions = {
+  autoStart: true
+}
 
-//     isDisconnect = false
-//     intervalStart = setInterval(() => {
-//       if (!AudioMonitor.isWork() && !isDisconnect) {
-//         AudioMonitor.start()
-//       }
-//     }, 1000) as NodeJS.Timeout
-//   });
+export const handlerMQTT = (aedes: Aedes) => {
+  let monitor: AudioMonitor | null = null
 
-//   aedes.on('clientDisconnect', (client) => {
-//     console.log(`Клиент отключился: ${client.id}`)
-//     AudioMonitor.stop();
+  const initializeMonitor = (clientId: string) => {
+    if (monitor) {
+      monitor.stop()
+    }
 
-//     isDisconnect = true
-//     clearInterval(intervalStart as NodeJS.Timeout)
-//     intervalStart = null
-//   });
+    monitor = new AudioMonitor(OPTIONS)
 
-//   aedes.on('publish', (packet, client) => {
-//     const topic = packet.topic;
+    monitor.on('listen', async (data: AudioEventData) => {
+      const topicPrefix = `audio/${clientId}`
 
-//     if (client) {
-//       if (topic === 'increment/volume') {
-//         sendToProcessIncrementVolume()
-//       } else if (topic === 'decrement/volume') {
-//         sendToProcessDecrementVolume()
-//       } else if (topic === 'toggle/volume') {
-//         AudioMonitor.toggleMute()
-//       }
-//     }
-//   });
-// }
+      try {
+        switch (data.action.type) {
+          case 'initial':
+            await publishAsync(aedes, {
+              cmd: 'publish',
+              topic: `${topicPrefix}/initial`,
+              payload: Buffer.from(JSON.stringify(data.devices)),
+              qos: 1,
+              retain: false, // Явно указано
+              dup: false // Явно указано
+            })
+            break
+          case 'default':
+            await publishAsync(aedes, {
+              cmd: 'publish',
+              topic: `${topicPrefix}/default`,
+              payload: Buffer.from(JSON.stringify(data.devices)),
+              qos: 1,
+              retain: false,
+              dup: false
+            })
+            break
+          case 'volume':
+            if (data.action.device) {
+              await publishAsync(aedes, {
+                cmd: 'publish',
+                topic: `${topicPrefix}/volume`,
+                payload: Buffer.from(JSON.stringify(data.action.device)),
+                qos: 1,
+                retain: false,
+                dup: false
+              })
+            }
+            break
+          case 'add':
+          case 'remove':
+            await publishAsync(aedes, {
+              cmd: 'publish',
+              topic: `${topicPrefix}/devices`,
+              payload: Buffer.from(
+                JSON.stringify({
+                  action: data.action.type,
+                  devices: data.devices
+                })
+              ),
+              qos: 1,
+              retain: false,
+              dup: false
+            })
+            break
+        }
+      } catch (error) {
+        console.error(`Ошибка публикации для ${clientId}: ${error}`)
+      }
+    })
 
-// const sendToProcessIncrementVolume = () => {
-//   AudioMonitor.incrementVolume()
-// }
+    monitor.on('error', async (error: string) => {
+      try {
+        await publishAsync(aedes, {
+          cmd: 'publish',
+          topic: `audio/${clientId}/error`,
+          payload: Buffer.from(error),
+          qos: 1,
+          retain: false,
+          dup: false
+        })
+      } catch (pubError) {
+        console.error(`Ошибка публикации ошибки для ${clientId}: ${pubError}`)
+      }
+    })
+  }
 
-// const sendToProcessDecrementVolume = () => {
-//   AudioMonitor.decrementVolume()
-// }
+  aedes.on('client', (client) => {
+    if (!client?.id) {
+      console.log('Подключен неизвестный клиент')
+      return
+    }
 
-// const sendToClientsIncrementVolume = (defaultValue: IDevice) => {
-//   console.log('inc ', defaultValue.volume)
-// }
+    console.log(`Клиент подключен: ${client.id}`)
+    initializeMonitor(client.id)
+  })
 
-// const sendToClientsDecrementVolume = (defaultValue: IDevice) => {
-//   console.log('dec ', defaultValue.volume)
-// }
+  aedes.on('clientDisconnect', (client) => {
+    if (monitor) {
+      monitor.stop()
+      monitor = null
+    }
+    console.log(`Клиент отключился: ${client.id}`)
+  })
 
-// // AudioMonitor.on('change', (oldDeviceInfo, newDeviceInfo) => {
+  aedes.on('publish', (packet, client) => {
+    if (!client || !monitor) return
 
-// //   if (oldDeviceInfo.volume !== newDeviceInfo.volume) {
-// //     if (oldDeviceInfo.volume < newDeviceInfo.volume) sendUPVolume(newDeviceInfo.volume);
-// //     if (oldDeviceInfo.volume < newDeviceInfo.volume) sendDOWNVolume(newDeviceInfo.volume);
-// //   }
+    const topic = packet.topic
+    const payload = packet.payload.toString()
 
-// //   if (oldDeviceInfo.name !== newDeviceInfo.name) {
-// //     sendChangeNAME(newDeviceInfo.name);
-// //   }
-// // });
-
-// // AudioMonitor.on('change', async ({ id, volume }) => {
-// //   const device = await AudioMonitor.getDevice(id);
-
-// //   if (volume && volume !== device.volume) {
-// //     sendToClientsChangeVolume(id, volume);
-// //   }
-// // });
+    try {
+      switch (topic) {
+        case 'increment/volume':
+          monitor.incrementVolume()
+          break
+        case 'decrement/volume':
+          monitor.decrementVolume()
+          break
+        case 'toggle/volume':
+          monitor.toggleMuted()
+          break
+        case 'set/volume': {
+          const volume = parseInt(payload)
+          if (!isNaN(volume)) {
+            monitor.setVolume(volume)
+          }
+          break
+        }
+        case 'set/volume/id': {
+          const { deviceId, volume } = JSON.parse(payload)
+          if (deviceId && !isNaN(volume)) {
+            monitor.setVolumeById(deviceId, volume)
+          }
+          break
+        }
+        case 'toggle/volume/id': {
+          const deviceId = payload
+          if (deviceId) {
+            monitor.toggleMutedById(deviceId)
+          }
+          break
+        }
+      }
+    } catch (error) {
+      const errorMsg = `Ошибка выполнения команды ${topic}: ${error instanceof Error ? error.message : String(error)}`
+      publishAsync(aedes, {
+        cmd: 'publish',
+        topic: `audio/${client.id}/error`,
+        payload: Buffer.from(errorMsg),
+        qos: 1,
+        retain: false,
+        dup: false
+      }).catch((pubError) => {
+        console.error(`Ошибка публикации ошибки: ${pubError}`)
+      })
+    }
+  })
+}

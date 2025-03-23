@@ -12,6 +12,7 @@
       "@types_app/*": ["types_app/*"],
       "@ipc/*": ["ipc/*"],
       "@utils/*": ["utils/*"],
+      "@lib/*": ["lib/*"],
       "@database/*": ["database/*"],
       "@models/*": ["models/*"],
       "@services/*": ["services/*"],

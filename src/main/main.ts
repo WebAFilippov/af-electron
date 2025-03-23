@@ -1,4 +1,6 @@
 import { is } from '@electron-toolkit/utils'
+import AudioMonitor from '@lib/audio-monitor/audio-monitor'
+import { MQTTBroker } from '@lib/broker/mqtt-broker'
 
 import { app, BrowserWindow, Menu, session } from 'electron'
 
@@ -15,7 +17,6 @@ import { seedDatabase } from '@database/seed'
 import { applicationService } from '@services/application.service'
 
 import { ipcHandlers } from './ipc'
-import { ThemeColorBackground } from './shared/constants'
 import { Theme } from './shared/types'
 import { setAutoLaunch } from './utils/auto-launch'
 
@@ -68,6 +69,9 @@ if (!gotTheLock) {
       // HANDLERS
       ipcHandlers(window, isAutoLaunch)
       windowLifecycle(window)
+
+      // AUDIO MONITOR
+      MQTTBroker()
 
       log.info('Application ready')
     } catch (error) {

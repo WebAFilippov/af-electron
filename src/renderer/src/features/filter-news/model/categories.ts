@@ -1,12 +1,13 @@
 import { createEvent, sample } from 'effector'
 
-import { $currentCategory } from '@entities/categories'
+import { $currentCategory, Category } from '@entities/categories'
+import { $queryCategory } from '@entities/news'
 
-const setCurrentCetegory = createEvent<string>()
+const setCurrentCategory = createEvent<Category>()
 
 sample({
-  clock: setCurrentCetegory,
-  target: $currentCategory
+  clock: setCurrentCategory,
+  target: [$currentCategory, $queryCategory]
 })
 
-export { setCurrentCetegory }
+export { setCurrentCategory }

@@ -1,6 +1,6 @@
 import { useGate, useUnit } from 'effector-react'
 
-import { setCurrentCetegory } from '@features/filter-news/model/categories'
+import { setCurrentCategory } from '@features/filter-news'
 
 import {
   $categories,
@@ -14,7 +14,7 @@ import { NewsCategoriesGate } from '../model/categories'
 export const NewsCategories = () => {
   useGate(NewsCategoriesGate)
   const [categories, isLoading] = useUnit([$categories, fetchCategoriesFx.$pending])
-  const handleSetCurrentCategory = useUnit(setCurrentCetegory)
+  const handleSetCurrentCategory = useUnit(setCurrentCategory)
 
   return (
     <div className="relative grid h-full w-full select-none grid-cols-4 flex-col gap-6 overflow-y-auto overflow-x-hidden p-10">
@@ -24,9 +24,9 @@ export const NewsCategories = () => {
             .map((_, index) => <CategoryPreviewSkeleton key={index} />)
         : categories.map((category) => (
             <CategoryPreview
-              key={category.slug}
+              key={category.id}
               category={category}
-              onClick={() => handleSetCurrentCategory(category.slug)}
+              onClick={() => handleSetCurrentCategory(category)}
             />
           ))}
     </div>

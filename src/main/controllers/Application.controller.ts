@@ -1,6 +1,6 @@
 import { BrowserWindow, ipcMain, nativeTheme } from 'electron'
 
-import { applicationService } from '@services/Application.service'
+import { applicationService } from '@services/application.service'
 
 import { ThemeColorBackground } from '@main/shared/constants'
 

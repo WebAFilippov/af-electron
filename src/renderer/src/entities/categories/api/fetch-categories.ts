@@ -7,7 +7,7 @@ import { GET_ALL_CATEGORIES } from '@shared/api'
 
 const ResponseCategories = z.object({
   success: z.boolean(),
-  data: z.array(z.object({ slug: z.string(), title: z.string(), count: z.number() })).optional(),
+  data: z.array(z.object({ id: z.string(), title: z.string(), count: z.number() })).optional(),
   message: z.string().optional()
 })
 
