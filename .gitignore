@@ -7,7 +7,6 @@ out
 .idea
 
 logs
-yarn.lock
 package-lock.json
 Scenario.md
 electron.vite.config.*.mjs
