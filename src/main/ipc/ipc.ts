@@ -1,4 +1,5 @@
 import { BrowserWindow, ipcMain, shell } from 'electron'
+import cron from 'node-cron'
 
 import { configureTheme } from '@utils/window-theme'
 
@@ -7,6 +8,14 @@ import { applicationService } from '@services/application.service'
 import { Theme } from '@main/shared/types'
 
 export const IPCHandlers = (window: BrowserWindow) => {
+  //Programm
+  cron.schedule('*/5 * * * * *', async () => {
+    const isOnline = await applicationService.isHostReachable('8.8.8.8')
+
+    window.webContents.send('v1/programm/check_network', isOnline)
+  })
+
+  //Window
   ipcMain.on('v1/window/theme', async (_event, theme: Theme) => {
     if (!window) return
     await applicationService.updateApplicationField('theme', theme)
@@ -38,6 +47,7 @@ export const IPCHandlers = (window: BrowserWindow) => {
     }
   })
 
+  //External
   ipcMain.on('v1/external/open', (_event, url: string) => {
     shell.openExternal(url)
   })

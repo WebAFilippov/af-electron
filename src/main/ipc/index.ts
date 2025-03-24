@@ -2,16 +2,15 @@ import { MQTTBroker } from '@lib/broker/mqtt-broker'
 
 import { BrowserWindow } from 'electron'
 
-import { NewsController } from '@controllers/News.controller'
-import { ProgrammController } from '@controllers/programm.controlles'
+import { windowLifecycle } from '@utils/window-lifecycle'
 
-import { dataHandlers } from './data-handlers'
+import { NewsController } from '@controllers/News.controller'
+
 import { IPCHandlers } from './ipc'
 
-export const ipcHandlers = (window: BrowserWindow, isAutoLaunch: boolean) => {
+export const ipcHandlers = (window: BrowserWindow) => {
   IPCHandlers(window)
-  dataHandlers(window, isAutoLaunch)
-  ProgrammController(window)
+  windowLifecycle(window)
   NewsController()
   MQTTBroker(window)
 }

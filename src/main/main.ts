@@ -65,8 +65,7 @@ if (!gotTheLock) {
       createTray(window)
 
       // HANDLERS
-      ipcHandlers(window, isAutoLaunch)
-      windowLifecycle(window)
+      ipcHandlers(window)
 
       log.info('Application ready')
     } catch (error) {

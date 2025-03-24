@@ -1,7 +1,7 @@
 import AudioMonitor, { AudioEventData, AudioMonitorOptions } from '@lib/audio-monitor/audio-monitor'
 
 import Aedes from 'aedes'
-import { BrowserWindow } from 'electron'
+import { BrowserWindow, ipcMain } from 'electron'
 
 interface PublishPacket {
   cmd: 'publish'
@@ -27,6 +27,11 @@ const OPTIONS: AudioMonitorOptions = {
 
 export const handlerMQTT = (window: BrowserWindow, aedes: Aedes) => {
   let monitor: AudioMonitor | null = null
+  let isConnected: boolean = false
+
+  ipcMain.handle('v1/device/get_connection', () => {
+    return isConnected
+  })
 
   const initializeMonitor = (clientId: string) => {
     if (monitor) {
@@ -117,8 +122,8 @@ export const handlerMQTT = (window: BrowserWindow, aedes: Aedes) => {
     }
 
     console.log(`Клиент подключен: ${client.id}`)
-
-    window.webContents.send('v1/device/isConnect', true)
+    isConnected = true
+    window.webContents.send('v1/device/connection', isConnected)
     initializeMonitor(client.id)
   })
 
@@ -129,7 +134,8 @@ export const handlerMQTT = (window: BrowserWindow, aedes: Aedes) => {
     }
 
     console.log(`Клиент отключился: ${client.id}`)
-    window.webContents.send('v1/device/isConnect', false)
+    isConnected = false
+    window.webContents.send('v1/device/connection', isConnected)
   })
 
   aedes.on('publish', (packet, client) => {

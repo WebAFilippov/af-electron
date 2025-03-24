@@ -5,7 +5,7 @@ import { Theme, WindowState } from "./transport";
 
 export const api = {
   // Programm
-  onStartup: () => ipcRenderer.invoke("v1/programm/start"),
+  onStartup: () => ipcRenderer.send("v1/programm/startup"),
   checkNetworkStatus: (callback: (state: boolean) => void) => ipcRenderer.on('v1/programm/check_network', (_event, state: boolean) => callback(state)),
 
   // Window
@@ -20,16 +20,17 @@ export const api = {
 
   // Device
   onDeviceConnected: (callback: (isConnected: boolean) => void ) => {
-    ipcRenderer.on('v1/device/isConnect', (_event, isConnected: boolean) => callback(isConnected))
+    ipcRenderer.on('v1/device/connection', (_event, isConnected: boolean) => callback(isConnected))
   },
+  getDeviceConnection: () => ipcRenderer.invoke("v1/device/get_connection"),
 
 
   // News
   fetchNews: (query: string) => ipcRenderer.invoke("v1/news/fetch_news", query),
 
   // Sidebar
-  getSidebarList: () => ipcRenderer.invoke('v1/sidebar/getAll'),
-  updateSidebarOrder: (list) => ipcRenderer.invoke('v1/sidebar/updateSidebar', list),
+  // getSidebarList: () => ipcRenderer.invoke('v1/sidebar/getAll'),
+  // updateSidebarOrder: (list) => ipcRenderer.invoke('v1/sidebar/updateSidebar', list),
 
   // // Application
   // fetchApplicationSettings: (): Promise<PreloadApplication> =>
