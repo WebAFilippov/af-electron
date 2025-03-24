@@ -4,10 +4,15 @@ import { fetchCategoriesFx } from '../api/fetch-categories'
 import { Category } from '../types'
 
 const loadCategories = createEvent()
-const resetCurrentCategory = createEvent()
+const setCurrentCategory = createEvent<Category>()
 
 const $categories = createStore<Category[]>([])
-const $currentCategory = createStore<Category | null>(null).reset(resetCurrentCategory)
+const $currentCategory = createStore<Category | null>(null)
+
+sample({
+  clock: setCurrentCategory,
+  target: $currentCategory
+})
 
 sample({
   clock: loadCategories,
@@ -25,22 +30,7 @@ sample({
   target: $categories
 })
 
-// sample({
-//   clock: $categories,
-//   source: $currentCategory,
-//   fn: (current, categories) => {
-//     if (current) {
-//       if (categories.find((category) => category.title === current)) return current
-//     }
-
-//     if (categories.length) return 'Все'
-
-//     return null
-//   },
-//   target: $currentCategory
-// })
-
-export { $categories, $currentCategory, loadCategories, resetCurrentCategory }
+export { $categories, $currentCategory, loadCategories, setCurrentCategory }
 
 // $categories.watch((categories) => console.log('#categories: ', categories))
-// $currentCategory.watch((category) => console.log('#currentCategory: ', category))
+$currentCategory.watch((category) => console.log('#currentCategory: ', category))

@@ -1,2 +1,2 @@
-export { refreshCategories, GateRefresh } from './model/news-refresh'
+export { refreshCategories, RefreshGate } from './model/news-refresh'
 export * from './ui/NewsRefresh'

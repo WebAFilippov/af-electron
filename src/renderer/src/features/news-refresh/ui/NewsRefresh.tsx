@@ -1,21 +1,21 @@
 import { useGate, useUnit } from 'effector-react'
 import { RefreshCw } from 'lucide-react'
 import { FC } from 'react'
-import { useNavigate } from 'react-router-dom'
+
+import { fetchCategoriesFx } from '@entities/categories'
 
 import { cn } from '@shared/lib'
 import { Button } from '@shared/ui'
 
-import { GateRefresh, refreshCategories } from '../model/news-refresh'
+import { refreshCategories, RefreshGate } from '../model/news-refresh'
 
-interface Props {
-  isLoading: boolean
-}
+export const NewsRefresh: FC = () => {
+  useGate(RefreshGate)
 
-export const NewsRefresh: FC<Props> = ({ isLoading }) => {
-  const navigate = useNavigate()
-  useGate(GateRefresh, { navigate })
-  const handleRefreshCategories = useUnit(refreshCategories)
+  const [handleRefreshCategories, isLoading] = useUnit([
+    refreshCategories,
+    fetchCategoriesFx.$pending
+  ])
 
   return (
     <Button

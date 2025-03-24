@@ -21,6 +21,6 @@ const fetchCategoriesFx = createJsonQuery({
   }
 })
 
-concurrency(fetchCategoriesFx, { strategy: 'TAKE_FIRST' })
+concurrency(fetchCategoriesFx, { strategy: 'TAKE_LATEST' })
 
 export { fetchCategoriesFx }

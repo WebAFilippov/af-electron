@@ -1,6 +1,5 @@
 import { createEffect, createEvent, sample } from 'effector'
 import { createGate } from 'effector-react'
-import { useNavigate } from 'react-router-dom'
 
 import { fetchCategoriesFx } from '@entities/categories'
 
@@ -13,10 +12,9 @@ const handleKeyDown = (event: KeyboardEvent) => {
   }
 }
 
-const GateRefresh = createGate<{ navigate: ReturnType<typeof useNavigate> }>()
-
 const refreshCategories = createEvent()
-const navigateToNews = createEvent()
+
+const RefreshGate = createGate()
 
 const addListenerRefreshFx = createEffect(() => {
   window.addEventListener('keydown', handleKeyDown)
@@ -26,30 +24,21 @@ const removeListenerRefreshFx = createEffect(() => {
   window.removeEventListener('keydown', handleKeyDown)
 })
 
-const navigateFx = createEffect(({ navigate }) => {
-  navigate('/news')
-})
-
-sample({
-  clock: navigateToNews,
-  source: GateRefresh.state,
-  fn: ({ navigate }) => ({ navigate }),
-  target: navigateFx
-})
-
 sample({
   clock: refreshCategories,
-  target: [fetchCategoriesFx.start, navigateToNews]
+  source: fetchCategoriesFx.$pending,
+  filter: (isLoading) => !isLoading,
+  target: fetchCategoriesFx.start
 })
 
 sample({
-  clock: GateRefresh.open,
+  clock: RefreshGate.open,
   target: addListenerRefreshFx
 })
 
 sample({
-  clock: GateRefresh.close,
+  clock: RefreshGate.close,
   target: removeListenerRefreshFx
 })
 
-export { refreshCategories, GateRefresh }
+export { refreshCategories, RefreshGate }

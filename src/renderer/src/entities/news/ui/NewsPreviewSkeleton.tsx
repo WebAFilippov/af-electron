@@ -1,6 +1,6 @@
 import { Card, CardHeader, Separator, Skeleton } from '@shared/ui'
 
-export const NewsSkeleton = () => {
+export const NewsPreviewSkeleton = () => {
   return (
     <Card>
       <CardHeader className="flex select-none flex-row gap-2 p-3">

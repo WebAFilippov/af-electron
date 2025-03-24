@@ -39,13 +39,17 @@ const ResponseNewsSchema = z.object({
   message: z.string().optional()
 })
 
-interface CategoryNews {
+export type ResponseNews = z.infer<typeof ResponseNewsSchema>
+
+export type NewsItem = z.infer<typeof NewsSchema>
+
+interface News {
   category: string
-  data: any
+  data: NewsItem[]
   scroll: number
   cursor: string | null
   hasNextPage: boolean
 }
 
 export { ResponseNewsSchema }
-export type { CategoryNews }
+export type { News }
