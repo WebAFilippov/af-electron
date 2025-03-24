@@ -1,5 +1,11 @@
-import { createStore } from 'effector'
+import {  createStore } from 'effector'
 
-const $news = createStore([])
+import { CategoryNews } from '../types/news'
+
+const $news = createStore<CategoryNews[]>([])
+
+// const loadNewsFx = createEffect(async () => {
+//   return await window.api.getNews()
+// })
 
 export { $news }

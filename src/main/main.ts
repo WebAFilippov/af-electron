@@ -1,6 +1,4 @@
 import { is } from '@electron-toolkit/utils'
-import AudioMonitor from '@lib/audio-monitor/audio-monitor'
-import { MQTTBroker } from '@lib/broker/mqtt-broker'
 
 import { app, BrowserWindow, Menu, session } from 'electron'
 
@@ -69,9 +67,6 @@ if (!gotTheLock) {
       // HANDLERS
       ipcHandlers(window, isAutoLaunch)
       windowLifecycle(window)
-
-      // AUDIO MONITOR
-      MQTTBroker()
 
       log.info('Application ready')
     } catch (error) {

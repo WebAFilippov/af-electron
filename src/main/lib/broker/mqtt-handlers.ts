@@ -1,14 +1,15 @@
 import AudioMonitor, { AudioEventData, AudioMonitorOptions } from '@lib/audio-monitor/audio-monitor'
 
 import Aedes from 'aedes'
+import { BrowserWindow } from 'electron'
 
 interface PublishPacket {
   cmd: 'publish'
   topic: string
   payload: Buffer
   qos: 0 | 1 | 2
-  retain: boolean 
-  dup: boolean 
+  retain: boolean
+  dup: boolean
 }
 
 const publishAsync = (aedes: Aedes, packet: PublishPacket): Promise<void> => {
@@ -24,7 +25,7 @@ const OPTIONS: AudioMonitorOptions = {
   autoStart: true
 }
 
-export const handlerMQTT = (aedes: Aedes) => {
+export const handlerMQTT = (window: BrowserWindow, aedes: Aedes) => {
   let monitor: AudioMonitor | null = null
 
   const initializeMonitor = (clientId: string) => {
@@ -45,8 +46,8 @@ export const handlerMQTT = (aedes: Aedes) => {
               topic: `${topicPrefix}/initial`,
               payload: Buffer.from(JSON.stringify(data.devices)),
               qos: 1,
-              retain: false, // Явно указано
-              dup: false // Явно указано
+              retain: false,
+              dup: false
             })
             break
           case 'default':
@@ -116,6 +117,8 @@ export const handlerMQTT = (aedes: Aedes) => {
     }
 
     console.log(`Клиент подключен: ${client.id}`)
+
+    window.webContents.send('v1/device/isConnect', true)
     initializeMonitor(client.id)
   })
 
@@ -124,7 +127,9 @@ export const handlerMQTT = (aedes: Aedes) => {
       monitor.stop()
       monitor = null
     }
+
     console.log(`Клиент отключился: ${client.id}`)
+    window.webContents.send('v1/device/isConnect', false)
   })
 
   aedes.on('publish', (packet, client) => {

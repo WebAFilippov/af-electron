@@ -1,1 +1,1 @@
-export { NetworkBadge } from './ui/NetworkBadge'
+export { NetworkIndicator } from './ui/NetworkIndicator'

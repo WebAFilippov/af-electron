@@ -2,7 +2,7 @@ import { ChevronsLeft } from 'lucide-react'
 import { FC, ReactNode } from 'react'
 import { useLocation, useNavigate, useParams } from 'react-router-dom'
 
-import { FilterNews } from '@features/filter-news'
+import { FilterNews, FilterSearch } from '@features/filter-news'
 
 import { Button } from '@shared/ui'
 
@@ -10,7 +10,7 @@ interface Props {
   NewsRefresh: ReactNode
 }
 
-export const NewsTopbar: FC<Props> = ({ NewsRefresh }) => {
+export const NewsCategories: FC<Props> = ({ NewsRefresh }) => {
   const { category, slug } = useParams()
   const navigate = useNavigate()
   const location = useLocation()
@@ -34,6 +34,7 @@ export const NewsTopbar: FC<Props> = ({ NewsRefresh }) => {
         <div className="flex items-center justify-center gap-2">
           {NewsRefresh}
           <FilterNews />
+          <FilterSearch />
         </div>
       </div>
     </div>

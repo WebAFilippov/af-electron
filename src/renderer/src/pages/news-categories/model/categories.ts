@@ -1,10 +1,8 @@
 import { sample } from 'effector'
 import { createGate } from 'effector-react'
 
-import { setCurrentCategory } from '@features/filter-news'
-
-import { fetchCategoriesFx, loadCategories } from '@entities/categories'
-import { $queryCategory, setLastTimeFetch } from '@entities/news'
+import { fetchCategoriesFx, loadCategories, resetCurrentCategory } from '@entities/categories'
+import {  resetQueryCategory, setLastTimeFetch } from '@entities/news'
 
 const NewsCategoriesGate = createGate()
 
@@ -16,8 +14,7 @@ sample({
 
 sample({
   clock: NewsCategoriesGate.open,
-  fn: () => null,
-  target: [$queryCategory, setCurrentCategory]
+  target: [resetQueryCategory, resetCurrentCategory]
 })
 
 sample({

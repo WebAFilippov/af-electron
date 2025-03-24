@@ -5,7 +5,8 @@ import { Link } from 'react-router-dom'
 import { $sidebar, toggleSidebar } from '@widgets/sidebar'
 
 import { useDebugLayer } from '@entities/debug-mode'
-import { NetworkBadge } from '@entities/network'
+import { DeviceIndicator } from '@entities/device'
+import { NetworkIndicator } from '@entities/network'
 import { ThemeSwitcher } from '@entities/theme'
 
 import { Button, RainbowButton } from '@shared/ui'
@@ -32,15 +33,8 @@ export const Header = () => {
       </Link>
 
       <div className="flex items-center gap-4">
-        <span className="animate-bounce bg-card">
-          <span className="text-sm text-red-400">device</span>
-        </span>
-        <NetworkBadge />
-
-        {/* <span className="relative flex size-2">
-          <span className="relative inline-flex size-2 rounded-full bg-green-500/30"></span>
-          <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-green-400 opacity-75"></span>
-        </span> */}
+        <DeviceIndicator />
+        <NetworkIndicator />
         <ThemeSwitcher />
       </div>
     </div>

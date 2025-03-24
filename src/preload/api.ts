@@ -18,9 +18,14 @@ export const api = {
     ipcRenderer.on('v1/window/state', (_event, state: WindowState) => callback(state))
   },
 
+  // Device
+  onDeviceConnected: (callback: (isConnected: boolean) => void ) => {
+    ipcRenderer.on('v1/device/isConnect', (_event, isConnected: boolean) => callback(isConnected))
+  },
+
 
   // News
-  fetchNews: () => ipcRenderer.invoke("v1/news/fetch_news"),
+  fetchNews: (query: string) => ipcRenderer.invoke("v1/news/fetch_news", query),
 
   // Sidebar
   getSidebarList: () => ipcRenderer.invoke('v1/sidebar/getAll'),

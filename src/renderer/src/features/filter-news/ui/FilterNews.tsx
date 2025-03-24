@@ -39,12 +39,16 @@ export const FilterNews = () => {
             ) : (
               categories.map((category) => {
                 return (
-                  <Link to={`/news/${category.id}`} key={category.id} className="select-none">
+                  <Link
+                    key={category.id}
+                    to={`/news/${category.id}`}
+                    className="select-none"
+                    onClick={() => handleSelectCurrentCetegory(category)}
+                  >
                     <Button
                       variant={currentCategory?.id === category.id ? 'default' : 'ghost'}
                       className="flex max-h-6 min-w-44 select-none items-center justify-between rounded-none px-3 py-1"
                       size="sm"
-                      onClick={() => handleSelectCurrentCetegory(category)}
                     >
                       <p>{category.title}</p>
                       <b>{category.count}</b>
