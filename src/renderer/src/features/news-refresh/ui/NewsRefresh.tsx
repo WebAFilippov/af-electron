@@ -19,13 +19,17 @@ export const NewsRefresh: FC = () => {
 
   return (
     <Button
-      onClick={() => handleRefreshCategories()}
+      className={cn(
+        'h-full rounded-none rounded-tl-2xl border-r border-border transition-colors duration-0 disabled:cursor-progress'
+      )}
       disabled={isLoading}
-      className={cn('h-8 w-8 disabled:cursor-progress')}
+      onClick={() => handleRefreshCategories()}
     >
-      <RefreshCw
-        className={cn('h-4 w-4 stroke-background stroke-2', isLoading && 'animate-spin')}
-      />
+      <div className="flex h-9 w-9 items-center justify-center">
+        <RefreshCw
+          className={cn('h-6 w-6 stroke-background stroke-2', isLoading && 'animate-spin')}
+        />
+      </div>
     </Button>
   )
 }

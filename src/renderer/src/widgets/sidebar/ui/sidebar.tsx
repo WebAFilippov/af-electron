@@ -17,7 +17,7 @@ export const Sidebar: FC = () => {
     <aside
       ref={ref}
       className={cn(
-        'transition-[width, height] relative z-10 flex flex-col gap-2 pt-4 duration-300',
+        'transition-[width, height] relative z-10 flex flex-col gap-2 pt-6 duration-300',
         isOpen ? 'w-44' : 'w-12'
       )}
     >

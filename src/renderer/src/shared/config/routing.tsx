@@ -9,5 +9,40 @@ export const ROUTES = [
     description: 'Список новостей',
     icon: <Newspaper size="1.5rem" />,
     element: <NewsCategories />
+  },
+  {
+    path: '/news',
+    title: 'Новости',
+    description: 'Список новостей',
+    icon: <Newspaper size="1.5rem" />,
+    element: <NewsCategories />
+  },
+  {
+    path: '/news',
+    title: 'Новости',
+    description: 'Список новостей',
+    icon: <Newspaper size="1.5rem" />,
+    element: <NewsCategories />
+  },
+  {
+    path: '/news',
+    title: 'Новости',
+    description: 'Список новостей',
+    icon: <Newspaper size="1.5rem" />,
+    element: <NewsCategories />
+  },
+  {
+    path: '/news',
+    title: 'Новости',
+    description: 'Список новостей',
+    icon: <Newspaper size="1.5rem" />,
+    element: <NewsCategories />
+  },
+  {
+    path: '/news',
+    title: 'Новости',
+    description: 'Список новостей',
+    icon: <Newspaper size="1.5rem" />,
+    element: <NewsCategories />
   }
 ]
