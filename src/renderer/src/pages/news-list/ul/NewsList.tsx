@@ -57,7 +57,7 @@ export const NewsList: FC = () => {
         <Button
           variant="ghost"
           className={cn(
-            'h-full rounded-none rounded-tl-2xl border-r border-border transition-colors duration-0 hover:bg-card/30'
+            'h-full rounded-none rounded-tl-2xl border-r border-border transition-colors '
           )}
           onClick={() => navigate('/news')}
         >
@@ -70,13 +70,9 @@ export const NewsList: FC = () => {
       <div className="flex h-full w-full select-none flex-col gap-6 p-10">
         {news &&
           news.data.map((newsItem) => {
-            return <NewsPreview newsItem={newsItem} key={newsItem.id + newsItem.slug} />
+            return <NewsPreview newsItem={newsItem} key={newsItem.id} />
           })}
-        {news && news.hasNextPage ? (
-          <NewsPreviewObserver />
-        ) : (
-          <div className="h-5 min-h-5 w-full" />
-        )}
+        {news && news.hasNextPage ? <NewsPreviewObserver /> : <div className="min-h-5 w-full" />}
       </div>
     </div>
   )

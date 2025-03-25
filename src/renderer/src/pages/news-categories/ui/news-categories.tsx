@@ -10,8 +10,6 @@ import {
 } from '@entities/categories'
 
 import { NewsCategoriesGate, setCurrentCategoryToTwice } from '../model/model'
-import { Button } from '@shared/ui'
-import { cn } from '@shared/lib'
 
 export const NewsCategories = () => {
   useGate(NewsCategoriesGate)
@@ -21,18 +19,13 @@ export const NewsCategories = () => {
   return (
     <div className="relative flex h-full w-full select-none flex-col overflow-y-auto overflow-x-hidden">
       <div className="sticky top-0 z-30 flex min-h-14 items-center gap-4 overflow-y-auto overflow-x-hidden rounded-tl-2xl border-b border-border bg-card/65 backdrop-blur-md">
-        
         <NewsRefresh />
         <div className="flex w-full items-center justify-between pr-4">
           <h1 className="text-3xl font-bold">Категории</h1>
         </div>
-        {/* <div className="flex w-full items-center justify-start gap-4 px-4">
-          <NewsRefresh />
-          <h1 className="text-3xl font-bold">Категории</h1>
-        </div> */}
       </div>
       <div className="grid h-full w-full select-none grid-cols-4 flex-col gap-6 p-10">
-        {isLoading
+        {isLoading && !categories.length
           ? Array(16)
               .fill(null)
               .map((_, index) => <CategoryPreviewSkeleton key={index} />)

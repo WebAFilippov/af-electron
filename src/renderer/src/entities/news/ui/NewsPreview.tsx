@@ -1,4 +1,4 @@
-import { FC } from 'react'
+import { FC, memo } from 'react'
 import { Link } from 'react-router-dom'
 
 import { cn, formatedDate } from '@shared/lib'
@@ -10,7 +10,7 @@ interface Props {
   newsItem: NewsItem
 }
 
-export const NewsPreview: FC<Props> = ({ newsItem }) => {
+export const NewsPreview: FC<Props> = memo(({ newsItem }) => {
   const getContentText = (): string => {
     if (!newsItem.content || newsItem.content.length === 0) return 'Нет описания'
     return (
@@ -61,4 +61,4 @@ export const NewsPreview: FC<Props> = ({ newsItem }) => {
       </CardHeader>
     </Card>
   )
-}
+})
