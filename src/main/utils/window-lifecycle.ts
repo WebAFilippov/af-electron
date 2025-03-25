@@ -1,4 +1,4 @@
-import { BrowserWindow, } from 'electron'
+import { BrowserWindow } from 'electron'
 
 import { WindowState } from '@main/shared/types'
 
@@ -17,7 +17,7 @@ export const windowLifecycle = (window: BrowserWindow) => {
             : window.isFullScreen(),
       show: window.isVisible()
     }
-    
+
     window.webContents.send('v1/window/state', windowState)
   }
 

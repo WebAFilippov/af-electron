@@ -1,12 +1,15 @@
 import { ElectronAPI } from "@electron-toolkit/preload";
 import { ipcRenderer } from "electron";
-import { Theme, WindowState } from "./transport";
 
+import { Theme, WindowState } from "./transport";
 
 export const api = {
   // Programm
   onStartup: () => ipcRenderer.send("v1/programm/startup"),
-  checkNetworkStatus: (callback: (state: boolean) => void) => ipcRenderer.on('v1/programm/check_network', (_event, state: boolean) => callback(state)),
+  checkNetworkStatus: (callback: (state: boolean) => void) =>
+    ipcRenderer.on("v1/programm/check_network", (_event, state: boolean) =>
+      callback(state),
+    ),
   checkForUpdates: () => ipcRenderer.send("v1/programm/check_for_updates"),
 
   // Window
@@ -15,16 +18,19 @@ export const api = {
   setMinimazeWindow: () => ipcRenderer.send("v1/window/minimaze"),
   setMaximazeWindow: () => ipcRenderer.send("v1/window/maximize"),
   setCloseWindow: () => ipcRenderer.send("v1/window/close"),
-  onWindowState: (callback: (state: WindowState) => void ) => {
-    ipcRenderer.on('v1/window/state', (_event, state: WindowState) => callback(state))
+  onWindowState: (callback: (state: WindowState) => void) => {
+    ipcRenderer.on("v1/window/state", (_event, state: WindowState) =>
+      callback(state),
+    );
   },
 
   // Device
-  onDeviceConnected: (callback: (isConnected: boolean) => void ) => {
-    ipcRenderer.on('v1/device/connection', (_event, isConnected: boolean) => callback(isConnected))
+  onDeviceConnected: (callback: (isConnected: boolean) => void) => {
+    ipcRenderer.on("v1/device/connection", (_event, isConnected: boolean) =>
+      callback(isConnected),
+    );
   },
   getDeviceConnection: () => ipcRenderer.invoke("v1/device/get_connection"),
-
 
   // News
   fetchNews: (query: string) => ipcRenderer.invoke("v1/news/fetch_news", query),
@@ -40,7 +46,6 @@ export const api = {
   //   field: keyof Omit<PreloadApplication, 'id'>,
   //   value: string
   // ): Promise<number> => ipcRenderer.invoke('v1/application/update_application', field, value),
-  
 
   // // CityService
   // searchCitiesWithLimits: (args) => ipcRenderer.invoke('v1/cityInfo/search', args),
@@ -56,11 +61,9 @@ export const api = {
   openExternal: (url: string) => ipcRenderer.send("v1/external/open", url),
 } satisfies Record<string, (...args: any) => any>;
 
-
 declare global {
   interface Window {
     electron: ElectronAPI;
     api: typeof api;
   }
 }
-

@@ -71,6 +71,6 @@ sample({
   target: $news
 })
 
-export { loadNews, fetchNewsQuery }
+export { fetchNewsQuery, loadNews }
 
 fetchNewsQuery.$pending.watch((pending) => console.log(`#fetchNewsQuery_pending: ${pending}`))

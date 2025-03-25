@@ -6,11 +6,7 @@ type Props = {
   className?: string
 }
 
-const WeatherIconSmokeDay: FC<Props> = ({
-  width = 64,
-  height = 64,
-  className = ''
-}) => {
+const WeatherIconSmokeDay: FC<Props> = ({ width = 64, height = 64, className = '' }) => {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -97,12 +93,7 @@ const WeatherIconSmokeDay: FC<Props> = ({
         </symbol>
         <symbol id="f" viewBox="0 0 363 258">
           <use width="196" height="196" xlinkHref="#g" />
-          <use
-            width="350"
-            height="222"
-            transform="translate(13 36)"
-            xlinkHref="#h"
-          />
+          <use width="350" height="222" transform="translate(13 36)" xlinkHref="#h" />
         </symbol>
         <symbol id="i" viewBox="0 0 168 212" overflow="visible">
           <circle
@@ -218,18 +209,8 @@ const WeatherIconSmokeDay: FC<Props> = ({
           </circle>
         </symbol>
       </defs>
-      <use
-        width="363"
-        height="258"
-        transform="translate(68 109)"
-        xlinkHref="#f"
-      />
-      <use
-        width="168"
-        height="212"
-        transform="translate(172 232)"
-        xlinkHref="#i"
-      />
+      <use width="363" height="258" transform="translate(68 109)" xlinkHref="#f" />
+      <use width="168" height="212" transform="translate(172 232)" xlinkHref="#i" />
     </svg>
   )
 }

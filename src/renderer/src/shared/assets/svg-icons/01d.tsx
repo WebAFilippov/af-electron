@@ -6,11 +6,7 @@ type Props = {
   className?: string
 }
 
-const WeatherIcon800_01d: FC<Props> = ({
-  width = 64,
-  height = 64,
-  className = ''
-}) => {
+const WeatherIcon800_01d: FC<Props> = ({ width = 64, height = 64, className = '' }) => {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -63,12 +59,7 @@ const WeatherIcon800_01d: FC<Props> = ({
           </path>
         </symbol>
       </defs>
-      <use
-        width="384"
-        height="384"
-        transform="translate(64 64)"
-        xlinkHref="#b"
-      />
+      <use width="384" height="384" transform="translate(64 64)" xlinkHref="#b" />
     </svg>
   )
 }

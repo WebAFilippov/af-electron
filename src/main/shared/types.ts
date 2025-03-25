@@ -7,4 +7,4 @@ interface WindowState {
 
 type Theme = 'light' | 'dark'
 
-export type { WindowState, Theme }
+export type { Theme, WindowState }

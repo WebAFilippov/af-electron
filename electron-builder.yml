@@ -3,16 +3,16 @@ productName: Harmonify
 directories:
   buildResources: build
 files:
-  - '!**/.vscode/*'
-  - '!src/*'
-  - '!electron.vite.config.{js,ts,mjs,cjs}'
-  - '!{.eslintignore,.eslintrc.cjs,.prettierignore,.prettierrc.yaml,dev-app-update.yml,CHANGELOG.md,README.md}'
-  - '!{.env,.env.*,.npmrc,pnpm-lock.yaml}'
-  - '!{tsconfig.json,tsconfig.node.json,tsconfig.web.json}'
-  - '!node_modules/**/*.md'
-  - '!node_modules/**/*.map'
-  - '!src/**/*.test.*'
-  - '!logs/*'
+  - "!**/.vscode/*"
+  - "!src/*"
+  - "!electron.vite.config.{js,ts,mjs,cjs}"
+  - "!{.eslintignore,.eslintrc.cjs,.prettierignore,.prettierrc.yaml,dev-app-update.yml,CHANGELOG.md,README.md}"
+  - "!{.env,.env.*,.npmrc,pnpm-lock.yaml}"
+  - "!{tsconfig.json,tsconfig.node.json,tsconfig.web.json}"
+  - "!node_modules/**/*.md"
+  - "!node_modules/**/*.map"
+  - "!src/**/*.test.*"
+  - "!logs/*"
 asarUnpack:
   - resources/**
 win:
@@ -31,10 +31,13 @@ nsis:
   createDesktopShortcut: always
   createStartMenuShortcut: true
   runAfterFinish: true
+  allowToChangeInstallationDirectory: true
+  removeDefaultUninstallWelcomePage: true
   installerIcon: build/application.ico
   uninstallerIcon: build/application.ico
 npmRebuild: true
 publish:
   provider: github
+  protocol: https
   owner: WebAFilippov
   repo: af-electron

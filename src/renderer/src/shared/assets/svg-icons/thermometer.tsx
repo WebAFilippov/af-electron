@@ -22,5 +22,3 @@ export const Thermometer: FC<IconProps> = ({ size = '1.5rem', ...props }) => {
     </svg>
   )
 }
-
-

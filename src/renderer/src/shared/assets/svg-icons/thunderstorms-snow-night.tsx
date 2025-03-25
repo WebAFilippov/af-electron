@@ -6,11 +6,7 @@ type Props = {
   className?: string
 }
 
-const ThunderstormsSnowNight: FC<Props> = ({
-  width = 64,
-  height = 64,
-  className = ''
-}) => {
+const ThunderstormsSnowNight: FC<Props> = ({ width = 64, height = 64, className = '' }) => {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -57,30 +53,9 @@ const ThunderstormsSnowNight: FC<Props> = ({
           <stop offset="0.45" stopColor="#86c3db" />
           <stop offset="1" stopColor="#5eafcf" />
         </linearGradient>
-        <linearGradient
-          id="d"
-          x1="11.38"
-          y1="5.93"
-          x2="32.82"
-          y2="43.07"
-          xlinkHref="#c"
-        />
-        <linearGradient
-          id="e"
-          x1="67.38"
-          y1="5.93"
-          x2="88.82"
-          y2="43.07"
-          xlinkHref="#c"
-        />
-        <linearGradient
-          id="f"
-          x1="123.38"
-          y1="5.93"
-          x2="144.82"
-          y2="43.07"
-          xlinkHref="#c"
-        />
+        <linearGradient id="d" x1="11.38" y1="5.93" x2="32.82" y2="43.07" xlinkHref="#c" />
+        <linearGradient id="e" x1="67.38" y1="5.93" x2="88.82" y2="43.07" xlinkHref="#c" />
+        <linearGradient id="f" x1="123.38" y1="5.93" x2="144.82" y2="43.07" xlinkHref="#c" />
         <symbol id="h" viewBox="0 0 172 172">
           <path
             d="M160.62,107.4c-47.17,0-85.41-37.73-85.41-84.26A83.31,83.31,0,0,1,78,2C35.27,6.61,2,42.33,2,85.73,2,132.27,40.24,170,87.41,170A85.16,85.16,0,0,0,170,106.87,88,88,0,0,1,160.62,107.4Z"
@@ -111,12 +86,7 @@ const ThunderstormsSnowNight: FC<Props> = ({
         </symbol>
         <symbol id="g" viewBox="0 0 351 246">
           <use width="172" height="172" xlinkHref="#h" />
-          <use
-            width="350"
-            height="222"
-            transform="translate(1 24)"
-            xlinkHref="#i"
-          />
+          <use width="350" height="222" transform="translate(1 24)" xlinkHref="#i" />
         </symbol>
         <symbol id="j" viewBox="0 0 156.2 49" overflow="visible">
           <g>
@@ -252,24 +222,9 @@ const ThunderstormsSnowNight: FC<Props> = ({
           </polygon>
         </symbol>
       </defs>
-      <use
-        width="351"
-        height="246"
-        transform="translate(80 121)"
-        xlinkHref="#g"
-      />
-      <use
-        width="156.2"
-        height="49"
-        transform="translate(177.9 337.5)"
-        xlinkHref="#j"
-      />
-      <use
-        width="102.66"
-        height="186.74"
-        transform="translate(205.23 291)"
-        xlinkHref="#k"
-      />
+      <use width="351" height="246" transform="translate(80 121)" xlinkHref="#g" />
+      <use width="156.2" height="49" transform="translate(177.9 337.5)" xlinkHref="#j" />
+      <use width="102.66" height="186.74" transform="translate(205.23 291)" xlinkHref="#k" />
     </svg>
   )
 }

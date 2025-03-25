@@ -26,7 +26,7 @@ export const NewsCategoriesPage = () => {
       </div>
       <div className="grid grid-cols-1 gap-4 p-10 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
         {isLoading && !categories.length
-          ? Array(12) 
+          ? Array(12)
               .fill(null)
               .map((_, index) => <CategoryPreviewSkeleton key={index} />)
           : categories.map((category, index) => (

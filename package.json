@@ -1,23 +1,10 @@
 {
   "name": "harmonify",
-  "version": "2.0.3",
+  "productname": "Harmonify Electron App",
   "description": "Библиотека для работы с громкость в Windows системах. Декстопное приложение.",
+  "version": "2.0.3",
   "main": "./out/main/main.js",
-  "author": {
-    "name": "Alexey Filippov",
-    "email": "msmail2020@yandex.ru"
-  },
   "homepage": "https://electron-vite.org",
-  "repository": {
-    "url": "https://github.com/WebAFilippov/af-electron"
-  },
-  "build": {
-    "publish": [{
-        "provider": "github",
-        "owner": "WebAFilippov",
-        "repo": "af-electron"
-    }]
-  },
   "type": "module",
   "scripts": {
     "format": "prettier --write .",
@@ -26,13 +13,12 @@
     "typecheck:web": "tsc --noEmit -p tsconfig.web.json --composite false",
     "typecheck": "npm run typecheck:node && npm run typecheck:web",
     "start": "electron-vite preview",
-    "dev": "electron-vite dev",
-    "dev:w": "electron-vite dev --watch",
-    "build": "electron-vite build",
+    "dev": "electron-vite dev --watch",
     "postinstall": "electron-builder install-app-deps",
-    "release": "electron-builder --win --publish always",
+    "build": "electron-builder build",
     "build:unpack": "npm run build && electron-builder --dir",
-    "build:win": "npm run build && electron-builder --win"
+    "build:win": "npm run build && electron-builder --win",
+    "build:publish": "electron-builder --win --publish always"
   },
   "dependencies": {
     "@electron-toolkit/preload": "^3.0.1",

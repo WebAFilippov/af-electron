@@ -6,11 +6,7 @@ type Props = {
   className?: string
 }
 
-const WeatherIconTornado: FC<Props> = ({
-  width = 64,
-  height = 64,
-  className = ''
-}) => {
+const WeatherIconTornado: FC<Props> = ({ width = 64, height = 64, className = '' }) => {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -33,38 +29,10 @@ const WeatherIconTornado: FC<Props> = ({
           <stop offset="0.45" stopColor="#d4d7dd" />
           <stop offset="1" stopColor="#bec1c6" />
         </linearGradient>
-        <linearGradient
-          id="b"
-          x1="224"
-          y1="152.57"
-          x2="288"
-          y2="263.43"
-          xlinkHref="#a"
-        />
-        <linearGradient
-          id="c"
-          x1="229"
-          y1="209.23"
-          x2="283"
-          y2="302.77"
-          xlinkHref="#a"
-        />
-        <linearGradient
-          id="d"
-          x1="234"
-          y1="265.89"
-          x2="278"
-          y2="342.11"
-          xlinkHref="#a"
-        />
-        <linearGradient
-          id="e"
-          x1="242"
-          y1="327.75"
-          x2="270"
-          y2="376.25"
-          xlinkHref="#a"
-        />
+        <linearGradient id="b" x1="224" y1="152.57" x2="288" y2="263.43" xlinkHref="#a" />
+        <linearGradient id="c" x1="229" y1="209.23" x2="283" y2="302.77" xlinkHref="#a" />
+        <linearGradient id="d" x1="234" y1="265.89" x2="278" y2="342.11" xlinkHref="#a" />
+        <linearGradient id="e" x1="242" y1="327.75" x2="270" y2="376.25" xlinkHref="#a" />
       </defs>
 
       <line

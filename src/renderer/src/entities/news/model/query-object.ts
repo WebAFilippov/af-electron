@@ -27,7 +27,7 @@ sample({
   target: $queryCategory
 })
 
-export { $queryObject, setQueryCategory, $queryTimelapse }
+export { $queryObject, $queryTimelapse, setQueryCategory }
 
 // $queryCursor.watch((store) => console.log('#queryCursor: ', store))
 // $queryCategory.watch((store) => console.log('#queryCategory: ', store))

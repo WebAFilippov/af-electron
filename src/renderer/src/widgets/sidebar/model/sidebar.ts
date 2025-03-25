@@ -27,4 +27,4 @@ sample({
   target: $sidebar
 })
 
-export { $sidebar, toggleSidebar, addListenerSidebarFx, removeListenerSidebarFx }
+export { $sidebar, addListenerSidebarFx, removeListenerSidebarFx, toggleSidebar }

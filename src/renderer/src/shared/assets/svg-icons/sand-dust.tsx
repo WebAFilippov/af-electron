@@ -6,11 +6,7 @@ type Props = {
   className?: string
 }
 
-const WeatherIconSandDust: FC<Props> = ({
-  width = 64,
-  height = 64,
-  className = ''
-}) => {
+const WeatherIconSandDust: FC<Props> = ({ width = 64, height = 64, className = '' }) => {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -33,14 +29,7 @@ const WeatherIconSandDust: FC<Props> = ({
           <stop offset="0.45" stopColor="#d4d7dd" />
           <stop offset="1" stopColor="#bec1c6" />
         </linearGradient>
-        <linearGradient
-          id="b"
-          x1="77.66"
-          y1="96.23"
-          x2="168.99"
-          y2="254.41"
-          xlinkHref="#a"
-        />
+        <linearGradient id="b" x1="77.66" y1="96.23" x2="168.99" y2="254.41" xlinkHref="#a" />
         <linearGradient
           id="c"
           x1="90"
@@ -53,70 +42,14 @@ const WeatherIconSandDust: FC<Props> = ({
           <stop offset="0.45" stopColor="#fde68a" />
           <stop offset="1" stopColor="#fde171" />
         </linearGradient>
-        <linearGradient
-          id="d"
-          x1="174"
-          y1="185.61"
-          x2="186"
-          y2="206.39"
-          xlinkHref="#c"
-        />
-        <linearGradient
-          id="e"
-          x1="258"
-          y1="185.61"
-          x2="270"
-          y2="206.39"
-          xlinkHref="#c"
-        />
-        <linearGradient
-          id="f"
-          x1="216"
-          y1="245.61"
-          x2="228"
-          y2="266.39"
-          xlinkHref="#c"
-        />
-        <linearGradient
-          id="g"
-          x1="300"
-          y1="245.61"
-          x2="312"
-          y2="266.39"
-          xlinkHref="#c"
-        />
-        <linearGradient
-          id="h"
-          x1="384"
-          y1="245.61"
-          x2="396"
-          y2="266.39"
-          xlinkHref="#c"
-        />
-        <linearGradient
-          id="i"
-          x1="166"
-          y1="305.61"
-          x2="178"
-          y2="326.39"
-          xlinkHref="#c"
-        />
-        <linearGradient
-          id="j"
-          x1="250"
-          y1="305.61"
-          x2="262"
-          y2="326.39"
-          xlinkHref="#c"
-        />
-        <linearGradient
-          id="k"
-          x1="334"
-          y1="305.61"
-          x2="346"
-          y2="326.39"
-          xlinkHref="#c"
-        />
+        <linearGradient id="d" x1="174" y1="185.61" x2="186" y2="206.39" xlinkHref="#c" />
+        <linearGradient id="e" x1="258" y1="185.61" x2="270" y2="206.39" xlinkHref="#c" />
+        <linearGradient id="f" x1="216" y1="245.61" x2="228" y2="266.39" xlinkHref="#c" />
+        <linearGradient id="g" x1="300" y1="245.61" x2="312" y2="266.39" xlinkHref="#c" />
+        <linearGradient id="h" x1="384" y1="245.61" x2="396" y2="266.39" xlinkHref="#c" />
+        <linearGradient id="i" x1="166" y1="305.61" x2="178" y2="326.39" xlinkHref="#c" />
+        <linearGradient id="j" x1="250" y1="305.61" x2="262" y2="326.39" xlinkHref="#c" />
+        <linearGradient id="k" x1="334" y1="305.61" x2="346" y2="326.39" xlinkHref="#c" />
         <symbol id="l" viewBox="0 0 348 240">
           <path
             d="M267.16,24.29A40,40,0,1,1,296,92H12"
@@ -235,12 +168,7 @@ const WeatherIconSandDust: FC<Props> = ({
         />
       </g>
 
-      <use
-        width="348"
-        height="240"
-        transform="translate(83 136)"
-        xlinkHref="#l"
-      />
+      <use width="348" height="240" transform="translate(83 136)" xlinkHref="#l" />
     </svg>
   )
 }

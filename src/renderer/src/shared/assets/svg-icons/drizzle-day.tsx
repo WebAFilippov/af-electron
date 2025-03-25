@@ -6,11 +6,7 @@ type Props = {
   className?: string
 }
 
-const WeatherIconDrizzleDay: FC<Props> = ({
-  width = 64,
-  height = 64,
-  className = ''
-}) => {
+const WeatherIconDrizzleDay: FC<Props> = ({ width = 64, height = 64, className = '' }) => {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -58,22 +54,8 @@ const WeatherIconDrizzleDay: FC<Props> = ({
           <stop offset="0.45" stopColor="#0a5ad4" />
           <stop offset="1" stopColor="#0950bc" />
         </linearGradient>
-        <linearGradient
-          id="d"
-          x1="1363.64"
-          y1="-649.18"
-          x2="1373.1"
-          y2="-624.54"
-          xlinkHref="#c"
-        />
-        <linearGradient
-          id="e"
-          x1="1418.95"
-          y1="-640.42"
-          x2="1428.41"
-          y2="-615.78"
-          xlinkHref="#c"
-        />
+        <linearGradient id="d" x1="1363.64" y1="-649.18" x2="1373.1" y2="-624.54" xlinkHref="#c" />
+        <linearGradient id="e" x1="1418.95" y1="-640.42" x2="1428.41" y2="-615.78" xlinkHref="#c" />
         <symbol id="g" viewBox="0 0 196 196">
           <circle
             cx="98"
@@ -114,20 +96,10 @@ const WeatherIconDrizzleDay: FC<Props> = ({
         </symbol>
         <symbol id="f" viewBox="0 0 363 258">
           <use width="196" height="196" xlinkHref="#g" />
-          <use
-            width="350"
-            height="222"
-            transform="translate(13 36)"
-            xlinkHref="#h"
-          />
+          <use width="350" height="222" transform="translate(13 36)" xlinkHref="#h" />
         </symbol>
       </defs>
-      <use
-        width="363"
-        height="258"
-        transform="translate(68 109)"
-        xlinkHref="#f"
-      />
+      <use width="363" height="258" transform="translate(68 109)" xlinkHref="#f" />
 
       <path
         d="M200,376a8,8,0,0,1-8-8V356a8,8,0,0,1,16,0v12A8,8,0,0,1,200,376Z"

@@ -52,4 +52,4 @@ interface News {
 }
 
 export { ResponseNewsSchema }
-export type { News, ResponseNews, NewsItem, MediaData }
+export type { MediaData, News, NewsItem, ResponseNews }

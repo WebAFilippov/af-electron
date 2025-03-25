@@ -80,7 +80,7 @@ export const NewsDetail: FC<Props> = ({ news }) => {
       case 'figcaption':
         return (
           <figcaption key={key} className="mt-1 text-center text-sm italic text-muted-foreground">
-            {!node.children.length&& node.text}
+            {!node.children.length && node.text}
             {node.children?.map((child, childIndex) => renderNode(child, childIndex))}
           </figcaption>
         )
@@ -88,7 +88,7 @@ export const NewsDetail: FC<Props> = ({ news }) => {
         return (
           <blockquote
             key={key}
-            className="my-4 border-l-4 border-gray-300 pl-4 italic text-card-foreground py-2"
+            className="my-4 border-l-4 border-gray-300 py-2 pl-4 italic text-card-foreground"
           >
             {!node.children.length && node.text}
             {node.children?.map((child, childIndex) => renderNode(child, childIndex))}

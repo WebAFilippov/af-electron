@@ -1,10 +1,10 @@
 interface WindowState {
-  minimize: boolean
-  maximize: boolean
-  fullscreen: boolean
-  show: boolean
+  minimize: boolean;
+  maximize: boolean;
+  fullscreen: boolean;
+  show: boolean;
 }
 
-type Theme = 'light' | 'dark'
+type Theme = "light" | "dark";
 
-export type { WindowState, Theme }
+export type { Theme, WindowState };

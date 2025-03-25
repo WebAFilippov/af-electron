@@ -6,11 +6,7 @@ type Props = {
   className?: string
 }
 
-const WeatherIcon803_04n: FC<Props> = ({
-  width = 64,
-  height = 64,
-  className = ''
-}) => {
+const WeatherIcon803_04n: FC<Props> = ({ width = 64, height = 64, className = '' }) => {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -94,12 +90,7 @@ const WeatherIcon803_04n: FC<Props> = ({
           />
         </symbol>
         <symbol id="f" viewBox="0 0 398 222" overflow="visible">
-          <use
-            width="200.26"
-            height="126.12"
-            transform="translate(198 27)"
-            xlinkHref="#g"
-          >
+          <use width="200.26" height="126.12" transform="translate(198 27)" xlinkHref="#g">
             <animateTransform
               attributeName="transform"
               additive="sum"
@@ -123,20 +114,10 @@ const WeatherIcon803_04n: FC<Props> = ({
         </symbol>
         <symbol id="d" viewBox="0 0 398.84 246" overflow="visible">
           <use width="172" height="172" xlinkHref="#e" />
-          <use
-            width="398"
-            height="222"
-            transform="translate(0.84 24)"
-            xlinkHref="#f"
-          />
+          <use width="398" height="222" transform="translate(0.84 24)" xlinkHref="#f" />
         </symbol>
       </defs>
-      <use
-        width="398.84"
-        height="246"
-        transform="translate(68 121)"
-        xlinkHref="#d"
-      />
+      <use width="398.84" height="246" transform="translate(68 121)" xlinkHref="#d" />
     </svg>
   )
 }

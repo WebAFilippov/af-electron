@@ -1,6 +1,6 @@
 import { is } from '@electron-toolkit/utils'
 
-import { app, BrowserWindow, Menu, session } from 'electron'
+import { app, autoUpdater, BrowserWindow, Menu, session } from 'electron'
 
 import { createWindow } from '@ui/create-window'
 import { createTray } from '@ui/tray'
@@ -69,6 +69,7 @@ if (!gotTheLock) {
 
       // Updater
       setupAutoUpdates()
+
 
       log.info('Application ready')
     } catch (error) {

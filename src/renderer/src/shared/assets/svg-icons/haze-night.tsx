@@ -6,11 +6,7 @@ type Props = {
   className?: string
 }
 
-const WeatherIconHazeNight: FC<Props> = ({
-  width = 64,
-  height = 64,
-  className = ''
-}) => {
+const WeatherIconHazeNight: FC<Props> = ({ width = 64, height = 64, className = '' }) => {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -33,45 +29,11 @@ const WeatherIconHazeNight: FC<Props> = ({
           <stop offset="0.45" stopColor="#d4d7dd" />
           <stop offset="1" stopColor="#bec1c6" />
         </linearGradient>
-        <linearGradient
-          id="b"
-          x1="107.25"
-          y1="-8.85"
-          x2="179.25"
-          y2="115.86"
-          xlinkHref="#a"
-        />
-        <linearGradient
-          id="c"
-          x1="174.75"
-          y1="-47.82"
-          x2="246.75"
-          y2="76.89"
-          xlinkHref="#a"
-        />
-        <linearGradient
-          id="d"
-          y1="-4.89"
-          x2="89.25"
-          y2="119.82"
-          xlinkHref="#a"
-        />
-        <linearGradient
-          id="e"
-          x1="107.25"
-          y1="-56.85"
-          x2="179.25"
-          y2="67.86"
-          xlinkHref="#a"
-        />
-        <linearGradient
-          id="f"
-          x1="174.75"
-          y1="-95.82"
-          x2="246.75"
-          y2="28.89"
-          xlinkHref="#a"
-        />
+        <linearGradient id="b" x1="107.25" y1="-8.85" x2="179.25" y2="115.86" xlinkHref="#a" />
+        <linearGradient id="c" x1="174.75" y1="-47.82" x2="246.75" y2="76.89" xlinkHref="#a" />
+        <linearGradient id="d" y1="-4.89" x2="89.25" y2="119.82" xlinkHref="#a" />
+        <linearGradient id="e" x1="107.25" y1="-56.85" x2="179.25" y2="67.86" xlinkHref="#a" />
+        <linearGradient id="f" x1="174.75" y1="-95.82" x2="246.75" y2="28.89" xlinkHref="#a" />
         <linearGradient
           id="g"
           x1="54.33"
@@ -200,19 +162,9 @@ const WeatherIconHazeNight: FC<Props> = ({
         </symbol>
       </defs>
       <g clipPath="url(#h)">
-        <use
-          width="270"
-          height="270"
-          transform="translate(121 121)"
-          xlinkHref="#i"
-        />
+        <use width="270" height="270" transform="translate(121 121)" xlinkHref="#i" />
       </g>
-      <use
-        width="264"
-        height="72"
-        transform="translate(124 336)"
-        xlinkHref="#j"
-      />
+      <use width="264" height="72" transform="translate(124 336)" xlinkHref="#j" />
     </svg>
   )
 }

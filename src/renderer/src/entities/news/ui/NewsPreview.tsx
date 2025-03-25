@@ -20,7 +20,11 @@ export const NewsPreview: FC<Props> = memo(({ newsItem }) => {
 
   return (
     <Card>
-      <CardHeader className={cn('z-0 flex select-none flex-row gap-2 p-3 transition-all duration-300 hover:shadow-md')}>
+      <CardHeader
+        className={cn(
+          'z-0 flex select-none flex-row gap-2 p-3 transition-all duration-300 hover:shadow-md'
+        )}
+      >
         {newsItem.media?.thumbnailUrl ? (
           <div className="pointer-events-none m-1 h-36 w-36 flex-shrink-0">
             <img

@@ -1,11 +1,11 @@
 export {
   $window,
-  $windowMinimize,
-  $windowMaximize,
   $windowFullscreen,
+  $windowMaximize,
+  $windowMinimize,
   $windowShow,
-  setWindowMinimize,
-  setWindowMaximize,
+  GateWindow,
   setWindowClose,
-  GateWindow
+  setWindowMaximize,
+  setWindowMinimize
 } from './model/window'

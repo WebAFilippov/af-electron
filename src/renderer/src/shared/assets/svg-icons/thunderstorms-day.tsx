@@ -6,11 +6,7 @@ type Props = {
   className?: string
 }
 
-const ThunderstormsDay: FC<Props> = ({
-  width = 64,
-  height = 64,
-  className = ''
-}) => {
+const ThunderstormsDay: FC<Props> = ({ width = 64, height = 64, className = '' }) => {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -97,12 +93,7 @@ const ThunderstormsDay: FC<Props> = ({
         </symbol>
         <symbol id="d" viewBox="0 0 363 258">
           <use width="196" height="196" xlinkHref="#e" />
-          <use
-            width="350"
-            height="222"
-            transform="translate(13 36)"
-            xlinkHref="#f"
-          />
+          <use width="350" height="222" transform="translate(13 36)" xlinkHref="#f" />
         </symbol>
         <symbol id="g" viewBox="0 0 102.66 186.75">
           <polygon
@@ -123,18 +114,8 @@ const ThunderstormsDay: FC<Props> = ({
           </polygon>
         </symbol>
       </defs>
-      <use
-        width="363"
-        height="258"
-        transform="translate(68 109)"
-        xlinkHref="#d"
-      />
-      <use
-        width="102.66"
-        height="186.74"
-        transform="translate(205.23 291)"
-        xlinkHref="#g"
-      />
+      <use width="363" height="258" transform="translate(68 109)" xlinkHref="#d" />
+      <use width="102.66" height="186.74" transform="translate(205.23 291)" xlinkHref="#g" />
     </svg>
   )
 }

@@ -43,6 +43,6 @@ sample({
   target: [getWindowTheme]
 })
 
-export { $theme, setTheme, applyThemeFx }
+export { $theme, applyThemeFx, setTheme }
 
 // $theme.watch((store) => console.log(`theme change: ${store}`))

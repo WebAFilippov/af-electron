@@ -35,15 +35,9 @@ class CityRepository {
         throw new Error(`Город с ID ${cityId} не найден.`)
       }
 
-      await City.update(
-        { default: false },
-        { where: { default: true }, transaction }
-      )
+      await City.update({ default: false }, { where: { default: true }, transaction })
 
-      await City.update(
-        { default: true },
-        { where: { id: cityId }, transaction }
-      )
+      await City.update({ default: true }, { where: { id: cityId }, transaction })
 
       const updatedCity = await City.findOne({
         where: { default: true },
@@ -140,10 +134,7 @@ class CityRepository {
         })
 
         if (newDefaultCity) {
-          await City.update(
-            { default: false },
-            { where: { default: true }, transaction }
-          )
+          await City.update({ default: false }, { where: { default: true }, transaction })
           await newDefaultCity.update({ default: true }, { transaction })
         }
       }

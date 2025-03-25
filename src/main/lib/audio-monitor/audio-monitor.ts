@@ -132,10 +132,10 @@ class AudioMonitor extends EventEmitter {
 
   public stop() {
     if (this.process) {
-        this.process.kill('SIGTERM')
-        this.process = null
+      this.process.kill('SIGTERM')
+      this.process = null
     }
-}
+  }
 
   /**
    * Устанавливает общую громкость системы

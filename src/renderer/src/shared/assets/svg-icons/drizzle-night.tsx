@@ -6,11 +6,7 @@ type Props = {
   className?: string
 }
 
-const WeatherIconDrizzleNight: FC<Props> = ({
-  width = 64,
-  height = 64,
-  className = ''
-}) => {
+const WeatherIconDrizzleNight: FC<Props> = ({ width = 64, height = 64, className = '' }) => {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -58,22 +54,8 @@ const WeatherIconDrizzleNight: FC<Props> = ({
           <stop offset="0.45" stopColor="#0a5ad4" />
           <stop offset="1" stopColor="#0950bc" />
         </linearGradient>
-        <linearGradient
-          id="d"
-          x1="1357.18"
-          y1="-567.21"
-          x2="1366.64"
-          y2="-542.57"
-          xlinkHref="#c"
-        />
-        <linearGradient
-          id="e"
-          x1="1412.5"
-          y1="-558.45"
-          x2="1421.95"
-          y2="-533.81"
-          xlinkHref="#c"
-        />
+        <linearGradient id="d" x1="1357.18" y1="-567.21" x2="1366.64" y2="-542.57" xlinkHref="#c" />
+        <linearGradient id="e" x1="1412.5" y1="-558.45" x2="1421.95" y2="-533.81" xlinkHref="#c" />
         <symbol id="g" viewBox="0 0 172 172">
           <path
             d="M160.62,107.4c-47.17,0-85.41-37.73-85.41-84.26A83.31,83.31,0,0,1,78,2C35.27,6.61,2,42.33,2,85.73,2,132.27,40.24,170,87.41,170A85.16,85.16,0,0,0,170,106.87,88,88,0,0,1,160.62,107.4Z"
@@ -104,20 +86,10 @@ const WeatherIconDrizzleNight: FC<Props> = ({
         </symbol>
         <symbol id="f" viewBox="0 0 351 246">
           <use width="172" height="172" xlinkHref="#g" />
-          <use
-            width="350"
-            height="222"
-            transform="translate(1 24)"
-            xlinkHref="#h"
-          />
+          <use width="350" height="222" transform="translate(1 24)" xlinkHref="#h" />
         </symbol>
       </defs>
-      <use
-        width="351"
-        height="246"
-        transform="translate(80 121)"
-        xlinkHref="#f"
-      />
+      <use width="351" height="246" transform="translate(80 121)" xlinkHref="#f" />
 
       <path
         d="M200,376a8,8,0,0,1-8-8V356a8,8,0,0,1,16,0v12A8,8,0,0,1,200,376Z"

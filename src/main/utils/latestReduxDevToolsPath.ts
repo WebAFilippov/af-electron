@@ -17,9 +17,7 @@ export const getLatestReduxDevToolsPath = async (): Promise<string | null> => {
 
   try {
     const files = await fs.readdir(basePath) // Получаем список папок
-    const versionFolders = files.filter((folder) =>
-      /^\d+\.\d+\.\d+(_\d+)?$/.test(folder)
-    ) // Фильтруем только версии
+    const versionFolders = files.filter((folder) => /^\d+\.\d+\.\d+(_\d+)?$/.test(folder)) // Фильтруем только версии
 
     if (versionFolders.length === 0) {
       console.error('No version folders found.')

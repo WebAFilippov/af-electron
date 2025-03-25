@@ -6,11 +6,7 @@ type Props = {
   className?: string
 }
 
-const ThunderstormsRainNight: FC<Props> = ({
-  width = 64,
-  height = 64,
-  className = ''
-}) => {
+const ThunderstormsRainNight: FC<Props> = ({ width = 64, height = 64, className = '' }) => {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -118,12 +114,7 @@ const ThunderstormsRainNight: FC<Props> = ({
         </symbol>
         <symbol id="g" viewBox="0 0 351 246">
           <use width="172" height="172" xlinkHref="#h" />
-          <use
-            width="350"
-            height="222"
-            transform="translate(1 24)"
-            xlinkHref="#i"
-          />
+          <use width="350" height="222" transform="translate(1 24)" xlinkHref="#i" />
         </symbol>
         <symbol id="j" viewBox="0 0 129 57" overflow="visible">
           <path
@@ -226,24 +217,9 @@ const ThunderstormsRainNight: FC<Props> = ({
           </polygon>
         </symbol>
       </defs>
-      <use
-        width="351"
-        height="246"
-        transform="translate(80 121)"
-        xlinkHref="#g"
-      />
-      <use
-        width="129"
-        height="57"
-        transform="translate(191.5 343.5)"
-        xlinkHref="#j"
-      />
-      <use
-        width="102.66"
-        height="186.74"
-        transform="translate(205.23 291)"
-        xlinkHref="#k"
-      />
+      <use width="351" height="246" transform="translate(80 121)" xlinkHref="#g" />
+      <use width="129" height="57" transform="translate(191.5 343.5)" xlinkHref="#j" />
+      <use width="102.66" height="186.74" transform="translate(205.23 291)" xlinkHref="#k" />
     </svg>
   )
 }

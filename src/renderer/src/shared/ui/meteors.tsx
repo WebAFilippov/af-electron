@@ -1,5 +1,6 @@
-import { cn } from '@shared/lib'
 import React, { useEffect, useState } from 'react'
+
+import { cn } from '@shared/lib'
 
 interface MeteorsProps {
   number?: number

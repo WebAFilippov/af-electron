@@ -1,6 +1,6 @@
 import { is } from '@electron-toolkit/utils'
 
-import { app, BrowserWindow, nativeImage, nativeTheme } from 'electron'
+import { app, BrowserWindow, nativeImage } from 'electron'
 import { join } from 'node:path'
 
 import { configureTheme } from '@utils/window-theme'
@@ -40,7 +40,6 @@ export const createWindow = (theme: Theme): BrowserWindow => {
     }
   })
 
-  
   window.flashFrame(false)
   // window.setOverlayIcon(nativeImage.createFromPath(icon16), 'Harmonify')
   configureTheme(window, theme)

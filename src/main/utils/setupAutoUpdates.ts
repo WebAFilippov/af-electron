@@ -13,9 +13,7 @@ export const setupAutoUpdates = () => {
 
   autoUpdater.setFeedURL({
     provider: 'github',
-    owner: 'WebAFilippov',
-    repo: 'af-electron',
-  });
+  })
 
   autoUpdater.logger = log
   autoUpdater.logger.info = log.info
