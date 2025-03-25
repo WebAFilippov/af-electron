@@ -26,7 +26,7 @@ export const HomePage = () => {
           </Link>
         ))}
       </div>
-      <Button className="mt-5 bg-red-700 p-20" onClick={() => window.api.checkForUpdates()}>
+      <Button className="mt-5 bg-green-700 p-20" onClick={() => window.api.checkForUpdates()}>
         Check
       </Button>
     </div>

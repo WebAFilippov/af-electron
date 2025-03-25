@@ -2,7 +2,7 @@
   "name": "harmonify",
   "productname": "Harmonify Electron App",
   "description": "Библиотека для работы с громкость в Windows системах. Декстопное приложение.",
-  "version": "2.0.5",
+  "version": "2.0.6",
   "main": "./out/main/main.js",
   "homepage": "https://electron-vite.org",
   "type": "module",
