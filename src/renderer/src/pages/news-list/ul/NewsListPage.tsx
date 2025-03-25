@@ -53,11 +53,11 @@ export const NewsListPage: FC = () => {
       ref={scrollRef}
       className="relative flex h-full w-full select-none flex-col overflow-y-auto overflow-x-hidden"
     >
-      <div className="sticky top-0 z-30 flex max-h-14 h-14 items-center justify-start gap-4 rounded-tl-2xl border-b border-border bg-card/65 backdrop-blur-xl">
+      <div className="sticky top-0 z-30 flex h-14 max-h-14 min-h-14 items-center justify-start gap-4 rounded-tl-2xl border-b border-border bg-card/65 backdrop-blur-xl">
         <Button
           variant="ghost"
           className={cn(
-            'h-full rounded-none rounded-tl-2xl border-r border-border transition-colors '
+            'h-full rounded-none rounded-tl-2xl border-r border-border transition-colors'
           )}
           onClick={() => navigate('/news')}
         >

@@ -1,11 +1,17 @@
 {
   "name": "harmonify",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "description": "Библиотека для работы с громкость в Windows системах. Декстопное приложение.",
   "main": "./out/main/main.js",
-  "author": "example.com",
-  "type": "module",
+  "author": {
+    "name": "Alexey Filippov",
+    "email": "msmail2020@yandex.ru"
+  },
   "homepage": "https://electron-vite.org",
+  "repository" : {
+    "url": "https://github.com/WebAFilippov/af-electron"
+  },
+  "type": "module",
   "scripts": {
     "format": "prettier --write .",
     "lint": "eslint . --ext .js,.jsx,.cjs,.mjs,.ts,.tsx,.cts,.mts --fix",

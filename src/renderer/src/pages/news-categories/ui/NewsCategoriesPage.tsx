@@ -18,23 +18,28 @@ export const NewsCategoriesPage = () => {
 
   return (
     <div className="relative flex h-full w-full select-none flex-col overflow-y-auto overflow-x-hidden">
-      <div className="sticky top-0 z-30 flex h-14 min-h-14 max-h-14 items-center gap-4 overflow-y-auto overflow-x-hidden rounded-tl-2xl border-b border-border bg-card/65 backdrop-blur-md">
+      <div className="sticky top-0 z-30 flex h-14 min-h-14 items-center gap-4 rounded-tl-2xl border-b border-border bg-card/65 backdrop-blur-md">
         <NewsRefresh />
-        <div className="flex w-full items-center justify-between pr-4">
-          <h1 className="text-3xl font-bold">Категории</h1>
+        <div className="flex w-full items-center justify-between px-4">
+          <h1 className="text-2xl font-semibold">Категории</h1>
         </div>
       </div>
-      <div className="grid h-full w-full select-none grid-cols-4 flex-col gap-6 p-10">
+      <div className="grid grid-cols-1 gap-4 p-10 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
         {isLoading && !categories.length
-          ? Array(16)
+          ? Array(12) 
               .fill(null)
               .map((_, index) => <CategoryPreviewSkeleton key={index} />)
-          : categories.map((category) => (
-              <CategoryPreview
+          : categories.map((category, index) => (
+              <div
                 key={category.id}
-                category={category}
-                onClick={() => handleSetCurrentCategoryTwice(category)}
-              />
+                className="animate-fade-in"
+                style={{ animationDelay: `${index * 50}ms` }}
+              >
+                <CategoryPreview
+                  category={category}
+                  onClick={() => handleSetCurrentCategoryTwice(category)}
+                />
+              </div>
             ))}
       </div>
     </div>

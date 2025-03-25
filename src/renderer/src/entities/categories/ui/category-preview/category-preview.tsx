@@ -13,9 +13,9 @@ interface CategoryPreviewProps {
 export const CategoryPreview: FC<CategoryPreviewProps> = ({ category, onClick }) => {
   return (
     <Link to={`/news/${category.id}`} onClick={onClick}>
-      <Card className="flex h-32 flex-col items-start justify-center p-8 transition-shadow duration-300 hover:shadow-lg">
-        <span className="text- text-xl font-bold">{category.title}</span>
-        <span className="text-lg italic text-muted-foreground">{category.count}</span>
+      <Card className="flex h-24 flex-col items-start justify-center p-4 transition-all duration-300 hover:shadow-md">
+        <span className="truncate text-lg font-semibold text-foreground">{category.title}</span>
+        <span className="text-sm text-muted-foreground">{category.count} новостей</span>
       </Card>
     </Link>
   )

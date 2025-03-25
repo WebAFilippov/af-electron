@@ -4,7 +4,7 @@ import { useNavigate, useParams } from 'react-router-dom'
 
 import { $news, NewsDetail } from '@entities/news'
 
-import { cn } from '@shared/lib'
+import { cn, formatedDate } from '@shared/lib'
 import { Button } from '@shared/ui'
 
 export const NewsDetailPage = () => {
@@ -21,7 +21,7 @@ export const NewsDetailPage = () => {
 
   return (
     <div className="relative flex h-full w-full select-none flex-col overflow-y-auto overflow-x-hidden">
-      <div className="sticky top-0 z-30 flex max-h-14 h-14 items-center justify-start gap-4 rounded-tl-2xl border-b border-border bg-card/65 backdrop-blur-xl">
+      <div className="sticky top-0 z-30 flex items-center justify-start gap-4 rounded-tl-2xl border-b border-border bg-card/65 backdrop-blur-xl">
         <Button
           variant="ghost"
           className={cn(
@@ -31,11 +31,26 @@ export const NewsDetailPage = () => {
         >
           <ChevronsLeft className="h-9 w-9 stroke-2" />
         </Button>
-        <div className="flex w-full items-center justify-between gap-4 pr-4">
-          <h1 className="text-3xl font-bold">{detailNews?.title}</h1>
+
+        <div className="space-y-1 py-3 pr-4">
+          <h1 className="w-full text-3xl font-bold leading-7 text-card-foreground">
+            {detailNews && detailNews.title}
+          </h1>
+          <div className="w-full divide-x divide-dotted divide-card-foreground/50">
+            <span className="pr-2 text-sm italic tracking-tighter text-muted-foreground">
+              {detailNews && formatedDate(detailNews.pubDate)}
+            </span>
+            <span className="px-2 text-sm italic tracking-tighter text-muted-foreground">
+              {detailNews?.category?.title || 'Не указана'}
+            </span>
+            <span className="pl-2 text-sm italic tracking-tighter text-muted-foreground">
+              {(detailNews && detailNews.creator?.name) || 'Не указан'}
+            </span>
+          </div>
         </div>
       </div>
-      <div className="flex h-full w-full select-none flex-col gap-6 p-10">
+
+      <div className="flex h-full w-full select-none flex-col gap-6 py-5">
         {detailNews && <NewsDetail news={detailNews} />}
       </div>
     </div>
