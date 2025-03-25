@@ -30,7 +30,6 @@ nsis:
   uninstallDisplayName: ${productName}
   createDesktopShortcut: always
   createStartMenuShortcut: true
-  allowToChangeInstallationDirectory: true
   runAfterFinish: true
   installerIcon: build/application.ico
   uninstallerIcon: build/application.ico 

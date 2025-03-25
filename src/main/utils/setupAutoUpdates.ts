@@ -2,10 +2,10 @@ import { app, autoUpdater, dialog } from 'electron'
 import log from 'electron-log'
 
 export const setupAutoUpdates = () => {
-  if (!app.isPackaged) {
-    log.info('Development mode, skipping update check.')
-    return
-  }
+  // if (!app.isPackaged) {
+  //   log.info('Development mode, skipping update check.')
+  //   return
+  // }
 
   autoUpdater.on('checking-for-update', () => {
     log.info('Checking for updates...')
