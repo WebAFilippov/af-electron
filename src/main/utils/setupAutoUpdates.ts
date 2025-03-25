@@ -4,10 +4,10 @@ import log from 'electron-log'
 import { getAutoUpdater } from './test'
 
 export const setupAutoUpdates = () => {
-  // if (!app.isPackaged) {
-  //   log.info('Development mode, skipping update check.')
-  //   return
-  // }
+  if (!app.isPackaged) {
+    log.info('Development mode, skipping update check.')
+    return
+  }
 
   const autoUpdater = getAutoUpdater()
 

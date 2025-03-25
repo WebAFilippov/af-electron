@@ -29,6 +29,54 @@ export const HomePage = () => {
       <Button className="mt-5 bg-green-700 p-20" onClick={() => window.api.checkForUpdates()}>
         Check
       </Button>
+      <Button className="mt-5 bg-green-700 p-20" onClick={() => window.api.checkForUpdates()}>
+        Check
+      </Button>
+      <Button className="mt-5 bg-green-700 p-20" onClick={() => window.api.checkForUpdates()}>
+        Check
+      </Button>
+      <Button className="mt-5 bg-green-700 p-20" onClick={() => window.api.checkForUpdates()}>
+        Check
+      </Button>
+      <Button className="mt-5 bg-green-700 p-20" onClick={() => window.api.checkForUpdates()}>
+        Check
+      </Button>
+      <Button className="mt-5 bg-green-700 p-20" onClick={() => window.api.checkForUpdates()}>
+        Check
+      </Button>
+      <Button className="mt-5 bg-green-700 p-20" onClick={() => window.api.checkForUpdates()}>
+        Check
+      </Button>
+      <Button className="mt-5 bg-green-700 p-20" onClick={() => window.api.checkForUpdates()}>
+        Check
+      </Button>
+      <Button className="mt-5 bg-green-700 p-20" onClick={() => window.api.checkForUpdates()}>
+        Check
+      </Button>
+      <Button className="mt-5 bg-green-700 p-20" onClick={() => window.api.checkForUpdates()}>
+        Check
+      </Button>
+      <Button className="mt-5 bg-green-700 p-20" onClick={() => window.api.checkForUpdates()}>
+        Check
+      </Button>
+      <Button className="mt-5 bg-green-700 p-20" onClick={() => window.api.checkForUpdates()}>
+        Check
+      </Button>
+      <Button className="mt-5 bg-green-700 p-20" onClick={() => window.api.checkForUpdates()}>
+        Check
+      </Button>
+      <Button className="mt-5 bg-green-700 p-20" onClick={() => window.api.checkForUpdates()}>
+        Check
+      </Button>
+      <Button className="mt-5 bg-green-700 p-20" onClick={() => window.api.checkForUpdates()}>
+        Check
+      </Button>
+      <Button className="mt-5 bg-green-700 p-20" onClick={() => window.api.checkForUpdates()}>
+        Check
+      </Button>
+      <Button className="mt-5 bg-green-700 p-20" onClick={() => window.api.checkForUpdates()}>
+        Check
+      </Button>
     </div>
   )
 }
