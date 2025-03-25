@@ -1,11 +1,24 @@
-import { app, autoUpdater, dialog } from 'electron'
+import { dialog } from 'electron'
 import log from 'electron-log'
+
+import { getAutoUpdater } from './test'
 
 export const setupAutoUpdates = () => {
   // if (!app.isPackaged) {
   //   log.info('Development mode, skipping update check.')
   //   return
   // }
+
+  const autoUpdater = getAutoUpdater()
+
+  autoUpdater.setFeedURL({
+    provider: 'github',
+    owner: 'WebAFilippov',
+    repo: 'af-electron',
+  });
+
+  autoUpdater.logger = log
+  autoUpdater.logger.info = log.info
 
   autoUpdater.on('checking-for-update', () => {
     log.info('Checking for updates...')

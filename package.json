@@ -1,6 +1,6 @@
 {
   "name": "harmonify",
-  "version": "2.0.1",
+  "version": "2.0.3",
   "description": "Библиотека для работы с громкость в Windows системах. Декстопное приложение.",
   "main": "./out/main/main.js",
   "author": {
@@ -10,6 +10,13 @@
   "homepage": "https://electron-vite.org",
   "repository": {
     "url": "https://github.com/WebAFilippov/af-electron"
+  },
+  "build": {
+    "publish": [{
+        "provider": "github",
+        "owner": "WebAFilippov",
+        "repo": "af-electron"
+    }]
   },
   "type": "module",
   "scripts": {
