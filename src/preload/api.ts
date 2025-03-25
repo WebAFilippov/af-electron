@@ -7,6 +7,7 @@ export const api = {
   // Programm
   onStartup: () => ipcRenderer.send("v1/programm/startup"),
   checkNetworkStatus: (callback: (state: boolean) => void) => ipcRenderer.on('v1/programm/check_network', (_event, state: boolean) => callback(state)),
+  checkForUpdates: () => ipcRenderer.send("v1/programm/check_for_updates"),
 
   // Window
   sendWindowTheme: (theme: Theme) => ipcRenderer.send("v1/window/theme", theme),

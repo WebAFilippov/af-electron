@@ -1,4 +1,4 @@
-import { BrowserWindow, ipcMain, shell } from 'electron'
+import { autoUpdater, BrowserWindow, ipcMain, shell } from 'electron'
 import cron from 'node-cron'
 
 import { configureTheme } from '@utils/window-theme'
@@ -14,6 +14,8 @@ export const IPCHandlers = (window: BrowserWindow) => {
 
     window.webContents.send('v1/programm/check_network', isOnline)
   })
+
+  ipcMain.on('v1/programm/check_for_updates', () => autoUpdater.checkForUpdates())
 
   //Window
   ipcMain.on('v1/window/theme', async (_event, theme: Theme) => {

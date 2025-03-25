@@ -1,7 +1,12 @@
 import { Link } from 'react-router-dom'
 
 import { ROUTES } from '@shared/config/routing'
-import { Card, CardDescription, CardTitle } from '@shared/ui'
+import { Button, Card, CardDescription, CardTitle } from '@shared/ui'
+
+// // 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
+// [Environment]::SetEnvironmentVariable("GH_TOKEN","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","User")
+// [System.Environment]::SetEnvironmentVariable("GH_TOKEN", "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", "User")
+// set GH_TOKEN=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
 
 export const HomePage = () => {
   return (
@@ -26,6 +31,9 @@ export const HomePage = () => {
           </Link>
         ))}
       </div>
+      <Button className="mt-5" onClick={() => window.api.checkForUpdates()}>
+        Check
+      </Button>
     </div>
   )
 }

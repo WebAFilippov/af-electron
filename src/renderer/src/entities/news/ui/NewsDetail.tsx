@@ -114,15 +114,6 @@ export const NewsDetail: FC<Props> = ({ news }) => {
           {news.content.map((node, index) => renderNode(node, index))}
         </div>
       )}
-      <p className="mr-5 mt-2 text-right text-base font-bold italic text-foreground">
-        <span>Источник: </span>
-        <span
-          className="cursor-pointer not-italic underline hover:no-underline"
-          onClick={() => externalLink('https://lenta.ru/')}
-        >
-          Lenta.ru
-        </span>
-      </p>
     </div>
   )
 }

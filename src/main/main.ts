@@ -7,7 +7,7 @@ import { createTray } from '@ui/tray'
 
 import { getLatestReduxDevToolsPath } from '@utils/latestReduxDevToolsPath'
 import { Logger } from '@utils/logger'
-import { windowLifecycle } from '@utils/window-lifecycle'
+import { setupAutoUpdates } from '@utils/setupAutoUpdates'
 
 import { initDatabase } from '@database/database'
 import { seedDatabase } from '@database/seed'
@@ -24,7 +24,7 @@ const log = new Logger('main')
 setAutoLaunch(!is.dev)
 !is.dev && Menu.setApplicationMenu(null)
 
-const isAutoLaunch = process.argv.includes('--auto-launch')
+// const isAutoLaunch = process.argv.includes('--auto-launch')
 const gotTheLock = app.requestSingleInstanceLock() // Проверка на запущенное окно -> true if once window
 
 if (!gotTheLock) {
@@ -66,6 +66,9 @@ if (!gotTheLock) {
 
       // HANDLERS
       ipcHandlers(window)
+
+      // Updater
+      setupAutoUpdates()
 
       log.info('Application ready')
     } catch (error) {
