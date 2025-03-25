@@ -11,7 +11,7 @@ import { Button } from '@shared/ui'
 
 import { updateScroll } from '../model/model'
 
-export const NewsList: FC = () => {
+export const NewsListPage: FC = () => {
   const navigate = useNavigate()
 
   const scrollRef = useRef<HTMLDivElement>(null)
@@ -53,7 +53,7 @@ export const NewsList: FC = () => {
       ref={scrollRef}
       className="relative flex h-full w-full select-none flex-col overflow-y-auto overflow-x-hidden"
     >
-      <div className="sticky top-0 z-30 flex min-h-14 items-center justify-start gap-4 rounded-tl-2xl border-b border-border bg-card/65 backdrop-blur-xl">
+      <div className="sticky top-0 z-30 flex max-h-14 h-14 items-center justify-start gap-4 rounded-tl-2xl border-b border-border bg-card/65 backdrop-blur-xl">
         <Button
           variant="ghost"
           className={cn(

@@ -37,7 +37,7 @@ export const NewsPreview: FC<Props> = memo(({ newsItem }) => {
         <div className="flex flex-col gap-2">
           <CardTitle>
             <Link
-              to={`/news/${newsItem.slug}`}
+              to={`/news/${newsItem.id}/detail/`}
               className="cursor-pointer text-xl font-extrabold leading-6 antialiased outline-black hover:underline"
             >
               {newsItem.title}

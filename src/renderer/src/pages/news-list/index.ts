@@ -1,1 +1,1 @@
-export { NewsList } from './ul/NewsList'
+export { NewsListPage } from './ul/NewsListPage'

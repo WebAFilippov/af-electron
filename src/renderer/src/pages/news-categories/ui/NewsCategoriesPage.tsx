@@ -11,14 +11,14 @@ import {
 
 import { NewsCategoriesGate, setCurrentCategoryToTwice } from '../model/model'
 
-export const NewsCategories = () => {
+export const NewsCategoriesPage = () => {
   useGate(NewsCategoriesGate)
   const [categories, isLoading] = useUnit([$categories, fetchCategoriesFx.$pending])
   const handleSetCurrentCategoryTwice = useUnit(setCurrentCategoryToTwice)
 
   return (
     <div className="relative flex h-full w-full select-none flex-col overflow-y-auto overflow-x-hidden">
-      <div className="sticky top-0 z-30 flex min-h-14 items-center gap-4 overflow-y-auto overflow-x-hidden rounded-tl-2xl border-b border-border bg-card/65 backdrop-blur-md">
+      <div className="sticky top-0 z-30 flex h-14 min-h-14 max-h-14 items-center gap-4 overflow-y-auto overflow-x-hidden rounded-tl-2xl border-b border-border bg-card/65 backdrop-blur-md">
         <NewsRefresh />
         <div className="flex w-full items-center justify-between pr-4">
           <h1 className="text-3xl font-bold">Категории</h1>

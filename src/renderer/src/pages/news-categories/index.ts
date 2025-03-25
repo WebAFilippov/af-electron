@@ -1,1 +1,1 @@
-export { NewsCategories } from './ui/news-categories'
+export { NewsCategoriesPage } from './ui/NewsCategoriesPage'
