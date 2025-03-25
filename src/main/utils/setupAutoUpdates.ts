@@ -1,4 +1,4 @@
-import { dialog } from 'electron'
+import { app, dialog } from 'electron'
 import log from 'electron-log'
 
 import { getAutoUpdater } from './test'
@@ -13,6 +13,8 @@ export const setupAutoUpdates = () => {
 
   autoUpdater.setFeedURL({
     provider: 'github',
+    owner: 'WebAFilippov',
+    repo: 'af-electron'
   })
 
   autoUpdater.logger = log
