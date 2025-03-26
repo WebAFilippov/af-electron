@@ -1,9 +1,9 @@
 import { is } from '@electron-toolkit/utils'
 
-import { app, autoUpdater, BrowserWindow, Menu, session } from 'electron'
+import { app, BrowserWindow, Menu, session } from 'electron'
 
+import { createTray } from '@ui/create-tray'
 import { createWindow } from '@ui/create-window'
-import { createTray } from '@ui/tray'
 
 import { getLatestReduxDevToolsPath } from '@utils/latestReduxDevToolsPath'
 import { Logger } from '@utils/logger'
@@ -69,7 +69,6 @@ if (!gotTheLock) {
 
       // Updater
       setupAutoUpdates()
-
 
       log.info('Application ready')
     } catch (error) {

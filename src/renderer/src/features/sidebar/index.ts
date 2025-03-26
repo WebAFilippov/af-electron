@@ -1,2 +1,2 @@
-export * from './model/sidebar'
-// export * from './ui/Sidebar'
+export { ToggleSidebar } from './ui/toggle-sidebar'
+export { Sidebar } from './ui/sidebar'

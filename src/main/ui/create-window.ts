@@ -7,11 +7,11 @@ import { configureTheme } from '@utils/window-theme'
 
 import { Theme } from '@main/shared/types'
 
-import icon from '../../../build/window-256x256.ico?asset'
+import appIcon from '../../../build/icon.ico?asset'
 
 export const createWindow = (theme: Theme): BrowserWindow => {
   const window = new BrowserWindow({
-    icon: nativeImage.createFromPath(icon),
+    icon: nativeImage.createFromPath(appIcon),
     minWidth: 768,
     minHeight: 650,
     width: 1280,
@@ -23,7 +23,6 @@ export const createWindow = (theme: Theme): BrowserWindow => {
     minimizable: true,
     maximizable: true,
     frame: false,
-    backgroundColor: '#191b1d',
     trafficLightPosition: {
       x: 5,
       y: 5
@@ -41,11 +40,11 @@ export const createWindow = (theme: Theme): BrowserWindow => {
   })
 
   window.flashFrame(false)
-  // window.setOverlayIcon(nativeImage.createFromPath(icon16), 'Harmonify')
+  window.setOverlayIcon(nativeImage.createFromPath(appIcon), 'Effectory')
+
   configureTheme(window, theme)
 
   if (is.dev) window.webContents.openDevTools()
-
   if (!is.dev) {
     window.setMenu(null)
     window.setMenuBarVisibility(false)

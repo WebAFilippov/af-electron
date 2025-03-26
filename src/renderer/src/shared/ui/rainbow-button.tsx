@@ -20,6 +20,7 @@ export const RainbowButton = React.forwardRef<HTMLButtonElement, RainbowButtonPr
           className
         )}
         {...props}
+        tabIndex={-1}
       >
         {children}
       </button>

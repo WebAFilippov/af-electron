@@ -1,7 +1,7 @@
 {
-  "name": "harmonify",
-  "productname": "Harmonify Electron App",
-  "description": "Библиотека для работы с громкость в Windows системах. Декстопное приложение.",
+  "name": "effectory",
+  "productname": "Effectory Electron App",
+  "description": "Universal Desktop App for Effectory",
   "version": "2.0.8",
   "main": "./out/main/main.js",
   "homepage": "https://electron-vite.org",

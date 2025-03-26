@@ -4,7 +4,7 @@ import { AppStarted } from '@shared/config/init'
 
 import { Theme } from '../types'
 
-const setTheme = createEvent<Theme>()
+const toggleTheme = createEvent()
 
 const $theme = createStore<Theme>('light')
 
@@ -24,18 +24,25 @@ const getWindowTheme = createEffect<void, Theme, Error>(async () => {
     throw new Error('Error getting window theme')
   }
 })
-const sendWindowTheme = createEffect<Theme, void, Error>((theme) =>
+const sendWindowTheme = createEffect<Theme, void, Error>((theme) => {
   window.api.sendWindowTheme(theme)
-)
+})
 
 sample({
-  clock: setTheme,
+  clock: toggleTheme,
+  source: $theme,
+  fn: (theme) => {
+    if (theme === 'light') {
+      return 'dark'
+    }
+    return 'light'
+  },
   target: [$theme, applyThemeFx, sendWindowTheme]
 })
 
 sample({
   clock: getWindowTheme.doneData,
-  target: setTheme
+  target: [$theme, applyThemeFx]
 })
 
 sample({
@@ -43,6 +50,6 @@ sample({
   target: [getWindowTheme]
 })
 
-export { $theme, applyThemeFx, setTheme }
+export { $theme, applyThemeFx, toggleTheme }
 
-// $theme.watch((store) => console.log(`theme change: ${store}`))
+$theme.watch((store) => console.log(`theme change: ${store}`))

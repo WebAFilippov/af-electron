@@ -15,6 +15,7 @@ export const api = {
   // Window
   sendWindowTheme: (theme: Theme) => ipcRenderer.send("v1/window/theme", theme),
   getWindowTheme: () => ipcRenderer.invoke("v1/window/get_theme"),
+  setFullscreenWindow: () => ipcRenderer.send("v1/window/toggle_fullscreen"),
   setMinimazeWindow: () => ipcRenderer.send("v1/window/minimaze"),
   setMaximazeWindow: () => ipcRenderer.send("v1/window/maximize"),
   setCloseWindow: () => ipcRenderer.send("v1/window/close"),

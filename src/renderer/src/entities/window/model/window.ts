@@ -1,14 +1,19 @@
 import { createEffect, createEvent, createStore, sample } from 'effector'
 import { createGate } from 'effector-react'
 
+window.api.onWindowState((state) => changeWindowState(state))
+
 const KeyDownToWindow = (event: KeyboardEvent) => {
+  if (event.key === 'F11') {
+    event.preventDefault()
+    setWindowFullscreen()
+  }
+
   if (event.ctrlKey && event.key === 'Enter') {
     event.preventDefault()
-    window.api.setMaximazeWindow()
+    setWindowMaximize()
   }
 }
-
-window.api.onWindowState((state) => changeWindowState(state))
 
 interface WindowState {
   minimize: boolean
@@ -16,6 +21,8 @@ interface WindowState {
   fullscreen: boolean
   show: boolean
 }
+
+const changeWindowState = createEvent<WindowState>()
 
 const GateWindow = createGate()
 
@@ -30,15 +37,14 @@ const $windowMaximize = $window.map((state) => state.maximize)
 const $windowFullscreen = $window.map((state) => state.fullscreen)
 const $windowShow = $window.map((state) => state.show)
 
-const changeWindowState = createEvent<WindowState>()
-
-const addListenerWindowFx = createEffect(() => {
+const addKeydownWindowFx = createEffect(() => {
   window.addEventListener('keydown', KeyDownToWindow)
 })
-const removeListenerWindowFx = createEffect(() => {
+const removeKeydownWindowFx = createEffect(() => {
   window.removeEventListener('keydown', KeyDownToWindow)
 })
 const setWindowClose = createEffect(() => window.api.setCloseWindow())
+const setWindowFullscreen = createEffect(() => window.api.setFullscreenWindow())
 const setWindowMaximize = createEffect(() => window.api.setMaximazeWindow())
 const setWindowMinimize = createEffect(() => window.api.setMinimazeWindow())
 
@@ -49,11 +55,11 @@ sample({
 
 sample({
   clock: GateWindow.open,
-  target: [addListenerWindowFx]
+  target: [addKeydownWindowFx]
 })
 sample({
   clock: GateWindow.close,
-  target: [removeListenerWindowFx]
+  target: [removeKeydownWindowFx]
 })
 
 export {

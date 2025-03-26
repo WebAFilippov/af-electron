@@ -33,6 +33,16 @@ export const IPCHandlers = (window: BrowserWindow) => {
     return theme as Theme
   })
 
+  ipcMain.on('v1/window/toggle_fullscreen', () => {
+    if (window) {
+      if (window.isFullScreen()) {
+        window.setFullScreen(false)
+      } else {
+        window.setFullScreen(true)
+      }
+    }
+  })
+
   ipcMain.on('v1/window/minimaze', () => {
     if (window) window.minimize()
   })

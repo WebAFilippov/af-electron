@@ -4,8 +4,8 @@
   "compilerOptions": {
     "composite": true,
     "types": ["electron-vite/node"],
-    /* Alias */
     "baseUrl": "./src/main",
+    /* Alias */
     "paths": {
       "@/*": ["/*"],
       "@ui/*": ["ui/*"],

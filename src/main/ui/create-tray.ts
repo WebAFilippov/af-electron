@@ -1,6 +1,6 @@
 import { BrowserWindow, Menu, nativeImage, Tray } from 'electron'
 
-import icon from '../../../build/tray-48x48.png?asset'
+import appIcon from '../../../build/icon.ico?asset'
 
 const toggleWindowVisibility = (window: BrowserWindow | null) => {
   if (!window) return
@@ -16,7 +16,7 @@ const toggleWindowVisibility = (window: BrowserWindow | null) => {
 }
 
 export const createTray = (window: BrowserWindow) => {
-  const tray = new Tray(nativeImage.createFromPath(icon))
+  const tray = new Tray(nativeImage.createFromPath(appIcon))
 
   const contextMenu = Menu.buildFromTemplate([
     {
@@ -30,8 +30,8 @@ export const createTray = (window: BrowserWindow) => {
     }
   ])
 
-  tray.setToolTip('Harmonify')
-  tray.setTitle('Harmonify')
+  tray.setToolTip('Effectory')
+  tray.setTitle('Effectory')
   tray.setContextMenu(contextMenu)
 
   tray.on('click', () => {

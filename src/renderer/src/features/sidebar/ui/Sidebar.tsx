@@ -1,31 +1,31 @@
-// import { useUnit } from 'effector-react'
+import { useGate, useUnit } from 'effector-react'
+import { FC, PropsWithChildren } from 'react'
 
-// import { useDebugLayer } from '@entities/debug-mode/ui/use-debug-layer'
+import { ROUTES } from '@shared/config/routing'
+import { cn } from '@shared/lib'
 
-// import { cn } from '@shared/lib'
+import { $isCollapsedSidebar, SidebarGate } from '../model/sidebar'
+import { SidebarNavItem } from './sidebar-nav-item'
 
-// import { $sidebar } from '../model/sidebar'
-// import { SidebarNav } from './SidebarNav/sidebar-nav'
+export const Sidebar: FC<PropsWithChildren> = ({ children }) => {
+  useGate(SidebarGate)
+  const isCollapsed = useUnit($isCollapsedSidebar)
 
-// export const Sidebar = () => {
-//   const isOpenSidebar = useUnit($sidebar)
-//   const { ref } = useDebugLayer<HTMLDivElement>('widgets')
+  return (
+    <div className="flex h-full w-full overflow-hidden p-5 pl-0 pt-0">
+      <aside className={cn('z-10 my-10 flex flex-col gap-2 transition-all', isCollapsed ? 'w-12' : 'w-44')}>
+        {ROUTES.map((item) => {
+          return <SidebarNavItem key={item.title} navItem={item} isCollapsed={isCollapsed} />
+        })}
+      </aside>
 
-//   return (
-//     <aside
-//       ref={ref}
-//       className={cn(
-//         'wallpaper transition-[width, height] relative z-10 flex h-full flex-col border-r border-dashed border-primary duration-300',
-//         isOpenSidebar ? 'w-[15rem]' : 'w-[5rem]'
-//       )}
-//     >
-//       <div className="relative h-[4rem] border-b border-dashed border-primary bg-background">
-//         Logo
-//       </div>
-
-//       <SidebarNav />
-
-//       <div className="h-[3rem] border-t border-dashed border-primary bg-background">footer</div>
-//     </aside>
-//   )
-// }
+      <main
+        className={cn(
+          'custom-scrollbar-2 relative z-20 flex-1 overflow-hidden rounded-2xl border-2 bg-background transition-all'
+        )}
+      >
+        {children}
+      </main>
+    </div>
+  )
+}

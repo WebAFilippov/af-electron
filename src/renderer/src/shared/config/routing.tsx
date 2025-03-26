@@ -2,7 +2,15 @@ import { Briefcase, HelpCircle, Newspaper, Package, Settings, User } from 'lucid
 
 import { NewsCategoriesPage } from '@pages/news-categories'
 
-export const ROUTES = [
+export interface Route {
+  path: string
+  title: string
+  description: string
+  icon: JSX.Element
+  element: JSX.Element
+}
+
+export const ROUTES: Route[] = [
   {
     path: '/news',
     title: 'Новости',
