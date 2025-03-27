@@ -22,9 +22,6 @@ export const HomePage = () => {
           </Link>
         ))}
       </div>
-      <Button className="mt-5 bg-destructive p-20" onClick={() => window.api.checkForUpdates()}>
-        Check
-      </Button>
     </div>
   )
 }
