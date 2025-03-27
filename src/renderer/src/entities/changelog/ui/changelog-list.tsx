@@ -16,20 +16,20 @@ export const ChangelogList = () => {
                 <span className="text-sm font-bold">{item.version}</span>
                 <span className="text-xs text-muted-foreground">{formatDate(item.date)}</span>
               </div>
-              <ul className="text-xs text-foreground">
-                {item.description.map((description) => {
-                  return <li key={description}>{description}</li>
-                })}
-              </ul>
-              <ul className="space-y list-outside list-disc pl-4 text-xs font-normal text-muted-foreground">
-                {item.changelog.map((changelog) => {
-                  return (
-                    <li key={changelog}>
-                      {changelog}
-                    </li>
-                  )
-                })}
-              </ul>
+              {item.description && (
+                <ul className="text-xs text-foreground">
+                  {item.description.map((description) => {
+                    return <li key={description}>{description}</li>
+                  })}
+                </ul>
+              )}
+              {item.changelog && (
+                <ul className="space-y list-outside list-disc pl-4 text-xs font-normal text-muted-foreground">
+                  {item.changelog.map((changelog) => {
+                    return <li key={changelog}>{changelog}</li>
+                  })}
+                </ul>
+              )}
             </div>
           )
         })}

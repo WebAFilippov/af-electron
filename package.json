@@ -4,10 +4,10 @@
   "author": "Alexey Filippov <msmail2020@yandex.ru>",
   "productname": "Effectory App",
   "description": "Effectory App",
-  "version": "3.0.7",
+  "version": "3.0.8",
   "main": "./out/main/main.js",
   "homepage": "https://electron-vite.org",
- "scripts": {
+  "scripts": {
     "format": "prettier --write .",
     "lint": "eslint . --ext .js,.jsx,.cjs,.mjs,.ts,.tsx,.cts,.mts --fix",
     "typecheck:node": "tsc --noEmit -p tsconfig.node.json --composite false",
@@ -16,11 +16,12 @@
     "start": "electron-vite preview",
     "dev": "electron-vite dev",
     "dev:w": "electron-vite dev --watch",
+    "clean": "rimraf dist out",
     "build": "electron-vite build",
     "postinstall": "electron-builder install-app-deps",
-    "release": "electron-builder --win --publish always",
     "build:unpack": "npm run build && electron-builder --dir",
-    "build:win": "rm -rf dist && rm -rf out && npm run build && electron-builder --win"
+    "build:win": "npm run clean && npm run build && electron-builder --win",
+    "build:publish": "npm run clean && npm run build && electron-builder --win --publish always"
   },
   "dependencies": {
     "@electron-toolkit/preload": "^3.0.1",
@@ -53,7 +54,6 @@
     "effector-react": "^23.3.0",
     "effector-storage": "^7.1.0",
     "electron-log": "^5.2.0",
-    "i": "^0.3.7",
     "i18next": "^24.2.2",
     "i18next-browser-languagedetector": "^8.0.3",
     "lucide-react": "^0.460.0",
@@ -101,6 +101,7 @@
     "prettier-plugin-tailwindcss": "^0.6.9",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
+    "rimraf": "^6.0.1",
     "tailwindcss": "^3.4.15",
     "typescript": "^5.5.4",
     "vite": "^5.3.1",
