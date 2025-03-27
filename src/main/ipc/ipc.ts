@@ -35,11 +35,7 @@ export const IPCHandlers = (window: BrowserWindow) => {
 
   ipcMain.on('v1/window/toggle_fullscreen', () => {
     if (window) {
-      if (window.isFullScreen()) {
-        window.setFullScreen(false)
-      } else {
-        window.setFullScreen(true)
-      }
+      window.setFullScreen(!window.isFullScreen())
     }
   })
 

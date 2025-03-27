@@ -1,10 +1,9 @@
-import { useGate, useUnit } from 'effector-react'
+import { useUnit } from 'effector-react'
 import { MaximizeIcon, MinimizeIcon, MinusIcon, X } from 'lucide-react'
 
 import {
   $windowFullscreen,
   $windowMaximize,
-  GateWindow,
   setWindowClose,
   setWindowMaximize,
   setWindowMinimize
@@ -14,8 +13,6 @@ import { cn } from '@shared/lib'
 import { Button } from '@shared/ui'
 
 export const TopbarApp = () => {
-
-
   const [windowFullscreen, windowMaximize, handleMinimize, handleMaximize, handleClose] = useUnit([
     $windowFullscreen,
     $windowMaximize,
@@ -27,7 +24,7 @@ export const TopbarApp = () => {
   return (
     <div
       className={cn(
-        'relative z-10 flex h-8 w-full items-center justify-end bg-gray-300/20 area-drag',
+        'abosulute inset-0 z-10 flex h-8 w-full items-center justify-end bg-transparent shadow-md backdrop-blur-sm area-drag dark:shadow-white/10',
         windowFullscreen && 'hidden'
       )}
     >

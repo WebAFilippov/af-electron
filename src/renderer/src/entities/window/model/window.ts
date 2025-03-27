@@ -4,7 +4,7 @@ import { createGate } from 'effector-react'
 window.api.onWindowState((state) => changeWindowState(state))
 
 const KeyDownToWindow = (event: KeyboardEvent) => {
-  if (event.key === 'F11') {
+  if (event.altKey && event.key === 'Enter') {
     event.preventDefault()
     setWindowFullscreen()
   }

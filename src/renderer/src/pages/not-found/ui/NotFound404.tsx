@@ -11,7 +11,7 @@ export const NotFound404: FC = () => {
   }
 
   return (
-    <div className="flex h-full w-full flex-col items-center justify-center rounded-2xl bg-background p-8 text-center">
+    <div className="flex h-full w-full flex-col items-center justify-center rounded-2xl bg-background p-8 text-center overflow-hidden">
       <div className="animate-fade-in">
         <h1 className="text-6xl font-bold text-foreground">404</h1>
         <p className="mt-4 text-2xl font-semibold text-foreground">Страница не найдена</p>

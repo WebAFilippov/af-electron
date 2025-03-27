@@ -12,23 +12,17 @@ import { refreshCategories, RefreshGate } from '../model/news-refresh'
 export const NewsRefresh: FC = () => {
   useGate(RefreshGate)
 
-  const [handleRefreshCategories, isLoading] = useUnit([
-    refreshCategories,
-    fetchCategoriesFx.$pending
-  ])
+  const [handleRefreshCategories, isLoading] = useUnit([refreshCategories, fetchCategoriesFx.$pending])
 
   return (
     <Button
-      className={cn(
-        'h-full rounded-none rounded-tl-2xl border-r border-border transition-colors duration-0 disabled:cursor-progress'
-      )}
+      variant={'outline'}
+      className={cn('h-full rounded-none border-r border-border transition-all duration-0 disabled:cursor-progress w-16')}
       disabled={isLoading}
       onClick={() => handleRefreshCategories()}
     >
       <div className="flex h-9 w-9 items-center justify-center">
-        <RefreshCw
-          className={cn('h-6 w-6 stroke-background stroke-2', isLoading && 'animate-spin')}
-        />
+        <RefreshCw className={cn('h-6 w-6 stroke-foreground stroke-2', isLoading && 'animate-spin')} />
       </div>
     </Button>
   )

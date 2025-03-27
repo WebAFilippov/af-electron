@@ -8,6 +8,7 @@ import { configureTheme } from '@utils/window-theme'
 import { Theme } from '@main/shared/types'
 
 import appIcon from '../../../build/icon.ico?asset'
+import { ThemeColorBackground } from '../shared'
 
 export const createWindow = (theme: Theme): BrowserWindow => {
   const window = new BrowserWindow({
@@ -18,10 +19,16 @@ export const createWindow = (theme: Theme): BrowserWindow => {
     height: 800,
     center: true,
     show: false,
+    resizable: true,
+    focusable: true,
+    fullscreen: false,
+    title: 'Effectory',
+    backgroundColor: theme === 'dark' ? ThemeColorBackground.DARK : ThemeColorBackground.LIGHT,
     titleBarStyle: 'hidden',
-    autoHideMenuBar: is.dev ? false : true,
+    autoHideMenuBar: true,
     minimizable: true,
     maximizable: true,
+    fullscreenable: true,
     frame: false,
     trafficLightPosition: {
       x: 5,
@@ -35,12 +42,22 @@ export const createWindow = (theme: Theme): BrowserWindow => {
       sandbox: false,
       allowRunningInsecureContent: false,
       plugins: false,
-      devTools: true
+      webgl: true,
+      enablePreferredSizeMode: true, 
+      devTools: is.dev
     }
   })
 
-  window.flashFrame(false)
   window.setOverlayIcon(nativeImage.createFromPath(appIcon), 'Effectory')
+  window.flashFrame(false)
+
+  app.commandLine.appendSwitch('enable-gpu-rasterization')
+  app.commandLine.appendSwitch('enable-accelerated-2d-canvas')
+  app.commandLine.appendSwitch('enable-zero-copy')
+  // app.commandLine.appendSwitch('disable-renderer-backgrounding')
+  app.commandLine.appendSwitch('disable-features', 'CrossSiteDocumentBlockingIfIsolating')
+  app.commandLine.appendSwitch('disable-pinch')
+  app.commandLine.appendSwitch('enable-overlay-scrollbars')
 
   configureTheme(window, theme)
 

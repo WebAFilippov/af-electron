@@ -1,8 +1,14 @@
-appId: com.AF.Effectory
-name: effectory
+appId: com.AFilippov.Effectory
 productName: Effectory
+copyright: Copyright © 2025 WebAFilippov
+buildVersion: 2.0.9
+
 directories:
   buildResources: build
+
+asarUnpack:
+  - resources/**
+
 files:
   - "!**/.vscode/*"
   - "!src/*"
@@ -14,30 +20,36 @@ files:
   - "!node_modules/**/*.map"
   - "!src/**/*.test.*"
   - "!logs/*"
-asarUnpack:
-  - resources/**
+
 win:
   icon: build/icon.ico
+  requestedExecutionLevel: highestAvailable 
   executableName: Effectory
   target:
     - target: nsis
       arch:
         - x64
         - ia32
+        
 nsis:
   oneClick: false
-  artifactName: ${name}_setup:${version}.${ext}
-  shortcutName: ${productName}
-  uninstallDisplayName: ${productName}
-  createDesktopShortcut: always
-  createStartMenuShortcut: true
-  runAfterFinish: true
+  perMachine: false
+  allowElevation: true
   allowToChangeInstallationDirectory: true
-  removeDefaultUninstallWelcomePage: true
+  deleteAppDataOnUninstall: false
+  createDesktopShortcut: true
+  createStartMenuShortcut: true
+  shortcutName: Effectory
+  artifactName: "${productName}_${version}_setup.${ext}"
+  uninstallDisplayName: "${productName} ${version}"
   installerIcon: build/icon.ico
   uninstallerIcon: build/icon.ico
+  removeDefaultUninstallWelcomePage: true
+
 npmRebuild: true
+
 publish:
   provider: github
   owner: WebAFilippov
   repo: af-electron
+  releaseType: draft

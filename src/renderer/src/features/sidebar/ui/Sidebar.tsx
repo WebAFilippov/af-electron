@@ -12,8 +12,8 @@ export const Sidebar: FC<PropsWithChildren> = ({ children }) => {
   const isCollapsed = useUnit($isCollapsedSidebar)
 
   return (
-    <div className="flex h-full w-full overflow-hidden p-5 pl-0 pt-0">
-      <aside className={cn('z-10 my-10 flex flex-col gap-2 transition-all', isCollapsed ? 'w-12' : 'w-44')}>
+    <div className="flex h-full w-full overflow-hidden pr-5 pb-5">
+      <aside className={cn('z-10 py-10 flex flex-col gap-2 transition-all overflow-hidden' , isCollapsed ? 'w-12' : 'w-40')}>
         {ROUTES.map((item) => {
           return <SidebarNavItem key={item.title} navItem={item} isCollapsed={isCollapsed} />
         })}
@@ -21,7 +21,7 @@ export const Sidebar: FC<PropsWithChildren> = ({ children }) => {
 
       <main
         className={cn(
-          'custom-scrollbar-2 relative z-20 flex-1 overflow-hidden rounded-2xl border-2 bg-background transition-all'
+          'custom-scrollbar relative z-20 flex-1 overflow-hidden rounded-2xl border-2 bg-background transition-all shadow-lg dark:shadow-white/10 shadow-black/10'
         )}
       >
         {children}

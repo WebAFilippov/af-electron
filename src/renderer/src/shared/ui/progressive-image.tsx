@@ -3,9 +3,7 @@ import { FC, useState } from 'react'
 import { MediaData } from '@entities/news'
 
 // Утилита для извлечения текста из ParsedNodeSchema[]
-const extractText = (
-  nodes: MediaData['credit'] | MediaData['title'] | MediaData['text']
-): string => {
+const extractText = (nodes: MediaData['credit'] | MediaData['title'] | MediaData['text']): string => {
   if (!nodes || nodes.length === 0) return ''
   return (
     nodes
@@ -56,9 +54,7 @@ export const ProgressiveImage: FC<Props> = ({ mediaData }) => {
             {[titleText, creditText].filter(Boolean).join('. ')}
           </p>
         )}
-        {captionText && (
-          <p className="text-center text-xs font-semibold text-muted-foreground">{captionText}</p>
-        )}
+        {captionText && <p className="text-center text-xs font-semibold text-muted-foreground">{captionText}</p>}
       </div>
     </div>
   )

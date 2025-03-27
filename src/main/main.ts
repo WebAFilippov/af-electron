@@ -5,7 +5,6 @@ import { app, BrowserWindow, Menu, session } from 'electron'
 import { createTray } from '@ui/create-tray'
 import { createWindow } from '@ui/create-window'
 
-import { getLatestReduxDevToolsPath } from '@utils/latestReduxDevToolsPath'
 import { Logger } from '@utils/logger'
 import { setupAutoUpdates } from '@utils/setupAutoUpdates'
 
@@ -45,18 +44,6 @@ if (!gotTheLock) {
 
   app.whenReady().then(async () => {
     try {
-      if (is.dev) {
-        const latestPath = await getLatestReduxDevToolsPath()
-        if (latestPath) {
-          try {
-            await session.defaultSession.loadExtension(latestPath)
-            log.log('Redux DevTools загружен!')
-          } catch (err) {
-            log.error('Ошибка загрузки Redux DevTools:', err)
-          }
-        }
-      }
-
       await initDatabase()
       await seedDatabase()
       const { theme } = await applicationService.getApplication()

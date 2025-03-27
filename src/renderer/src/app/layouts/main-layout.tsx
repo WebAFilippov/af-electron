@@ -19,12 +19,12 @@ export const MainLayout = () => {
   return (
     <div
       className={cn(
-        'relative m-0 box-border flex h-[100dvh] w-full flex-col bg-background p-0 font-jetbrains font-normal text-foreground transition-all'
+        'relative m-0 box-border flex h-[100dvh] w-full flex-col overflow-hidden bg-background p-0 font-jetbrains font-normal text-foreground transition-colors'
       )}
     >
       {/* Design Elements */}
       <Particles
-        className="absolute inset-0 z-0"
+        className="absolute inset-0 z-0 overflow-hidden"
         quantity={600}
         ease={50}
         size={0.5}

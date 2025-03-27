@@ -49,16 +49,11 @@ export const NewsListPage: FC = () => {
   }, [])
 
   return (
-    <div
-      ref={scrollRef}
-      className="relative flex h-full w-full select-none flex-col overflow-y-auto overflow-x-hidden"
-    >
+    <div ref={scrollRef} className="relative flex h-full w-full select-none flex-col overflow-y-auto overflow-x-hidden">
       <div className="sticky top-0 z-30 flex h-14 max-h-14 min-h-14 items-center justify-start gap-4 rounded-tl-2xl border-b border-border bg-card/65 backdrop-blur-xl">
         <Button
           variant="ghost"
-          className={cn(
-            'h-full rounded-none rounded-tl-2xl border-r border-border transition-colors'
-          )}
+          className={cn('h-full rounded-none border-r border-border transition-colors w-16')}
           onClick={() => navigate('/news')}
         >
           <ChevronsLeft className="h-9 w-9 stroke-2" />
@@ -67,12 +62,12 @@ export const NewsListPage: FC = () => {
           <h1 className="text-3xl font-bold">{currentCategory?.title}</h1>
         </div>
       </div>
-      <div className="flex h-full w-full select-none flex-col gap-6 p-10">
+      <div className="flex h-full w-full select-none snap-y flex-col px-10 pt-10">
         {news &&
           news.data.map((newsItem) => {
             return <NewsPreview newsItem={newsItem} key={newsItem.id} />
           })}
-        {news && news.hasNextPage ? <NewsPreviewObserver /> : <div className="min-h-5 w-full" />}
+        {news && news.hasNextPage ? <NewsPreviewObserver /> : <div className="min-h-10 w-full" />}
       </div>
     </div>
   )
