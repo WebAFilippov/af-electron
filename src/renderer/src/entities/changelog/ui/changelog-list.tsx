@@ -18,7 +18,7 @@ export const ChangelogList = () => {
               </div>
               <ul className="text-xs text-foreground">
                 {item.description.map((description) => {
-                  return <li>{description}</li>
+                  return <li key={description}>{description}</li>
                 })}
               </ul>
               <ul className="space-y list-outside list-disc pl-4 text-xs font-normal text-muted-foreground">

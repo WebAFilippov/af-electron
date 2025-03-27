@@ -17,7 +17,7 @@ export const Changelog: FC<ChangelogProps> = ({ updated, autoUpdater }) => {
       <DropdownMenuTrigger tabIndex={-1} className="outline-none">
         <ChangelogBadge isPulse={updated}>{CHANGELOG[0].version}</ChangelogBadge>
       </DropdownMenuTrigger>
-      <DropdownMenuContent className="shadow-md w-72 dark:shadow-white/10" sideOffset={10}>
+      <DropdownMenuContent className="w-72 shadow-md dark:shadow-white/10" sideOffset={10}>
         <DropdownMenuLabel className="select-none text-start text-xl">Что Нового?</DropdownMenuLabel>
         {autoUpdater}
         <ChangelogList />

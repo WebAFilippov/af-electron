@@ -3,19 +3,31 @@
   "include": [
     "src/renderer/env.d.ts",
     "src/renderer/src/**/*",
-    "src/preload/*.ts"
+    "src/preload/*.ts",
   ],
   "compilerOptions": {
     "composite": true,
     "jsx": "react-jsx",
     "baseUrl": "./src/renderer/src",
     "paths": {
-      "@app/*": ["app/*"],
-      "@pages/*": ["pages/*"],
-      "@widgets/*": ["widgets/*"],
-      "@features/*": ["features/*"],
-      "@entities/*": ["entities/*"],
-      "@shared/*": ["shared/*"]
+      "@app/*": [
+        "app/*"
+      ],
+      "@pages/*": [
+        "pages/*"
+      ],
+      "@widgets/*": [
+        "widgets/*"
+      ],
+      "@features/*": [
+        "features/*"
+      ],
+      "@entities/*": [
+        "entities/*"
+      ],
+      "@shared/*": [
+        "shared/*"
+      ]
     }
   }
 }

@@ -43,7 +43,7 @@ export const createWindow = (theme: Theme): BrowserWindow => {
       allowRunningInsecureContent: false,
       plugins: false,
       webgl: true,
-      enablePreferredSizeMode: true, 
+      enablePreferredSizeMode: false, 
       devTools: is.dev
     }
   })
@@ -54,10 +54,6 @@ export const createWindow = (theme: Theme): BrowserWindow => {
   app.commandLine.appendSwitch('enable-gpu-rasterization')
   app.commandLine.appendSwitch('enable-accelerated-2d-canvas')
   app.commandLine.appendSwitch('enable-zero-copy')
-  // app.commandLine.appendSwitch('disable-renderer-backgrounding')
-  app.commandLine.appendSwitch('disable-features', 'CrossSiteDocumentBlockingIfIsolating')
-  app.commandLine.appendSwitch('disable-pinch')
-  app.commandLine.appendSwitch('enable-overlay-scrollbars')
 
   configureTheme(window, theme)
 

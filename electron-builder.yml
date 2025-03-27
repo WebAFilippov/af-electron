@@ -1,13 +1,10 @@
 appId: com.AFilippov.Effectory
 productName: Effectory
 copyright: Copyright © 2025 WebAFilippov
-buildVersion: 2.0.9
+buildVersion: 3.0.5
 
 directories:
   buildResources: build
-
-asarUnpack:
-  - resources/**
 
 files:
   - "!**/.vscode/*"
@@ -21,30 +18,27 @@ files:
   - "!src/**/*.test.*"
   - "!logs/*"
 
+asarUnpack:
+  - resources/**
+
 win:
   icon: build/icon.ico
-  requestedExecutionLevel: highestAvailable 
   executableName: Effectory
   target:
     - target: nsis
       arch:
         - x64
-        - ia32
         
 nsis:
   oneClick: false
   perMachine: false
-  allowElevation: true
-  allowToChangeInstallationDirectory: true
-  deleteAppDataOnUninstall: false
-  createDesktopShortcut: true
+  createDesktopShortcut: always
   createStartMenuShortcut: true
   shortcutName: Effectory
-  artifactName: "${productName}_${version}_setup.${ext}"
+  artifactName: "${productName}-${version}-setup.${ext}"
   uninstallDisplayName: "${productName} ${version}"
   installerIcon: build/icon.ico
   uninstallerIcon: build/icon.ico
-  removeDefaultUninstallWelcomePage: true
 
 npmRebuild: true
 
