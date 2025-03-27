@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom'
 
 import { ROUTES } from '@shared/config/routing'
-import { Button, Card, CardDescription, CardTitle } from '@shared/ui'
+import { Card, CardDescription, CardTitle } from '@shared/ui'
 
 export const HomePage = () => {
   return (
