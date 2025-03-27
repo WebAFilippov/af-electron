@@ -4,7 +4,7 @@
   "author": "Alexey Filippov <msmail2020@yandex.ru>",
   "productname": "Effectory App",
   "description": "Effectory App",
-  "version": "3.0.6",
+  "version": "3.0.7",
   "main": "./out/main/main.js",
   "homepage": "https://electron-vite.org",
  "scripts": {
@@ -20,7 +20,7 @@
     "postinstall": "electron-builder install-app-deps",
     "release": "electron-builder --win --publish always",
     "build:unpack": "npm run build && electron-builder --dir",
-    "build:win": "npm run build && electron-builder --win"
+    "build:win": "rm -rf dist && rm -rf out && npm run build && electron-builder --win"
   },
   "dependencies": {
     "@electron-toolkit/preload": "^3.0.1",
