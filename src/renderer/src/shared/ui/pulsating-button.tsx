@@ -9,12 +9,15 @@ interface PulsatingButtonProps extends React.ButtonHTMLAttributes<HTMLDivElement
 }
 
 export const PulsatingButton = React.forwardRef<HTMLDivElement, PulsatingButtonProps>(
-  ({ className, children, pulseColor = '#0096ff', duration = '1.5s', classNamePusle, ...props }, ref) => {
+  (
+    { className, children, pulseColor = '#0096ff', duration = '1.5s', classNamePusle, ...props },
+    ref
+  ) => {
     return (
       <div
         ref={ref}
         className={cn(
-          'relative flex cursor-pointer items-center justify-center rounded-lg bg-primary px-4 py-2 text-center text-primary-foreground ',
+          'relative flex cursor-pointer items-center justify-center rounded-lg bg-primary px-4 py-2 text-center text-primary-foreground',
           className
         )}
         style={
@@ -32,7 +35,6 @@ export const PulsatingButton = React.forwardRef<HTMLDivElement, PulsatingButtonP
             classNamePusle
           )}
         />
-        
       </div>
     )
   }

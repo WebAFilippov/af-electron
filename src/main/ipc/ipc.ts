@@ -9,19 +9,26 @@ import { applicationService } from '@services/application.service'
 import { Theme } from '@main/shared/types'
 
 export const IPCHandlers = (window: BrowserWindow) => {
-  //Programm
+  // Programm
   cron.schedule('*/5 * * * * *', async () => {
     const isOnline = await applicationService.isHostReachable('8.8.8.8')
 
     window.webContents.send('v1/programm/check_network', isOnline)
   })
 
+  ipcMain.handle('v1/programm/get_network', async () => {
+    const isOnline = await applicationService.isHostReachable('8.8.8.8')
+
+    return isOnline
+  })
+
+  // AutoUpdater
   ipcMain.on('v1/programm/check_for_updates', () => {
     const autoUpdater = getAutoUpdater()
     autoUpdater.checkForUpdatesAndNotify()
   })
 
-  //Window
+  // Window
   ipcMain.on('v1/window/theme', async (_event, theme: Theme) => {
     if (!window) return
     await applicationService.updateApplicationField('theme', theme)

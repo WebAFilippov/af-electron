@@ -1,6 +1,6 @@
 singleQuote: true
 semi: false
-printWidth: 120
+printWidth: 100
 trailingComma: none
 plugins:
   - '@trivago/prettier-plugin-sort-imports'
@@ -9,6 +9,7 @@ tailwindFunctions:
   - clsx
   - cva
 tailwindPreserveDuplicates: true
+proseWrap: 'always'
 importOrder:
   - '^[a-zA-Z0-9]'
   - '^react'

@@ -15,14 +15,14 @@ export const ThemeSwitcher: FC = () => {
       <Sun
         size="1rem"
         className={cn(
-          'absolute rotate-0 scale-100 text-foreground transition-all',
+          'absolute rotate-0 scale-100 text-foreground transition-colors',
           theme === 'dark' && 'rotate-180 scale-0'
         )}
       />
       <Moon
         size="1rem"
         className={cn(
-          'absolute rotate-0 scale-100 text-foreground transition-all',
+          'absolute rotate-0 scale-100 text-foreground transition-colors',
           theme === 'light' && 'rotate-180 scale-0'
         )}
       />

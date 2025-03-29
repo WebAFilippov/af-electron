@@ -7,4 +7,12 @@ interface WindowState {
 
 type Theme = "light" | "dark";
 
-export type { Theme, WindowState };
+type UpdatedStatusDto =
+  | 'checking-for-update'
+  | 'download-progress'
+  | 'update-available'
+  | 'update-cancelled'
+  | 'update-downloaded'
+  | 'update-not-available'
+
+export type { Theme, WindowState, UpdatedStatusDto };

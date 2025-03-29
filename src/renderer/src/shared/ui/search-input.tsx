@@ -42,7 +42,7 @@ const SearchInput = forwardRef<HTMLInputElement, SearchInputProps>(
         {value && (
           <X
             className={cn(
-              'absolute right-2 top-2 h-4 w-4 cursor-pointer stroke-foreground/50 stroke-[3] transition-all',
+              'absolute right-2 top-2 h-4 w-4 cursor-pointer stroke-foreground/50 stroke-[3] transition-colors',
               !isLoaded && 'hover:stroke-foreground hover:stroke-[4]'
             )}
             onClick={onRemove}

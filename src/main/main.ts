@@ -1,12 +1,12 @@
 import { is } from '@electron-toolkit/utils'
 
-import { app, BrowserWindow, Menu, session } from 'electron'
+import { app, BrowserWindow, Menu } from 'electron'
 
 import { createTray } from '@ui/create-tray'
 import { createWindow } from '@ui/create-window'
 
+import { autoUpdater } from '@utils/autoUpdater'
 import { Logger } from '@utils/logger'
-import { setupAutoUpdates } from '@utils/setupAutoUpdates'
 
 import { initDatabase } from '@database/database'
 import { seedDatabase } from '@database/seed'
@@ -14,7 +14,6 @@ import { seedDatabase } from '@database/seed'
 import { applicationService } from '@services/application.service'
 
 import { ipcHandlers } from './ipc'
-import { Theme } from './shared/types'
 import { setAutoLaunch } from './utils/auto-launch'
 
 Logger.setupLogger()
@@ -46,16 +45,17 @@ if (!gotTheLock) {
     try {
       await initDatabase()
       await seedDatabase()
+
       const { theme } = await applicationService.getApplication()
 
-      const window = createWindow(theme as Theme)
+      const window = createWindow(theme)
       createTray(window)
 
       // HANDLERS
       ipcHandlers(window)
 
       // Updater
-      setupAutoUpdates()
+      autoUpdater(window)
 
       log.info('Application ready')
     } catch (error) {

@@ -127,7 +127,7 @@ export const DebugMenu = () => {
       id="debug-menu-portal"
       ref={menuRef}
       className={cn(
-        'fixed -right-full top-1/2 flex h-[20rem] w-full max-w-[calc(100dvw_-_60%)] -translate-y-1/2 select-none overflow-hidden bg-transparent transition-all duration-300',
+        'fixed -right-full top-1/2 flex h-[20rem] w-full max-w-[calc(100dvw_-_60%)] -translate-y-1/2 select-none overflow-hidden bg-transparent transition-colors duration-0',
         openMenu && 'right-0'
       )}
     >

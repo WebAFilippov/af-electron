@@ -21,17 +21,19 @@ export const NewsDetailPage = () => {
 
   return (
     <div className="relative flex h-full w-full select-none flex-col overflow-y-auto overflow-x-hidden">
-      <div className="sticky top-0 z-30 flex items-center justify-start gap-4 rounded-tl-2xl border-b border-border bg-card/65 backdrop-blur-md">
+      <div className="sticky top-0 z-30 flex items-center justify-start gap-4 rounded-tl-2xl border-b border-border bg-background/80 backdrop-blur-sm transition-colors">
         <Button
           variant="ghost"
-          className={cn('h-full rounded-none border-r border-border w-16')}
+          className={cn('h-full w-16 rounded-none border-none border-border text-foreground')}
           onClick={() => navigate(-1)}
         >
-          <ChevronsLeft className="h-9 w-9 stroke-2 text-foreground" />
+          <ChevronsLeft className="h-9 w-9 stroke-2" />
         </Button>
 
         <div className="space-y-1 py-3 pr-4">
-          <h1 className="w-full text-3xl font-bold leading-7 text-card-foreground">{detailNews && detailNews.title}</h1>
+          <h1 className="w-full text-3xl font-bold leading-7 text-foreground">
+            {detailNews && detailNews.title}
+          </h1>
           <div className="w-full divide-x divide-dotted divide-card-foreground/50">
             <span className="pr-2 text-sm italic tracking-tighter text-muted-foreground">
               {detailNews && formatedDate(detailNews.pubDate)}
@@ -46,7 +48,7 @@ export const NewsDetailPage = () => {
         </div>
       </div>
 
-      <div className="flex h-full w-full select-none flex-col gap-6 py-5 ">
+      <div className="flex h-full w-full select-none flex-col gap-6 py-5">
         {detailNews && <NewsDetail news={detailNews} />}
       </div>
     </div>

@@ -18,6 +18,9 @@ sample({
   clock: loadCategories,
   source: $categories,
   filter: (categories) => !categories.length,
+  fn: () => ({
+    timelapse: Date.now()
+  }),
   target: fetchCategoriesFx.start
 })
 
@@ -33,4 +36,4 @@ sample({
 export { $categories, $currentCategory, loadCategories, setCurrentCategory }
 
 // $categories.watch((categories) => console.log('#categories: ', categories))
-$currentCategory.watch((category) => console.log('#currentCategory: ', category))
+// $currentCategory.watch((category) => console.log('#currentCategory: ', category))

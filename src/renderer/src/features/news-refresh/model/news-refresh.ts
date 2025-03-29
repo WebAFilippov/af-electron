@@ -28,6 +28,9 @@ sample({
   clock: refreshCategories,
   source: fetchCategoriesFx.$pending,
   filter: (isLoading) => !isLoading,
+  fn: () => ({
+    timelapse: Date.now()
+  }),
   target: fetchCategoriesFx.start
 })
 

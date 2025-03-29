@@ -31,5 +31,5 @@ export { $queryObject, $queryTimelapse, setQueryCategory }
 
 // $queryCursor.watch((store) => console.log('#queryCursor: ', store))
 // $queryCategory.watch((store) => console.log('#queryCategory: ', store))
-$queryTimelapse.watch((store) => console.log('#queryTimelapse: ', store))
+// $queryTimelapse.watch((store) => console.log('#queryTimelapse: ', store))
 $queryObject.watch((store) => console.log('#queryObject: ', store))

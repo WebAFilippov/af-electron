@@ -19,7 +19,7 @@ export const MainLayout = () => {
   return (
     <div
       className={cn(
-        'relative m-0 box-border flex h-[100dvh] w-full flex-col overflow-hidden bg-background p-0 font-jetbrains font-normal text-foreground transition-colors'
+        'relative m-0 box-border flex h-dvh min-w-dvw flex-col overflow-hidden bg-background p-0 font-jetbrains font-normal text-foreground transition-colors'
       )}
     >
       {/* Design Elements */}

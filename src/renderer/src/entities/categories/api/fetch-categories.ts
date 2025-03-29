@@ -1,4 +1,4 @@
-import { concurrency, createJsonQuery } from '@farfetched/core'
+import { concurrency, createJsonQuery, declareParams } from '@farfetched/core'
 import { zodContract } from '@farfetched/zod'
 
 import { z } from 'zod'
@@ -12,9 +12,13 @@ const ResponseCategories = z.object({
 })
 
 const fetchCategoriesFx = createJsonQuery({
+  params: declareParams<{ timelapse: number }>(),
   request: {
     method: 'GET',
-    url: () => GET_ALL_CATEGORIES
+    url: () => GET_ALL_CATEGORIES,
+    query: ({ timelapse }) => ({
+      timelapse: timelapse
+    })
   },
   response: {
     contract: zodContract(ResponseCategories)

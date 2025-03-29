@@ -1,7 +1,7 @@
 appId: com.AFilippov.Effectory
 productName: Effectory
 copyright: Copyright © 2025 WebAFilippov
-buildVersion: 3.0.8
+buildVersion: 3.0.9
 
 directories:
   buildResources: build
@@ -28,7 +28,7 @@ win:
     - target: nsis
       arch:
         - x64
-        
+
 nsis:
   oneClick: false
   perMachine: false

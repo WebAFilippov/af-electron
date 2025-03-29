@@ -7,12 +7,14 @@ import { NewsCategoriesPage } from '@pages/news-categories'
 import { NewsDetailPage } from '@pages/news-detail'
 import { NewsListPage } from '@pages/news-list'
 import { NotFound404 } from '@pages/not-found'
+import { ErrorPage } from '@pages/error'
 
 export const router = createBrowserRouter(
   [
     {
       path: '/',
       element: <MainLayout />,
+      errorElement: <ErrorPage />,
       children: [
         { index: true, element: <HomePage /> },
         { path: 'news', element: <NewsCategoriesPage /> },

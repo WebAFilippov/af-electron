@@ -9,7 +9,7 @@ import {
 import { sequelize } from '@database/database'
 
 export interface IApplication {
-  theme: string
+  theme: 'dark' | 'light'
   owm_apikey: string
 }
 

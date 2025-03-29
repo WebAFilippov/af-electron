@@ -20,7 +20,7 @@ sample({
 
 sample({
   clock: fetchCategoriesFx.finished.success,
-  fn: () => Date.now(),
+  fn: (result) => result.params.timelapse,
   target: $queryTimelapse
 })
 

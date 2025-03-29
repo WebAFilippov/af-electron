@@ -29,10 +29,20 @@ export const TopbarApp = () => {
       )}
     >
       <div className="flex space-x-0 area-no-drag">
-        <Button variant="outline" className="h-8 w-8" tabIndex={-1} onClick={() => handleMinimize()}>
+        <Button
+          variant="outline"
+          className="h-8 w-8"
+          tabIndex={-1}
+          onClick={() => handleMinimize()}
+        >
           <MinusIcon strokeWidth={1} className="h-4 w-4" />
         </Button>
-        <Button variant="outline" className="h-8 w-8" tabIndex={-1} onClick={() => handleMaximize()}>
+        <Button
+          variant="outline"
+          className="h-8 w-8"
+          tabIndex={-1}
+          onClick={() => handleMaximize()}
+        >
           {windowMaximize ? (
             <MinimizeIcon strokeWidth={1} className="h-4 w-4" />
           ) : (

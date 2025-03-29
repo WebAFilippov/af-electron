@@ -8,7 +8,6 @@ import { configureTheme } from '@utils/window-theme'
 import { Theme } from '@main/shared/types'
 
 import appIcon from '../../../build/icon.ico?asset'
-import { ThemeColorBackground } from '../shared'
 
 export const createWindow = (theme: Theme): BrowserWindow => {
   const window = new BrowserWindow({
@@ -23,37 +22,36 @@ export const createWindow = (theme: Theme): BrowserWindow => {
     focusable: true,
     fullscreen: false,
     title: 'Effectory',
-    backgroundColor: theme === 'dark' ? ThemeColorBackground.DARK : ThemeColorBackground.LIGHT,
     titleBarStyle: 'hidden',
-    autoHideMenuBar: true,
+    autoHideMenuBar: false,
     minimizable: true,
     maximizable: true,
     fullscreenable: true,
-    frame: false,
-    trafficLightPosition: {
-      x: 5,
-      y: 5
-    },
+    // frame: false,
+    // trafficLightPosition: {
+    //   x: 5,
+    //   y: 5
+    // },
     webPreferences: {
       preload: join(__dirname, '..', 'preload', 'index.mjs'),
-      backgroundThrottling: false,
+      // backgroundThrottling: false,
       contextIsolation: true,
       nodeIntegration: false,
       sandbox: false,
-      allowRunningInsecureContent: false,
+      // allowRunningInsecureContent: false,
       plugins: false,
-      webgl: true,
-      enablePreferredSizeMode: false, 
+      // webgl: true,
+      // enablePreferredSizeMode: false,
       devTools: is.dev
     }
   })
 
-  window.setOverlayIcon(nativeImage.createFromPath(appIcon), 'Effectory')
   window.flashFrame(false)
+  window.setOverlayIcon(nativeImage.createFromPath(appIcon), 'Effectory')
 
-  app.commandLine.appendSwitch('enable-gpu-rasterization')
-  app.commandLine.appendSwitch('enable-accelerated-2d-canvas')
-  app.commandLine.appendSwitch('enable-zero-copy')
+  // app.commandLine.appendSwitch('enable-gpu-rasterization')
+  // app.commandLine.appendSwitch('enable-accelerated-2d-canvas')
+  // app.commandLine.appendSwitch('enable-zero-copy')
 
   configureTheme(window, theme)
 

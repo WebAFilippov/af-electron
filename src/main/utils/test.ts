@@ -1,8 +1,42 @@
-import electronUpdater, { type AppUpdater } from 'electron-updater'
+import Logger from 'electron-log'
+import electronUpdater, {
+  type AppUpdater,
+  type ProgressInfo,
+  type UpdateDownloadedEvent,
+  type UpdateInfo
+} from 'electron-updater'
 
 export const getAutoUpdater = (): AppUpdater => {
-  // Using destructuring to access autoUpdater due to the CommonJS module of 'electron-updater'.
-  // It is a workaround for ESM compatibility issues, see https://github.com/electron-userland/electron-builder/issues/7976.
   const { autoUpdater } = electronUpdater
+
+  autoUpdater.autoDownload = false
+  autoUpdater.autoInstallOnAppQuit = false
+
+  autoUpdater.logger = Logger
+  autoUpdater.logger.info = Logger.info
+
+  autoUpdater.on('checking-for-update', () => {
+    
+  })
+  autoUpdater.on('download-progress', (info: ProgressInfo) => {
+    console.log(info)
+  })
+  autoUpdater.on('error', (error, message) => {
+    console.log(error)
+    message && console.log(message)
+  })
+  autoUpdater.on('update-available', (info: UpdateInfo) => {
+    console.log(info)
+  })
+  autoUpdater.on('update-cancelled', (info: UpdateInfo) => {
+    console.log(info)
+  })
+  autoUpdater.on('update-downloaded', (event: UpdateDownloadedEvent) => {
+    console.log(event)
+  })
+  autoUpdater.on('update-not-available', (info: UpdateInfo) => {
+    console.log(info)
+  })
+
   return autoUpdater
 }

@@ -4,7 +4,7 @@
   "author": "Alexey Filippov <msmail2020@yandex.ru>",
   "productname": "Effectory App",
   "description": "Effectory App",
-  "version": "3.0.8",
+  "version": "3.0.9",
   "main": "./out/main/main.js",
   "homepage": "https://electron-vite.org",
   "scripts": {
@@ -33,6 +33,7 @@
     "@radix-ui/react-hover-card": "^1.1.2",
     "@radix-ui/react-label": "^2.1.0",
     "@radix-ui/react-popover": "^1.1.2",
+    "@radix-ui/react-progress": "^1.1.2",
     "@radix-ui/react-scroll-area": "^1.2.3",
     "@radix-ui/react-select": "^2.1.6",
     "@radix-ui/react-separator": "^1.1.0",

@@ -6,6 +6,7 @@ import { Changelog } from '@entities/changelog'
 import { DeviceIndicator } from '@entities/device'
 import { NetworkIndicator } from '@entities/network'
 import { ThemeSwitcher } from '@entities/theme'
+import { SuccessNotification, Updater } from '@entities/updater'
 
 import { RainbowButton } from '@shared/ui'
 import { EffectorIcon } from '@shared/ui/assets/svg-icons'
@@ -25,12 +26,15 @@ export const HeaderApp = () => {
               <span>effectory</span>
             </RainbowButton>
           </Link>
+
+          <Changelog updated={true} autoUpdater={<Updater />} />
+
+          <SuccessNotification />
         </div>
 
         <div className="flex items-center gap-4">
           <DeviceIndicator />
           <NetworkIndicator />
-          <Changelog />
           <ThemeSwitcher />
         </div>
       </div>

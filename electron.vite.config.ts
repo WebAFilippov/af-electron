@@ -52,11 +52,13 @@ export default defineConfig({
   },
   renderer: {
     base: "./",
-    plugins: [react({
-      babel: {
-        plugins: ['effector/babel-plugin'],
-      },
-    }),],
+    plugins: [
+      react({
+        babel: {
+          plugins: ["effector/babel-plugin"],
+        },
+      }),
+    ],
     define: {
       "process.env": process.env,
     },

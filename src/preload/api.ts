@@ -1,16 +1,32 @@
 import { ElectronAPI } from "@electron-toolkit/preload";
 import { ipcRenderer } from "electron";
 
-import { Theme, WindowState } from "./transport";
+import { Theme, WindowState, UpdatedStatusDto } from "./transport";
+
 
 export const api = {
   // Programm
   onStartup: () => ipcRenderer.send("v1/programm/startup"),
+  getNetworkStatus: () => ipcRenderer.invoke("v1/programm/get_network"),
   checkNetworkStatus: (callback: (state: boolean) => void) =>
     ipcRenderer.on("v1/programm/check_network", (_event, state: boolean) =>
       callback(state),
     ),
-  checkForUpdates: () => ipcRenderer.send("v1/programm/check_for_updates"),
+
+  // AutoUpdater
+  startUpdate: () => ipcRenderer.send("v1/autoUpdater/start_update"),
+  installNow: () => ipcRenderer.send("v1/autoUpdater/install-now"),
+  installOnQuit: () => ipcRenderer.send("v1/autoUpdater/install-on-quit"),
+  onSuccessUpdate: (callback: (version: string) => void) =>
+    ipcRenderer.on(
+      "v1/autoUpdater/success_update",
+      (_event, version: string) => callback(version),
+    ),
+  onUpdateData: (callback: (data: { status: UpdatedStatusDto, data? : Record<string, any>}) => void) =>
+    ipcRenderer.on(
+      "v1/autoUpdater/update_data",
+      (_event, data: { status: UpdatedStatusDto, data? : Record<string, any>}) => callback(data),
+    ),  
 
   // Window
   sendWindowTheme: (theme: Theme) => ipcRenderer.send("v1/window/theme", theme),
