@@ -27,8 +27,7 @@ export const HeaderApp = () => {
             </RainbowButton>
           </Link>
 
-          <Changelog updated={true} autoUpdater={<Updater />} />
-
+          <Changelog autoUpdater={<Updater />} />
           <SuccessNotification />
         </div>
 

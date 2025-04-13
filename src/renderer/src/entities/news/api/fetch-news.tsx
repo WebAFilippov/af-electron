@@ -73,4 +73,4 @@ sample({
 
 export { fetchNewsQuery, loadNews }
 
-fetchNewsQuery.$pending.watch((pending) => console.log(`#fetchNewsQuery_pending: ${pending}`))
+// fetchNewsQuery.$pending.watch((pending) => console.log(`#fetchNewsQuery_pending: ${pending}`))

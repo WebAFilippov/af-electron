@@ -6,7 +6,7 @@ import { configureTheme } from '@utils/window-theme'
 
 import { applicationService } from '@services/application.service'
 
-import { Theme } from '@main/shared/types'
+import { Theme } from '@shared/types'
 
 export const IPCHandlers = (window: BrowserWindow) => {
   // Programm

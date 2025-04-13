@@ -4,7 +4,7 @@ import { BrowserWindow } from 'electron'
 
 import { windowLifecycle } from '@utils/window-lifecycle'
 
-import { NewsController } from '@controllers/News.controller'
+import { NewsController } from '@controllers/news.controller'
 
 import { IPCHandlers } from './ipc'
 

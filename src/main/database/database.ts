@@ -2,7 +2,7 @@ import { Sequelize } from 'sequelize'
 
 import { Logger } from '@utils/logger'
 
-import { config } from '@main/shared/config'
+import { config } from '@shared/config'
 
 const log = new Logger('database')
 

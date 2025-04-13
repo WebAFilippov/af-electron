@@ -20,3 +20,5 @@ export { Popover, PopoverAnchor, PopoverContent, PopoverTrigger } from './popove
 export { SearchInput } from './search-input'
 export { badgeVariants, Badge } from './badge'
 export { PulsatingButton } from './pulsating-button'
+export { Input } from './input'
+export { Progress } from './progress'

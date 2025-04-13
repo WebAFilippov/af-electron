@@ -8,8 +8,7 @@
     /* Alias */
     "paths": {
       "@/*": ["/*"],
-      "@ui/*": ["ui/*"],
-      "@types_app/*": ["types_app/*"],
+      "@app/*": ["app/*"],
       "@ipc/*": ["ipc/*"],
       "@utils/*": ["utils/*"],
       "@lib/*": ["lib/*"],
@@ -18,7 +17,7 @@
       "@services/*": ["services/*"],
       "@controllers/*": ["controllers/*"],
       "@repositories/*": ["repositories/*"],
-      "@main/shared/*": ["shared/*"]
+      "@shared/*": ["shared/*"]
     }
   }
 }

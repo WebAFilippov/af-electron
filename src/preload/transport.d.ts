@@ -11,8 +11,8 @@ type UpdatedStatusDto =
   | 'checking-for-update'
   | 'download-progress'
   | 'update-available'
-  | 'update-cancelled'
   | 'update-downloaded'
   | 'update-not-available'
+  | 'error'
 
 export type { Theme, WindowState, UpdatedStatusDto };

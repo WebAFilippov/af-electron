@@ -4,7 +4,7 @@
   "author": "Alexey Filippov <msmail2020@yandex.ru>",
   "productname": "Effectory App",
   "description": "Effectory App",
-  "version": "3.0.9",
+  "version": "3.1.0",
   "main": "./out/main/main.js",
   "homepage": "https://electron-vite.org",
   "scripts": {
@@ -80,6 +80,7 @@
     "@trivago/prettier-plugin-sort-imports": "^4.3.0",
     "@types/node": "^20.14.8",
     "@types/node-cron": "^3.0.11",
+    "@types/ping": "^0.4.4",
     "@types/react": "^18.3.3",
     "@types/react-dom": "^18.3.0",
     "@types/sequelize": "^4.28.20",

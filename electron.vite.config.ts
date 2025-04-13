@@ -14,7 +14,7 @@ export default defineConfig({
     resolve: {
       alias: {
         "@": path.resolve(__dirname, "./src/main"),
-        "@ui": path.resolve(__dirname, "./src/main/ui"),
+        "@app": path.resolve(__dirname, "./src/main/app"),
         "@ipc": path.resolve(__dirname, "./src/main/ipc"),
         "@utils": path.resolve(__dirname, "./src/main/utils"),
         "@lib": path.resolve(__dirname, "./src/main/lib"),
@@ -23,7 +23,7 @@ export default defineConfig({
         "@services": path.resolve(__dirname, "./src/main/services"),
         "@controllers": path.resolve(__dirname, "./src/main/controllers"),
         "@repositories": path.resolve(__dirname, "./src/main/repositories"),
-        "@main/shared": path.resolve(__dirname, "./src/main/shared"),
+        "@shared": path.resolve(__dirname, "./src/main/shared"),
       },
     },
     build: {

@@ -1,8 +1,8 @@
 import { nativeTheme } from 'electron'
 import { BrowserWindow } from 'electron'
 
-import { ThemeColorBackground } from '@main/shared/constants'
-import { Theme } from '@main/shared/types'
+import { ThemeColorBackground } from '@shared/constants'
+import { Theme } from '@shared/types'
 
 export const configureTheme = (window: BrowserWindow, theme: Theme) => {
   switch (theme) {

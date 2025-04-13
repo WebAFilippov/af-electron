@@ -14,7 +14,7 @@ export const api = {
     ),
 
   // AutoUpdater
-  startUpdate: () => ipcRenderer.send("v1/autoUpdater/start_update"),
+  startDownload: () => ipcRenderer.send("v1/autoUpdater/start_download"),
   installNow: () => ipcRenderer.send("v1/autoUpdater/install-now"),
   installOnQuit: () => ipcRenderer.send("v1/autoUpdater/install-on-quit"),
   onSuccessUpdate: (callback: (version: string) => void) =>
@@ -22,11 +22,11 @@ export const api = {
       "v1/autoUpdater/success_update",
       (_event, version: string) => callback(version),
     ),
-  onUpdateData: (callback: (data: { status: UpdatedStatusDto, data? : Record<string, any>}) => void) =>
+  onUpdateData: (callback: (data: { status: UpdatedStatusDto, data?: Record<string, any> }) => void) =>
     ipcRenderer.on(
       "v1/autoUpdater/update_data",
-      (_event, data: { status: UpdatedStatusDto, data? : Record<string, any>}) => callback(data),
-    ),  
+      (_event, data: { status: UpdatedStatusDto, data?: Record<string, any> }) => callback(data),
+    ),
 
   // Window
   sendWindowTheme: (theme: Theme) => ipcRenderer.send("v1/window/theme", theme),

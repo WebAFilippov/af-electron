@@ -52,4 +52,4 @@ sample({
 
 export { $theme, applyThemeFx, toggleTheme }
 
-$theme.watch((store) => console.log(`theme change: ${store}`))
+// $theme.watch((store) => console.log(`theme change: ${store}`))

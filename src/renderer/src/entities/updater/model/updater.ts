@@ -4,10 +4,9 @@ type UpdatedStatus =
   | 'checking-for-update'
   | 'update-available'
   | 'update-not-available'
-  | 'error'
   | 'update-downloaded'
-  | 'update-cancelled'
   | 'download-progress'
+  | 'error'
   | null
 
 type UpdateData = Record<string, any> | null
@@ -17,7 +16,7 @@ window.api.onUpdateData((data) => {
   data.data ? setUpdateData(data.data) : setUpdateData(null)
 })
 
-const startDowloadFx = createEffect(() => window.api.startUpdate())
+const startDownloadFx = createEffect(() => window.api.startDownload())
 const installNowFx = createEffect(() => window.api.installNow())
 const installOnQuitFx = createEffect(() => window.api.installOnQuit())
 
@@ -25,13 +24,14 @@ const setUpdateStatus = createEvent<UpdatedStatus>()
 const resetUpdateStatus = createEvent()
 
 const setUpdateData = createEvent<UpdateData>()
-const startUpdate = createEvent()
+const startDownload = createEvent()
 const installNow = createEvent()
 const installOnQuit = createEvent()
 
-const $updateStatus = createStore<UpdatedStatus>('error').reset(resetUpdateStatus)
+const $updateStatus = createStore<UpdatedStatus>(null).reset(resetUpdateStatus)
 const $updateData = createStore<UpdateData>(null)
-const $isDowloading = startDowloadFx.pending
+const $isDowloading = startDownloadFx.pending
+const $isActiveStateUpdater = $updateStatus.map((status) => status !== null)
 
 sample({
   clock: setUpdateStatus,
@@ -44,10 +44,10 @@ sample({
 })
 
 sample({
-  clock: startUpdate,
+  clock: startDownload,
   source: $isDowloading,
   filter: (pending) => !pending,
-  target: startDowloadFx
+  target: startDownloadFx
 })
 
 sample({
@@ -60,4 +60,14 @@ sample({
   target: [installOnQuitFx, resetUpdateStatus]
 })
 
-export { $updateStatus, $updateData, $isDowloading, startUpdate, installNow, installOnQuit }
+export {
+  $updateStatus,
+  $updateData,
+  $isDowloading,
+  $isActiveStateUpdater,
+  startDownload,
+  installNow,
+  installOnQuit
+}
+
+$updateStatus.watch((state) => console.log('#update status: ', state))

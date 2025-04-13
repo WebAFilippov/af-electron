@@ -1924,6 +1924,11 @@
   resolved "https://registry.npmjs.org/@types/node/-/node-16.9.1.tgz"
   integrity sha512-QpLcX9ZSsq3YYUUnD3nFDY8H7wctAhQj/TFKL8Ya8v5fMm3CFXxo8zStsLAl780ltoYoo1WvKUVGBQK+1ifr7g==
 
+"@types/ping@^0.4.4":
+  version "0.4.4"
+  resolved "https://registry.npmjs.org/@types/ping/-/ping-0.4.4.tgz#ec45bd022f40949fe8eaf76778a704f73d0be72c"
+  integrity sha512-ifvo6w2f5eJYlXm+HiVx67iJe8WZp87sfa683nlqED5Vnt9Z93onkokNoWqOG21EaE8fMxyKPobE+mkPEyxsdw==
+
 "@types/plist@^3.0.1":
   version "3.0.5"
   resolved "https://registry.npmjs.org/@types/plist/-/plist-3.0.5.tgz#9a0c49c0f9886c8c8696a7904dd703f6284036e0"

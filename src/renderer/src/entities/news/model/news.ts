@@ -6,4 +6,4 @@ const $news = createStore<News[]>([])
 
 export { $news }
 
-$news.watch((news) => console.log('#news ', news))
+// $news.watch((news) => console.log('#news ', news))

@@ -1,11 +1,11 @@
 import { is } from '@electron-toolkit/utils'
 
-import { app, BrowserWindow, nativeImage } from 'electron'
+import { app, BrowserWindow, Menu, nativeImage } from 'electron'
 import { join } from 'node:path'
 
 import { configureTheme } from '@utils/window-theme'
 
-import { Theme } from '@main/shared/types'
+import { Theme } from '@shared/types'
 
 import appIcon from '../../../build/icon.ico?asset'
 
@@ -27,21 +27,17 @@ export const createWindow = (theme: Theme): BrowserWindow => {
     minimizable: true,
     maximizable: true,
     fullscreenable: true,
-    // frame: false,
-    // trafficLightPosition: {
-    //   x: 5,
-    //   y: 5
-    // },
+    frame: false,
+    trafficLightPosition: {
+      x: 5,
+      y: 5
+    },
     webPreferences: {
       preload: join(__dirname, '..', 'preload', 'index.mjs'),
-      // backgroundThrottling: false,
       contextIsolation: true,
       nodeIntegration: false,
       sandbox: false,
-      // allowRunningInsecureContent: false,
       plugins: false,
-      // webgl: true,
-      // enablePreferredSizeMode: false,
       devTools: is.dev
     }
   })
@@ -49,14 +45,11 @@ export const createWindow = (theme: Theme): BrowserWindow => {
   window.flashFrame(false)
   window.setOverlayIcon(nativeImage.createFromPath(appIcon), 'Effectory')
 
-  // app.commandLine.appendSwitch('enable-gpu-rasterization')
-  // app.commandLine.appendSwitch('enable-accelerated-2d-canvas')
-  // app.commandLine.appendSwitch('enable-zero-copy')
-
   configureTheme(window, theme)
 
   if (is.dev) window.webContents.openDevTools()
   if (!is.dev) {
+    Menu.setApplicationMenu(null)
     window.setMenu(null)
     window.setMenuBarVisibility(false)
     window.setSkipTaskbar(false)

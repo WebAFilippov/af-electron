@@ -1,8 +1,9 @@
+import { config } from '@shared/config'
 import { type ChildProcess, spawn } from 'child_process'
 import EventEmitter from 'events'
 import fs from 'fs'
 
-import { config } from '@main/shared/config'
+
 
 export interface AudioMonitorOptions {
   autoStart: boolean

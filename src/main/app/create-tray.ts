@@ -1,4 +1,5 @@
-import { BrowserWindow, Menu, nativeImage, Tray } from 'electron'
+import { app, BrowserWindow, Menu, nativeImage, Tray } from 'electron'
+import electronUpdater from 'electron-updater'
 
 import appIcon from '../../../build/icon.ico?asset'
 
@@ -15,7 +16,7 @@ const toggleWindowVisibility = (window: BrowserWindow | null) => {
   }
 }
 
-export const createTray = (window: BrowserWindow) => {
+export const createTray = (window: BrowserWindow, updater?: electronUpdater.AppUpdater) => {
   const tray = new Tray(nativeImage.createFromPath(appIcon))
 
   const contextMenu = Menu.buildFromTemplate([
@@ -26,7 +27,13 @@ export const createTray = (window: BrowserWindow) => {
     { type: 'separator' },
     {
       label: 'Выход',
-      role: 'quit'
+      click: () => {
+        if (updater && updater.autoInstallOnAppQuit) {
+          updater.quitAndInstall()
+        } else {
+          app.quit()
+        }
+      }
     }
   ])
 

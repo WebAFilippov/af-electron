@@ -6,7 +6,7 @@ plugins:
   - '@trivago/prettier-plugin-sort-imports'
 importOrder:
   - '^[a-zA-Z0-9]'
-  - '^@ui'
+  - '^@app'
   - '^@libs'
   - '^@utils'
   - '^@database'
@@ -15,7 +15,6 @@ importOrder:
   - '^@services'
   - '^@controllers'
   - '^@ipc'
-  - '^@main/shared'
   - '^@shared'
   - '^[./]'
   - '^[../]'

@@ -1,7 +1,7 @@
-import Application, { IApplication } from '@models/application.model'
+import Application, { ApplicationModel } from '@models/application.model'
 
 class ApplicationRepository {
-  async getApplication(): Promise<IApplication> {
+  async getApplication(): Promise<Omit<ApplicationModel, 'id'>> {
     try {
       const model = await Application.findOne({
         attributes: { exclude: ['id'] },
@@ -18,12 +18,12 @@ class ApplicationRepository {
     }
   }
 
-  async updateApplicationField<T extends keyof Omit<IApplication, 'id'>>(
+  async updateApplicationField<T extends keyof Omit<ApplicationModel, 'id'>>(
     field: T,
-    value: IApplication[T]
+    value: ApplicationModel[T]
   ): Promise<boolean> {
     try {
-      if ((field === 'owm_apikey' || field === 'theme') && typeof value != 'string') {
+      if ((field === 'version' || field === 'theme') && typeof value != 'string') {
         throw new Error(
           `Тип значения для поля '${field}' должен быть 'string', получен ${typeof value}.`
         )

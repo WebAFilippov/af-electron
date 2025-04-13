@@ -1,11 +1,11 @@
 import { is } from '@electron-toolkit/utils'
 
-import { app, BrowserWindow, Menu } from 'electron'
+import { app, BrowserWindow } from 'electron'
 
-import { createTray } from '@ui/create-tray'
-import { createWindow } from '@ui/create-window'
+import { createTray } from '@app/create-tray'
+import { createWindow } from '@app/create-window'
 
-import { autoUpdater } from '@utils/autoUpdater'
+import { autoUpdater } from '@utils/auto-updater'
 import { Logger } from '@utils/logger'
 
 import { initDatabase } from '@database/database'
@@ -20,7 +20,6 @@ Logger.setupLogger()
 const log = new Logger('main')
 
 setAutoLaunch(!is.dev)
-!is.dev && Menu.setApplicationMenu(null)
 
 // const isAutoLaunch = process.argv.includes('--auto-launch')
 const gotTheLock = app.requestSingleInstanceLock() // Проверка на запущенное окно -> true if once window
@@ -49,13 +48,11 @@ if (!gotTheLock) {
       const { theme } = await applicationService.getApplication()
 
       const window = createWindow(theme)
-      createTray(window)
+      const updater = autoUpdater(window)
+      createTray(window, updater)
 
       // HANDLERS
       ipcHandlers(window)
-
-      // Updater
-      autoUpdater(window)
 
       log.info('Application ready')
     } catch (error) {

@@ -8,19 +8,16 @@ import {
 
 import { sequelize } from '@database/database'
 
-export interface IApplication {
-  theme: 'dark' | 'light'
-  owm_apikey: string
-}
-
-class Application extends Model<
+export class Application extends Model<
   InferAttributes<Application>,
   InferCreationAttributes<Application>
 > {
   declare id: CreationOptional<number>
-  declare theme: string
-  declare owm_apikey: string
+  declare theme: 'dark' | 'light'
+  declare version: string
 }
+
+export type ApplicationModel  = InferCreationAttributes<Application>
 
 Application.init(
   {
@@ -33,7 +30,7 @@ Application.init(
       type: DataTypes.STRING,
       allowNull: false
     },
-    owm_apikey: {
+    version: {
       type: DataTypes.TEXT,
       allowNull: false
     }

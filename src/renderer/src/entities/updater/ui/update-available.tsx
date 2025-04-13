@@ -2,12 +2,12 @@ import { useUnit } from 'effector-react'
 
 import { Button } from '@shared/ui'
 
-import { $isDowloading, $updateData, startUpdate } from '../model/updater'
+import { $isDowloading, $updateData, startDownload } from '../model/updater'
 
 export const UpdateAvailable = () => {
   const [updateData, handleStartUpdate, isDowloading] = useUnit([
     $updateData,
-    startUpdate,
+    startDownload,
     $isDowloading
   ])
 

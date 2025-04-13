@@ -1,27 +1,11 @@
-import { useUnit } from 'effector-react'
 import { Link } from 'react-router-dom'
-
-import { $updateData } from '@entities/updater/model/updater'
 
 import { ROUTES } from '@shared/config/routing'
 import { Card, CardDescription, CardTitle } from '@shared/ui'
 
 export const HomePage = () => {
-  const updateData = useUnit($updateData)
-
   return (
     <div className="flex h-full w-full flex-col items-center overflow-y-auto overflow-x-hidden p-10">
-      {/* Блок с информацией об обновлении */}
-      {updateData && (
-        <div className="mb-8 w-full max-w-2xl rounded-lg border bg-card p-6 shadow-sm">
-          <h2 className="mb-4 text-2xl font-bold text-foreground">Информация об обновлении</h2>
-          <pre className="overflow-auto rounded bg-muted/50 p-4 text-sm text-foreground">
-            {JSON.stringify(updateData, null, 2)}
-          </pre>
-        </div>
-      )}
-
-      {/* Основной контент */}
       <h1 className="mb-6 text-4xl font-bold text-foreground">Добро пожаловать</h1>
       <div className="grid w-full grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3">
         {ROUTES.map((item) => (
