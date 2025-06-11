@@ -1,24 +1,21 @@
+import { programService } from '@services/program.service'
+import appIcon from '../../../build/icon.ico?asset'
 import { is } from '@electron-toolkit/utils'
 
+import { configureTheme } from '@utils/window-theme'
 import { app, BrowserWindow, Menu, nativeImage } from 'electron'
 import { join } from 'node:path'
 
-import { configureTheme } from '@utils/window-theme'
-
-import { Theme } from '@shared/types'
-
-import appIcon from '../../../build/icon.ico?asset'
-
-export const createWindow = (theme: Theme): BrowserWindow => {
+export const createWindow = async (): Promise<BrowserWindow> => {
   const window = new BrowserWindow({
     icon: nativeImage.createFromPath(appIcon),
-    minWidth: 768,
-    minHeight: 650,
-    width: 1280,
-    height: 800,
+    minWidth: 865,
+    minHeight: 715,
+    width: 865,
+    height: 715,
     center: true,
     show: false,
-    resizable: true,
+    resizable: false,
     focusable: true,
     fullscreen: false,
     title: 'Effectory',
@@ -38,16 +35,20 @@ export const createWindow = (theme: Theme): BrowserWindow => {
       nodeIntegration: false,
       sandbox: false,
       plugins: false,
-      devTools: is.dev
+      devTools: true
     }
   })
 
   window.flashFrame(false)
   window.setOverlayIcon(nativeImage.createFromPath(appIcon), 'Effectory')
 
+  // Настройка темы окна приложения
+  const { theme } = await programService.getProgram()
   configureTheme(window, theme)
 
-  if (is.dev) window.webContents.openDevTools()
+  // if (is.dev) window.webContents.openDevTools()
+  window.webContents.openDevTools()
+
   if (!is.dev) {
     Menu.setApplicationMenu(null)
     window.setMenu(null)

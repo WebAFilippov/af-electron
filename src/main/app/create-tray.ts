@@ -1,7 +1,6 @@
-import { app, BrowserWindow, Menu, nativeImage, Tray } from 'electron'
-import electronUpdater from 'electron-updater'
-
 import appIcon from '../../../build/icon.ico?asset'
+import { app, BrowserWindow, Menu, nativeImage, Tray } from 'electron'
+import { type AppUpdater } from 'electron-updater'
 
 const toggleWindowVisibility = (window: BrowserWindow | null) => {
   if (!window) return
@@ -16,7 +15,7 @@ const toggleWindowVisibility = (window: BrowserWindow | null) => {
   }
 }
 
-export const createTray = (window: BrowserWindow, updater?: electronUpdater.AppUpdater) => {
+export const createTray = (window: BrowserWindow, updater: AppUpdater) => {
   const tray = new Tray(nativeImage.createFromPath(appIcon))
 
   const contextMenu = Menu.buildFromTemplate([

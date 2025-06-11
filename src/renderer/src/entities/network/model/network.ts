@@ -1,21 +1,11 @@
-import { createEvent, restore, sample } from 'effector'
+import { createEvent, restore } from 'effector'
 
-import { $windowShow } from '@entities/window'
-
-window.api.checkNetworkStatus((state) => {
-  setNetworkStatus(state)
+window.api.networkState((state) => {
+  setNetworkState(state)
 })
 
-const setNetworkStatus = createEvent<boolean>()
+const setNetworkState = createEvent<boolean>()
 
-const $isNetwork = restore(setNetworkStatus, false)
-
-sample({
-  clock: $windowShow,
-  filter: (state) => Boolean(state),
-  target: setNetworkStatus
-})
+const $isNetwork = restore(setNetworkState, false)
 
 export { $isNetwork }
-
-// $isNetwork.watch((state) => console.log('network status: ', state))

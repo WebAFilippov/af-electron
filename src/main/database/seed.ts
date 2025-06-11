@@ -1,6 +1,6 @@
+import Application, { ApplicationModel } from '@models/program.model'
 import { Logger } from '@utils/logger'
-
-import Application, { ApplicationModel } from '@models/application.model'
+import { app } from 'electron'
 
 const log = new Logger('seed')
 
@@ -9,10 +9,11 @@ const seedDatabase = async () => {
     const countApplication = await Application.count()
 
     if (!countApplication) {
+      const version = app.getVersion()
       const initialApplication: Omit<ApplicationModel, 'id'>[] = [
         {
           theme: 'light',
-          version: '0.0.0'
+          version
         }
       ]
 

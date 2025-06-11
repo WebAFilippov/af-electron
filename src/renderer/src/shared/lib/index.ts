@@ -1,2 +1,1 @@
-export { formatedDate } from '../utils/formatedDate'
-export { cn } from './cn'
+export { cn } from './utils'

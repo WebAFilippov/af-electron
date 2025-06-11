@@ -1,20 +1,15 @@
-import { is } from '@electron-toolkit/utils'
-
-import { app, BrowserWindow } from 'electron'
-
 import { createTray } from '@app/create-tray'
 import { createWindow } from '@app/create-window'
-
-import { autoUpdater } from '@utils/auto-updater'
-import { Logger } from '@utils/logger'
-
 import { initDatabase } from '@database/database'
 import { seedDatabase } from '@database/seed'
+import { is } from '@electron-toolkit/utils'
+import { ipcHandlers } from '@ipc/index'
+import { setAutoLaunch } from '@utils/auto-launch'
+import { autoUpdater } from '@lib/updater'
+import { Logger } from '@utils/logger'
+import { app, BrowserWindow } from 'electron'
 
-import { applicationService } from '@services/application.service'
-
-import { ipcHandlers } from './ipc'
-import { setAutoLaunch } from './utils/auto-launch'
+process.env['ELECTRON_DISABLE_SECURITY_WARNINGS'] = 'true'
 
 Logger.setupLogger()
 const log = new Logger('main')
@@ -45,16 +40,11 @@ if (!gotTheLock) {
       await initDatabase()
       await seedDatabase()
 
-      const { theme } = await applicationService.getApplication()
-
-      const window = createWindow(theme)
+      const window = await createWindow()
       const updater = autoUpdater(window)
       createTray(window, updater)
-
-      // HANDLERS
-      ipcHandlers(window)
-
-      log.info('Application ready')
+      ipcHandlers(window, updater)
+      // initUdpServer()
     } catch (error) {
       log.error(error)
     }

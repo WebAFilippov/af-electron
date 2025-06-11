@@ -1,23 +1,21 @@
 {
-  "extends": ["@electron-toolkit/tsconfig/tsconfig.node.json"],
-  "include": ["electron.vite.config.*", "src/main/**/*"],
+  "extends": "@electron-toolkit/tsconfig/tsconfig.node.json",
+  "include": ["electron.vite.config.*", "src/main/**/*", "src/preload/**/*"],
   "compilerOptions": {
     "composite": true,
     "types": ["electron-vite/node"],
-    "baseUrl": "./src/main",
-    /* Alias */
+    "baseUrl": ".",
     "paths": {
-      "@/*": ["/*"],
-      "@app/*": ["app/*"],
-      "@ipc/*": ["ipc/*"],
-      "@utils/*": ["utils/*"],
-      "@lib/*": ["lib/*"],
-      "@database/*": ["database/*"],
-      "@models/*": ["models/*"],
-      "@services/*": ["services/*"],
-      "@controllers/*": ["controllers/*"],
-      "@repositories/*": ["repositories/*"],
-      "@shared/*": ["shared/*"]
+      "@app/*": ["src/main/app/*"],
+      "@ipc/*": ["src/main/ipc/*"],
+      "@utils/*": ["src/main/utils/*"],
+      "@lib/*": ["src/main/lib/*"],
+      "@database/*": ["src/main/database/*"],
+      "@models/*": ["src/main/models/*"],
+      "@services/*": ["src/main/services/*"],
+      "@controllers/*": ["src/main/controllers/*"],
+      "@repositories/*": ["src/main/repositories/*"],
+      "@shared/*": ["src/main/shared/*"],
     }
   }
 }

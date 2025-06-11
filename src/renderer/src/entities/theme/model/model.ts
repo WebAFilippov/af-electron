@@ -24,8 +24,8 @@ const getWindowTheme = createEffect<void, Theme, Error>(async () => {
     throw new Error('Error getting window theme')
   }
 })
-const sendWindowTheme = createEffect<Theme, void, Error>((theme) => {
-  window.api.sendWindowTheme(theme)
+const updateWindowTheme = createEffect<Theme, void, Error>((theme) => {
+  window.api.updateWindowTheme(theme)
 })
 
 sample({
@@ -37,7 +37,7 @@ sample({
     }
     return 'light'
   },
-  target: [$theme, applyThemeFx, sendWindowTheme]
+  target: [$theme, applyThemeFx, updateWindowTheme]
 })
 
 sample({

@@ -1,11 +1,18 @@
-import { Link } from 'react-router-dom'
-
+import { $updateData, $updateStatus } from '@entities/updater/model/model-updater'
 import { ROUTES } from '@shared/config/routing'
 import { Card, CardDescription, CardTitle } from '@shared/ui'
+import { useUnit } from 'effector-react'
+import { Link } from 'react-router-dom'
 
 export const HomePage = () => {
+  const [updateData, updateStatus] = useUnit([$updateData, $updateStatus])
+
   return (
     <div className="flex h-full w-full flex-col items-center overflow-y-auto overflow-x-hidden p-10">
+      {updateData && (
+        <div>{Object.entries(updateData).map(([key, value]) => `${key}: ${value}`)}</div>
+      )}
+      {updateStatus}
       <h1 className="mb-6 text-4xl font-bold text-foreground">Добро пожаловать</h1>
       <div className="grid w-full grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3">
         {ROUTES.map((item) => (
