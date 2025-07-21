@@ -1,10 +1,9 @@
+import { AppStarter } from './app-starter'
 import { createEffect, createEvent, createStore, sample } from 'effector'
 
-import { AppStarted } from '@shared/config/init'
+type Theme = 'light' | 'dark'
 
-import { Theme } from '../types'
-
-const toggleTheme = createEvent()
+const themeToggle = createEvent()
 
 const $theme = createStore<Theme>('light')
 
@@ -17,19 +16,19 @@ const applyThemeFx = createEffect<Theme, void, Error>((theme) => {
   root.classList.remove('light', 'dark')
   root.classList.add(theme)
 })
-const getWindowTheme = createEffect<void, Theme, Error>(async () => {
+const getThemeFx = createEffect<void, Theme, Error>(async () => {
   try {
     return await window.api.getWindowTheme()
   } catch (err) {
     throw new Error('Error getting window theme')
   }
 })
-const updateWindowTheme = createEffect<Theme, void, Error>((theme) => {
+const updateThemeFx = createEffect<Theme, void, Error>((theme) => {
   window.api.updateWindowTheme(theme)
 })
 
 sample({
-  clock: toggleTheme,
+  clock: themeToggle,
   source: $theme,
   fn: (theme) => {
     if (theme === 'light') {
@@ -37,19 +36,17 @@ sample({
     }
     return 'light'
   },
-  target: [$theme, applyThemeFx, updateWindowTheme]
+  target: [$theme, applyThemeFx, updateThemeFx]
 })
 
 sample({
-  clock: getWindowTheme.doneData,
+  clock: getThemeFx.doneData,
   target: [$theme, applyThemeFx]
 })
 
 sample({
-  clock: AppStarted,
-  target: [getWindowTheme]
+  clock: AppStarter,
+  target: [getThemeFx]
 })
 
-export { $theme, applyThemeFx, toggleTheme }
-
-// $theme.watch((store) => console.log(`theme change: ${store}`))
+export { $theme, applyThemeFx, themeToggle }

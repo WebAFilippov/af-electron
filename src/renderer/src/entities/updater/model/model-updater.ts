@@ -54,14 +54,17 @@ const installNowUpdateFx = createEffect(() => {
 const InstallOnQuitUpdateFx = createEffect(() => {
   window.api.installOnQuit()
   setUpdateData(DEFAULT_UPDATE_DATA)
+  setIsDownloaded(true)
 })
 
 const setVersionApp = createEvent<string>()
 const setUpdatedApp = createEvent<boolean>()
+const setIsDownloaded = createEvent<boolean>()
 const setUpdateData = createEvent<UpdateDataDto>()
 
 const $versionApp = restore(setVersionApp, '')
 const $updatedApp = restore(setUpdatedApp, false)
+const $isDowloaded = restore(setIsDownloaded, false)
 const $updateData = restore<UpdateDataDto>(setUpdateData, DEFAULT_UPDATE_DATA)
 
 // Successful sample
@@ -104,12 +107,14 @@ export {
   $versionApp,
   $updatedApp,
   $updateData,
+  $isDowloaded,
   successfulFx,
   checkForUpdateFx,
   retryDownloadFx,
   downloadUpdateFx,
   installNowUpdateFx,
-  InstallOnQuitUpdateFx
+  InstallOnQuitUpdateFx,
+  setIsDownloaded
 }
 
 $updateData.watch((data) => console.log(`#data ${JSON.stringify(data)}`))

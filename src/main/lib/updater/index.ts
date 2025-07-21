@@ -5,14 +5,15 @@ import electronUpdater, { type AppUpdater } from 'electron-updater'
 export const autoUpdater = (window: BrowserWindow): AppUpdater => {
   const { autoUpdater } = electronUpdater
 
-  // autoUpdater.setFeedURL({
-  //   provider: 'generic',
-  //   url: 'http://localhost:10000/updates/'
-  // })
+  autoUpdater.setFeedURL({
+    provider: 'generic',
+    url: 'http://localhost:10000/updates/'
+  })
 
   autoUpdater.logger = Logger
   autoUpdater.logger.info = Logger.info
 
+  autoUpdater.autoRunAppAfterInstall = true
   autoUpdater.autoDownload = false
   autoUpdater.autoInstallOnAppQuit = false
 
@@ -43,7 +44,6 @@ export const autoUpdater = (window: BrowserWindow): AppUpdater => {
     }
 
     window.webContents.send('update_data', data)
-    autoUpdater.downloadUpdate()
   })
 
   //  Обновление отсутствует

@@ -4,8 +4,10 @@ import { initDatabase } from '@database/database'
 import { seedDatabase } from '@database/seed'
 import { is } from '@electron-toolkit/utils'
 import { ipcHandlers } from '@ipc/index'
-import { setAutoLaunch } from '@utils/auto-launch'
+import LittleFSPackager from '@lib/mklittlefs/mklittlefs'
+import { initUdpServer } from '@lib/udp-server/init'
 import { autoUpdater } from '@lib/updater'
+import { setAutoLaunch } from '@utils/auto-launch'
 import { Logger } from '@utils/logger'
 import { app, BrowserWindow } from 'electron'
 
@@ -34,7 +36,7 @@ if (!gotTheLock) {
       window.focus()
     }
   })
-
+  
   app.whenReady().then(async () => {
     try {
       await initDatabase()
@@ -44,7 +46,11 @@ if (!gotTheLock) {
       const updater = autoUpdater(window)
       createTray(window, updater)
       ipcHandlers(window, updater)
-      // initUdpServer()
+      initUdpServer(window)
+
+      const pack = new LittleFSPackager()
+
+      pack.createImage()
     } catch (error) {
       log.error(error)
     }

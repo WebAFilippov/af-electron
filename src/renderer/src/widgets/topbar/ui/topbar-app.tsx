@@ -1,18 +1,19 @@
-import { useUnit } from 'effector-react'
-import { MaximizeIcon, MinimizeIcon, MinusIcon, X } from 'lucide-react'
-
+import { cn } from '@shared/lib'
 import {
   $windowFullscreen,
   $windowMaximize,
+  GateWindow,
   setWindowClose,
   setWindowMaximize,
   setWindowMinimize
-} from '@entities/window'
-
-import { cn } from '@shared/lib'
+} from '@shared/model'
 import { Button } from '@shared/ui'
+import { useGate, useUnit } from 'effector-react'
+import { MaximizeIcon, MinimizeIcon, MinusIcon, X } from 'lucide-react'
 
 export const TopbarApp = () => {
+  useGate(GateWindow)
+
   const [windowFullscreen, windowMaximize, handleMinimize, handleMaximize, handleClose] = useUnit([
     $windowFullscreen,
     $windowMaximize,
@@ -25,34 +26,34 @@ export const TopbarApp = () => {
     <>
       <div
         className={cn(
-          'absolute inset-0 z-10 flex h-[33px] w-full items-center justify-end border-b border-border bg-background area-drag',
+          'absolute inset-0 flex h-[33px] w-full items-center justify-end border-b border-border bg-background area-drag',
           windowFullscreen && 'hidden'
         )}
       >
         <div className="flex space-x-0 area-no-drag">
           <Button
             variant="outline"
-            className="h-8 w-8 cursor-default border-none rounded-none"
+            className="h-8 w-10 cursor-default border-none rounded-none shadow-none duration-0 dark:text-foreground dark:bg-background"
             tabIndex={-1}
             onClick={() => handleMinimize()}
           >
-            <MinusIcon size="1rem" />
+            <MinusIcon />
           </Button>
           <Button
             variant="outline"
-            className="h-8 w-8 cursor-default border-none rounded-none"
+            className="h-8 w-10 cursor-default border-none rounded-none dark:bg-background shadow-none duration-0 dark:text-foreground"
             tabIndex={-1}
             onClick={() => handleMaximize()}
           >
-            {windowMaximize ? <MinimizeIcon size="1rem" /> : <MaximizeIcon size="1rem" />}
+            {windowMaximize ? <MinimizeIcon /> : <MaximizeIcon />}
           </Button>
           <Button
             variant="outline"
-            className="h-8 w-8 cursor-default border-none rounded-none hover:bg-destructive hover:text-destructive-foreground"
+            className="h-8 w-10 cursor-default border-none rounded-none dark:bg-background hover:bg-destructive hover:text-destructive-foreground dark:text-foreground bg-background shadow-none duration-0 dark:hover:bg-destructive"
             tabIndex={-1}
             onClick={() => handleClose()}
           >
-            <X size="1rem" />
+            <X />
           </Button>
         </div>
       </div>

@@ -63,9 +63,6 @@ export default defineConfig({
       }),
       tailwindcss()
     ],
-    define: {
-      'process.env': process.env
-    },
     output: {
       assetFileNames: ['src/shared/assets/fonts/[name].[ext]']
     },

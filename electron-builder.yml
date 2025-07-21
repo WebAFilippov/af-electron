@@ -1,25 +1,27 @@
 appId: com.AFilippov.Effectory
 productName: Effectory
 copyright: Copyright © 2025 WebAFilippov
-buildVersion: 1.0.0
+buildVersion: 0.1.0
 
 directories:
   buildResources: build
+  output: dist
 
 files:
-  - "!**/.vscode/*"
-  - "!src/*"
-  - "!electron.vite.config.{js,ts,mjs,cjs}"
-  - "!{.eslintignore,.eslintrc.cjs,.prettierignore,.prettierrc.yaml,dev-app-update.yml,CHANGELOG.md,README.md}"
-  - "!{.env,.env.*,.npmrc,pnpm-lock.yaml}"
-  - "!{tsconfig.json,tsconfig.node.json,tsconfig.web.json}"
-  - "!node_modules/**/*.md"
-  - "!node_modules/**/*.map"
-  - "!src/**/*.test.*"
-  - "!logs/*"
+  - '!**/.vscode/*'
+  - '!src/*'
+  - '!electron.vite.config.{js,ts,mjs,cjs}'
+  - '!{.eslintignore,.eslintrc.cjs,.prettierignore,.prettierrc.yaml,dev-app-update.yml,CHANGELOG.md,README.md}'
+  - '!{.env,.env.*,.npmrc,pnpm-lock.yaml}'
+  - '!{tsconfig.json,tsconfig.node.json,tsconfig.web.json}'
+  - '!node_modules/**/*.md'
+  - '!node_modules/**/*.map'
+  - '!src/**/*.test.*'
+  - '!logs/*'
 
 asarUnpack:
-  - resources/**
+  - 'resources/**'
+
 
 win:
   icon: build/icon.ico
@@ -35,12 +37,12 @@ nsis:
   createDesktopShortcut: always
   createStartMenuShortcut: true
   shortcutName: Effectory
-  artifactName: "${productName}-${version}-setup.${ext}"
-  uninstallDisplayName: "${productName} ${version}"
+  artifactName: '${productName}-${version}-setup.${ext}'
+  uninstallDisplayName: '${productName} ${version}'
   installerIcon: build/icon.ico
   uninstallerIcon: build/icon.ico
 
-npmRebuild: true
+npmRebuild: false
 
 publish:
   provider: github

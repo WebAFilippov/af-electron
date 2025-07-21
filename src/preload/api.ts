@@ -30,6 +30,10 @@ export const api = {
   maximazeWindow: () => ipcRenderer.send('maximize'),
   closeWindow: () => ipcRenderer.send('close'),
 
+  // Device
+  isConnectedDevice: (callback: (state: boolean) => void) =>
+    ipcRenderer.on('is_connected_device', (_event, state: boolean) => callback(state)),
+
   // External_link
   openExternal: (url: string) => ipcRenderer.send('external_open', url)
 } as const satisfies Record<string, (...args: any) => any>

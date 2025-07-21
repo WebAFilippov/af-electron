@@ -1,4 +1,3 @@
-// @pages/error-boundary/index.tsx
 import { FC, ReactNode } from 'react'
 import { isRouteErrorResponse, useNavigate, useRouteError } from 'react-router-dom'
 

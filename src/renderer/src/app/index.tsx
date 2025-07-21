@@ -1,10 +1,10 @@
 import { App } from './application'
 import './styles/globals.css'
-import { AppStarted } from '@shared/config/init'
+import { AppStarter } from '@shared/model/app-starter'
 import ReactDOM from 'react-dom/client'
 
 const container = document.getElementById('root') as HTMLElement
 const root = ReactDOM.createRoot(container)
 
-AppStarted()
+AppStarter()
 root.render(<App />)

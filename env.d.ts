@@ -1,7 +1,7 @@
 /// <reference types="vite/client" />
 
 interface ImportMetaEnv {
-  VITE_MORPHER_APIKEY: string
+  readonly VITE_API_ENDPOINT: string
 }
 
 interface ImportMeta {

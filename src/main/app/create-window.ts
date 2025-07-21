@@ -15,7 +15,7 @@ export const createWindow = async (): Promise<BrowserWindow> => {
     height: 715,
     center: true,
     show: false,
-    resizable: false,
+    resizable: true,
     focusable: true,
     fullscreen: false,
     title: 'Effectory',
