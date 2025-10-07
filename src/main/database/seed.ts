@@ -1,4 +1,4 @@
-import Application, { ApplicationModel } from '@models/program.model'
+import Program, { ProgramModel } from '@models/program.model'
 import { Logger } from '@utils/logger'
 import { app } from 'electron'
 
@@ -6,18 +6,18 @@ const log = new Logger('seed')
 
 const seedDatabase = async () => {
   try {
-    const countApplication = await Application.count()
+    const countApplication = await Program.count()
 
     if (!countApplication) {
       const version = app.getVersion()
-      const initialApplication: Omit<ApplicationModel, 'id'>[] = [
+      const initialApplication: Omit<ProgramModel, 'id'>[] = [
         {
           theme: 'light',
           version
         }
       ]
 
-      await Application.bulkCreate(initialApplication)
+      await Program.bulkCreate(initialApplication)
     }
   } catch (error) {
     log.error('Ошибка заполнения базы данных: ', error)

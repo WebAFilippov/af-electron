@@ -3,6 +3,8 @@ import { ipcRenderer } from 'electron'
 import { UpdateCheckResult } from 'electron-updater'
 
 export const api = {
+  getScreenSources: () => ipcRenderer.invoke('get-screen-stream'),
+
   // Network
   networkState: (callback: (state: boolean) => void) =>
     ipcRenderer.on('network_state', (_event, state: boolean) => callback(state)),

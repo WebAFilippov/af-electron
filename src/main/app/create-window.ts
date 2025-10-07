@@ -1,7 +1,6 @@
-import { programService } from '@services/program.service'
 import appIcon from '../../../build/icon.ico?asset'
 import { is } from '@electron-toolkit/utils'
-
+import { programService } from '@services/program.service'
 import { configureTheme } from '@utils/window-theme'
 import { app, BrowserWindow, Menu, nativeImage } from 'electron'
 import { join } from 'node:path'

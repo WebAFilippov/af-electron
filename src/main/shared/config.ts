@@ -13,8 +13,10 @@ const updateOutputPath = is.dev
   ? join(userDataPath, 'update_output', 'littlefs.bin')
   : join(userDataPath, 'update_output', 'littlefs.bin')
 
-
 const fileCSVPath = join(app.getAppPath(), 'resources', 'data.csv')
+const fileFFMpeg = is.dev
+  ? join(app.getAppPath(), 'resources', 'ffmpeg.exe')
+  : join(app.getAppPath(), 'resources', 'ffmpeg.exe').replace('app.asar', 'app.asar.unpacked')
 const fileAFWinAudio = is.dev
   ? join(app.getAppPath(), 'resources', 'af-win-audio.exe')
   : join(app.getAppPath(), 'resources', 'af-win-audio.exe').replace('app.asar', 'app.asar.unpacked')
@@ -31,6 +33,7 @@ export const config = {
   updateSourcePath,
   updateOutputPath,
   fileCSVPath,
+  fileFFMpeg,
   fileAFWinAudio,
   fileMKLittleFS,
   intervalCheckIsOnline: 10000

@@ -4,6 +4,8 @@ import { initDatabase } from '@database/database'
 import { seedDatabase } from '@database/seed'
 import { is } from '@electron-toolkit/utils'
 import { ipcHandlers } from '@ipc/index'
+import { getPhysicalDisplays } from '@lib/ambilight_pc/getDisplays'
+import type { Displays } from '@lib/ambilight_pc/getDisplays'
 import LittleFSPackager from '@lib/mklittlefs/mklittlefs'
 import { initUdpServer } from '@lib/udp-server/init'
 import { autoUpdater } from '@lib/updater'
@@ -17,7 +19,6 @@ Logger.setupLogger()
 const log = new Logger('main')
 
 setAutoLaunch(!is.dev)
-
 // const isAutoLaunch = process.argv.includes('--auto-launch')
 const gotTheLock = app.requestSingleInstanceLock() // Проверка на запущенное окно -> true if once window
 
@@ -36,7 +37,7 @@ if (!gotTheLock) {
       window.focus()
     }
   })
-  
+
   app.whenReady().then(async () => {
     try {
       await initDatabase()
@@ -44,9 +45,14 @@ if (!gotTheLock) {
 
       const window = await createWindow()
       const updater = autoUpdater(window)
+
       createTray(window, updater)
       ipcHandlers(window, updater)
       initUdpServer(window)
+
+      console.log(getPhysicalDisplays())
+      let das:Displays
+      das.offset.y
 
       const pack = new LittleFSPackager()
 
