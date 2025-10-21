@@ -1,54 +1,53 @@
-import { screen } from 'electron'
+import { Logger } from '@utils/logger'
+import { Display, screen } from 'electron'
 
-/**
- * Тип данных для представления информации о дисплее.
- */
-type Displays = {
-  /** Уникальный идентификатор дисплея (номер, который возвращает Electron) */
+const log = new Logger('getDisplays')
+
+export type Displays = {
   id: number
-
-  /** Название дисплея (например, 'SyncMaster', 'SAMSUNG') */
   label: string
-
-  /** Флаг, указывающий, является ли дисплей основным (primary) */
   primary: boolean
-
-  /** Флаг, указывающий, встроенный это дисплей (например, экран ноутбука) */
   internal: boolean
-
-  /** Масштаб дисплея (scaleFactor). Используется для HiDPI дисплеев */
   scale: number
-
-  /** Поворот дисплея в градусах (0, 90, 180, 270) */
   rotation: number
-
-  /** Частота обновления дисплея (в герцах) */
   fps: number
-
-  /** Смещение дисплея относительно глобального пространства рабочего стола */
-  offset: {
-    /** смещение по горизонтали (с учётом scale) */
-    x: number // смещение по горизонтали (с учётом scale)
-    /** смещение по вертикали (с учётом scale) */
-    y: number // смещение по вертикали (с учётом scale)
-  }
-
-  /** Фактический размер дисплея с учётом масштабирования */
   size: {
-    width: number // ширина в пикселях (умножена на scale)
-    height: number // высота в пикселях (умножена на scale)
+    offsetX: number
+    offsetY: number
+    width: number
+    height: number
   }
-}
+  sizeWorkArea: {
+    offsetX: number
+    offsetY: number
+    width: number
+    height: number
+  }
+}[]
 
-/**
- * Функция возвращает массив объектов с полной информацией о всех подключённых дисплеях.
- * @returns {Displays[]} Массив дисплеев с физическими размерами, смещениями и дополнительными параметрами.
- */
-const getPhysicalDisplays = (): Displays[] => {
-  const displays = screen.getAllDisplays()
+export const getPhysicalDisplays = (): null | Displays => {
   const primaryDisplay = screen.getPrimaryDisplay()
+  const displays = screen.getAllDisplays()
+
+  if (!displays) {
+    log.error('Дисплей не найден')
+    return null
+  }
+
+  screen.on('display-added', (_, newDisplay) => {
+    console.log('display-added')
+  })
+
+  screen.on('display-removed', (_, oldDisplay) => {
+    console.log('display-removed')
+  })
+
+  screen.on('display-metrics-changed', (_, display) => {
+    console.log('display-metrics-changed')
+  })
 
   return displays.map((display) => {
+    const { offsetX, offsetY, d_width, d_height } = calcSizes(display)
     return {
       id: display.id,
       label: display.label,
@@ -56,18 +55,28 @@ const getPhysicalDisplays = (): Displays[] => {
       internal: display.internal,
       scale: display.scaleFactor,
       rotation: display.rotation,
-      fps: display.displayFrequency,
-      offset: {
-        x: display.nativeOrigin.x * display.scaleFactor,
-        y: display.nativeOrigin.y * display.scaleFactor
-      },
-      size: {
-        width: display.size.width * display.scaleFactor,
-        height: display.size.height * display.scaleFactor
-      }
+      fps: Math.trunc(display.displayFrequency),
+      size: { offsetX: offsetX, offsetY: offsetY, width: d_width, height: d_height },
+      sizeWorkArea: { offsetX: offsetX, offsetY: offsetY, width: d_width, height: d_height }
     }
   })
 }
 
-export type { Displays }
-export { getPhysicalDisplays }
+// helpers
+const calcSizes = (display: Display) => {
+  const offsetX = Math.ceil(display.nativeOrigin.x * display.scaleFactor)
+  const offsetY = Math.ceil(display.nativeOrigin.y * display.scaleFactor)
+  const d_width = Math.ceil(display.size.width * display.scaleFactor)
+  const d_height = Math.ceil(display.size.height * display.scaleFactor)
+
+  return {
+    offsetX,
+    offsetY,
+    d_width,
+    d_height
+  }
+}
+
+
+// ffmpeg -filter_complex ddagrab=offset_x=0:offset_y=0:output_idx=0:draw_mouse=0:framerate=30,hwdownload,format=bgra,scale=256:160 -c:v libx264 -crf 18 output_display2.mp4
+// ffmpeg -filter_complex ddagrab=offset_x=0:offset_y=0:output_idx=0:draw_mouse=0:framerate=30,hwdownload,format=bgra,scale=192:108 -f rawvideo -

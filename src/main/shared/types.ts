@@ -7,4 +7,7 @@ export interface WindowState {
 
 export type Theme = 'light' | 'dark'
 
-
+export enum ThemeColorBackground {
+  DARK = '#000000',
+  LIGHT = '#ffffff'
+}

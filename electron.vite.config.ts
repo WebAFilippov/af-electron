@@ -1,5 +1,4 @@
 // @ts-nocheck
-import { is } from '@electron-toolkit/utils'
 import tailwindcss from '@tailwindcss/vite'
 import react from '@vitejs/plugin-react'
 import { bytecodePlugin, defineConfig, externalizeDepsPlugin } from 'electron-vite'

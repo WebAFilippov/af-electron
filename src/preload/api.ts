@@ -1,20 +1,60 @@
 import { Theme, UpdateDataDto, WindowState } from './transport'
-import { ipcRenderer } from 'electron'
+import { ipcRenderer, Display } from 'electron' // Правильный импорт
 import { UpdateCheckResult } from 'electron-updater'
 
-export const api = {
-  getScreenSources: () => ipcRenderer.invoke('get-screen-stream'),
-
-  // Network
-  networkState: (callback: (state: boolean) => void) =>
-    ipcRenderer.on('network_state', (_event, state: boolean) => callback(state)),
+interface Api {
+  // Display
+  getPhysicalDisplays: () => Promise<Display[]>
+  addPhysicalDisplay: (callback: (data: Display) => void) => void
+  removePhysicalDisplay: (callback: (data: Display) => void) => void
+  changeMetricsPhisycalDisplay: (callback: (data: { display: Display; changeMetrics: string[] }) => void) => void
 
   // Updater-Desktop
-  onUpdateData: (callback: (data: UpdateDataDto) => void) =>
-    ipcRenderer.on('update_data', (_event, data: UpdateDataDto) => callback(data)),
-  successfulUpdate: (): Promise<{ version: string; updated: boolean }> =>
+  onUpdateData: (callback: (data: UpdateDataDto) => void) => void
+  successfulUpdate: () => Promise<{ version: string; updated: boolean }>
+  checkForUpdates: () => Promise<UpdateCheckResult | null>
+  retryDowmload: () => void
+  startDownload: () => void
+  installNow: () => void
+  installOnQuit: () => void
+
+  // Window
+  windowState: (callback: (state: WindowState) => void) => void
+  updateWindowTheme: (theme: Theme) => void
+  getWindowTheme: () => Promise<Theme>
+  toggleFullscreenWindow: () => void
+  minimazeWindow: () => void
+  maximazeWindow: () => void
+  closeWindow: () => void
+
+  // External_link
+  openExternal: (url: string) => void
+}
+
+export const api: Api = {
+  // Display
+  getPhysicalDisplays: () =>
+    ipcRenderer.invoke('get_physicals_displays'),
+  addPhysicalDisplay: (callback) => {
+    ipcRenderer.on('add_physical_display', (_event, data: Display) => callback(data))
+  },
+  removePhysicalDisplay: (callback) => {
+    ipcRenderer.on('remove_physical_display', (_event, data: Display) => callback(data))
+  },
+  changeMetricsPhisycalDisplay: (callback) => {
+    ipcRenderer.on(
+      'change_metrics_phisycal_display',
+      (_event, data: { display: Display; changeMetrics: string[] }) => callback(data)
+    )
+  },
+
+  // Updater-Desktop
+  onUpdateData: (callback) => {
+    ipcRenderer.on('update_data', (_event, data: UpdateDataDto) => callback(data))
+  },
+  successfulUpdate: () =>
     ipcRenderer.invoke('successful_update'),
-  checkForUpdates: (): Promise<UpdateCheckResult | null> =>
+  checkForUpdates: () =>
     ipcRenderer.invoke('checking_for_update'),
   retryDowmload: () => ipcRenderer.send('retry_checking_for_update'),
   startDownload: () => ipcRenderer.send('start_download'),
@@ -22,20 +62,16 @@ export const api = {
   installOnQuit: () => ipcRenderer.send('install_on_quit'),
 
   // Window
-  windowState: (callback: (state: WindowState) => void) => {
+  windowState: (callback) => {
     ipcRenderer.on('window_state', (_event, state: WindowState) => callback(state))
   },
-  updateWindowTheme: (theme: Theme) => ipcRenderer.send('update_theme', theme),
+  updateWindowTheme: (theme) => ipcRenderer.send('update_theme', theme),
   getWindowTheme: () => ipcRenderer.invoke('get_theme'),
   toggleFullscreenWindow: () => ipcRenderer.send('toggle_fullscreen'),
   minimazeWindow: () => ipcRenderer.send('minimaze'),
   maximazeWindow: () => ipcRenderer.send('maximize'),
   closeWindow: () => ipcRenderer.send('close'),
 
-  // Device
-  isConnectedDevice: (callback: (state: boolean) => void) =>
-    ipcRenderer.on('is_connected_device', (_event, state: boolean) => callback(state)),
-
   // External_link
-  openExternal: (url: string) => ipcRenderer.send('external_open', url)
-} as const satisfies Record<string, (...args: any) => any>
+  openExternal: (url) => ipcRenderer.send('external_open', url)
+} as const

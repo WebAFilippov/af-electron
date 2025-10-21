@@ -1,6 +1,5 @@
 import { ProgramModel } from '@models/program.model'
 import { programRepository } from '@repositories/program.repository'
-import ping from 'ping'
 
 class ProgramService {
   async getProgram(): Promise<Omit<ProgramModel, 'id'>> {
@@ -19,15 +18,6 @@ class ProgramService {
       return await programRepository.updateProgramField(field, value)
     } catch (error) {
       throw error
-    }
-  }
-
-  async isHostReachable(host: string): Promise<boolean> {
-    try {
-      const { alive } = await ping.promise.probe(host)
-      return alive
-    } catch {
-      return false
     }
   }
 }

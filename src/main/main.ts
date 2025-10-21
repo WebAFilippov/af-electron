@@ -4,10 +4,7 @@ import { initDatabase } from '@database/database'
 import { seedDatabase } from '@database/seed'
 import { is } from '@electron-toolkit/utils'
 import { ipcHandlers } from '@ipc/index'
-import { getPhysicalDisplays } from '@lib/ambilight_pc/getDisplays'
-import type { Displays } from '@lib/ambilight_pc/getDisplays'
-import LittleFSPackager from '@lib/mklittlefs/mklittlefs'
-import { initUdpServer } from '@lib/udp-server/init'
+import { Monitors } from '@lib/screen/screen'
 import { autoUpdater } from '@lib/updater'
 import { setAutoLaunch } from '@utils/auto-launch'
 import { Logger } from '@utils/logger'
@@ -48,15 +45,8 @@ if (!gotTheLock) {
 
       createTray(window, updater)
       ipcHandlers(window, updater)
-      initUdpServer(window)
 
-      console.log(getPhysicalDisplays())
-      let das:Displays
-      das.offset.y
-
-      const pack = new LittleFSPackager()
-
-      pack.createImage()
+      const monitors = new Monitors(window)
     } catch (error) {
       log.error(error)
     }

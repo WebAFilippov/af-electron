@@ -17,7 +17,7 @@ export const createWindow = async (): Promise<BrowserWindow> => {
     resizable: true,
     focusable: true,
     fullscreen: false,
-    title: 'Effectory',
+    title: 'AFLED Controller',
     titleBarStyle: 'hidden',
     autoHideMenuBar: false,
     minimizable: true,
@@ -39,7 +39,7 @@ export const createWindow = async (): Promise<BrowserWindow> => {
   })
 
   window.flashFrame(false)
-  window.setOverlayIcon(nativeImage.createFromPath(appIcon), 'Effectory')
+  window.setOverlayIcon(nativeImage.createFromPath(appIcon), 'AFLED Controller')
 
   // Настройка темы окна приложения
   const { theme } = await programService.getProgram()

@@ -20,7 +20,6 @@ export const ipcUpdater = (autoUpdater: AppUpdater) => {
 
   ipcMain.handle('checking_for_update', async () => {
     try {
-      console.log('dddddddddddddd')
       return await autoUpdater.checkForUpdates()
     } catch (error) {
       return error

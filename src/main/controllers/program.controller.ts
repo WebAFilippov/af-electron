@@ -1,5 +1,5 @@
 import { programService } from '@services/program.service'
-import { ThemeColorBackground } from '@shared/constants'
+import { ThemeColorBackground } from '@shared/types'
 import { BrowserWindow, ipcMain, nativeTheme } from 'electron'
 
 export const ProgramController = (window: BrowserWindow) => {

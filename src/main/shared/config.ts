@@ -35,6 +35,5 @@ export const config = {
   fileCSVPath,
   fileFFMpeg,
   fileAFWinAudio,
-  fileMKLittleFS,
-  intervalCheckIsOnline: 10000
+  fileMKLittleFS
 }

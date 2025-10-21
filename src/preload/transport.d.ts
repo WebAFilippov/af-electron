@@ -1,3 +1,9 @@
+import {
+  ProgressInfo,
+  UpdateDownloadedEvent,
+  UpdateInfo
+} from 'electron-updater'
+
 interface WindowState {
   minimize: boolean
   maximize: boolean
@@ -6,46 +12,6 @@ interface WindowState {
 }
 
 type Theme = 'light' | 'dark'
-
-interface BlockMapDataHolder {
-  size?: number
-  blockMapSize?: number
-  readonly sha512: string
-  readonly isAdminRightsRequired?: boolean
-}
-
-interface UpdateFileInfo extends BlockMapDataHolder {
-  url: string
-}
-
-interface ReleaseNoteInfo {
-  readonly version: string
-  readonly note: string | null
-}
-
-interface UpdateInfo {
-  readonly version: string
-  readonly files: Array<UpdateFileInfo>
-  readonly path: string
-  readonly sha512: string
-  releaseName?: string | null
-  releaseNotes?: string | Array<ReleaseNoteInfo> | null
-  releaseDate: string
-  readonly stagingPercentage?: number
-  readonly minimumSystemVersion?: string
-}
-
-interface UpdateDownloadedEvent extends UpdateInfo {
-  downloadedFile: string
-}
-
-interface ProgressInfo {
-  total: number
-  delta: number
-  transferred: number
-  percent: number
-  bytesPerSecond: number
-}
 
 type UpdateStatusDto =
   | 'idle'

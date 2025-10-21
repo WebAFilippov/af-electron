@@ -1,7 +1,6 @@
+// import { Button } from '@shared/ui'
 import { FC, ReactNode } from 'react'
 import { isRouteErrorResponse, useNavigate, useRouteError } from 'react-router-dom'
-
-import { Button } from '@shared/ui'
 
 export const ErrorPage: FC<{ children?: ReactNode }> = () => {
   const error = useRouteError()
@@ -27,13 +26,12 @@ export const ErrorPage: FC<{ children?: ReactNode }> = () => {
         <p className="mt-2 max-w-md text-base text-muted-foreground">
           Пожалуйста, попробуйте перезагрузить страницу или вернуться на главную
         </p>
-        <Button
+        <button
           onClick={handleGoHome}
-          variant="default"
           className="mt-6 w-fit rounded-md px-6 py-2"
         >
           На главную
-        </Button>
+        </button>
       </div>
     </div>
   )
