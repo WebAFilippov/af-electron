@@ -3,10 +3,6 @@ import { createEffect, createEvent, createStore, sample } from 'effector'
 
 type Theme = 'light' | 'dark'
 
-const themeToggle = createEvent()
-
-const $theme = createStore<Theme>('light')
-
 const applyThemeFx = createEffect<Theme, void, Error>((theme) => {
   const root = document.getElementById('root')
   if (!root) {
@@ -27,6 +23,10 @@ const updateThemeFx = createEffect<Theme, void, Error>((theme) => {
   window.api.updateWindowTheme(theme)
 })
 
+const themeToggle = createEvent()
+
+const $theme = createStore<Theme>('light')
+
 sample({
   clock: themeToggle,
   source: $theme,
@@ -36,6 +36,7 @@ sample({
     }
     return 'light'
   },
+
   target: [$theme, applyThemeFx, updateThemeFx]
 })
 

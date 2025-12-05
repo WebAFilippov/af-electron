@@ -1,17 +1,21 @@
 import appIcon from '../../../build/icon.ico?asset'
+import { programService } from '@database/services/program.service'
 import { is } from '@electron-toolkit/utils'
-import { programService } from '@services/program.service'
 import { configureTheme } from '@utils/window-theme'
-import { app, BrowserWindow, Menu, nativeImage } from 'electron'
+import { app, BrowserWindow, Menu, nativeImage, screen } from 'electron'
 import { join } from 'node:path'
 
 export const createWindow = async (): Promise<BrowserWindow> => {
+  const {
+    bounds: { width, height }
+  } = screen.getPrimaryDisplay()
+
   const window = new BrowserWindow({
     icon: nativeImage.createFromPath(appIcon),
-    minWidth: 865,
-    minHeight: 715,
-    width: 865,
-    height: 715,
+    minWidth: width / 2,
+    minHeight: height / 2,
+    width:  width * 0.75,
+    height: height * 0.75,
     center: true,
     show: false,
     resizable: true,
@@ -45,8 +49,8 @@ export const createWindow = async (): Promise<BrowserWindow> => {
   const { theme } = await programService.getProgram()
   configureTheme(window, theme)
 
-  // if (is.dev) window.webContents.openDevTools()
-  window.webContents.openDevTools()
+  if (is.dev) window.webContents.openDevTools()
+  // window.webContents.openDevTools()
 
   if (!is.dev) {
     Menu.setApplicationMenu(null)

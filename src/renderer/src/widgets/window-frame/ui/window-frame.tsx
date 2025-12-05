@@ -8,7 +8,7 @@ import {
   setWindowMaximize,
   setWindowMinimize
 } from '@shared/model'
-import { Separator } from '@shared/ui'
+import { Button, Separator } from '@shared/ui'
 import { useGate, useUnit } from 'effector-react'
 import { Maximize, Minimize, Minus, Webhook, X } from 'lucide-react'
 import { useLocation } from 'react-router-dom'
@@ -31,50 +31,60 @@ export const WindowFrame = () => {
     setWindowMaximize,
     setWindowClose
   ])
-  
+
   return (
     <header
       className={cn(
-        'flex-shrink-0 bg-sidebar h-8 p-1 pl-3 flex items-center justify-between border-b area-drag backdrop-blur-sm',
+        'bg-sidebar text-sidebar-foreground area-drag flex h-8 shrink-0 items-center justify-between border-b p-1 pl-3',
         windowFullscreen && 'hidden'
       )}
     >
-      <div className="flex items-center truncate gap-2 h-full">
-        <Webhook size={17} className="text-accent" />
-        <span className="text-sm font-bold text-accent">AFLED</span>
+      <div className="flex h-full items-center gap-2 truncate">
+        <Webhook size={17} className="text-sidebar-primary" />
+        <span className="text-sidebar-primary text-sm font-bold">AFLED</span>
         {NavItems.find((item) => item.path === location.pathname) && (
           <>
             <Separator
               decorative={true}
               orientation="vertical"
-              className="!h-6 mx-1"
+              className="mx-1 !h-6"
             />
-            <span className="text-sidebar-foreground/80 font-medium">
+            <span className="font-medium">
               {NavItems.find((item) => item.path === location.pathname)?.title}
             </span>
           </>
         )}
       </div>
 
-      <div className="flex items-center gap-[5px] justify-center">
-        <button
-          className="bg-transparent p-[5px] text-sidebar-foreground hover:bg-neutral-400/20 rounded-md area-no-drag"
+      <div className="flex items-center justify-center gap-[5px]">
+        <Button
+          variant="ghost"
+          size="icon-xs"
+          className="area-no-drag rounded-md"
           onClick={handleMinimize}
         >
-          <Minus size={17} />
-        </button>
-        <button
-          className="bg-transparent p-[5px] text-sidebar-foreground hover:bg-neutral-400/20 rounded-md area-no-drag"
+          <Minus className="size-5" />
+        </Button>
+        <Button
+          variant="ghost"
+          size="icon-xs"
+          className="area-no-drag rounded-md"
           onClick={handleMaximize}
         >
-          {!windowMaximize ? <Maximize size={17} /> : <Minimize size={17} />}
-        </button>
-        <button
-          className="bg-transparent p-[5px] text-sidebar-foreground hover:bg-destructive hover:text-white rounded-md area-no-drag"
+          {!windowMaximize ? (
+            <Maximize className="size-4" />
+          ) : (
+            <Minimize className="size-4" />
+          )}
+        </Button>
+        <Button
+          variant="ghost"
+          size="icon-xs"
+          className="area-no-drag !bg-sidebar text-sidebar-foreground hover:!bg-destructive hover:text-background dark:hover:!text-sidebar-foreground focus-visible:ring-destructive/20 dark:focus-visible:ring-destructive/40 dark:bg-destructive/60 rounded-md"
           onClick={handleClose}
         >
-          <X size={17} />
-        </button>
+          <X className="size-5" />
+        </Button>
       </div>
     </header>
   )

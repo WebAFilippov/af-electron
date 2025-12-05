@@ -1,15 +1,17 @@
 import { Theme, UpdateDataDto, WindowState } from './transport'
-import { ipcRenderer, Display } from 'electron' // Правильный импорт
+import { Display, ipcRenderer } from 'electron'
 import { UpdateCheckResult } from 'electron-updater'
 
 interface Api {
   // Display
-  getPhysicalDisplays: () => Promise<Display[]>
-  addPhysicalDisplay: (callback: (data: Display) => void) => void
-  removePhysicalDisplay: (callback: (data: Display) => void) => void
-  changeMetricsPhisycalDisplay: (callback: (data: { display: Display; changeMetrics: string[] }) => void) => void
+  getDisplays: () => Promise<Display[]>
+  addedDisplay: (callback: (data: Display) => void) => void
+  removedDisplay: (callback: (data: Display) => void) => void
+  displayMetricsChange: (
+    callback: (data: { display: Display; changeMetrics: string[] }) => void
+  ) => void
 
-  // Updater-Desktop
+  // Updater_Desktop
   onUpdateData: (callback: (data: UpdateDataDto) => void) => void
   successfulUpdate: () => Promise<{ version: string; updated: boolean }>
   checkForUpdates: () => Promise<UpdateCheckResult | null>
@@ -33,29 +35,29 @@ interface Api {
 
 export const api: Api = {
   // Display
-  getPhysicalDisplays: () =>
-    ipcRenderer.invoke('get_physicals_displays'),
-  addPhysicalDisplay: (callback) => {
-    ipcRenderer.on('add_physical_display', (_event, data: Display) => callback(data))
+  getDisplays: () => ipcRenderer.invoke('get_displays'),
+  addedDisplay: (callback) => {
+    ipcRenderer.on('added_display', (_event, data: Display) => callback(data))
   },
-  removePhysicalDisplay: (callback) => {
-    ipcRenderer.on('remove_physical_display', (_event, data: Display) => callback(data))
+  removedDisplay: (callback) => {
+    ipcRenderer.on('removed_display', (_event, data: Display) => callback(data))
   },
-  changeMetricsPhisycalDisplay: (callback) => {
+  displayMetricsChange: (callback) => {
     ipcRenderer.on(
-      'change_metrics_phisycal_display',
-      (_event, data: { display: Display; changeMetrics: string[] }) => callback(data)
+      'display-metrics-changed',
+      (_event, data: { display: Display; changeMetrics: string[] }) =>
+        callback(data)
     )
   },
 
   // Updater-Desktop
   onUpdateData: (callback) => {
-    ipcRenderer.on('update_data', (_event, data: UpdateDataDto) => callback(data))
+    ipcRenderer.on('update_data', (_event, data: UpdateDataDto) =>
+      callback(data)
+    )
   },
-  successfulUpdate: () =>
-    ipcRenderer.invoke('successful_update'),
-  checkForUpdates: () =>
-    ipcRenderer.invoke('checking_for_update'),
+  successfulUpdate: () => ipcRenderer.invoke('successful_update'),
+  checkForUpdates: () => ipcRenderer.invoke('checking_for_update'),
   retryDowmload: () => ipcRenderer.send('retry_checking_for_update'),
   startDownload: () => ipcRenderer.send('start_download'),
   installNow: () => ipcRenderer.send('install_now'),
@@ -63,7 +65,9 @@ export const api: Api = {
 
   // Window
   windowState: (callback) => {
-    ipcRenderer.on('window_state', (_event, state: WindowState) => callback(state))
+    ipcRenderer.on('window_state', (_event, state: WindowState) =>
+      callback(state)
+    )
   },
   updateWindowTheme: (theme) => ipcRenderer.send('update_theme', theme),
   getWindowTheme: () => ipcRenderer.invoke('get_theme'),

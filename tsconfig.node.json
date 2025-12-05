@@ -12,10 +12,10 @@
       "@utils/*": ["src/main/utils/*"],
       "@lib/*": ["src/main/lib/*"],
       "@database/*": ["src/main/database/*"],
-      "@models/*": ["src/main/models/*"],
-      "@services/*": ["src/main/services/*"],
-      "@controllers/*": ["src/main/controllers/*"],
-      "@repositories/*": ["src/main/repositories/*"],
+      "@models/*": ["src/main/database/models/*"],
+      "@services/*": ["src/main/database/services/*"],
+      "@controllers/*": ["src/main/database/controllers/*"],
+      "@repositories/*": ["src/main/database/repositories/*"],
       "@shared/*": ["src/main/shared/*"]
     }
   }

@@ -1,4 +1,4 @@
-import { programService } from '@services/program.service'
+import { programService } from '@database/services/program.service'
 import { app, ipcMain } from 'electron'
 import { AppUpdater } from 'electron-updater'
 

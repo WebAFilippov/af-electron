@@ -1,1 +1,1 @@
-export { AmbilightPage } from './ui/ambilight'
+export { AmbilightPage } from './ui'

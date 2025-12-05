@@ -1,4 +1,4 @@
-import { programService } from '@services/program.service'
+import { programService } from '@database/services/program.service'
 import { Theme } from '@shared/types'
 import { configureTheme } from '@utils/window-theme'
 import { BrowserWindow, ipcMain } from 'electron'
@@ -12,6 +12,7 @@ export const ipcWindow = (window: BrowserWindow) => {
 
   ipcMain.handle('get_theme', async () => {
     const { theme } = await programService.getProgram()
+    console.log(theme);
     return theme as Theme
   })
 

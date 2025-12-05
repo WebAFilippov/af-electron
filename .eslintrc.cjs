@@ -1,63 +1,62 @@
 /** @type {import('eslint').Linter.Config} */
 module.exports = {
-  plugins: ["import", "simple-import-sort", "react", "@typescript-eslint"],
+  plugins: [
+    'import',
+    'simple-import-sort',
+    'react',
+    '@typescript-eslint',
+    'effector'
+  ],
   extends: [
-    "eslint:recommended",
-    "plugin:import/recommended",
-    "plugin:react/recommended",
-    "plugin:@typescript-eslint/recommended",
-    "plugin:react/jsx-runtime",
-    "@electron-toolkit/eslint-config-ts/recommended",
-    "@electron-toolkit/eslint-config-prettier",
+    'eslint:recommended',
+    'plugin:import/recommended',
+    'plugin:react/recommended',
+    'plugin:@typescript-eslint/recommended',
+    'plugin:react/jsx-runtime',
+    '@electron-toolkit/eslint-config-ts/recommended',
+    '@electron-toolkit/eslint-config-prettier',
+    'plugin:effector/recommended',
+    'plugin:effector/scope'
   ],
   rules: {
-    // Сортировка импортов с разделением групп
-    "simple-import-sort/imports": [
-      "error",
+    'simple-import-sort/imports': [
+      'error',
       {
         groups: [
-          // Импорты React
-          ["^react", "^@react"],
-
-          // Импорты сторонних библиотек
-          ["^@?\\w", "^components", "^utils"],
-
-          // Импорты с алиасами
-          ["^@/features"],
-          ["^@/shared"],
-          ["^@/widgets"],
-          ["^@/pages"],
-          ["^@/entities"],
-
-          ["^[./]", "^[../]"],
-        ],
-      },
+          ['^react', '^@react'],
+          ['^@?\\w', '^components', '^utils'],
+          ['^@/features'],
+          ['^@/shared'],
+          ['^@/widgets'],
+          ['^@/pages'],
+          ['^@/entities'],
+          ['^[./]', '^[../]']
+        ]
+      }
     ],
-    "simple-import-sort/exports": "error",
+    'simple-import-sort/exports': 'error',
+    '@typescript-eslint/explicit-function-return-type': 'off',
+    'react/react-in-jsx-scope': 'off',
 
-    // Отключение типа возврата у функций
-    "@typescript-eslint/explicit-function-return-type": "off",
-
-    // Прочие правила
-    "react/react-in-jsx-scope": "off",
+    'effector/enforce-effect-naming-convention': 'error'
   },
   settings: {
     react: {
-      version: "detect",
+      version: 'detect'
     },
-    "import/resolver": {
+    'import/resolver': {
       alias: {
         map: [
-          ["@/features", "./src/features"],
-          ["@/shared/components/ui", "./src/shared/components/ui"],
-          ["@/shared/hooks", "./src/shared/hooks"],
-          ["@/shared/lib/utils", "./src/shared/lib/utils"],
-          ["@/entities", "./src/entities"],
-          ["@/pages", "./src/pages"],
-          ["@/widgets", "./src/widgets"], // Добавьте алиас для @/widgets, если используете
+          ['@/features', './src/features'],
+          ['@/shared/components/ui', './src/shared/components/ui'],
+          ['@/shared/hooks', './src/shared/hooks'],
+          ['@/shared/lib/utils', './src/shared/lib/utils'],
+          ['@/entities', './src/entities'],
+          ['@/pages', './src/pages'],
+          ['@/widgets', './src/widgets']
         ],
-        extensions: [".js", ".jsx", ".ts", ".tsx"],
-      },
-    },
-  },
-};
+        extensions: ['.js', '.jsx', '.ts', '.tsx']
+      }
+    }
+  }
+}

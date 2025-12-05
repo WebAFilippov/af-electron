@@ -1,5 +1,7 @@
+import { Button } from './button'
+import { cn } from '@shared/lib'
 import { $theme, themeToggle } from '@shared/model/theme-store'
-import { $sidebar } from '@widgets/sidebar/model/sidebar.model'
+import { $sidebar } from '@widgets/sidebar/model.ts'
 import { useUnit } from 'effector-react'
 import { Moon, Sun } from 'lucide-react'
 
@@ -8,26 +10,22 @@ export const ThemeToggler = () => {
   const isOpen = useUnit($sidebar)
 
   return (
-    <button
-      className="flex justify-center items-center text-center text-sm font-medium whitespace-normal p-2 gap-3 w-full cursor-pointer rounded-sm text-sidebar-foreground/80 hover:text-sidebar-accent-foreground hover:bg-sidebar-border"
+    <Button
+      variant="outline"
+      size={isOpen ? 'xl' : 'icon-xl'}
       onClick={handleSetTheme}
+      className={cn('select-none w-full py-2 duration-0')}
     >
-      {theme === 'light' && (
-        <>
-          <Sun size={28} strokeWidth={1.5} />
-          {isOpen && (
-            <span>
-              Светлая
-            </span>
-          )}
-        </>
+      {theme === 'light' ? (
+        <Sun className="size-7" />
+      ) : (
+        <Moon className="size-7" />
       )}
-      {theme === 'dark' && (
-        <>
-          <Moon size={28} strokeWidth={1.5} />
-          {isOpen && <span>Темная</span>}
-        </>
+      {isOpen && (
+        <span className="text-center text-balance text-base font-medium w-full">
+          {theme === 'light' ? 'Светлая' : 'Темная'}
+        </span>
       )}
-    </button>
+    </Button>
   )
 }

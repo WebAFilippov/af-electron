@@ -8,14 +8,14 @@ export const NavItems = [
     id: 'ambilight',
     path: '/',
     title: 'Ambilight Setup',
-    icon: <HandMetal size={28} strokeWidth={1.5}/>,
+    icon: <HandMetal className='size-7'/>,
     description: "Амбилент подсветка"
   },
   {
     id: 'settings',
     path: '/settings',
     title: 'Settings',
-    icon: <Settings size={28} strokeWidth={1.5}/>,
+    icon: <Settings className='size-7'/>,
     description: "Настройки"
   }
 ]
