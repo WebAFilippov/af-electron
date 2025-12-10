@@ -1,4 +1,4 @@
-import { $sidebar, GateSidebar } from './model.ts.js'
+import { $sidebar, GateSidebar } from '../model.ts.js'
 import { NavItems } from '@shared/config/constants'
 import { cn } from '@shared/lib'
 import {
@@ -9,23 +9,22 @@ import {
   TooltipTrigger
 } from '@shared/ui'
 import { ThemeToggler } from '@shared/ui/theme-toggler'
-import { is } from 'effector'
 import { useGate, useUnit } from 'effector-react'
 import { FC, Fragment } from 'react'
 import { NavLink } from 'react-router-dom'
 
-export const Sidebar: FC = () => {
+export const AppSidebar: FC = () => {
   useGate(GateSidebar)
   const isOpen = useUnit($sidebar)
 
   return (
     <aside
       className={cn(
-        'relative z-10 flex flex-col bg-sidebar text-sidebar-foreground border-r border-sidebar-border py-2',
+        'bg-sidebar text-sidebar-foreground border-sidebar-border relative z-10 flex flex-col border-r py-2',
         isOpen ? 'w-56' : 'w-16'
       )}
     >
-      <div className="flex-1 px-2 flex flex-col gap-3 justify-start items-center">
+      <div className="flex flex-1 flex-col items-center justify-start gap-3 px-2">
         {NavItems.map((item) => {
           const link = (
             <NavLink
@@ -42,14 +41,14 @@ export const Sidebar: FC = () => {
                       size={isOpen ? 'xl' : 'icon-xl'}
                       variant={isActive ? 'default' : 'outline'}
                       className={cn(
-                        'select-none w-full py-2 border',
+                        'w-full border py-2 select-none',
                         isActive && 'border-primary',
                         isOpen && 'h-fit'
                       )}
                     >
                       {item.icon}
                       {isOpen && (
-                        <span className="text-center text-balance text-base font-medium  w-full">
+                        <span className="w-full text-center text-base font-medium text-balance">
                           {item.description}
                         </span>
                       )}
@@ -76,7 +75,7 @@ export const Sidebar: FC = () => {
         })}
       </div>
 
-      <div className="w-full relative pt-2 px-2">
+      <div className="relative w-full px-2 pt-2">
         <Separator
           orientation="horizontal"
           className={cn('absolute top-0 left-1.5 !w-13', isOpen && '!w-53')}

@@ -1,19 +1,58 @@
-import { Toaster } from '@shared/ui/sonner'
-import { Sidebar } from '@widgets/sidebar'
-import { WindowFrame } from '@widgets/window-frame'
+import {
+  Breadcrumb,
+  BreadcrumbItem,
+  BreadcrumbLink,
+  BreadcrumbList,
+  BreadcrumbPage,
+  BreadcrumbSeparator,
+  ScrollArea,
+  Separator,
+  SidebarInset,
+  SidebarProvider,
+  SidebarTrigger
+} from '@shared/ui'
+
 import { Outlet } from 'react-router-dom'
+import { AppSidebar } from './app-sidebar'
+import { ThemeProvider } from '@shared/model/theme-provider'
+import { WindowFrame } from '@widgets/window-frame'
 
 export const Baselayout = () => {
   return (
-    <div className="flex flex-col h-screen w-screen font-sans border-border outline-ring/50 bg-background text-foreground">
-      <Toaster position="top-right" offset={{ right: 20, top: 60 }} />
-      <WindowFrame />
-      <div className="flex flex-1 overflow-hidden">
-        <Sidebar />
-        <main className="flex-1 flex flex-col overflow-auto">
-          <Outlet />
-        </main>
+    <ThemeProvider storageKey="ui-theme">
+      <div className='flex flex-col w-full relative'>
+        <WindowFrame />
+        <SidebarProvider className="h-screen">
+          <AppSidebar />
+          <SidebarInset>
+            <header className="sticky top-0 z-20 flex h-12 shrink-0 items-center gap-2 overflow-hidden border-b transition-[width,height] ease-linear">
+              <div className="flex items-center gap-2 px-4">
+                <SidebarTrigger className="-ml-1" />
+                <Separator
+                  orientation="vertical"
+                  className="mr-2 data-[orientation=vertical]:h-4"
+                />
+                <Breadcrumb>
+                  <BreadcrumbList>
+                    <BreadcrumbItem className="hidden md:block">
+                      <BreadcrumbLink href="#">Мониторинг</BreadcrumbLink>
+                    </BreadcrumbItem>
+                    <BreadcrumbSeparator className="hidden md:block" />
+                    <BreadcrumbItem>
+                      <BreadcrumbPage>Обзор</BreadcrumbPage>
+                    </BreadcrumbItem>
+                  </BreadcrumbList>
+                </Breadcrumb>
+              </div>
+            </header>
+            <main className="flex flex-1 flex-col overflow-hidden p-4 pr-1">
+              <ScrollArea className="h-[calc(100vh-7.5rem)] pr-3 transition-[width,height]">
+                <Outlet />
+              </ScrollArea>
+            </main>
+          </SidebarInset>
+        </SidebarProvider>
       </div>
-    </div>
+    </ThemeProvider>
   )
 }

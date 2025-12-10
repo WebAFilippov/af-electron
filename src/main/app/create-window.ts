@@ -12,10 +12,10 @@ export const createWindow = async (): Promise<BrowserWindow> => {
 
   const window = new BrowserWindow({
     icon: nativeImage.createFromPath(appIcon),
-    minWidth: width / 2,
+    minWidth: width / 3,
     minHeight: height / 2,
-    width:  width * 0.75,
-    height: height * 0.75,
+    width:  width * .8,
+    height: height * .8,
     center: true,
     show: false,
     resizable: true,

@@ -1,0 +1,1 @@
+export { CPUPage } from './ui/cpu'

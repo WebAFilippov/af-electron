@@ -9,6 +9,7 @@ import { autoUpdater } from '@lib/updater'
 import { setAutoLaunch } from '@utils/auto-launch'
 import { Logger } from '@utils/logger'
 import { app, BrowserWindow } from 'electron'
+import si from 'systeminformation'
 
 process.env['ELECTRON_DISABLE_SECURITY_WARNINGS'] = 'true'
 
@@ -47,8 +48,12 @@ if (!gotTheLock) {
       ipcHandlers(window, updater)
 
       const monitors = new Monitors(window)
+
+
     } catch (error) {
       log.error(error)
     }
+
+
   })
 }
