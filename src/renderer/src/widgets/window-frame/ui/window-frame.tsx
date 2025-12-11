@@ -42,14 +42,14 @@ export const WindowFrame = () => {
       <div className=" flex items-center justify-center gap-[5px]">
         <Button
           variant="ghost"
-          className="no-drag rounded-md"
+          className="no-drag rounded-none"
           onClick={handleMinimize}
         >
           <Minus className="size-5" />
         </Button>
         <Button
           variant="ghost"
-          className="no-drag rounded-md"
+          className="no-drag rounded-none"
           onClick={handleMaximize}
         >
           {!windowMaximize ? (
@@ -60,7 +60,7 @@ export const WindowFrame = () => {
         </Button>
         <Button
           variant="ghost"
-          className="no-drag !bg-sidebar text-sidebar-foreground hover:!bg-destructive hover:text-background dark:hover:!text-sidebar-foreground focus-visible:ring-destructive/20 dark:focus-visible:ring-destructive/40 dark:bg-destructive/60 rounded-md"
+          className="no-drag !bg-sidebar rounded-none text-sidebar-foreground hover:!bg-destructive hover:text-background dark:hover:!text-sidebar-foreground focus-visible:ring-destructive/20 dark:focus-visible:ring-destructive/40 dark:bg-destructive/60"
           onClick={handleClose}
         >
           <X className="size-5" />

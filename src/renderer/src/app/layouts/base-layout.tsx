@@ -22,7 +22,7 @@ export const Baselayout = () => {
     <ThemeProvider storageKey="ui-theme">
       <div className='flex flex-col w-full relative'>
         <WindowFrame />
-        <SidebarProvider className="h-screen">
+        <SidebarProvider>
           <AppSidebar />
           <SidebarInset>
             <header className="sticky top-0 z-20 flex h-12 shrink-0 items-center gap-2 overflow-hidden border-b transition-[width,height] ease-linear">
