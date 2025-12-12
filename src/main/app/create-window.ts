@@ -49,8 +49,8 @@ export const createWindow = async (): Promise<BrowserWindow> => {
   const { theme } = await programService.getProgram()
   configureTheme(window, theme)
 
-  if (is.dev) window.webContents.openDevTools()
-  // window.webContents.openDevTools()
+  // if (is.dev) window.webContents.openDevTools()
+  window.webContents.openDevTools()
 
   if (!is.dev) {
     Menu.setApplicationMenu(null)

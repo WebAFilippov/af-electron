@@ -19,6 +19,7 @@ export const Routing: RouteObject = {
   children: [
     {
       index: true,
+      path: '/',
       element: <OverviewPage />
     },
     {

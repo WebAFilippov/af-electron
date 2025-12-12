@@ -106,12 +106,12 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
           </SidebarMenu>
         </SidebarGroup>
 
-        <SidebarGroup>
+        {/* <SidebarGroup>
           <SidebarGroupLabel>Дополнительно</SidebarGroupLabel>
           <SidebarMenu>
             {itemUpdates.map((item) => (
               <SidebarMenuItem key={item.href}>
-                <NavLink to={item.href} tabIndex={-1}>
+                <NavLink to={item.href + 'dsad'} tabIndex={-1}>
                   {({ isActive }) => (
                     <SidebarMenuButton tooltip={item.title} isActive={isActive}>
                       {item.icon && <item.icon />}
@@ -122,7 +122,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
               </SidebarMenuItem>
             ))}
           </SidebarMenu>
-        </SidebarGroup>
+        </SidebarGroup> */}
       </SidebarContent>
 
       <SidebarFooter>

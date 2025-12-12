@@ -35,11 +35,11 @@ export const WindowFrame = () => {
   return (
     <header
       className={cn(
-        '  sticky top-0 z-50 bg-sidebar text-sidebar-foreground drag flex h-9 w-full shrink-0 items-center justify-end border-b overflow-hidden',
+        'bg-sidebar text-sidebar-foreground drag sticky top-0 z-50 flex h-9 w-full shrink-0 items-center justify-end overflow-hidden border-b',
         windowFullscreen && 'hidden'
       )}
     >
-      <div className=" flex items-center justify-center gap-[5px]">
+      <div className="flex items-center justify-center gap-[5px]">
         <Button
           variant="ghost"
           className="no-drag rounded-none"
@@ -60,7 +60,7 @@ export const WindowFrame = () => {
         </Button>
         <Button
           variant="ghost"
-          className="no-drag !bg-sidebar rounded-none text-sidebar-foreground hover:!bg-destructive hover:text-background dark:hover:!text-sidebar-foreground focus-visible:ring-destructive/20 dark:focus-visible:ring-destructive/40 dark:bg-destructive/60"
+          className="no-drag !bg-sidebar text-sidebar-foreground hover:!bg-destructive hover:text-background dark:hover:!text-sidebar-foreground focus-visible:ring-destructive/20 dark:focus-visible:ring-destructive/40 dark:bg-destructive/60 rounded-none"
           onClick={handleClose}
         >
           <X className="size-5" />

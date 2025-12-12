@@ -18,9 +18,10 @@ import { ThemeProvider } from '@shared/model/theme-provider'
 import { WindowFrame } from '@widgets/window-frame'
 
 export const Baselayout = () => {
+
   return (
     <ThemeProvider storageKey="ui-theme">
-      <div className='flex flex-col w-full relative'>
+      <div className="relative flex w-full flex-col">
         <WindowFrame />
         <SidebarProvider>
           <AppSidebar />
@@ -35,7 +36,7 @@ export const Baselayout = () => {
                 <Breadcrumb>
                   <BreadcrumbList>
                     <BreadcrumbItem className="hidden md:block">
-                      <BreadcrumbLink href="#">Мониторинг</BreadcrumbLink>
+                      {/* <BreadcrumbLink href="#">Мониторинг</BreadcrumbLink> */}
                     </BreadcrumbItem>
                     <BreadcrumbSeparator className="hidden md:block" />
                     <BreadcrumbItem>
