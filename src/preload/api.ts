@@ -1,9 +1,13 @@
-import { Theme, UpdateDataDto, WindowState } from './transport'
+import { Theme, UpdateDataDto, WindowState, SystemInfoResponse, ProcessesResult } from './transport'
 import { Display, ipcRenderer } from 'electron'
 import { UpdateCheckResult } from 'electron-updater'
 
 interface Api {
-  // Display
+  // === НОВОЕ: System Info ===
+  getSystemInfo: () => Promise<SystemInfoResponse>
+  getProcesses: () => Promise<ProcessesResult>
+
+  // === Display ===
   getDisplays: () => Promise<Display[]>
   addedDisplay: (callback: (data: Display) => void) => void
   removedDisplay: (callback: (data: Display) => void) => void
@@ -11,7 +15,7 @@ interface Api {
     callback: (data: { display: Display; changeMetrics: string[] }) => void
   ) => void
 
-  // Updater_Desktop
+  // === Updater ===
   onUpdateData: (callback: (data: UpdateDataDto) => void) => void
   successfulUpdate: () => Promise<{ version: string; updated: boolean }>
   checkForUpdates: () => Promise<UpdateCheckResult | null>
@@ -20,7 +24,7 @@ interface Api {
   installNow: () => void
   installOnQuit: () => void
 
-  // Window
+  // === Window ===
   windowState: (callback: (state: WindowState) => void) => void
   updateWindowTheme: (theme: Theme) => void
   getWindowTheme: () => Promise<Theme>
@@ -29,12 +33,17 @@ interface Api {
   maximazeWindow: () => void
   closeWindow: () => void
 
-  // External_link
+  // === External Link ===
   openExternal: (url: string) => void
+
+  onUdpData: (callback: (data: { pos: number; adc: number; ip: string }) => void) => void,
 }
 
 export const api: Api = {
-  // Display
+  // === System Info ===
+  getSystemInfo: (): Promise<SystemInfoResponse> => ipcRenderer.invoke('get-system-info'),
+  getProcesses: (): Promise<ProcessesResult> => ipcRenderer.invoke('get-processes'),
+  // === Display ===
   getDisplays: () => ipcRenderer.invoke('get_displays'),
   addedDisplay: (callback) => {
     ipcRenderer.on('added_display', (_event, data: Display) => callback(data))
@@ -45,16 +54,13 @@ export const api: Api = {
   displayMetricsChange: (callback) => {
     ipcRenderer.on(
       'display-metrics-changed',
-      (_event, data: { display: Display; changeMetrics: string[] }) =>
-        callback(data)
+      (_event, data: { display: Display; changeMetrics: string[] }) => callback(data)
     )
   },
 
-  // Updater-Desktop
+  // === Updater ===
   onUpdateData: (callback) => {
-    ipcRenderer.on('update_data', (_event, data: UpdateDataDto) =>
-      callback(data)
-    )
+    ipcRenderer.on('update_data', (_event, data: UpdateDataDto) => callback(data))
   },
   successfulUpdate: () => ipcRenderer.invoke('successful_update'),
   checkForUpdates: () => ipcRenderer.invoke('checking_for_update'),
@@ -63,11 +69,9 @@ export const api: Api = {
   installNow: () => ipcRenderer.send('install_now'),
   installOnQuit: () => ipcRenderer.send('install_on_quit'),
 
-  // Window
+  // === Window ===
   windowState: (callback) => {
-    ipcRenderer.on('window_state', (_event, state: WindowState) =>
-      callback(state)
-    )
+    ipcRenderer.on('window_state', (_event, state: WindowState) => callback(state))
   },
   updateWindowTheme: (theme) => ipcRenderer.send('update_theme', theme),
   getWindowTheme: () => ipcRenderer.invoke('get_theme'),
@@ -76,6 +80,15 @@ export const api: Api = {
   maximazeWindow: () => ipcRenderer.send('maximize'),
   closeWindow: () => ipcRenderer.send('close'),
 
-  // External_link
-  openExternal: (url) => ipcRenderer.send('external_open', url)
-} as const
+  // === External ===
+  openExternal: (url) => ipcRenderer.send('external_open', url),
+
+
+
+
+
+  onUdpData: (callback) => {
+    ipcRenderer.on('udp-data', (_event, data) => callback(data))
+
+  }
+}

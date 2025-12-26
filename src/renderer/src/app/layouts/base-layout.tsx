@@ -18,11 +18,10 @@ import { ThemeProvider } from '@shared/model/theme-provider'
 import { WindowFrame } from '@widgets/window-frame'
 
 export const Baselayout = () => {
-
   return (
     <ThemeProvider storageKey="ui-theme">
+      <WindowFrame />
       <div className="relative flex w-full flex-col">
-        <WindowFrame />
         <SidebarProvider>
           <AppSidebar />
           <SidebarInset>

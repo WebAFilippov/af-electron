@@ -35,23 +35,15 @@ export const WindowFrame = () => {
   return (
     <header
       className={cn(
-        'bg-sidebar text-sidebar-foreground drag sticky top-0 z-50 flex h-9 w-full shrink-0 items-center justify-end overflow-hidden border-b',
+        'drag bg-sidebar text-sidebar-foreground sticky top-0 z-50 flex h-9 w-full shrink-0 items-center justify-end overflow-hidden border-b',
         windowFullscreen && 'hidden'
       )}
     >
-      <div className="flex items-center justify-center gap-[5px]">
-        <Button
-          variant="ghost"
-          className="no-drag rounded-none"
-          onClick={handleMinimize}
-        >
+      <div className="flex items-center justify-center">
+        <Button tabIndex={-1} variant="windowApp" onClick={handleMinimize}>
           <Minus className="size-5" />
         </Button>
-        <Button
-          variant="ghost"
-          className="no-drag rounded-none"
-          onClick={handleMaximize}
-        >
+        <Button tabIndex={-1} variant="windowApp" onClick={handleMaximize}>
           {!windowMaximize ? (
             <Maximize className="size-4" />
           ) : (
@@ -59,8 +51,8 @@ export const WindowFrame = () => {
           )}
         </Button>
         <Button
-          variant="ghost"
-          className="no-drag !bg-sidebar text-sidebar-foreground hover:!bg-destructive hover:text-background dark:hover:!text-sidebar-foreground focus-visible:ring-destructive/20 dark:focus-visible:ring-destructive/40 dark:bg-destructive/60 rounded-none"
+          tabIndex={-1}
+          variant="windowAppDesctructive"
           onClick={handleClose}
         >
           <X className="size-5" />

@@ -9,6 +9,7 @@ import { OverviewPage } from '@pages/overview'
 
 import { ProcessesPage } from '@pages/process'
 import { SystemPage } from '@pages/systeminfo'
+import { UdpDashboard } from '@pages/udp'
 
 import { RouteObject } from 'react-router-dom'
 
@@ -21,6 +22,10 @@ export const Routing: RouteObject = {
       index: true,
       path: '/',
       element: <OverviewPage />
+    },
+    {
+      path: '/udp',
+      element: <UdpDashboard />
     },
     {
       path: '/cpu',

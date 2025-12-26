@@ -10,6 +10,7 @@ import { setAutoLaunch } from '@utils/auto-launch'
 import { Logger } from '@utils/logger'
 import { app, BrowserWindow } from 'electron'
 import si from 'systeminformation'
+import { startEspServer } from './server'
 
 process.env['ELECTRON_DISABLE_SECURITY_WARNINGS'] = 'true'
 
@@ -49,11 +50,10 @@ if (!gotTheLock) {
 
       const monitors = new Monitors(window)
 
+      startEspServer();
 
     } catch (error) {
       log.error(error)
     }
-
-
   })
 }

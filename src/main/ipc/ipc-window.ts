@@ -41,4 +41,6 @@ export const ipcWindow = (window: BrowserWindow) => {
       window.hide()
     }
   })
+
+  
 }

@@ -4,6 +4,7 @@ import {
   SidebarFooter,
   SidebarGroup,
   SidebarGroupLabel,
+  SidebarHeader,
   SidebarMenu,
   SidebarMenuButton,
   SidebarMenuItem,
@@ -16,7 +17,6 @@ import {
   Gauge,
   HardDriveIcon,
   Info,
-  LayoutDashboardIcon,
   MemoryStickIcon,
   NetworkIcon,
   ServerIcon,
@@ -56,6 +56,11 @@ const itemMonitoring: {
     href: '/network'
   },
   {
+    title: 'UDP',
+    icon: NetworkIcon,
+    href: '/udp'
+  },
+  {
     title: 'Системная информация',
     icon: Info,
     href: '/systeminfo'
@@ -86,7 +91,14 @@ const itemUpdates: {
 
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
   return (
-    <Sidebar collapsible='icon' {...props}>
+    <Sidebar collapsible="icon" {...props}>
+      <SidebarHeader>
+        <SidebarMenu>
+          <SidebarMenuItem>
+            <SidebarMenuButton>header</SidebarMenuButton>
+          </SidebarMenuItem>
+        </SidebarMenu>
+      </SidebarHeader>
       <SidebarContent>
         <SidebarGroup>
           <SidebarGroupLabel>Мониторинг</SidebarGroupLabel>
@@ -106,7 +118,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
           </SidebarMenu>
         </SidebarGroup>
 
-        {/* <SidebarGroup>
+        <SidebarGroup>
           <SidebarGroupLabel>Дополнительно</SidebarGroupLabel>
           <SidebarMenu>
             {itemUpdates.map((item) => (
@@ -122,7 +134,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
               </SidebarMenuItem>
             ))}
           </SidebarMenu>
-        </SidebarGroup> */}
+        </SidebarGroup>
       </SidebarContent>
 
       <SidebarFooter>
