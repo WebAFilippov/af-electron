@@ -1,4 +1,3 @@
-import { NavItems } from '@shared/config/constants'
 import { cn } from '@shared/lib'
 import {
   $windowFullscreen,
@@ -8,15 +7,12 @@ import {
   setWindowMaximize,
   setWindowMinimize
 } from '@shared/model'
-import { Button, Separator } from '@shared/ui'
+import { Button } from '@shared/ui'
 import { useGate, useUnit } from 'effector-react'
-import { Maximize, Minimize, Minus, Webhook, X } from 'lucide-react'
-import { useLocation } from 'react-router-dom'
+import { Maximize, Minimize, Minus, X } from 'lucide-react'
 
 export const WindowFrame = () => {
   useGate(GateWindow)
-
-  const location = useLocation()
 
   const [
     windowFullscreen,
@@ -35,7 +31,7 @@ export const WindowFrame = () => {
   return (
     <header
       className={cn(
-        'drag bg-sidebar text-sidebar-foreground sticky top-0 z-50 flex h-9 w-full shrink-0 items-center justify-end overflow-hidden border-b',
+        'drag bg-sidebar text-sidebar-foreground sticky top-0 z-50 flex h-9 w-full shrink-0 items-center justify-end border-b',
         windowFullscreen && 'hidden'
       )}
     >

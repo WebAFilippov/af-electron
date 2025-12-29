@@ -43,7 +43,7 @@ server.on('message', (msg, rinfo) => {
                 const adc = msg.readInt16LE(7);
 
                 // Выводим данные в консоль
-                // console.log(`[${rinfo.address}] POS: ${pos.toString().padEnd(8)} | ADC: ${adc}`);
+                console.log(`[${rinfo.address}] POS: ${pos.toString().padEnd(8)} | ADC: ${adc}`);
 
                 // Обновляем статус устройства
                 // devices.set(rinfo.address, { ip: rinfo.address, lastSeen: Date.now() });

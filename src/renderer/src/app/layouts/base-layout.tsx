@@ -1,11 +1,9 @@
 import {
   Breadcrumb,
   BreadcrumbItem,
-  BreadcrumbLink,
   BreadcrumbList,
   BreadcrumbPage,
   BreadcrumbSeparator,
-  ScrollArea,
   Separator,
   SidebarInset,
   SidebarProvider,
@@ -20,12 +18,12 @@ import { WindowFrame } from '@widgets/window-frame'
 export const Baselayout = () => {
   return (
     <ThemeProvider storageKey="ui-theme">
-      <WindowFrame />
-      <div className="relative flex w-full flex-col">
+      <div className="relative flex h-screen w-screen flex-col overflow-hidden">
+        <WindowFrame />
         <SidebarProvider>
           <AppSidebar />
           <SidebarInset>
-            <header className="sticky top-0 z-20 flex h-12 shrink-0 items-center gap-2 overflow-hidden border-b transition-[width,height] ease-linear">
+            <header className="bg-background sticky top-0 z-20 flex h-12 shrink-0 items-center gap-2 border-b transition-[width,height] ease-linear">
               <div className="flex items-center gap-2 px-4">
                 <SidebarTrigger className="-ml-1" />
                 <Separator
@@ -45,10 +43,8 @@ export const Baselayout = () => {
                 </Breadcrumb>
               </div>
             </header>
-            <main className="flex flex-1 flex-col overflow-hidden p-4 pr-1">
-              <ScrollArea className="h-[calc(100vh-7.5rem)] pr-3 transition-[width,height]">
-                <Outlet />
-              </ScrollArea>
+            <main className="flex flex-1 flex-col p-4 pr-1">
+              <Outlet />
             </main>
           </SidebarInset>
         </SidebarProvider>

@@ -83,12 +83,7 @@ export const api: Api = {
   // === External ===
   openExternal: (url) => ipcRenderer.send('external_open', url),
 
-
-
-
-
   onUdpData: (callback) => {
     ipcRenderer.on('udp-data', (_event, data) => callback(data))
-
   }
 }

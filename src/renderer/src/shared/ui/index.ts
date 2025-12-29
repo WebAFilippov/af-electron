@@ -86,3 +86,11 @@ export {
 } from './breadcrumb'
 export { Progress } from './progress'
 export { Badge, badgeVariants } from './badge'
+export {
+  ChartContainer,
+  ChartTooltip,
+  ChartTooltipContent,
+  ChartLegend,
+  ChartLegendContent,
+  ChartStyle
+} from './chart'
