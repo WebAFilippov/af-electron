@@ -1,26 +1,7 @@
-import {
-  Card,
-  CardAction,
-  CardContent,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-  CardTitle
-} from '@shared/ui'
+import { Card, CardContent, CardHeader } from '@shared/ui'
 import React, { useEffect, useState } from 'react'
-import {
-  Line,
-  XAxis,
-  YAxis,
-  CartesianGrid,
-  Tooltip,
-  ResponsiveContainer,
-  AreaChart,
-  Legend,
-  Area
-} from 'recharts'
+
 import { MyLineChart } from './chart_comp'
-import { error } from 'console'
 
 export interface DataPoint {
   time: number
@@ -31,7 +12,9 @@ export interface DataPoint {
 }
 
 export const UdpDashboard: React.FC = () => {
-  const [data, setData] = useState<DataPoint[]>([])
+  const [data, setData] = useState<DataPoint[]>([
+    { time: new Date().getTime(), pos: 0, adc: 0, error: false }
+  ])
   const [currentInfo, setCurrentInfo] = useState({
     pos: 0,
     adc: 0,
@@ -73,7 +56,7 @@ export const UdpDashboard: React.FC = () => {
   }, [])
 
   return (
-    <div className="min-h-screen overflow-scroll p-2">
+    <div className="h-full w-full overflow-auto">
       <div className="mb-4 flex items-center justify-between">
         <h2 className="text-3xl font-bold tracking-tight">Debug UDP</h2>
         <Card className="p-2">

@@ -24,6 +24,9 @@ import {
 } from 'lucide-react'
 import { NavLink } from 'react-router-dom'
 import { NavUser } from './nav-user'
+import { useUnit } from 'effector-react'
+import { $windowFullscreen } from '@shared/model'
+import { cn } from '@shared/lib'
 
 const itemMonitoring: {
   title: string
@@ -80,18 +83,26 @@ const itemUpdates: {
   {
     title: 'Обновления',
     icon: ServerIcon,
-    href: '/'
+    href: '/updates'
   },
   {
     title: 'История обновлений',
     icon: FileText,
-    href: '/'
+    href: '/updates/history'
   }
 ]
 
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
+  const [windowFullscreen] = useUnit([$windowFullscreen])
+
   return (
-    <Sidebar collapsible="icon" {...props}>
+    <Sidebar
+      collapsible="icon"
+      {...props}
+      className={cn(
+        windowFullscreen ? 'top-0 h-screen' : 'top-9 h-[calc(100vh-36px)]'
+      )}
+    >
       <SidebarHeader>
         <SidebarMenu>
           <SidebarMenuItem>
@@ -123,7 +134,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
           <SidebarMenu>
             {itemUpdates.map((item) => (
               <SidebarMenuItem key={item.href}>
-                <NavLink to={item.href + 'dsad'} tabIndex={-1}>
+                <NavLink to={item.href} tabIndex={-1}>
                   {({ isActive }) => (
                     <SidebarMenuButton tooltip={item.title} isActive={isActive}>
                       {item.icon && <item.icon />}

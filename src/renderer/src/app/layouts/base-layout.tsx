@@ -18,12 +18,12 @@ import { WindowFrame } from '@widgets/window-frame'
 export const Baselayout = () => {
   return (
     <ThemeProvider storageKey="ui-theme">
-      <div className="relative flex h-screen w-screen flex-col overflow-hidden">
+      <div className="relative flex h-screen w-screen flex-col gap-0 overflow-hidden">
         <WindowFrame />
         <SidebarProvider>
           <AppSidebar />
           <SidebarInset>
-            <header className="bg-background sticky top-0 z-20 flex h-12 shrink-0 items-center gap-2 border-b transition-[width,height] ease-linear">
+            <header className="bg-background flex h-12 shrink-0 items-center gap-2 border-b">
               <div className="flex items-center gap-2 px-4">
                 <SidebarTrigger className="-ml-1" />
                 <Separator
@@ -43,7 +43,7 @@ export const Baselayout = () => {
                 </Breadcrumb>
               </div>
             </header>
-            <main className="flex flex-1 flex-col p-4 pr-1">
+            <main className="p-4">
               <Outlet />
             </main>
           </SidebarInset>
